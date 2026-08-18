@@ -1,0 +1,159 @@
+== Hofstadter Q-sequence exact-substructure search ==
+NMAX=10000000, allocated 572 MB
+Q computed in 0.7 s
+
+---- Task 1: Q values, checks, checksums ----
+anchor Q(1..15) == [1,1,2,3,3,4,5,5,6,6,6,8,8,8,10]: PASS
+anchor Q(100000) = 48157 (expected 48157): PASS
+Q(10^6)  = 512066
+Q(10^7)  = 5124632
+sum Q(1..10^6) mod 2^64 = 250007889123
+sum Q(1..10^7) mod 2^64 = 25000190971777
+sum Q(1..NMAX) mod 2^64 = 25000190971777
+death-condition triggers: 0 (program aborts immediately if one occurs)
+invariant Q(n)<=n violations: 0
+d(n)=Q(n)-Q(n-1) value range over n=2..10000000: [-661641, 631083]
+
+---- Task 2: longest exact repeated substring of d(n)=Q(n)-Q(n-1) ----
+(positions are n-indices of the first symbol of each occurrence; overlaps allowed)
+[d N=100000] M=99999 symbols at positions n=2..100000
+  bsearch L=50000 -> none
+  bsearch L=25000 -> none
+  bsearch L=12500 -> none
+  bsearch L=6250 -> none
+  bsearch L=3125 -> none
+  bsearch L=1563 -> none
+  bsearch L=782 -> none
+  bsearch L=391 -> none
+  bsearch L=196 -> none
+  bsearch L=98 -> none
+  bsearch L=49 -> none
+  bsearch L=25 -> none
+  bsearch L=13 -> none
+  bsearch L=7 -> repeat
+  bsearch L=10 -> none
+  bsearch L=8 -> repeat
+  bsearch L=9 -> repeat
+[d N=100000] RESULT: L=9, witness n1=375 n2=759 (offset n2-n1=384)
+[d N=100000] direct elementwise check: exact equality confirmed; decision at L+1=10: no repeat (maximality confirmed)
+[d N=100000] repeated block, first 9 of 9 symbols: -4 4 -2 2 0 0 0 0 0
+[d N=100000] elapsed 0.1 s
+
+[d N=1000000] M=999999 symbols at positions n=2..1000000
+  bsearch L=500000 -> none
+  bsearch L=250000 -> none
+  bsearch L=125000 -> none
+  bsearch L=62500 -> none
+  bsearch L=31250 -> none
+  bsearch L=15625 -> none
+  bsearch L=7813 -> none
+  bsearch L=3907 -> none
+  bsearch L=1954 -> none
+  bsearch L=977 -> none
+  bsearch L=489 -> none
+  bsearch L=245 -> none
+  bsearch L=123 -> none
+  bsearch L=62 -> none
+  bsearch L=31 -> none
+  bsearch L=16 -> none
+  bsearch L=8 -> repeat
+  bsearch L=12 -> none
+  bsearch L=10 -> none
+  bsearch L=9 -> repeat
+[d N=1000000] RESULT: L=9, witness n1=375 n2=759 (offset n2-n1=384)
+[d N=1000000] direct elementwise check: exact equality confirmed; decision at L+1=10: no repeat (maximality confirmed)
+[d N=1000000] repeated block, first 9 of 9 symbols: -4 4 -2 2 0 0 0 0 0
+[d N=1000000] elapsed 1.5 s
+
+[d N=10000000] M=9999999 symbols at positions n=2..10000000
+  bsearch L=5000000 -> none
+  bsearch L=2500000 -> none
+  bsearch L=1250000 -> none
+  bsearch L=625000 -> none
+  bsearch L=312500 -> none
+  bsearch L=156250 -> none
+  bsearch L=78125 -> none
+  bsearch L=39063 -> none
+  bsearch L=19532 -> none
+  bsearch L=9766 -> none
+  bsearch L=4883 -> none
+  bsearch L=2442 -> none
+  bsearch L=1221 -> none
+  bsearch L=611 -> none
+  bsearch L=306 -> none
+  bsearch L=153 -> none
+  bsearch L=77 -> none
+  bsearch L=39 -> none
+  bsearch L=20 -> none
+  bsearch L=10 -> none
+  bsearch L=5 -> repeat
+  bsearch L=7 -> repeat
+  bsearch L=8 -> repeat
+  bsearch L=9 -> repeat
+[d N=10000000] RESULT: L=9, witness n1=375 n2=759 (offset n2-n1=384)
+[d N=10000000] direct elementwise check: exact equality confirmed; decision at L+1=10: no repeat (maximality confirmed)
+[d N=10000000] repeated block, first 9 of 9 symbols: -4 4 -2 2 0 0 0 0 0
+[d N=10000000] elapsed 27.5 s
+
+---- Task 3: dyadic self-similarity, d(2^k+i) vs d(2^(k+1)+i) ----
+k   2^k       2^(k+1)    i-bound     L(exact)   first mismatch
+10  1024      2048       9997953     0          d(1024)=37 vs d(2048)=11
+11  2048      4096       9995905     0          d(2048)=11 vs d(4096)=-12
+12  4096      8192       9991809     0          d(4096)=-12 vs d(8192)=49
+13  8192      16384      9983617     0          d(8192)=49 vs d(16384)=713
+14  16384     32768      9967233     0          d(16384)=713 vs d(32768)=717
+15  32768     65536      9934465     0          d(32768)=717 vs d(65536)=-1654
+16  65536     131072     9868929     0          d(65536)=-1654 vs d(131072)=235
+17  131072    262144     9737857     0          d(131072)=235 vs d(262144)=-3214
+18  262144    524288     9475713     0          d(262144)=-3214 vs d(524288)=4607
+19  524288    1048576    8951425     0          d(524288)=4607 vs d(1048576)=-1692
+20  1048576   2097152    7902849     0          d(1048576)=-1692 vs d(2097152)=4906
+21  2097152   4194304    5805697     0          d(2097152)=4906 vs d(4194304)=16689
+22  4194304   8388608    1611393     0          d(4194304)=16689 vs d(8388608)=50044
+
+---- Task 4: zeros of e(n)=2Q(n)-n ----
+number of n <= 10000000 with e(n)=0: 231
+first zero: n=2
+largest gap between consecutive zeros: 951566 (from n=5999550 to n=6951116)
+last 5 zeros <= 10000000: 8227044 8750472 8900582 9295244 9830512
+32-symbol d-windows d(z+1..z+32) following the first 231 zeros: 231 DISTINCT (max multiplicity of any one window: 1)
+
+---- Task 5: longest exact repeated substring of e(n) mod 2, n=1..10000000 ----
+computed check of the identity e(n) mod 2 == n mod 2 (since e(n)=2Q(n)-n): violations = 0
+(so the parity sequence is exactly 1,0,1,0,... ; the repeat below is forced by this identity)
+[parity e mod 2] M=10000000 symbols at positions n=1..10000000
+  bsearch L=5000000 -> repeat
+  bsearch L=7500000 -> repeat
+  bsearch L=8750000 -> repeat
+  bsearch L=9375000 -> repeat
+  bsearch L=9687500 -> repeat
+  bsearch L=9843750 -> repeat
+  bsearch L=9921875 -> repeat
+  bsearch L=9960937 -> repeat
+  bsearch L=9980468 -> repeat
+  bsearch L=9990234 -> repeat
+  bsearch L=9995117 -> repeat
+  bsearch L=9997558 -> repeat
+  bsearch L=9998779 -> repeat
+  bsearch L=9999389 -> repeat
+  bsearch L=9999694 -> repeat
+  bsearch L=9999847 -> repeat
+  bsearch L=9999923 -> repeat
+  bsearch L=9999961 -> repeat
+  bsearch L=9999980 -> repeat
+  bsearch L=9999990 -> repeat
+  bsearch L=9999995 -> repeat
+  bsearch L=9999997 -> repeat
+  bsearch L=9999998 -> repeat
+  bsearch L=9999999 -> none
+[parity e mod 2] RESULT: L=9999998, witness n1=1 n2=3 (offset n2-n1=2)
+[parity e mod 2] direct elementwise check: exact equality confirmed; decision at L+1=9999999: no repeat (maximality confirmed)
+[parity e mod 2] note: the two occurrences OVERLAP (offset 2 < L), i.e. a block with exact period 2
+[parity e mod 2] repeated block, first 40 of 9999998 symbols: 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 ...
+[parity e mod 2] elapsed 3.0 s
+
+==== summary ====
+hash collisions found and rejected by exact comparison: 0
+anomalies (death/invariant/anchor/verification failures): 0 + invariant violations 0
+total elapsed: 32.8 s
+EXIT=0

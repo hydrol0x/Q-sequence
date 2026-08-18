@@ -1,0 +1,7 @@
+prefix Q(1..15): PASS
+Q(100000) = 48157  (expect 48157): PASS
+sum Q(1..200000) mod 2^64 = 10001846157  (C printed 10001846157): PASS
+d range n=2..200000: [-16681, 15291]  (C printed [-16681, 15291]): PASS
+zeros of e(n) up to 200000: 140  (C printed 140): PASS
+witness d(375..383)==d(759..767), length exactly 9 at that pair: PASS
+block: [-4, 4, -2, 2, 0, 0, 0, 0, 0]

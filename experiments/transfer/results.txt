@@ -1,0 +1,185 @@
+Hofstadter Q generation-transfer interval experiment
+N = 2^25 = 33554432; seeds exact on [1, 2^20] except +-E0 fuzz on G_19 = [2^19, 2^20); propagate to 2^25
+approx peak RAM: 640 MB (single-threaded)
+
+== PHASE 1: exact Q(1..2^25) ==
+  prefix Q(1..15) check: PASS
+  Q(100000) = 48157 (expected 48157): PASS
+  Q(2^20) = 527047
+  sum(Q(1..2^20)) mod 2^64 = 274884990472
+  Q(2^24) = 8308680
+  death-condition violations: 0 (sequence defined up to n=2^25)
+  Q(n)>n violations: 0
+  [1.28 s]
+
+== PHASE 2: exact lookup spillover, G_k=[2^k,2^(k+1)) ==
+  For n in G_k, lookups i1=n-Q(n-1), i2=n-Q(n-2) (2*2^k lookups per generation).
+  'below' = lookup < 2^(k-1);  'above' = lookup >= 2^k;  else it is inside G_(k-1).
+   k |    #below     frac_below |    #above     frac_above |  #n any-outside   frac_n
+  15 |       956     0.014587 |      1723     0.026291 |         2484   0.075806
+  16 |      1701     0.012978 |      3137     0.023933 |         4468   0.068176
+  17 |      3189     0.012165 |      5855     0.022335 |         8338   0.063614
+  18 |      5889     0.011232 |     10996     0.020973 |        15569   0.059391
+  19 |     10743     0.010245 |     19954     0.019030 |        28368   0.054108
+  20 |     19742     0.009414 |     37238     0.017756 |        52505   0.050073
+  21 |     37151     0.008857 |     68694     0.016378 |        97379   0.046434
+  22 |     68164     0.008126 |    127361     0.015183 |       179908   0.042893
+  23 |    125655     0.007490 |    234343     0.013968 |       331348   0.039500
+  24 |    232606     0.006932 |    431773     0.012868 |       611510   0.036449
+  [0.10 s]
+
+== PHASE 3: interval propagation, E0 = 0  (fuzz +-E0 on G_19=[2^19,2^20), all earlier seeds exact) ==
+  segtree selftest (1000 random ranges vs direct scan): PASS
+  naive-reference check on first 2500 computed n: PASS (0 mismatches)
+  E0=0 exactness sanity check (lo=Q=hi at every computed n): PASS (0 mismatches)
+  containment lo(n)<=Q(n)<=hi(n) violations: 0 (must be 0)
+  width ramp checkpoints (leaf values after run):
+    n=2^20+1        lo=525666     hi=525666     width=0          Q(n)=525666
+    n=2^20+2        lo=519257     hi=519257     width=0          Q(n)=519257
+    n=2^20+5        lo=534300     hi=534300     width=0          Q(n)=534300
+    n=2^20+10       lo=532838     hi=532838     width=0          Q(n)=532838
+    n=2^20+100      lo=556443     hi=556443     width=0          Q(n)=556443
+    n=2^20+1000     lo=531966     hi=531966     width=0          Q(n)=531966
+    n=2^20+10000    lo=528448     hi=528448     width=0          Q(n)=528448
+    n=2^20+100000   lo=577085     hi=577085     width=0          Q(n)=577085
+    n=2^20+1000000  lo=1017724    hi=1017724    width=0          Q(n)=1017724
+    n=2^21          lo=1068590    hi=1068590    width=0          Q(n)=1068590
+    n=2^22          lo=2105505    hi=2105505    width=0          Q(n)=2105505
+    n=2^23          lo=4244054    hi=4244054    width=0          Q(n)=4244054
+    n=2^24          lo=8308680    hi=8308680    width=0          Q(n)=8308680
+    n=2^25          lo=17099814   hi=17099814   width=0          Q(n)=17099814
+  per-generation interval widths (hi-lo):
+     k |      max_width |      mean_width | maxw(G_k)/maxw(G_(k-1)) | meanw ratio
+    19 |              0 |               0 |                  (seed) | (seed)
+    20 |              0 |               0 |                     0/0 | 0/0
+    21 |              0 |               0 |                     0/0 | 0/0
+    22 |              0 |               0 |                     0/0 | 0/0
+    23 |              0 |               0 |                     0/0 | 0/0
+    24 |              0 |               0 |                     0/0 | 0/0
+  clipping to [1,n-1]: low-side events=0, high-side events=0, distinct n clipped=0, first clipped n=0
+  hi-saturation (hi capped at 4294967294): events=0, first n=0
+  first n with width >= n/2 (vacuous scale): 0
+  [6.36 s]
+
+== PHASE 3: interval propagation, E0 = 1  (fuzz +-E0 on G_19=[2^19,2^20), all earlier seeds exact) ==
+  segtree selftest (1000 random ranges vs direct scan): PASS
+  naive-reference check on first 2500 computed n: PASS (0 mismatches)
+  containment lo(n)<=Q(n)<=hi(n) violations: 0 (must be 0)
+  width ramp checkpoints (leaf values after run):
+    n=2^20+1        lo=514762     hi=525666     width=10904      Q(n)=525666
+    n=2^20+2        lo=494929     hi=548320     width=53391      Q(n)=519257
+    n=2^20+5        lo=404011     hi=644333     width=240322     Q(n)=534300
+    n=2^20+10       lo=326137     hi=716530     width=390393     Q(n)=532838
+    n=2^20+100      lo=2          hi=4294967294 width=4294967292 Q(n)=556443
+    n=2^20+1000     lo=2          hi=4294967294 width=4294967292 Q(n)=531966
+    n=2^20+10000    lo=2          hi=4294967294 width=4294967292 Q(n)=528448
+    n=2^20+100000   lo=2          hi=4294967294 width=4294967292 Q(n)=577085
+    n=2^20+1000000  lo=2          hi=4294967294 width=4294967292 Q(n)=1017724
+    n=2^21          lo=2          hi=4294967294 width=4294967292 Q(n)=1068590
+    n=2^22          lo=2          hi=4294967294 width=4294967292 Q(n)=2105505
+    n=2^23          lo=2          hi=4294967294 width=4294967292 Q(n)=4244054
+    n=2^24          lo=2          hi=4294967294 width=4294967292 Q(n)=8308680
+    n=2^25          lo=2          hi=4294967294 width=4294967292 Q(n)=17099814
+  per-generation interval widths (hi-lo):
+     k |      max_width |      mean_width | maxw(G_k)/maxw(G_(k-1)) | meanw ratio
+    19 |              2 |               2 |                  (seed) | (seed)
+    20 |     4294967292 |     4.29478e+09 |               2.147e+09 | 2.147e+09
+    21 |     4294967292 |     4.29497e+09 |                       1 | 1
+    22 |     4294967292 |     4.29497e+09 |                       1 | 1
+    23 |     4294967292 |     4.29497e+09 |                       1 | 1
+    24 |     4294967292 |     4.29497e+09 |                       1 | 1
+  clipping to [1,n-1]: low-side events=65011665, high-side events=0, distinct n clipped=32505833, first clipped n=1048600
+  hi-saturation (hi capped at 4294967294): events=32505808, first n=1048625
+  first n with width >= n/2 (vacuous scale): 1048591
+  [17.27 s]
+
+== PHASE 3: interval propagation, E0 = 8  (fuzz +-E0 on G_19=[2^19,2^20), all earlier seeds exact) ==
+  segtree selftest (1000 random ranges vs direct scan): PASS
+  naive-reference check on first 2500 computed n: PASS (0 mismatches)
+  containment lo(n)<=Q(n)<=hi(n) violations: 0 (must be 0)
+  width ramp checkpoints (leaf values after run):
+    n=2^20+1        lo=507575     hi=532191     width=24616      Q(n)=525666
+    n=2^20+2        lo=491620     hi=557414     width=65794      Q(n)=519257
+    n=2^20+5        lo=396860     hi=652986     width=256126     Q(n)=534300
+    n=2^20+10       lo=326137     hi=716774     width=390637     Q(n)=532838
+    n=2^20+100      lo=2          hi=4294967294 width=4294967292 Q(n)=556443
+    n=2^20+1000     lo=2          hi=4294967294 width=4294967292 Q(n)=531966
+    n=2^20+10000    lo=2          hi=4294967294 width=4294967292 Q(n)=528448
+    n=2^20+100000   lo=2          hi=4294967294 width=4294967292 Q(n)=577085
+    n=2^20+1000000  lo=2          hi=4294967294 width=4294967292 Q(n)=1017724
+    n=2^21          lo=2          hi=4294967294 width=4294967292 Q(n)=1068590
+    n=2^22          lo=2          hi=4294967294 width=4294967292 Q(n)=2105505
+    n=2^23          lo=2          hi=4294967294 width=4294967292 Q(n)=4244054
+    n=2^24          lo=2          hi=4294967294 width=4294967292 Q(n)=8308680
+    n=2^25          lo=2          hi=4294967294 width=4294967292 Q(n)=17099814
+  per-generation interval widths (hi-lo):
+     k |      max_width |      mean_width | maxw(G_k)/maxw(G_(k-1)) | meanw ratio
+    19 |             16 |              16 |                  (seed) | (seed)
+    20 |     4294967292 |     4.29478e+09 |               2.684e+08 | 2.684e+08
+    21 |     4294967292 |     4.29497e+09 |                       1 | 1
+    22 |     4294967292 |     4.29497e+09 |                       1 | 1
+    23 |     4294967292 |     4.29497e+09 |                       1 | 1
+    24 |     4294967292 |     4.29497e+09 |                       1 | 1
+  clipping to [1,n-1]: low-side events=65011665, high-side events=0, distinct n clipped=32505833, first clipped n=1048600
+  hi-saturation (hi capped at 4294967294): events=32505808, first n=1048625
+  first n with width >= n/2 (vacuous scale): 1048591
+  [17.00 s]
+
+== PHASE 3: interval propagation, E0 = 64  (fuzz +-E0 on G_19=[2^19,2^20), all earlier seeds exact) ==
+  segtree selftest (1000 random ranges vs direct scan): PASS
+  naive-reference check on first 800 computed n: PASS (0 mismatches)
+  containment lo(n)<=Q(n)<=hi(n) violations: 0 (must be 0)
+  width ramp checkpoints (leaf values after run):
+    n=2^20+1        lo=498328     hi=535166     width=36838      Q(n)=525666
+    n=2^20+2        lo=489766     hi=557470     width=67704      Q(n)=519257
+    n=2^20+5        lo=396860     hi=653098     width=256238     Q(n)=534300
+    n=2^20+10       lo=323598     hi=717511     width=393913     Q(n)=532838
+    n=2^20+100      lo=2          hi=4294967294 width=4294967292 Q(n)=556443
+    n=2^20+1000     lo=2          hi=4294967294 width=4294967292 Q(n)=531966
+    n=2^20+10000    lo=2          hi=4294967294 width=4294967292 Q(n)=528448
+    n=2^20+100000   lo=2          hi=4294967294 width=4294967292 Q(n)=577085
+    n=2^20+1000000  lo=2          hi=4294967294 width=4294967292 Q(n)=1017724
+    n=2^21          lo=2          hi=4294967294 width=4294967292 Q(n)=1068590
+    n=2^22          lo=2          hi=4294967294 width=4294967292 Q(n)=2105505
+    n=2^23          lo=2          hi=4294967294 width=4294967292 Q(n)=4244054
+    n=2^24          lo=2          hi=4294967294 width=4294967292 Q(n)=8308680
+    n=2^25          lo=2          hi=4294967294 width=4294967292 Q(n)=17099814
+  per-generation interval widths (hi-lo):
+     k |      max_width |      mean_width | maxw(G_k)/maxw(G_(k-1)) | meanw ratio
+    19 |            128 |             128 |                  (seed) | (seed)
+    20 |     4294967292 |     4.29478e+09 |               3.355e+07 | 3.355e+07
+    21 |     4294967292 |     4.29497e+09 |                       1 | 1
+    22 |     4294967292 |     4.29497e+09 |                       1 | 1
+    23 |     4294967292 |     4.29497e+09 |                       1 | 1
+    24 |     4294967292 |     4.29497e+09 |                       1 | 1
+  clipping to [1,n-1]: low-side events=65011665, high-side events=0, distinct n clipped=32505833, first clipped n=1048600
+  hi-saturation (hi capped at 4294967294): events=32505808, first n=1048625
+  first n with width >= n/2 (vacuous scale): 1048591
+  [13.35 s]
+
+TOTAL time: 55.37 s
+
+== SUPPLEMENTARY: local oscillation of exact Q (jumpstats.c) ==
+Local oscillation of exact Q per generation G_k=[2^k,2^(k+1)):
+  k |   max|dQ| |  mean|dQ| | maxspread w=3 | maxspread w=17 | maxspread w=129
+ 15 |      7097 |    966.03 |          7440 |           7440 |            7786
+ 16 |     15291 |   1774.05 |         15291 |          15291 |           15291
+ 17 |     26371 |   3273.70 |         26371 |          26946 |           27081
+ 18 |     49640 |   6040.24 |         50923 |          50923 |           51877
+ 19 |     94640 |  11146.72 |         94640 |          94640 |           95340
+ 20 |    174415 |  20553.58 |        180733 |         180733 |          186865
+ 21 |    324014 |  37865.93 |        345165 |         345165 |          345165
+ 22 |    631083 |  69891.52 |        631083 |         631083 |          631529
+ 23 |   1269225 | 128881.05 |       1269225 |        1269225 |         1269225
+ 24 |   2244099 | 237848.45 |       2275895 |        2275895 |         2363062
+
+First-step width at n0=2^20+1 predicted from exact Q (must equal measured):
+  E0=1   lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519837,519839] (entirely below 2^19): true Q spread 10904, seeded spread 10904
+         -> predicted width(2^20+1) = 10904
+  E0=8   lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519830,519846] (entirely below 2^19): true Q spread 24616, seeded spread 24616
+         -> predicted width(2^20+1) = 24616
+  E0=64  lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519774,519902] (entirely below 2^19): true Q spread 36838, seeded spread 36838
+         -> predicted width(2^20+1) = 36838

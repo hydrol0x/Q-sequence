@@ -1,0 +1,180 @@
+================================================================================
+Hofstadter Q-sequence: exact test for finite closed constraint systems over
+local configurations (mechanism of Balamohan-Kuznetsov-Tanny V-sequence proof).
+Date: 2026-08-18.  All computations exact integer, single-threaded C (gcc -O2).
+Definition (1-indexed): Q(1)=Q(2)=1, Q(n)=Q(n-Q(n-1))+Q(n-Q(n-2)).
+Death condition (Q(n-1)>=n or Q(n-2)>=n) and invariant Q(n)<=n checked at every
+step of the generation to n=10^8; storage uint32, arithmetic uint64.
+
+Files: q1.c (tasks 1-2, generation to 10^8), windows.c (tasks 3-4, n<=10^7),
+qprefix_1e7.u32 (raw uint32 dump of Q(1..10^7)).
+
+Definitions used in the tables below:
+  d(n)=Q(n)-Q(n-1) (n>=2); s(n)=Q(n)+Q(n-1)-n (n>=2); e(n)=2Q(n)-n (n>=1)
+  sigma(n)=sign(e(n)) in {-1,0,+1};  t(n)=e(n) mod 4 in {0,1,2,3}
+  pair(n)=(sigma(n), sign(d(n))), 9 symbols, defined n>=2
+  A w-window at start p is (x_p,...,x_{p+w-1}); its successor is x_{p+w}.
+  Window universe = all starts p in [n0, N-w] with N=10^7 (every counted window
+  has a successor; the one final window without successor is excluded).
+  "ambiguous" = the identical window occurs with >=2 different successor symbols
+  somewhere in the universe; amb_frac = (positions whose window is ambiguous)/M.
+  Distinct-value counts in task 2 are exact (bitmap over [-2^27,2^27), within
+  which all three abstractions provably lie given Q(n)<=n<=10^8).
+================================================================================
+
+=== TASK 1: sequence generation and cross-validation ===
+computed Q(1..15) = [1,1,2,3,3,4,5,5,6,6,6,8,8,8,10]
+Prefix check Q(1..15) vs known: PASS
+Check Q(100000)==48157: PASS (computed 48157)
+Q(10^6) = 512066
+Q(10^7) = 5124632
+Q(10^8) = 50166508
+sum(Q(1..10^6)) mod 2^64 = 250007889123
+sum(Q(1..10^7)) mod 2^64 = 25000190971777
+supplementary: sum(Q(1..10^8)) mod 2^64 = 2500005606402854
+death condition triggers: 0 (checked at every n, 3<=n<=10^8)
+invariant Q(n)<=n violations (ANOMALY): 0
+
+=== TASK 2: alphabet finiteness of local abstractions ===
+distinct values seen (exact bitmap counts); d,s over n>=2, e over n>=1
+abstraction               n<=10^4    n<=10^5    n<=10^6    n<=10^7    n<=10^8     min(1e8)     max(1e8)
+d(n)=Q(n)-Q(n-1)             1158       8078      77716     610357    4080633     -4590815      4419672
+s(n)=Q(n)+Q(n-1)-n            827       5630      54808     422569    2799985     -3025183      2845767
+e(n)=2Q(n)-n                 1339       9249      88606     703029    4721573     -5093277      5800252
+
+[q1 done in 8.5 s]
+=== TASK 3: window determinism, n <= 10^7 ===
+
+Alphabet: sigma(n)=sign(2Q(n)-n) in {-1,0,+1}  (3 symbols, defined for n>=1, N=10^7)
+universe: window starts p in [1, N-w]; window=(x_p..x_{p+w-1}); successor=x_{p+w}
+  w   positions   distinct   repeated  ambiguous      amb_pos   amb_frac
+  4     9999996         50         48         47      9999989   0.999999
+  8     9999992        949        700        544      9999319   0.999933
+ 12     9999988       6442       4399       4208      9997480   0.999749
+ 16     9999984      64786      58236      54158      9976989   0.997700
+ 20     9999980     629963     479299     382327      9523342   0.952336
+ 24     9999976    3146019    1539821    1008641      6918303   0.691832
+ 28     9999972    7247966    1519700     811027      2620509   0.262052
+ 32     9999968    9473730     450539     207385       468637   0.046864
+
+Alphabet: t(n)=(2Q(n)-n) mod 4 in {0,1,2,3}  (4 symbols, defined for n>=1, N=10^7)
+universe: window starts p in [1, N-w]; window=(x_p..x_{p+w-1}); successor=x_{p+w}
+  w   positions   distinct   repeated  ambiguous      amb_pos   amb_frac
+  4     9999996         32         32         32      9999996   1.000000
+  8     9999992        512        512        512      9999992   1.000000
+ 12     9999988       8192       8192       8192      9999988   1.000000
+ 16     9999984     131072     131072     131072      9999984   1.000000
+ 20     9999980    2079105    1993729    1727924      9078279   0.907830
+ 24     9999976    8645637    1225897     643897      1386519   0.138652
+ 28     9999972    9907042      92389      46195        92802   0.009280
+ 32     9999968    9993945       6022       2937         5875   0.000588
+
+=== TASK 4 (bonus): pair alphabet ===
+
+Alphabet: (sigma(n), sign(d(n))), 3x3=9 symbols  (9 symbols, defined for n>=2, N=10^7)
+universe: window starts p in [2, N-w]; window=(x_p..x_{p+w-1}); successor=x_{p+w}
+  w   positions   distinct   repeated  ambiguous      amb_pos   amb_frac
+  4     9999995        394        304        271      9999796   0.999980
+  8     9999991      11115       8313       7530      9994472   0.999448
+ 12     9999987     253672     180704     145329      9806566   0.980658
+ 16     9999983    2298257    1071787     754256      7856701   0.785671
+ 20     9999979    7144056    1423512     877949      2988495   0.298850
+ 24     9999975    9727019     251702     138398       293496   0.029350
+ 28     9999971    9986450      13451       7234        14526   0.001453
+ 32     9999967    9999310        657        346          692   0.000069
+
+[windows done in 17.0 s]
+Derived table: ambiguous / repeated (fraction of RECURRING windows that are ambiguous)
+and distinct / admissible (saturation of the a-priori possible window space).
+
+Alphabet: sigma(n)=sign(2Q(n)-n) in {-1,0,+1}  (3 symbols, defined for n>=1, N=10^7)   (admissible = 3^w)
+  w   distinct   repeated  ambiguous   amb/rep  distinct/admissible
+  4         50         48         47    0.9792             0.617284
+  8        949        700        544    0.7771             0.144643
+ 12       6442       4399       4208    0.9566             0.012122
+ 16      64786      58236      54158    0.9300             0.001505
+ 20     629963     479299     382327    0.7977             0.000181
+ 24    3146019    1539821    1008641    0.6550             0.000011
+ 28    7247966    1519700     811027    0.5337             0.000000
+ 32    9473730     450539     207385    0.4603             0.000000
+
+Alphabet: t(n)=(2Q(n)-n) mod 4 in {0,1,2,3}  (4 symbols, defined for n>=1, N=10^7)   (admissible = 2^(w+1) parity-admissible)
+  w   distinct   repeated  ambiguous   amb/rep  distinct/admissible
+  4         32         32         32    1.0000             1.000000
+  8        512        512        512    1.0000             1.000000
+ 12       8192       8192       8192    1.0000             1.000000
+ 16     131072     131072     131072    1.0000             1.000000
+ 20    2079105    1993729    1727924    0.8667             0.991395
+ 24    8645637    1225897     643897    0.5252             0.257660
+ 28    9907042      92389      46195    0.5000             0.018453
+ 32    9993945       6022       2937    0.4877             0.001163
+
+Alphabet: (sigma(n), sign(d(n))), 3x3=9 symbols  (9 symbols, defined for n>=2, N=10^7)   (admissible = 9^w)
+  w   distinct   repeated  ambiguous   amb/rep  distinct/admissible
+  4        394        304        271    0.8914             0.060052
+  8      11115       8313       7530    0.9058             0.000258
+ 12     253672     180704     145329    0.8042             0.000001
+ 16    2298257    1071787     754256    0.7037             0.000000
+ 20    7144056    1423512     877949    0.6167                   ~0
+ 24    9727019     251702     138398    0.5498                   ~0
+ 28    9986450      13451       7234    0.5378                   ~0
+ 32    9999310        657        346    0.5266                   ~0
+
+================================================================================
+FACTUAL FINDINGS (direct consequences of the tables above)
+================================================================================
+1. Generation integrity: 0 death-condition triggers and 0 violations of
+   Q(n)<=n for all n<=10^8. Q(1..15) and Q(100000)=48157 match the known
+   values exactly.
+
+2. Task 2 (alphabet finiteness): the number of distinct values of each of
+   d(n), s(n), e(n) grows at every decade sampled, with no sign of
+   saturation: d: 1158 -> 8078 -> 77716 -> 610357 -> 4080633;
+   s: 827 -> 5630 -> 54808 -> 422569 -> 2799985;
+   e: 1339 -> 9249 -> 88606 -> 703029 -> 4721573 (thresholds 10^4..10^8).
+   Ranges by n=10^8: d in [-4590815, 4419672], s in [-3025183, 2845767],
+   e in [-5093277, 5800252]. Growth is close to proportional to n in the last
+   decades (e.g. e: 703029 -> 4721573 for a 10x increase in n). Within the
+   computed range, none of these abstractions has a finite alphabet; a
+   finite closed constraint system over exact windows of d, s, or e (the
+   V-sequence mechanism) is therefore unavailable for any alphabet bound
+   below the observed counts, and the observed counts grow without any
+   detected bound.
+
+3. Task 3/4 (window determinism over finite alphabets sigma, t, pair):
+   For EVERY alphabet tested and EVERY window size w in {4,8,12,16,20,24,28,32},
+   the number of ambiguous windows is nonzero. Each ambiguous window is an
+   exact counterexample: the identical length-w word occurs at two positions
+   n<=10^7 followed by different next symbols. Hence no deterministic
+   successor rule over w-windows of these alphabets exists for the true
+   sequence, for any w<=32. Minimum ambiguity observed: sigma 207385
+   ambiguous windows at w=32; t 2937 at w=32; pair 346 at w=32.
+
+4. The decline of the occurrence-weighted ambiguous fraction with w
+   (e.g. sigma: 0.999999 at w=4 down to 0.046864 at w=32) is accounted for
+   by loss of recurrence, not by emerging determinism: at w=32, 94.7% (sigma),
+   99.9% (t), 99.99% (pair) of distinct windows occur only once in the 10^7
+   sample and so cannot exhibit ambiguity. Among windows that DO recur, the
+   ambiguous fraction stays between 0.46 and 0.53 at w=32 for all three
+   alphabets (sigma 0.4603, t 0.4877, pair 0.5266), having declined only
+   gradually from 0.78-1.00 at small w. The trend therefore refutes, rather
+   than supports, ambiguity reaching 0 at any finite w reachable by this
+   data; larger w cannot be tested meaningfully at N=10^7 because recurrence
+   itself vanishes.
+
+5. The t=(2Q(n)-n) mod 4 alphabet saturates its full a-priori admissible
+   window space (parity forces t(n) == n mod 2, leaving 2^(w+1) admissible
+   words) exactly for w=4,8,12,16: distinct = 32, 512, 8192, 131072 =
+   2^(w+1), with every admissible window both occurring and ambiguous
+   (ambiguous = distinct, amb_frac = 1.000000). At w=20 saturation is still
+   99.14%. On this abstraction the Q-sequence is indistinguishable from the
+   full parity-constrained shift up to window length 16.
+
+Caveats: (i) only the abstractions d, s, e, sigma, t, (sigma,sign d) and
+window sizes w<=32 were tested; these results say nothing about other
+abstractions (e.g. multi-scale, generational, or non-window-based systems).
+(ii) Nonzero ambiguity observed in a finite range is conclusive against
+determinism at that w; zero ambiguity, had it occurred, would only have been
+consistency, not proof — this situation did not arise. (iii) Task 2 growth is
+an observation over n<=10^8; it is not a proof of unboundedness.
+================================================================================

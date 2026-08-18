@@ -1,0 +1,22 @@
+recomputed Q(1..1e7) in 5.8s; invariant violations=0
+Q(1..15): got [1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10], C said [1, 1, 2, 3, 3, 4, 5, 5, 6, 6, 6, 8, 8, 8, 10] -> PASS
+Q(100000): got 48157, C said 48157 -> PASS
+Q(10^6): got 512066, C said 512066 -> PASS
+Q(10^7): got 5124632, C said 5124632 -> PASS
+sum Q(1..10^6) mod 2^64: got 250007889123, C said 250007889123 -> PASS
+sum Q(1..10^7) mod 2^64: got 25000190971777, C said 25000190971777 -> PASS
+d range: got (-661641, 631083), C said (-661641, 631083) -> PASS
+zero count: got 231, C said 231 -> PASS
+last 5 zeros: got [8227044, 8750472, 8900582, 9295244, 9830512], C said [8227044, 8750472, 8900582, 9295244, 9830512] -> PASS
+largest gap: got (951566, 5999550, 6951116), C said (951566, 5999550, 6951116) -> PASS
+distinct 32-windows after zeros: got 231, C said 231 -> PASS
+witness block d(375..383): got [-4, 4, -2, 2, 0, 0, 0, 0, 0], C said [-4, 4, -2, 2, 0, 0, 0, 0, 0] -> PASS
+d(375..383)==d(759..767) and d(384)!=d(768): got (True, True), C said (True, True) -> PASS
+d(1024), d(2048): got (37, 11), C said (37, 11) -> PASS
+d(4194304), d(8388608): got (16689, 50044), C said (16689, 50044) -> PASS
+SA/LCP longest-repeat LENGTH, d N=1e5: got 9, C said 9 -> PASS
+all suffix-adjacent length-9 witness pairs (n-indices): [(15, 38), (375, 759)]
+C witness (375,759) among them: got True, C said True -> PASS
+suffix-array check done in 0.7s
+ALL CHECKS DONE
+EXIT=0

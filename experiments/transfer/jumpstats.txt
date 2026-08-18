@@ -1,0 +1,23 @@
+Local oscillation of exact Q per generation G_k=[2^k,2^(k+1)):
+  k |   max|dQ| |  mean|dQ| | maxspread w=3 | maxspread w=17 | maxspread w=129
+ 15 |      7097 |    966.03 |          7440 |           7440 |            7786
+ 16 |     15291 |   1774.05 |         15291 |          15291 |           15291
+ 17 |     26371 |   3273.70 |         26371 |          26946 |           27081
+ 18 |     49640 |   6040.24 |         50923 |          50923 |           51877
+ 19 |     94640 |  11146.72 |         94640 |          94640 |           95340
+ 20 |    174415 |  20553.58 |        180733 |         180733 |          186865
+ 21 |    324014 |  37865.93 |        345165 |         345165 |          345165
+ 22 |    631083 |  69891.52 |        631083 |         631083 |          631529
+ 23 |   1269225 | 128881.05 |       1269225 |        1269225 |         1269225
+ 24 |   2244099 | 237848.45 |       2275895 |        2275895 |         2363062
+
+First-step width at n0=2^20+1 predicted from exact Q (must equal measured):
+  E0=1   lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519837,519839] (entirely below 2^19): true Q spread 10904, seeded spread 10904
+         -> predicted width(2^20+1) = 10904
+  E0=8   lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519830,519846] (entirely below 2^19): true Q spread 24616, seeded spread 24616
+         -> predicted width(2^20+1) = 24616
+  E0=64  lookup1 index 521530 (in fuzz region: no, contributes width 0);
+         lookup2 window [519774,519902] (entirely below 2^19): true Q spread 36838, seeded spread 36838
+         -> predicted width(2^20+1) = 36838

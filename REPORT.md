@@ -130,10 +130,10 @@ additionally re-derived its values in pure Python):
 | sum to 10⁷ mod 2⁶⁴ | 25000190971777 | — | — | 25000190971777 | — | 25000190971777 | — |
 
 (agents 1–4 = the closure-search, generation-transfer, renewal-scan, and
-criticality-statistics experiment agents; their code and raw outputs are
-preserved with the session artifacts, and the headline numbers are reproduced
-in §8. The Lean values are theorems about *every* spec-history, not about one
-program run.)
+criticality-statistics experiment agents; their exact code and raw outputs
+are preserved in `experiments/` — see `experiments/README.md` — and the
+headline numbers are reproduced in §8. The Lean values are theorems about
+*every* spec-history, not about one program run.)
 
 **Deviation growth (the empirical heart of the matter).** Per dyadic
 generation `G_k = [2^k, 2^{k+1})` (`data/generations.txt`):

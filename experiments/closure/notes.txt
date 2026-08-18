@@ -1,0 +1,59 @@
+
+================================================================================
+FACTUAL FINDINGS (direct consequences of the tables above)
+================================================================================
+1. Generation integrity: 0 death-condition triggers and 0 violations of
+   Q(n)<=n for all n<=10^8. Q(1..15) and Q(100000)=48157 match the known
+   values exactly.
+
+2. Task 2 (alphabet finiteness): the number of distinct values of each of
+   d(n), s(n), e(n) grows at every decade sampled, with no sign of
+   saturation: d: 1158 -> 8078 -> 77716 -> 610357 -> 4080633;
+   s: 827 -> 5630 -> 54808 -> 422569 -> 2799985;
+   e: 1339 -> 9249 -> 88606 -> 703029 -> 4721573 (thresholds 10^4..10^8).
+   Ranges by n=10^8: d in [-4590815, 4419672], s in [-3025183, 2845767],
+   e in [-5093277, 5800252]. Growth is close to proportional to n in the last
+   decades (e.g. e: 703029 -> 4721573 for a 10x increase in n). Within the
+   computed range, none of these abstractions has a finite alphabet; a
+   finite closed constraint system over exact windows of d, s, or e (the
+   V-sequence mechanism) is therefore unavailable for any alphabet bound
+   below the observed counts, and the observed counts grow without any
+   detected bound.
+
+3. Task 3/4 (window determinism over finite alphabets sigma, t, pair):
+   For EVERY alphabet tested and EVERY window size w in {4,8,12,16,20,24,28,32},
+   the number of ambiguous windows is nonzero. Each ambiguous window is an
+   exact counterexample: the identical length-w word occurs at two positions
+   n<=10^7 followed by different next symbols. Hence no deterministic
+   successor rule over w-windows of these alphabets exists for the true
+   sequence, for any w<=32. Minimum ambiguity observed: sigma 207385
+   ambiguous windows at w=32; t 2937 at w=32; pair 346 at w=32.
+
+4. The decline of the occurrence-weighted ambiguous fraction with w
+   (e.g. sigma: 0.999999 at w=4 down to 0.046864 at w=32) is accounted for
+   by loss of recurrence, not by emerging determinism: at w=32, 94.7% (sigma),
+   99.9% (t), 99.99% (pair) of distinct windows occur only once in the 10^7
+   sample and so cannot exhibit ambiguity. Among windows that DO recur, the
+   ambiguous fraction stays between 0.46 and 0.53 at w=32 for all three
+   alphabets (sigma 0.4603, t 0.4877, pair 0.5266), having declined only
+   gradually from 0.78-1.00 at small w. The trend therefore refutes, rather
+   than supports, ambiguity reaching 0 at any finite w reachable by this
+   data; larger w cannot be tested meaningfully at N=10^7 because recurrence
+   itself vanishes.
+
+5. The t=(2Q(n)-n) mod 4 alphabet saturates its full a-priori admissible
+   window space (parity forces t(n) == n mod 2, leaving 2^(w+1) admissible
+   words) exactly for w=4,8,12,16: distinct = 32, 512, 8192, 131072 =
+   2^(w+1), with every admissible window both occurring and ambiguous
+   (ambiguous = distinct, amb_frac = 1.000000). At w=20 saturation is still
+   99.14%. On this abstraction the Q-sequence is indistinguishable from the
+   full parity-constrained shift up to window length 16.
+
+Caveats: (i) only the abstractions d, s, e, sigma, t, (sigma,sign d) and
+window sizes w<=32 were tested; these results say nothing about other
+abstractions (e.g. multi-scale, generational, or non-window-based systems).
+(ii) Nonzero ambiguity observed in a finite range is conclusive against
+determinism at that w; zero ambiguity, had it occurred, would only have been
+consistency, not proof — this situation did not arise. (iii) Task 2 growth is
+an observation over n<=10^8; it is not a proof of unboundedness.
+================================================================================

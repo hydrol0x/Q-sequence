@@ -71,6 +71,8 @@ QSequence/
   Certificates.lean    -- spec-level certificates: 10⁷ immortality, values, ¾ floor
   Asymptotics.lean     -- Qval recurrence under A; Q(m)/m ≥ 3/4 cannot hold eventually
   BigCertificates.lean -- spec-level 10⁸ immortality + Q(10⁸)
+experiments/    -- route-audit experiments: independent code + raw outputs (see its README)
+data/           -- outputs of the 10⁹ run: records, per-generation tables, log
 scripts/
   q_reference.py -- fast exact-integer Python impl (mirrors the engine) + diagnostics
   setup_lean.sh  -- reinstall the exact toolchain without elan (see below)

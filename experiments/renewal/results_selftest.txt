@@ -1,0 +1,9 @@
+== Hofstadter Q-sequence exact-substructure search ==
+NMAX=5000, allocated 0 MB
+Q computed in 0.0 s
+
+---- selftest: LRS machinery vs O(M^2) brute force ----
+d-prefix M=3000:  brute L=9 (witness 15,38), machinery L=9 -> PASS
+parity M=500:     brute L=498 (witness 1,3), machinery L=498 -> PASS
+random+planted137 M=4000: brute L=138 (witness 500,2900), machinery L=138 -> PASS
+selftest OK (hash collisions filtered so far: 0)
