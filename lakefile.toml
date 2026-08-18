@@ -1,0 +1,6 @@
+name = "QSequence"
+version = "0.1.0"
+defaultTargets = ["QSequence"]
+
+[[lean_lib]]
+name = "QSequence"
