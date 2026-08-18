@@ -30,8 +30,10 @@ beyond any finite computation.
 This repository contains a **faithful formalization with machine-checked
 reductions and certificates, plus a full research-phase report** — not a
 resolution of either problem.  See **[REPORT.md](REPORT.md)** for the complete
-account: proved reductions, verified computation to 10⁹, two rigorous no-go
-theorems, an audit of eight proof routes, and the exact remaining gaps.
+account: proved reductions, verified computation to 10⁹, a rigorous no-go
+theorem for the envelope-induction route plus data-level refutations of the
+finite-state and renewal routes, an audit of eight proof routes, and the
+exact remaining gaps.
 
 | Item | State |
 |------|-------|
@@ -49,7 +51,7 @@ theorems, an audit of eight proof routes, and the exact remaining gaps.
 | Computation, exact to 10⁹ | ✅ survives; **0 violations of `Q(n) ≤ n`**; stats in `data/` |
 | Two-parameter envelope induction | ❌ **cannot close — no-go proved** (REPORT.md, Theorem D) |
 | **Problem A (proof)** | ❌ open — reduced exactly to `UniformBound` (REPORT.md §9, Gap A) |
-| **Problem B (proof)** | ❌ open — conditional form proved on paper (Theorem C); gap is `|2Q(n)−n| = o(n)` (Gap B) |
+| **Problem B (proof)** | ❌ open — the limit-*value* lemma (existence assumed) is proved on paper with endpoint exclusions (REPORT.md Theorem C); the gap is existence itself: `|2Q(n)−n| = o(n)` (Gap B) |
 
 The `native_decide` theorems are **finite certificates**, not a proof of
 Problem A. Thanks to `Faithful.lean` they now certify the *specified*
@@ -74,8 +76,10 @@ QSequence/
 experiments/    -- route-audit experiments: independent code + raw outputs (see its README)
 data/           -- outputs of the 10⁹ run: records, per-generation tables, log
 scripts/
-  q_reference.py -- fast exact-integer Python impl (mirrors the engine) + diagnostics
-  setup_lean.sh  -- reinstall the exact toolchain without elan (see below)
+  q_reference.py     -- fast exact-integer Python impl (mirrors the engine) + diagnostics
+  compute_q.c        -- exact C computation to 10⁹ with adversarial statistics
+  check_theorem_d.py -- exact-rational check of the REPORT.md Theorem D constructions
+  setup_lean.sh      -- reinstall the exact toolchain without elan (see below)
 ```
 
 ### The exact statements (in `QSequence/Spec.lean`)
@@ -137,10 +141,12 @@ range of Q(n)+Q(n−1)−n = [−402982, 436832]                  (widening)
 
 - The specification (`Spec.lean`) and all `Prop` statements use only `propext`,
   `Classical.choice`, `Quot.sound` (standard) — check with `#print axioms`.
-- The `native_decide` theorems in `Verify.lean` additionally depend on
-  `Lean.ofReduceBool` and the native-compilation axiom (visible in
-  `#print axioms`). They add the C compiler + runtime to the trusted base.
-  They are **finite** and are not, and cannot be, a proof of Problem A.
+- The `native_decide` theorems (`Verify.lean`, `Certificates.lean`,
+  `BigCertificates.lean`) additionally depend on per-call `native_decide`
+  axioms, shown by `#print axioms` as `…._native.native_decide.ax_1_1`
+  (each of shape `decide (…) = true`). They add the compiled evaluator
+  (compiler + runtime) to the trusted base. They are **finite** and are
+  not, and cannot be, a proof of Problem A.
 - A future `theorem problemA : ProblemA` must be `native_decide`-free (no finite
   computation resolves an index `> 3 × 10¹⁰`); it should reduce to `propext`,
   `Classical.choice`, `Quot.sound` only.

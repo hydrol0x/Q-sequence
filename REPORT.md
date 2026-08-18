@@ -15,18 +15,21 @@ found; every attempted route ends at a precisely identified obstruction.
 What this repository delivers instead, in machine-checked or exactly
 reproducible form:
 
-1. **Machine-checked reductions** (Lean 4, core only, no `sorry`, no extra
-   axioms): the Q-sequence is unique; *Problem A is equivalent to the single
-   statement `Q(n) ≤ n` for all n* (`UniformBound`), and equivalent to the
-   verified engine never dying; exact deviation and lookup-location
-   identities; spec-level finite certificates through 10⁸.
+1. **Machine-checked reductions** (Lean 4, core only, no `sorry`; the
+   mathematics uses only the three standard axioms, and the ⊕-marked finite
+   certificates additionally trust the `native_decide` evaluator, §2): the
+   Q-sequence is unique; *Problem A is equivalent to the single statement
+   `Q(n) ≤ n` for all n* (`UniformBound`), and equivalent to the verified
+   engine never dying; exact deviation and lookup-location identities;
+   spec-level finite certificates through 10⁸.
 2. **Verified computation to 10⁹** with zero violations of `Q(n) ≤ n`,
    cross-validated by seven independent implementations, with the adversarial
    statistics (deviation growth, generation spillover, jump records) that any
    proposed proof must survive.
-3. **Two rigorous no-go theorems**: the two-parameter linear-envelope
-   induction cannot close (Theorem D), and the finite-state/renewal routes
-   fail on the data at all tested abstractions and scales (§8).
+3. **A rigorous no-go theorem** — the two-parameter linear-envelope
+   induction cannot close (Theorem D) — plus *data-level* refutations of the
+   finite-state and renewal routes at all tested abstractions and scales
+   (§8), and a scope theorem retiring the hardness route (Proposition E).
 4. **A route audit** of the eight approach families from the task portfolio,
    each with its exact blocking statement.
 5. **The remaining gaps stated exactly** (§9): Gap A and Gap B, each a single
@@ -170,7 +173,7 @@ Machine-checked (`deviation_identity`, `lookup_*`): with `e(m) = 2Q(m) − m`,
 e(n) = e(a) + e(b) + (n − Q(n−1) − Q(n−2))            (I1)
      = e(a) + e(b) − (e(n−1) + e(n−2) − 3)/2          (I2, rewriting)
 2a   = (n+1) − e(n−1),   2b = (n+2) − e(n−2)          (lookup location)
-b − a = Q(n−1) − Q(n−2)  = d(n−1)                     (lookup separation)
+b − a = Q(n−1) − Q(n−2)  = d(n−1)                     (I3, lookup separation)
 ```
 
 Reading: the recursion reads the sequence at the *half-scale midpoint*,
@@ -251,9 +254,10 @@ explicit, is:
 
 This is exactly what "the induction closes" means when the inductive
 hypothesis is the envelope and the only structural input at `n` is the
-recurrence. (Schemes whose hypothesis carries *more* than the envelope —
-e.g. window constraints — are a different family; they are route R1 and are
-blocked by data, §8.)
+recurrence. (Schemes whose inductive hypothesis carries *more* than the
+envelope — window constraints, or use of the recurrence at earlier
+positions `m < n` — are a different, stronger family not covered by the
+theorem; the window family is route R1, blocked by data, §8.)
 
 > **Theorem D.** Let `0 ≤ c₁ ≤ c₂ < 1` and `d₁, d₂ ≥ 0` be reals such that
 > (a) `E(m)` contains an integer ≥ 1 for every `m ≥ 1` (necessary for the
@@ -270,7 +274,7 @@ satisfy the two-sided estimates `⌊c₂m + d₂⌋ ≥ c₂m + d₂ − 1` (max
 `max(1, ⌈c₁m − d₁⌉) ≤ max(1, c₁m − d₁ + 1)` (minimal): if any integer lies
 in `E(m)`, then so do `⌊upper⌋` and `⌈max(1, lower)⌉`. Positions other than
 the four that the recurrence at `n` reads are filled with an arbitrary
-envelope integer. From (b) at `m = 1`: `c₂ + d₂ ≥ 1`.
+envelope integer.
 
 **Case 1: `c₁ < 1/2`, `c₂ > 0`** (upper break). For large `n` set
 `f(n−1) := max(3, minimal at n−1)` and `f(n−2) := max(3, minimal at n−2)`.
@@ -289,8 +293,8 @@ for a constant `K` independent of `n`. Since `2c₂(1−c₁) − c₂ =
 c₂(1 − 2c₁) > 0`, `f(n) − (c₂n + d₂) ≥ c₂(1−2c₁)n − K − d₂ → ∞`: the upper
 envelope breaks for all large `n`. ∎(case)
 
-**Case 2: `c₁ < 1/2`, `c₂ = 0`.** By (a) for large `m`, `c₁m − d₁ ≤ d₂`
-forces `c₁ = 0`; envelope = `[1, d₂]` with, by (b) at `m = 96`, `d₂ ≥ 64`.
+**Case 2: `c₁ < 1/2`, `c₂ = 0`.** Then `c₁ = 0` (as `c₁ ≤ c₂`); the
+envelope is `[1, d₂]` with, by (b) at `m = 96`, `d₂ ≥ 64`.
 Set `f(n−1) = f(n−2) = 3`, so `a = b = n−3`, and `f(n−3) := ⌊d₂⌋`. Then
 `f(n) = 2⌊d₂⌋ ≥ 2d₂ − 2 > d₂` since `d₂ ≥ 64`. Upper break. ∎(case)
 
@@ -325,6 +329,16 @@ break. ∎(case)
 
 Cases 1–4 cover `0 ≤ c₁ ≤ c₂ < 1` (`c₁ < 1/2` → 1 or 2; `c₁ ≥ 1/2` →
 `c₂ ≥ c₁ ≥ 1/2`, hence 3 or 4). ∎
+
+*Numerical verification.* `scripts/check_theorem_d.py` re-runs the four
+constructions in exact rational arithmetic and confirms the break on a
+parameter grid.  An independent adversarial audit re-implemented the
+constructions from the proof text over 31 919 hypothesis-satisfying
+parameter sets (boundaries and `c₁ = 1/2 ± 10⁻⁹` included) and found no
+counterexample; as the margin coefficient is `c₂(1 − 2c₁)` (Case 1), the
+"sufficiently large `n`" threshold scales like its inverse, so
+near-critical templates (`c₁ = 1/2 − 10⁻⁶`) break only from `n ≈ 10⁹` on —
+verified there and beyond.
 
 **Reading Theorem D.** The two-parameter linear induction — the exact
 mechanism the task portfolio proposes as "targeting an unconditional linear
@@ -533,8 +547,10 @@ measurements quantify the criticality any proof must tame.
 
 * **Lean:** `bash scripts/setup_lean.sh && lake build` re-checks every
   theorem including the `native_decide` certificates. Axioms:
-  `propext, Classical.choice, Quot.sound` (+ `Lean.ofReduceBool` for ⊕-marked
-  certificates only — visible per-theorem via `#print axioms`). No `sorry`
+  `propext, Classical.choice, Quot.sound`; each ⊕-marked certificate
+  additionally depends on its per-call `native_decide` axiom (shown by
+  `#print axioms` as `…._native.native_decide.ax_1_1`, of shape
+  `decide (…) = true`), i.e. on trusting the compiled evaluator. No `sorry`
   anywhere. A future `theorem problemA : ProblemA` must be
   `native_decide`-free; the reductions here are.
 * **C computation:** `gcc -O2 -o scripts/compute_q scripts/compute_q.c &&
@@ -543,6 +559,10 @@ measurements quantify the criticality any proof must tame.
   `data/`).
 * **Python reference:** `python3 scripts/q_reference.py --upto 10000000
   --stats` (mirrors the engine; used as a third implementation).
+* **Theorem D checker:** `python3 scripts/check_theorem_d.py` (exact
+  rationals; re-runs the §6 constructions on a parameter grid).
+* **Route experiments:** `experiments/` (independent implementations + raw
+  outputs; see `experiments/README.md`).
 * Checkpoint values and additive checksums for independent re-derivation
   are printed in `data/run_1e9.log` and §3.
 
@@ -551,9 +571,11 @@ measurements quantify the criticality any proof must tame.
 Within this investigation: Problem A was reduced, with machine-checked
 equivalences, to the single finite-history statement `UniformBound`
 (`Q(n) ≤ n`), verified computationally to 10⁹ with trend-improving
-margins; Problem B was pinned to Gap B with the conditional direction fully
-proved (Theorem C) and the criticality obstruction made exact
-(`deviation_identity`, Theorem D); the natural proof mechanisms — finite
+margins; Problem B was pinned to Gap B, with the limit-*value* lemma fully
+proved (Theorem C — which assumes the limit exists, and is therefore not
+the A-free conditional form the task accepts) and the criticality
+obstruction made exact (`deviation_identity`, Theorem D); the natural
+proof mechanisms — finite
 closed constraint systems, linear-envelope inductions, absolute-error
 generation transfer, exact renewal structure, hardness transfer — were each
 either refuted by theorem, refuted by exact computation at the tested

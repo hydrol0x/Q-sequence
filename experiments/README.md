@@ -16,3 +16,10 @@ all checkpoints agree across all implementations (REPORT.md §3).
 
 Reproduce: `gcc -O2 <file>.c && ./a.out` per directory (see each source
 header / `run.sh` for arguments); single-threaded, ≤ 3 GB RAM each.
+
+`audit/` holds the final adversarial audit: an independent re-derivation of
+the computations (fresh implementation written from the definition alone),
+an independent re-implementation and 31 919-point grid attack on the
+Theorem D constructions, the axiom-check transcript, and `findings.md`
+(all eight audit items PASS; its line-number references to wording findings
+predate the fixes they prompted, which are in the current REPORT.md/README.md).

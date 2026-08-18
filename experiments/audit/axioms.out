@@ -1,0 +1,24 @@
+'QSequence.deterministic' depends on axioms: [propext, Quot.sound]
+'QSequence.problemA_iff_uniformBound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QSequence.problemA_iff_engine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QSequence.aliveUpTo_iff_history' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QSequence.deviation_identity' depends on axioms: [propext, Quot.sound]
+'QSequence.lookup_gap' depends on axioms: [propext, Quot.sound]
+'QSequence.Qval_rec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QSequence.not_eventually_ge_three_quarters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'QSequence.history_1e7' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ aliveUpTo_1e7._native.native_decide.ax_1_1]
+'QSequence.history_1e8' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ aliveUpTo_1e8._native.native_decide.ax_1_1]
+'QSequence.Q_1e7' depends on axioms: [propext, Classical.choice, Quot.sound, Qeng_1e7._native.native_decide.ax_1_1]
+'QSequence.Q_1e8' depends on axioms: [propext, Classical.choice, Quot.sound, Qeng_1e8._native.native_decide.ax_1_1]
+'QSequence.Q_96' depends on axioms: [propext, Classical.choice, Quot.sound, Qeng_96._native.native_decide.ax_1_1]
+'QSequence.no_uniform_bound_below_3_4' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound,
+ Qeng_4._native.native_decide.ax_1_1,
+ aliveUpTo_1e7._native.native_decide.ax_1_1]
