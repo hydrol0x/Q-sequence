@@ -1,4 +1,4 @@
-# k  span=[2^k,2^{k+1})  count  max|2Q-n|  max|2Q-n|/2^k  at_n  mean(2Q-n)  maxQ/n  lookups:below_parent  in_parent  in_own_gen
+# k  count  max|2Q-n|  max|2Q-n|/2^k  at_n  sum(2Q-n)  mean(2Q-n)  maxQ/n  lookups:below_parent  in_parent  in_own_gen
  1  1  1  0.500000  3  1  1.00  0.666667  0  0  2
  2  4  3  0.750000  7  8  2.00  0.750000  0  7  1
  3  8  5  0.625000  15  22  2.75  0.666667  1  15  0

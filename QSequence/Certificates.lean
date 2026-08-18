@@ -90,6 +90,17 @@ theorem Q_4 (a : List Nat) (ha : IsHistory a) (hlen : 4 ≤ a.length) :
   rw [← h]
   exact Qeng_4
 
+theorem Qeng_96 : Qeng 96 96 = 64 := by native_decide
+
+/-- Spec-level `Q(96) = 64` (deviation `2Q − n = +32` at `n = 96`; the largest
+early deviation, used as a data anchor by the envelope no-go, REPORT.md
+Theorem D). -/
+theorem Q_96 (a : List Nat) (ha : IsHistory a) (hlen : 96 ≤ a.length) :
+    valAt a 96 = 64 := by
+  have h := Qeng_eq_valAt (N := 96) (i := 96) (by omega) (by omega) ha hlen
+  rw [← h]
+  exact Qeng_96
+
 theorem Qeng_15 : Qeng 16 15 = 10 := by native_decide
 theorem Qeng_16 : Qeng 16 16 = 9 := by native_decide
 

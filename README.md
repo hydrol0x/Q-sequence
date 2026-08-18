@@ -27,33 +27,48 @@ beyond any finite computation.
 
 ## Status
 
-This repository currently contains a **faithful formalization scaffold**, not a
-resolution. Concretely:
+This repository contains a **faithful formalization with machine-checked
+reductions and certificates, plus a full research-phase report** — not a
+resolution of either problem.  See **[REPORT.md](REPORT.md)** for the complete
+account: proved reductions, verified computation to 10⁹, two rigorous no-go
+theorems, an audit of eight proof routes, and the exact remaining gaps.
 
 | Item | State |
 |------|-------|
 | Faithful specification of `Q` (`IsHistory`) | ✅ defined, compiles |
 | Exact statements `ProblemA`, `ProblemB`, `ProblemB_conditional` | ✅ stated as `Prop`s (no `sorry`, no custom axioms) |
-| Fast computation engine (`build`, `aliveUpTo`, `Qeng`) | ✅ defined, matches A005185 |
-| Engine ⟷ spec agreement, finite window | ✅ `native_decide` up to `n = 10⁵` (`engine_faithful_100k`) |
-| Immortality certificate, finite | ✅ `native_decide` up to `n = 10⁶` (`alive_1e6`) |
-| **Problem A (proof)** | ❌ open — target `theorem problemA : ProblemA` |
-| **Problem B (proof)** | ❌ open — target `theorem problemB (h : ProblemA) : ProblemB h` |
-| Determinism lemma | ◻️ stated (`Deterministic`), unproven |
-| Engine ⟷ spec agreement, general `N` | ◻️ obligation for research phase |
+| Determinism (uniqueness of Q) | ✅ **proved** (`deterministic`, `Basic.lean`) |
+| Positivity / boundary bookkeeping | ✅ **proved** (`history_pos`: lookups can only exit `[1,n−1]` downward) |
+| **Problem A ⟺ `UniformBound` (`Q(n) ≤ n`) ⟺ engine never dies** | ✅ **proved** (`problemA_iff_uniformBound`, `problemA_iff_engine`) |
+| Exact deviation & lookup identities | ✅ **proved** (`deviation_identity`, `lookup_*`) |
+| Engine ⟷ spec agreement, **general `N`, both directions** | ✅ **proved** (`Faithful.lean`) |
+| Spec-level immortality certificates | ✅ 10⁷ (`history_1e7`) and 10⁸ (`history_1e8`), via `native_decide` |
+| Spec-level values | ✅ `Q(10⁶)=512066`, `Q(10⁷)=5124632`, `Q(10⁸)=50166508`, `Q(4)=3`, `Q(96)=64`, `Q(16)<Q(15)` |
+| No linear bound below ¾ | ✅ **proved** (`no_uniform_bound_below_3_4`) |
+| Computation, exact to 10⁹ | ✅ survives; **0 violations of `Q(n) ≤ n`**; stats in `data/` |
+| Two-parameter envelope induction | ❌ **cannot close — no-go proved** (REPORT.md, Theorem D) |
+| **Problem A (proof)** | ❌ open — reduced exactly to `UniformBound` (REPORT.md §9, Gap A) |
+| **Problem B (proof)** | ❌ open — conditional form proved on paper (Theorem C); gap is `|2Q(n)−n| = o(n)` (Gap B) |
 
 The `native_decide` theorems are **finite certificates**, not a proof of
-Problem A. They exist to (a) pin the engine's faithfulness to the specification
-on a large window and (b) provide reproducible data. See "Trust base" below.
+Problem A. Thanks to `Faithful.lean` they now certify the *specified*
+sequence, not merely the engine. See "Trust base" below.
 
 ## Layout
 
 ```
+REPORT.md       -- full research report: reductions, computation, no-go theorems,
+                   route audit, exact remaining gaps
 QSequence/
   Engine.lean   -- computable exact-integer engine (Option/Array), for native_decide
   Spec.lean     -- faithful mathematical spec (IsHistory) + exact Problem A/B statements
+  Basic.lean    -- positivity, determinism, take/extend, A ⟺ UniformBound,
+                   deviation & lookup identities
+  Faithful.lean -- engine ⟷ spec faithfulness, both directions, every N
   Checks.lean   -- Bool checker `checkHistory` verifying the spec rule pointwise
   Verify.lean   -- native_decide theorems: engine⟷spec (1e5), immortality (1e6), value/non-monotonicity
+  Certificates.lean    -- spec-level certificates: 10⁷ immortality, values, ¾ floor
+  BigCertificates.lean -- spec-level 10⁸ immortality + Q(10⁸)
 scripts/
   q_reference.py -- fast exact-integer Python impl (mirrors the engine) + diagnostics
   setup_lean.sh  -- reinstall the exact toolchain without elan (see below)
@@ -84,7 +99,8 @@ so the toolchain is installed from the prebuilt tarball rather than via elan:
 
 ```bash
 bash scripts/setup_lean.sh     # puts lean/lake on PATH (no elan needed)
-lake build                     # builds everything and re-runs the native_decide proofs (~60s)
+lake build                     # builds everything and re-runs the native_decide proofs
+                               # (~1 min + a few minutes for the 10⁸ certificates)
 ```
 
 `lake build` is the full verification: it re-checks every theorem, including the
@@ -94,6 +110,10 @@ computation).
 Numeric experiments (much faster than `native_decide` for exploration):
 
 ```bash
+gcc -O2 -o scripts/compute_q scripts/compute_q.c
+./scripts/compute_q 1000000000 data                        # exact run to 10⁹ (~4 GB RAM):
+                                                           # survival, Q(n) ≤ n check, records,
+                                                           # per-generation tables → data/
 python3 scripts/q_reference.py --upto 100000000            # survival + Q(N)
 python3 scripts/q_reference.py --upto 10000000 --stats     # deviation / jump diagnostics
 python3 scripts/q_reference.py --values 24 16 1000         # specific values

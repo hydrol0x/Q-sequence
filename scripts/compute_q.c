@@ -142,7 +142,7 @@ int main(int argc, char **argv) {
                cp, q[cp], (uint64_t)sum);
     }
 
-    fprintf(fgen, "# k  span=[2^k,2^{k+1})  count  max|2Q-n|  max|2Q-n|/2^k  at_n  "
+    fprintf(fgen, "# k  count  max|2Q-n|  max|2Q-n|/2^k  at_n  sum(2Q-n)  "
                   "mean(2Q-n)  maxQ/n  lookups:below_parent  in_parent  in_own_gen\n");
     for (int k = 1; k < KMAX; k++) {
         if (!g_cnt[k]) continue;

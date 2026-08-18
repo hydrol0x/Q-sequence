@@ -338,4 +338,42 @@ theorem deviation_identity {a : List Nat} (ha : IsHistory a) {n : Nat}
   obtain ⟨h1, h2, heq⟩ := hr
   omega
 
+/-! ## Exact lookup-location identities (the "parent structure", made exact) -/
+
+/-- The first lookup index `j₁ = n − Q(n−1)` satisfies `2·j₁ = (n+1) − e(n−1)`
+**exactly**, where `e(m) = 2Q(m) − m`: the recursion reads the sequence at the
+midpoint `(n+1)/2`, displaced by exactly half the local deviation.  This is
+the quantitative "parent-generation" structure: it is exact, but the
+displacement is governed by `e`, whose observed size grows like `n^0.9`
+(see REPORT.md), which is why the generation structure drifts. -/
+theorem lookup_first_formula {a : List Nat} (ha : IsHistory a) {n : Nat}
+    (h3 : 3 ≤ n) (hn : n ≤ a.length) :
+    2 * ((n - valAt a (n-1) : Nat) : Int)
+      = (n : Int) + 1 - (2 * (valAt a (n-1) : Int) - ((n : Int) - 1)) := by
+  have hr := (ruleAt_of_ge_three h3).mp (ha n (by omega) hn)
+  obtain ⟨h1, -, -⟩ := hr
+  omega
+
+/-- Likewise the second lookup index: `2·j₂ = (n+2) − e(n−2)`. -/
+theorem lookup_second_formula {a : List Nat} (ha : IsHistory a) {n : Nat}
+    (h3 : 3 ≤ n) (hn : n ≤ a.length) :
+    2 * ((n - valAt a (n-2) : Nat) : Int)
+      = (n : Int) + 2 - (2 * (valAt a (n-2) : Int) - ((n : Int) - 2)) := by
+  have hr := (ruleAt_of_ge_three h3).mp (ha n (by omega) hn)
+  obtain ⟨-, h2, -⟩ := hr
+  omega
+
+/-- The two lookup indices differ by exactly `Q(n−1) − Q(n−2)`: the recursion
+samples the half-scale region at two points separated by the local difference
+`d(n−1)`, whose observed magnitude is unbounded (jumps of size ≈ 0.05·n occur
+below 10⁹; see `data/records_jump.txt`).  The "two lookup streams" are
+therefore far apart, not adjacent. -/
+theorem lookup_gap {a : List Nat} (ha : IsHistory a) {n : Nat}
+    (h3 : 3 ≤ n) (hn : n ≤ a.length) :
+    ((n - valAt a (n-2) : Nat) : Int) - ((n - valAt a (n-1) : Nat) : Int)
+      = (valAt a (n-1) : Int) - (valAt a (n-2) : Int) := by
+  have hr := (ruleAt_of_ge_three h3).mp (ha n (by omega) hn)
+  obtain ⟨h1, h2, -⟩ := hr
+  omega
+
 end QSequence
