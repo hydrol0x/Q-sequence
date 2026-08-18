@@ -45,6 +45,7 @@ theorems, an audit of eight proof routes, and the exact remaining gaps.
 | Spec-level immortality certificates | ✅ 10⁷ (`history_1e7`) and 10⁸ (`history_1e8`), via `native_decide` |
 | Spec-level values | ✅ `Q(10⁶)=512066`, `Q(10⁷)=5124632`, `Q(10⁸)=50166508`, `Q(4)=3`, `Q(96)=64`, `Q(16)<Q(15)` |
 | No linear bound below ¾ | ✅ **proved** (`no_uniform_bound_below_3_4`) |
+| `Qval` recurrence + first asymptotic exclusion under A | ✅ **proved** (`Qval_rec`, `not_eventually_ge_three_quarters`) |
 | Computation, exact to 10⁹ | ✅ survives; **0 violations of `Q(n) ≤ n`**; stats in `data/` |
 | Two-parameter envelope induction | ❌ **cannot close — no-go proved** (REPORT.md, Theorem D) |
 | **Problem A (proof)** | ❌ open — reduced exactly to `UniformBound` (REPORT.md §9, Gap A) |
@@ -68,6 +69,7 @@ QSequence/
   Checks.lean   -- Bool checker `checkHistory` verifying the spec rule pointwise
   Verify.lean   -- native_decide theorems: engine⟷spec (1e5), immortality (1e6), value/non-monotonicity
   Certificates.lean    -- spec-level certificates: 10⁷ immortality, values, ¾ floor
+  Asymptotics.lean     -- Qval recurrence under A; Q(m)/m ≥ 3/4 cannot hold eventually
   BigCertificates.lean -- spec-level 10⁸ immortality + Q(10⁸)
 scripts/
   q_reference.py -- fast exact-integer Python impl (mirrors the engine) + diagnostics

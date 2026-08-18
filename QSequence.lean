@@ -5,4 +5,5 @@ import QSequence.Faithful
 import QSequence.Checks
 import QSequence.Verify
 import QSequence.Certificates
+import QSequence.Asymptotics
 import QSequence.BigCertificates

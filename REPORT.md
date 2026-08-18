@@ -86,6 +86,8 @@ certificates only (marked ⊕ below).
 | `Q_4`, `Q_96` (Certificates) ⊕ | spec-level `Q(4) = 3`, `Q(96) = 64` (data anchors for Theorem D) |
 | `nonmono_spec` (Certificates) ⊕ | spec-level `Q(16) = 9 < 10 = Q(15)`: Q is not monotone |
 | `no_uniform_bound_below_3_4` (Certificates) ⊕ | no bound `Q(n) ≤ c·n` with `c < 3/4` holds on histories (witness `Q(4) = 3`) |
+| `Qval_pos`, `Qval_le_self`, `Qval_rec` (Asymptotics) | under A, the canonical `Qval` is positive, `≤ id`, and satisfies the recurrence |
+| **`not_eventually_ge_three_quarters`** (Asymptotics) | under A, `Q(m)/m ≥ 3/4` cannot hold for all large `m` — the machine-checked kernel of the `c = 1` endpoint exclusion in Theorem C |
 
 The equivalence chain is the load-bearing item: **a proof of the single
 statement `UniformBound` — a statement about finite lists only — resolves
@@ -212,7 +214,10 @@ linear. Contradiction for large `t`. ∎
 `m ≥ M`. For `n ≥ M + 2`: `a_n ≤ n − (1−ε)(n−1) ≤ εn + 1` and
 `b_n ≤ εn + 2`; since `Q(m) ≤ m` always (A), `Q(n) = Q(a_n) + Q(b_n) ≤
 a_n + b_n ≤ 2εn + 3 = n/2 + 3`. But `Q(n) ≥ (3/4)n`. Contradiction for
-`n ≥ 13`. ∎
+`n ≥ 13`. ∎  *(This step is machine-checked:
+`not_eventually_ge_three_quarters` in `QSequence/Asymptotics.lean` proves,
+under A, that `Q(m)/m ≥ 3/4` for all large `m` is impossible; the same
+one-step argument works for any threshold `> 2/3`.)*
 
 Note precisely where A is used: totality plus `Q ≤ id` (i.e. `UniformBound`).
 This proof does **not** prove the limit exists; that is Gap B.
