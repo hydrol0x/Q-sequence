@@ -19,9 +19,9 @@ reproducible form:
    axioms): the Q-sequence is unique; *Problem A is equivalent to the single
    statement `Q(n) ≤ n` for all n* (`UniformBound`), and equivalent to the
    verified engine never dying; exact deviation and lookup-location
-   identities; spec-level finite certificates through 10⁷.
+   identities; spec-level finite certificates through 10⁸.
 2. **Verified computation to 10⁹** with zero violations of `Q(n) ≤ n`,
-   cross-validated by six independent implementations, with the adversarial
+   cross-validated by seven independent implementations, with the adversarial
    statistics (deviation growth, generation spillover, jump records) that any
    proposed proof must survive.
 3. **Two rigorous no-go theorems**: the two-parameter linear-envelope
@@ -107,28 +107,33 @@ none occurred, so the run itself is a machine check of `UniformBound` on
 * `max |Q(n)−Q(n−1)| = 52 719 055` (at `n = 984 141 755`, a *downward* jump
   of ≈ 0.054·n): successive differences are enormous; "slowness"-type
   hypotheses fail catastrophically, not marginally.
-* `max_{3≤n} Q(n)/n = 3/4`, attained at `n = 4` and **never approached
-  again**: per-generation `max Q(n)/n` decreases monotonically from 0.667
-  (early) through 0.614 (gen 10) to **0.5345** (gen 29). Death requires
-  `Q(n)/n ≥ 1`.
+* `max_{3≤n} Q(n)/n = 3/4`, attained at `n = 4` and **never attained
+  again**: per-generation `max Q(n)/n` declines from 0.667 (early) through
+  0.614 (gen 10) to **0.5345** (gen 29, partial: up to 10⁹) — a steady
+  downward trend with small wiggles (e.g. 0.5813 → 0.5866 between gens
+  12–13), never re-approaching earlier maxima. The ten largest ratios over
+  `n ∈ [100, 5·10⁸]` all occur below `n = 1600` (criticality agent, §8 R6).
+  Death requires `Q(n)/n ≥ 1`.
 
-Cross-validation matrix (six independent implementations — different
+Cross-validation matrix (seven independent implementations — different
 authors/languages/data layouts — agreeing exactly; the renewal agent
 additionally re-derived its values in pure Python):
 
-| value | C (this run) | Lean `native_decide` | Python ref | agent 1 (C) | agent 2 (C) | agent 3 (C) |
-|---|---|---|---|---|---|---|
-| Q(10⁵) | 48157 | — | 48157 | 48157 | 48157 | 48157 |
-| Q(10⁶) | 512066 | **512066** (spec-level) | 512066 | 512066 | — | 512066 |
-| Q(10⁷) | 5124632 | **5124632** (spec-level) | 5124632 | 5124632 | — | 5124632 |
-| Q(10⁸) | 50166508 | — | — | 50166508 | — | — |
-| Q(2²⁰) | — | — | — | — | 527047 | — |
-| sum to 10⁷ mod 2⁶⁴ | 25000190971777 | — | — | 25000190971777 | — | 25000190971777 |
+| value | C (this run) | Lean `native_decide` | Python ref | agent 1 (C) | agent 2 (C) | agent 3 (C) | agent 4 (C) |
+|---|---|---|---|---|---|---|---|
+| Q(10⁵) | 48157 | — | 48157 | 48157 | 48157 | 48157 | 48157 |
+| Q(10⁶) | 512066 | **512066** (spec-level) | 512066 | 512066 | — | 512066 | 512066 |
+| Q(10⁷) | 5124632 | **5124632** (spec-level) | 5124632 | 5124632 | — | 5124632 | 5124632 |
+| Q(10⁸) | 50166508 | **50166508** (spec-level) | — | 50166508 | — | — | 50166508 |
+| Q(5·10⁸) | 247777817 | — | — | — | — | — | 247777817 |
+| Q(2²⁰) | — | — | — | — | 527047 | — | — |
+| sum to 10⁷ mod 2⁶⁴ | 25000190971777 | — | — | 25000190971777 | — | 25000190971777 | — |
 
-(agents 1–3 = the closure-search, generation-transfer, and renewal-scan
-experiment agents; their code and raw outputs are preserved with the session
-artifacts, and the headline numbers are reproduced in §8. The Lean values are
-theorems about *every* spec-history, not about one program run.)
+(agents 1–4 = the closure-search, generation-transfer, renewal-scan, and
+criticality-statistics experiment agents; their code and raw outputs are
+preserved with the session artifacts, and the headline numbers are reproduced
+in §8. The Lean values are theorems about *every* spec-history, not about one
+program run.)
 
 **Deviation growth (the empirical heart of the matter).** Per dyadic
 generation `G_k = [2^k, 2^{k+1})` (`data/generations.txt`):
@@ -143,10 +148,13 @@ generation `G_k = [2^k, 2^{k+1})` (`data/generations.txt`):
 | 29 | **0.125** | **0.5345** |
 
 The normalized deviation *decays*, supporting Problem B — but only like
-`≈ 2^{−0.08k}` (a factor ~3 over 19 generations), i.e. `max|e| ≈ n^{0.92}`
-in the computed range. Deviations are *barely* sublinear. Any proof of
-Problem B must beat excursions of relative size 0.125 at scale 10⁹; any
-death must grow them to relative size 1.
+`≈ 2^{−0.08k}` (a factor ~3 over 19 generations): fitted over generations
+15–28 (criticality agent, exact per-generation moments),
+`sd(e) ≈ n^{0.879}` and `max|e| ≈ n^{0.912}` — and the extreme-to-sd ratio
+itself *grows* (4.9 → 8.2 over k = 10..28; the tails are heavy). Deviations
+are *barely* sublinear. Any proof of Problem B must beat excursions of
+relative size 0.125 at scale 10⁹; any death must grow them to relative
+size 1.
 
 **An exact spine that dissolves.** `Q(3·2^k) = 2^{k+1}` holds exactly for
 `k ≤ 8` (`Q(24)=16, …, Q(768)=512`) and fails at `k = 9`
@@ -162,7 +170,7 @@ Machine-checked (`deviation_identity`, `lookup_*`): with `e(m) = 2Q(m) − m`,
 e(n) = e(a) + e(b) + (n − Q(n−1) − Q(n−2))            (I1)
      = e(a) + e(b) − (e(n−1) + e(n−2) − 3)/2          (I2, rewriting)
 2a   = (n+1) − e(n−1),   2b = (n+2) − e(n−2)          (lookup location)
-b − a = Q(n−1) − Q(n−2)  = −d(n−1)                    (lookup separation)
+b − a = Q(n−1) − Q(n−2)  = d(n−1)                     (lookup separation)
 ```
 
 Reading: the recursion reads the sequence at the *half-scale midpoint*,
@@ -175,8 +183,11 @@ terms). The linearized per-generation gain is exactly `2 − 1 = 1`:
 prove B, hence bound A's danger away) nor expanding (which would suggest
 death). Every naive envelope or contraction argument runs into this exact
 `= 1`, and Theorem D makes that obstruction rigorous for the standard
-induction template. The empirical `n^{0.92}` growth and the measured
-correlations (§8, R6) quantify how the critical dynamics actually behaves.
+induction template. The identities I1–I3 were additionally verified exactly
+at every `n ≤ 5·10⁸` by an independent implementation (0 violations), and
+the measured exponents and correlations (§8, R6) quantify how the critical
+dynamics actually behaves: deviation scale `n^{0.88}`, lookup streams
+numerically uncorrelated, damping 14.6% anti-aligned with reinforcement.
 
 ## 5. Theorem C (the conditional limit; known, included for completeness)
 
@@ -205,8 +216,10 @@ m − ε(m−1) ≥ (1−ε)m ≥ (1−2ε)t`, and likewise `b_m ≥ (1−2ε)t`
 L(t) ≥ 2·L((1−2ε)t)      for all t ≥ T.
 ```
 
-Iterating `j⋆ = ⌊log(t/T)/log(1/(1−2ε))⌋` times: `L(t) ≥ 2^{j⋆} ≥
-c₀·(t/T)^β` with `β = log 2 / log(1/(1−2ε)) = log 2 / log(4/3) ≈ 2.41 > 1`.
+Iterating `j⋆ = ⌊log(t/T)/log(1/(1−2ε))⌋` times (each intermediate argument
+stays ≥ `T` by the choice of `j⋆`, and `L ≥ 1` at the bottom):
+`L(t) ≥ 2^{j⋆} ≥ ½·(t/T)^β` with
+`β = log 2 / log(1/(1−2ε)) = log 2 / log(4/3) ≈ 2.41 > 1`.
 But `L(t) ≤ Q(m_t) ≤ ε(t + M + 1)` for the least integer `m_t ≥ max(t, M)` —
 linear. Contradiction for large `t`. ∎
 
@@ -298,8 +311,9 @@ and since `c₁(1 − 2(1−c₂)) = c₁(2c₂ − 1) > 0` (as `c₁ ≥ 1/2 > 
 **Case 4: `c₁ = c₂ = 1/2`** (the critical template). By (b) at `m = 96`:
 `48 + d₂ ≥ 64`, so `d₂ ≥ 16`, hence `d₁ + d₂ ≥ 16`. Choose `f(n−1), f(n−2)`
 minimal (`= ⌈(m)/2 − d₁⌉` at `m = n−1, n−2`; ≥ 3 for large `n`), giving
-`a ≥ n/2 + d₁ − 1/2` and `b ≥ n/2 + d₁`, and choose `f(a), f(b)` maximal.
-Exact bookkeeping (each floor/ceiling loses < 1):
+`n/2 + d₁ − 1/2 ≤ a` and `n/2 + d₁ ≤ b`, with `a, b ≤ (n+1)/2 + d₁ + 1 <
+n − 2` for large `n` (so no collision with the fixed positions), and choose
+`f(a), f(b)` maximal. Exact bookkeeping (each floor/ceiling loses < 1):
 
 ```
 f(n) = f(a) + f(b) ≥ (a/2 + d₂ − 1) + (b/2 + d₂ − 1) ≥ n/2 + d₁ + 2d₂ − 5/2 ,
@@ -424,21 +438,33 @@ build on.** *Unblock obligation:* exhibit any exact, unboundedly recurring
 substructure; the data says none exists below 10⁷–10⁸.
 
 **R6 — Derandomizing the probabilistic survival heuristic.** *Done:* the
-exact criticality identities (§4, machine-checked) isolate what a
-derandomization must control; the criticality agent measured the actual
-deviation dynamics to 5·10⁸ (identity checks passed exactly; values
-cross-validated): deviation scale grows like `n^α` with fitted
-`α ≈ [A4-alpha]` (s.d.-based) and `α ≈ [A4-alpha-max]` (max-based); the two
-lookup streams `e(a), e(b)` have per-generation correlation
-`[A4-corr]` (the independence assumed by random-walk heuristics is
-`[A4-corr-verdict]`); the damping-vs-reinforcement correlation is
-`[A4-damp]`. *Status:* **blocked by the statistics-to-worst-case wall, now
-with the wall quantified**: survival needs `|e(n)| < n` *always*; typical
-`|e|` is `n^α`, and the observed extreme is `max|e|/2^k = 0.125` over the
-last full generation (0.068 as a fraction of the record's own `n`) — while
-*no proven tail bound of any strength exists* (a tail bound of strength
-`o(n)` is exactly Gap B, and `< n` is Gap A). *Unblock obligation:* any unconditional
-tail estimate for `|e|` — this is not a route to the gap, it *is* the gap.
+exact criticality identities (§4, machine-checked in Lean, and verified
+exactly at every `n ≤ 5·10⁸` by the criticality agent — 0 violations)
+isolate what a derandomization must control; the agent measured the actual
+deviation dynamics to 5·10⁸ (per-generation moments in exact `__int128`
+arithmetic; values cross-validated): the deviation scale grows like `n^α`
+with fitted `α = 0.879` (s.d.-based, generations 15–28; 0.882 over full
+generations) and `α = 0.912` (generation-max-based); the per-generation
+growth factor `sd_k/sd_{k−1}` is a strikingly stable **1.840–1.846** for
+every full generation `k = 13..27` — the empirical signature of the critical
+dynamics. The two lookup streams `e(a), e(b)` have per-generation
+correlation decaying from +0.044 (k = 11) to **+0.00001** (k = 28): the
+independence assumed by random-walk heuristics is *quantitatively accurate*
+at large scale (consistent with the exact separation `b − a = d(n−1)`,
+whose median is ≈ 0.44·sd(e) ≈ 1.8·10⁶ indices at k = 28). The
+damping-vs-reinforcement correlation converges to **−0.1464** (stable to 4
+decimals for k ≥ 22): the mean-reversion is real but weak — 14.6%
+anti-alignment, nowhere near a deterministic contraction. *Status:*
+**blocked by the statistics-to-worst-case wall, now with the wall
+quantified**: survival needs `|e(n)| < n` *always*; the death boundary sits
+121 sd(e) away at `n = 5·10⁸` but approaches at rate `n^{1−α} = n^{0.12}` in
+sd units, while the observed extreme-to-sd ratio itself *grew* from 4.9 to
+8.2 over k = 10..28 (heavy tails: `α_max − α_sd ≈ +0.03`), and the
+per-generation `max|e(n)|/n` fell from 0.228 to 0.072 — margins widen even
+as typical deviations swell. *No proven tail bound of any strength exists*
+(a tail bound of strength `o(n)` is exactly Gap B, and `< n` is Gap A).
+*Unblock obligation:* any unconditional tail estimate for `|e|` — this is
+not a route to the gap, it *is* the gap.
 
 **R7 — Undecidability / computation-encoding.** *Done:* Proposition E.
 *Status:* **retired in scope**: for this fixed instance, "hardness" can only
@@ -448,7 +474,7 @@ computation requires initial-condition freedom the problem does not grant.
 **R8 — Death search (disproof orientation).** *Done:* margins tracked to
 10⁹ (this run) and 5·10⁸ (criticality agent, independent): the all-time
 ratio record `Q(n)/n = 3/4` stands at `n = 4`; per-generation max ratio
-*decreases monotonically* to 0.5345; the largest deviation excursions
+declines steadily (with small wiggles) to 0.5345; the largest deviation excursions
 (`data/records_absdev.txt`) grow like `n^0.92` while death needs an
 excursion to `e(n) ≈ n`. The two lookup streams sample points separated by
 `|d(n−1)|` (exact; §4), so a death-producing "resonance" would need the
@@ -484,7 +510,7 @@ route above — it is *why* R1–R3 are marked blocked rather than promising.
 Nothing weaker suffices (the equivalence is two-sided), and by
 `no_uniform_bound_below_3_4` any linear strengthening must have slope
 ≥ 3/4. Computed status: true for all `n ≤ 10⁹` (zero violations), with the
-per-generation margin *improving* (max ratio 0.5345 in the last computed
+per-generation margin trend-improving (max ratio 0.5345 in the last computed
 generation). By Theorem D, no two-parameter linear-envelope induction proves
 it; by R1's data, no tested finite local abstraction determines the sequence
 well enough to certify it; by Proposition E, even an independence proof
@@ -524,7 +550,7 @@ measurements quantify the criticality any proof must tame.
 
 Within this investigation: Problem A was reduced, with machine-checked
 equivalences, to the single finite-history statement `UniformBound`
-(`Q(n) ≤ n`), verified computationally to 10⁹ with strictly improving
+(`Q(n) ≤ n`), verified computationally to 10⁹ with trend-improving
 margins; Problem B was pinned to Gap B with the conditional direction fully
 proved (Theorem C) and the criticality obstruction made exact
 (`deviation_identity`, Theorem D); the natural proof mechanisms — finite
