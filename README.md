@@ -33,7 +33,10 @@ resolution of either problem.  See **[REPORT.md](REPORT.md)** for the complete
 account: proved reductions, verified computation to 10⁹, a rigorous no-go
 theorem for the envelope-induction route plus data-level refutations of the
 finite-state and renewal routes, an audit of eight proof routes, and the
-exact remaining gaps.
+exact remaining gaps.  A follow-up round then machine-checked the **full
+conditional-limit theorem** (Theorem C) via new **sharp ½-endpoint
+exclusions**, and pinned Gap B as a machine-checked equivalence
+(`ProblemB ⟺ RatioCauchy`) — see the table below and REPORT.md §5/§9.
 
 | Item | State |
 |------|-------|
@@ -48,10 +51,13 @@ exact remaining gaps.
 | Spec-level values | ✅ `Q(10⁶)=512066`, `Q(10⁷)=5124632`, `Q(10⁸)=50166508`, `Q(4)=3`, `Q(96)=64`, `Q(16)<Q(15)` |
 | No linear bound below ¾ | ✅ **proved** (`no_uniform_bound_below_3_4`) |
 | `Qval` recurrence + first asymptotic exclusion under A | ✅ **proved** (`Qval_rec`, `not_eventually_ge_three_quarters`) |
+| **Sharp exclusions at ½** (under A): no eventual bound `Q(m) ≥ c·m` for any rational `c > 1/2`, none `Q(m) ≤ c·m` for any `c < 1/2` — i.e. `liminf Q(n)/n ≤ 1/2 ≤ limsup Q(n)/n` | ✅ **proved** (`not_eventually_ge_of_gt_half`, `not_eventually_le_of_lt_half`, `frequently_*`, `HalfExclusions.lean`) |
+| **Theorem C fully machine-checked** (Golomb conditional lemma): under A, if `Q(n)/n` is Cauchy then it converges to ½ — both endpoint exclusions included, no assumption on the limit's location | ✅ **proved** (`problemB_of_ratioCauchy`, `TheoremC.lean`) |
+| **Gap B pinned as an equivalence**: under A, `ProblemB ⟺ RatioCauchy` ("the ratio sequence is Cauchy") | ✅ **proved** (`problemB_iff_ratioCauchy`) |
 | Computation, exact to 10⁹ | ✅ survives; **0 violations of `Q(n) ≤ n`**; stats in `data/` |
 | Two-parameter envelope induction | ❌ **cannot close — no-go proved** (REPORT.md, Theorem D) |
 | **Problem A (proof)** | ❌ open — reduced exactly to `UniformBound` (REPORT.md §9, Gap A) |
-| **Problem B (proof)** | ❌ open — the limit-*value* lemma (existence assumed) is proved on paper with endpoint exclusions (REPORT.md Theorem C); the gap is existence itself: `|2Q(n)−n| = o(n)` (Gap B) |
+| **Problem B (proof)** | ❌ open — the limit-*value* lemma is now fully machine-checked (`TheoremC.lean`); the gap is existence itself, machine-checked equivalent to `RatioCauchy` (Gap B) |
 
 The `native_decide` theorems are **finite certificates**, not a proof of
 Problem A. Thanks to `Faithful.lean` they now certify the *specified*
@@ -72,6 +78,8 @@ QSequence/
   Verify.lean   -- native_decide theorems: engine⟷spec (1e5), immortality (1e6), value/non-monotonicity
   Certificates.lean    -- spec-level certificates: 10⁷ immortality, values, ¾ floor
   Asymptotics.lean     -- Qval recurrence under A; Q(m)/m ≥ 3/4 cannot hold eventually
+  HalfExclusions.lean  -- sharp exclusions at ½ (both sides): liminf ≤ ½ ≤ limsup under A
+  TheoremC.lean        -- full Golomb lemma: RatioCauchy → ProblemB, and ProblemB ⟺ RatioCauchy
   BigCertificates.lean -- spec-level 10⁸ immortality + Q(10⁸)
 experiments/    -- route-audit experiments: independent code + raw outputs (see its README)
 data/           -- outputs of the 10⁹ run: records, per-generation tables, log

@@ -21,6 +21,10 @@ reproducible form:
    Q-sequence is unique; *Problem A is equivalent to the single statement
    `Q(n) ≤ n` for all n* (`UniformBound`), and equivalent to the verified
    engine never dying; exact deviation and lookup-location identities;
+   **sharp half-exclusions** — under A no eventual linear bound on either
+   side of ½ can hold, so `liminf Q(n)/n ≤ 1/2 ≤ limsup Q(n)/n`; **the
+   full conditional-limit theorem** (Theorem C/Golomb, §5) and the
+   machine-checked pinning **Gap B ⟺ `RatioCauchy`** (§9);
    spec-level finite certificates through 10⁸.
 2. **Verified computation to 10⁹** with zero violations of `Q(n) ≤ n`,
    cross-validated by seven independent implementations, with the adversarial
@@ -91,6 +95,11 @@ certificates only (marked ⊕ below).
 | `no_uniform_bound_below_3_4` (Certificates) ⊕ | no bound `Q(n) ≤ c·n` with `c < 3/4` holds on histories (witness `Q(4) = 3`) |
 | `Qval_pos`, `Qval_le_self`, `Qval_rec` (Asymptotics) | under A, the canonical `Qval` is positive, `≤ id`, and satisfies the recurrence |
 | **`not_eventually_ge_three_quarters`** (Asymptotics) | under A, `Q(m)/m ≥ 3/4` cannot hold for all large `m` — the machine-checked kernel of the `c = 1` endpoint exclusion in Theorem C |
+| **`not_eventually_ge_of_gt_half`** (HalfExclusions) | under A, for **every** rational `c > 1/2`, `Q(m) ≥ c·m` cannot hold for all large `m` (iterated envelope refinement; sharpens the ¾ threshold to its sharp value ½) |
+| **`not_eventually_le_of_lt_half`** (HalfExclusions) | under A, for **every** rational `c < 1/2`, `Q(m) ≤ c·m` cannot hold for all large `m` (level-doubling induction `2^j` vs. threshold growth `(q/(q−p))^j < 2^j`) |
+| `frequently_lt_of_gt_half`, `frequently_gt_of_lt_half` (HalfExclusions) | the ∀∃ forms: under A, `liminf Q(n)/n ≤ 1/2 ≤ limsup Q(n)/n` |
+| **`problemB_of_ratioCauchy`** (TheoremC) | **Theorem C in full**: under A, if the ratio sequence is Cauchy (`RatioCauchy`, integer cross-multiplied form) then `Q(n)/n → 1/2` (`ProblemB`) — both endpoints included, no assumption on the limit's location |
+| **`problemB_iff_ratioCauchy`** (TheoremC) | under A, `ProblemB ⟺ RatioCauchy`: Gap B **is** "the ratio sequence is Cauchy", as a machine-checked equivalence |
 
 The equivalence chain is the load-bearing item: **a proof of the single
 statement `UniformBound` — a statement about finite lists only — resolves
@@ -196,11 +205,27 @@ numerically uncorrelated, damping 14.6% anti-aligned with reinforcement.
 
 > **Theorem C.** Assume Problem A. If `Q(n)/n → c` exists, then `c = 1/2`.
 
-This is the classical conditional lemma; per the task rules it is *not
-progress* (the hard content of B is the existence of the limit). It is
-included because the standard sketch ignores the endpoint cases `c = 0`,
-`c = 1`; here is a complete elementary proof. Under A: `1 ≤ Q(n) ≤ n`
-(machine-checked equivalence), so `c ∈ [0,1]`.
+**Now fully machine-checked** (`QSequence/TheoremC.lean`,
+`problemB_of_ratioCauchy`; standard axioms only).  The Lean proof takes a
+cleaner route than the classical case analysis below: the two **sharp
+half-exclusions** (`HalfExclusions.lean`) supply, for every accuracy `1/k`,
+one point `m₀` with ratio `< 1/2 + 1/(4k)` and one point `m₁` with ratio
+`> 1/2 − 1/(4k)` beyond any threshold; the Cauchy estimate then transfers
+these one-point bounds to *every* large `n`.  No fixed-point equation, no
+case split on where the limit lies, and "the limit exists" is taken in the
+honest integer Cauchy form (`RatioCauchy`), so the theorem is exactly the
+conditional lemma with no hidden analytic content.  The sharp exclusions
+themselves strengthen the endpoint lemmas of this section from thresholds
+`3/4` (and the doubling constant `1/8`) to the sharp constant `1/2` on both
+sides — under A, **no eventual bound `Q(m) ≥ c·m` with rational `c > 1/2`
+and no eventual bound `Q(m) ≤ c·m` with rational `c < 1/2` can hold**; in
+limit language, `liminf Q(n)/n ≤ 1/2 ≤ limsup Q(n)/n` unconditionally
+under A.
+
+The classical proof below is retained for exposition (its case analysis is
+what the machine-checked route replaces). Per the task rules Theorem C is
+*not progress* (the hard content of B is the existence of the limit). Under
+A: `1 ≤ Q(n) ≤ n` (machine-checked equivalence), so `c ∈ [0,1]`.
 
 *Case `0 < c < 1`.* Fix `ε ∈ (0, (1−c)/2)` and `M` with
 `|Q(m)/m − c| ≤ ε` for `m ≥ M`. For `n` large, `a_n = n − Q(n−1)` and
@@ -535,9 +560,19 @@ conditional form the task accepts):
 
 > For every `k ≥ 1` there is `N₀` with `|2·Q(n) − n| · k < n` for all
 > `n ≥ N₀` — i.e. `max_{m ≤ n} |2Q(m) − m| = o(n)`.
+>
+> Equivalently (machine-checked, `problemB_iff_ratioCauchy`): **the ratio
+> sequence `Q(n)/n` is Cauchy** (`RatioCauchy`, integer cross-multiplied
+> form: `∀ k ≥ 1, ∃ N, ∀ m,n ≥ N, |Q(m)·n − Q(n)·m|·k ≤ m·n`).
 
-Theorem C shows the limit, if it exists, is 1/2; Gap B *is* the existence,
-and no reduction of it below itself was found. Computed status: the
+Theorem C — now fully machine-checked (`TheoremC.lean`) — shows the limit,
+if it exists, is 1/2; Gap B *is* the existence, and no reduction of it
+below itself was found: the machine-checked equivalence pins it as exactly
+"the ratio fluctuations eventually fall below every `1/k`", nothing more
+and nothing less. The sharp half-exclusions bound the gap from both sides:
+under A the ratio *must* straddle 1/2 (every eventual one-sided linear
+bound off ½ is refuted), so Gap B fails only if the ratio oscillates
+across ½ with non-vanishing amplitude forever. Computed status: the
 normalized deviation decays from 0.37 to 0.125 over generations 10→29 —
 consistent with Gap B being true with `|e| ≈ n^{0.9}` — but the decay
 observed is far too slow for any compactness/monotonicity shortcut, and R6's
@@ -571,9 +606,13 @@ measurements quantify the criticality any proof must tame.
 Within this investigation: Problem A was reduced, with machine-checked
 equivalences, to the single finite-history statement `UniformBound`
 (`Q(n) ≤ n`), verified computationally to 10⁹ with trend-improving
-margins; Problem B was pinned to Gap B, with the limit-*value* lemma fully
-proved (Theorem C — which assumes the limit exists, and is therefore not
-the A-free conditional form the task accepts) and the criticality
+margins; Problem B was pinned to Gap B, with the limit-*value* lemma now
+**fully machine-checked** (Theorem C, `TheoremC.lean` — which assumes the
+limit exists in integer Cauchy form, and is therefore not the A-free
+conditional form the task accepts), Gap B itself machine-checked equivalent
+to `RatioCauchy` (`problemB_iff_ratioCauchy`), the ratio proved to straddle
+½ from both sides under A (sharp half-exclusions,
+`HalfExclusions.lean`), and the criticality
 obstruction made exact (`deviation_identity`, Theorem D); the natural
 proof mechanisms — finite
 closed constraint systems, linear-envelope inductions, absolute-error
