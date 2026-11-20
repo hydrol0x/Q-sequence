@@ -1,40 +1,49 @@
 # Notes on A. M. Masullo, "The Music of the Primes" (draft released 2026-11-20)
 
 Source: `https://math216.wordpress.com/wp-content/uploads/2026/11/the-music-of-the-primes.pdf`
-(940 pages, SHA-256 `e039d3f6cf0a4b14f03c7edb85097752dd65c0a2fe543c76fe992be234f97bf5`).
+(940 pages, SHA-256 `e039d3f6cf0a4b14f03c7edb85097752dd65c0a2fe543c76fe992be234f97bf5`; unchanged when
+re-downloaded at 20:18 UTC on 2026-11-20).
 
 **Status of these notes.** Written 2026-11-20 by an AI model (Claude) in one working session. They are a
-reader's report, not a refereed verdict. Sections 2–4 were worked by hand in the simplest case (the field of
-rationals, trivial character). Section 5 summarises three line-by-line chapter reviews done by automated
-reviewers; their full reports are in `chapter-reviews/`. Where a claim was re-derived independently it is
-marked **checked**; otherwise it is marked **reported**. Nothing here bears on whether GRH is true.
+reader's report, not a refereed verdict. Eight line-by-line reviews of parts of the draft were done by
+automated reviewers (Claude subagents); their unedited reports are in `chapter-reviews/`. One of them was
+briefed to refute an earlier version of this note and found real errors in it; this version incorporates
+those corrections (section 7 lists what changed). Claims re-derived by the author of the note are marked
+**checked**; claims taken from a reviewer's report are marked **reported**. Nothing here bears on whether GRH
+is true. A specialist should confirm anything before relying on it.
 
 ## 1. Summary
 
-1. The draft is released knowingly unfinished. Its acknowledgements say "the math is complete, and only filling
-   in some writing remains". The parts that are not written are exactly the ones that carry the deduction of
-   GRH: the section assembling the pieces of the kernel (12.3, empty), the statement of the final theorem
+1. The draft is released knowingly unfinished. Its acknowledgements say "the math is complete, and only
+   filling in some writing remains". The parts not written are the ones that carry the deduction of GRH:
+   the section assembling the pieces of the kernel (12.3, empty), the statement of the final theorem
    (13.3.1.2, blank), and sections 13.1–13.2 (headings only).
-2. The main theorem (12.5.1.1) is a trace formula that, combined with Weil's explicit formula, is equivalent to
-   GRH. Its proof is six sentences. Each of the three results it cites fails to deliver what is used
+2. The main theorem (12.5.1.1) is a trace formula whose spectral side counts zeros in a strip around the
+   critical line. Its statement never fixes the strip. For a strip of half-width below 1/2 it is, together
+   with Weil's explicit formula, equivalent to GRH; for half-width at least 1/2 it is Weil's formula. Its
+   proof is six sentences, and each of the three results it cites fails to deliver what is used
    (section 5.3).
-3. The step meant to do the work is: split a "geometric kernel" into one piece per prime outside a finite set
-   S, show each piece has zero diagonal mass, and compute what is left S-locally. In every reading of the
-   draft's definitions that could be constructed, this step is either vacuous or contradicts the main theorem
-   (sections 3–4).
-4. Several stated intermediate results are false as written, with explicit counterexamples (section 5).
-   Some are repairable; the repairs do not restore the step in item 3.
-5. What holds up: the foundational chapters were not examined; within chapters 10–12 the spectral statement on
-   the critical line, the per-prime Poisson-summation trace on the 0-line, the Lebesgue-differentiation results
-   on diagonals of nuclear kernels, and the algebra of the Connes-style S-local computation are correct.
+3. The step meant to do the work is: split a "geometric kernel" into one piece per prime outside a finite
+   set S, show each piece has zero diagonal mass, and compute what is left S-locally. Three readings of that
+   step could be constructed from the text (section 4). Read literally it is vacuous. Read at the level of
+   operators on the full space, the per-prime vanishing is false. Read on the draft's one-sided
+   "Paley–Wiener levels", the per-prime statements are true and the whole difficulty moves to an interchange
+   of the sum over primes with a cutoff limit, which is equivalent to GRH and is false if done naively.
+4. Many stated intermediate results are false as written, with explicit counterexamples (section 5). Most are
+   repairable. The repairs do not supply the step in item 3.
+5. The foundations are in better shape than the later chapters. Tate theory, the identification of the
+   theta-function space with multiples of the completed L-function, the single-prime bases, and the
+   normalisation of the explicit formula hold up, in the fine (Fréchet) topology. Every review of the
+   foundations independently reports the same absence: nothing in a Hilbert norm, nothing for a growing set
+   of primes, nothing uniform in the prime.
 
-Assessment: as it stands the draft does not contain a proof of GRH, and the obstruction in section 3 suggests
-the gap is structural, not expository. A specialist should confirm the identification in section 4.
+Assessment: as it stands the draft does not contain a proof of GRH. The best reading of its strategy reduces
+GRH to a statement of the same difficulty.
 
 ## 2. The setting, in the simplest case
 
-Take the rationals and the trivial character, so that the relevant functions live on the positive reals, with
-`u = log x`. Convolution by a test function φ becomes multiplication by its Mellin transform:
+Take the rationals and the trivial character, so that the relevant functions live on the positive reals.
+Convolution by a test function φ becomes multiplication by its Mellin transform:
 
 $$
 A(\varphi)\ \longleftrightarrow\ \text{multiplication by } M\varphi(s), \qquad
@@ -48,198 +57,253 @@ $$
 V \;=\; \overline{\{\zeta(s+\tfrac12)\,G(s)\}} \;\subset\; W_I, \qquad I = [-a,a],\ \ |\mathrm{Re}\,s|\le a .
 $$
 
-The spectral side is the trace of the compression of `A(φ)` to the orthogonal complement of `V`:
+The spectral side is the trace of `A(φ)` on the quotient by `V`:
 
 $$
-\mathrm{Tr}\big(P_V^{\perp} A(\varphi) P_V^{\perp}\big) \;=\; \sum_{\rho:\ |\mathrm{Re}\,\rho-\frac12|<a} N(\rho)\,M\varphi(\rho-\tfrac12).
+\sum_{\rho:\ |\mathrm{Re}\,\rho-\frac12|<a} N(\rho)\,M\varphi(\rho-\tfrac12).
 $$
 
-Since the kernel `φ(x/y)` of `A(φ)` vanishes on the diagonal when `φ(1) = 0`, the draft's "trace formula" at the
-end of chapter 10 is the tautology
+Since the kernel `φ(x/y)` of `A(φ)` vanishes on the diagonal when `φ(1) = 0`, the "trace formula" at the end
+of chapter 10 is the tautology
 
 $$
 \int k_{\mathrm{geom}}(x,x)\,d\mu(x) \;=\; -\sum_{\rho\in\text{strip}} N(\rho)\,M\varphi(\rho-\tfrac12),
-\qquad k_{\mathrm{geom}} = \text{kernel of } P_V A(\varphi).
 $$
 
-All arithmetic content is in evaluating the left side independently (chapters 11–12).
+where the geometric kernel is that of `A(φ)` composed with the projector onto `V`. All arithmetic content is
+in evaluating the left side independently (chapters 11–12).
 
-## 3. Structural obstruction (checked)
+## 3. Two facts about removing one Euler factor (checked)
 
-Removing the Euler factor at a prime `p` acts on untwisted theta-functions as `1 − U_p`, where `U_p` is scaling
-by `p`, and on twisted ones as `1 − p^{-1/2} U_p`. On the Mellin side the two multipliers are
+Removing the Euler factor at `p` sends a Schwartz function `f` to `f(x) − f(x/p)` at the `p`-adic place. On a
+twisted theta-function `h` this is `h(x) − p^{-1/2} h(px)`, with Mellin multiplier
 
 $$
-1 - p^{-s} \quad\text{(untwisted)}, \qquad 1 - p^{-(s+1/2)} \quad\text{(twisted)} .
+1 - p^{-(s+1/2)} .
 $$
 
-**Lemma 1.** For `a < 1/2` the twisted multiplier is bounded with bounded inverse on the strip, because
+**Lemma 1 (full space).** On `W_I` with `a < 1/2` this multiplier is bounded with bounded inverse, because
 
 $$
 \big|p^{-(s+1/2)}\big| \le p^{-(1/2-a)} < 1 \qquad (|\mathrm{Re}\,s|\le a).
 $$
 
-`V` is closed and scaling-invariant, so `(1 − p^{-1/2}U_p)V = V`. The filtration of `V` obtained by removing
-Euler factors is therefore constant: all its quotients are zero.
+So for any closed subspace invariant under scaling in both directions, in particular `V`, the Euler step maps
+the subspace onto itself. The filtration (11.3.1.3) of the full theta-space is constant.
 
-**Consequence.** The per-prime quotients on which the draft computes traces are non-trivial only for the
-untwisted multiplier, whose zeros lie on the imaginary line, where the L-function has none. The zeros of the
-L-function are visible only after the twist, where each Euler-factor step is invertible. The two are related
-by multiplication by the square root of the norm, which is unbounded on `W_I`. Additivity of a trace along a
-filtration needs the subspaces to be closed in the Hilbert space where the trace is taken; here their closures
-all coincide. The draft's "Paley–Wiener levels" are dense, non-closed subspaces with finer topologies; traces
-computed there are not Hilbert-space traces in `W_I`.
-
-The author's letter to Sarnak (section 1.8 of the draft) states the idea as removing Euler factors "one step
-at a time" to avoid the non-convergence of Euler products in the critical strip. Lemma 1 says that in the
-space where the zeros are counted, each single step already loses nothing, so there is nothing to add up.
-
-## 4. The per-prime vanishing contradicts the main theorem (checked, with one identification)
-
-The draft defines the piece at a prime `p` outside `S` by multiplying the lifted kernel by the indicator of
-ideles that are not units at `p` (formula (11.3.1.4)), acting on theta-functions represented by Schwartz
-functions of the standard form (unramified outside `S`). For such a representative, restricting to non-units
-at `p` is the same as scaling by `p`. So as an operator on theta-functions the first piece is
+**Lemma 2 (one-sided subspaces).** The draft's Paley–Wiener levels (Definition 11.2.1.1) are closed subspaces
+of functions supported in norm at least `1/λ`. Such functions have Mellin transforms analytic in a left
+half-plane, where evaluation on the line `Re s = −1/2` is continuous. There
 
 $$
-P_V\,A(\varphi)\,\big(p^{-1/2}U_p\big) \;=\; P_V\,A(\varphi_p), \qquad \varphi_p(x) = p^{-1/2}\,\varphi(x/p),
+p^{s}\big(1 - p^{-(s+1/2)}\big) = p^{s} - p^{-1/2}
 $$
 
-which is the full geometric operator for a shifted test function. Proposition 12.2.2.2 defines diagonal mass
-as the plain integral of the smoothed kernel over the diagonal of the quotient, so mass is determined by the
-kernel on the quotient. Applying the tautology of section 2 and then the draft's main theorem to the shifted
-function:
+is bounded and vanishes at the points `−1/2 + 2πim/log p`. So the Euler step maps level `λ` into level `pλ`
+with closed range of infinite codimension, and convolution by a test function supported above norm 1 has
+trace on the quotient
 
 $$
-\text{mass}\big(\text{piece at } p\big) \;=\; -\sum_{\rho\in\text{strip}} N(\rho)\,M\varphi_p(\rho-\tfrac12) \;=\; -\,W(\varphi_p),
+\sum_{m\in\mathbb Z} M\varphi\!\Big(-\tfrac12 + \frac{2\pi i m}{\log p}\Big) \;=\; \log p \sum_{n\ge 1} \varphi(p^n)\,p^{-n/2} .
 $$
 
-where `W` is Weil's geometric functional. Theorem 11.3.2.1 says the left side is zero whenever `p` exceeds the
-support of `φ`. But `W(φ_p)` contains the terms of every prime power in the shifted support.
+Lemma 1 does not apply because the inverse of the Euler step destroys one-sided support. This is Weil's local
+term at `p`, and it vanishes when `p` exceeds the support of `φ`.
 
-**Example.** Let `φ` be a bump supported in `(1.24, 1.56)` and `p = 5`. The shifted function is supported in
-`(6.2, 7.8)`, which contains the prime 7 and no other prime power. Numerically (script in `numerics/`):
+The draft proves neither lemma in this form. Chapter 11 proves only the untwisted statement on the line
+`Re s = 0`, and the twisted value is asserted in the last lines of the proof of Theorem 11.3.2.1.
+
+## 4. Three readings of the per-prime step
+
+**Literal reading: vacuous (checked).** Proposition 12.2.2.2 defines diagonal mass through a lifted kernel
+multiplied by a localizing factor. Unwinding it, the "mass" of a chopped piece is a weighted integral of the
+diagonal of the original kernel, with a weight that depends on an arbitrary choice. With the choice used in
+Proposition 12.2.2.4 every per-prime piece is zero identically and the remainder is the whole global kernel.
+The localizing function printed in (11.3.2.2) is identically zero, and the proof of Theorem 11.3.2.1
+multiplies two indicator functions whose product is zero.
+
+**Reading A, operators on the full space: per-prime vanishing is false (checked).** For theta-functions of
+Schwartz functions unramified outside `S`, the first piece acts as
+
+$$
+-\,A(\psi)\,P_V, \qquad \psi(x) = p^{-1/2}\,\varphi(px),
+$$
+
+the full geometric operator for a shifted test function, supported below norm 1. Its mass is the spectral sum
+for `ψ`. Theorem 11.3.2.1 is stated for every half-width, and for half-width above 1/2 all zeros are counted,
+so by Weil's unconditional formula the mass is Weil's geometric functional of `ψ`, which is not zero. For
+`φ` a bump on `(1.24, 1.56)` in Weil's normalisation and `p = 5` (script `numerics/corrected.py`):
 
 | Quantity | Value |
 |---|---|
-| Sum over the first 400 zeta zeros (height up to 680) | −0.983325 |
-| Weil geometric side | −0.983301 |
-| Prime 7 term | −1.945910 |
-| Pole terms | +1.103738 |
-| Archimedean term | −0.141128 |
+| Sum over the first 150 zeta zeros | +0.674132 |
+| Weil geometric side | +0.674001 |
+| Pole terms | +0.884192 |
+| Prime-power term (4 = 2²) | −0.000610 |
+| Archimedean term | −0.209581 |
 
-So the piece at 5 has mass about 0.98 under this reading, not 0. Theorems 11.3.2.1 and 12.5.1.1 cannot both
-hold.
+The non-vanishing comes from the pole and Archimedean terms. For thin strips the same conclusion follows
+without Weil: vanishing for all test functions and all primes would force every coefficient of a Dirichlet
+series over the zeros in the strip to vanish, contradicting the existence of zeros on the critical line
+(reported).
 
-**What the draft computes instead.** The trace of `A(φ)` on the quotient of two consecutive filtration steps
-in the untwisted 0-line space, which is correct:
+**Reading B, Paley–Wiener levels: per-prime true, assembly equivalent to GRH (partly checked).** Fix a level
+and a two-sided cutoff `Λ`. The Euler-step subspaces form a decreasing chain with zero intersection, and the
+cut-off trace decomposes exactly into blocks, one per prime outside `S` (reported). Each block's trace tends
+to the value in Lemma 2 as the cutoff is removed (reported, sketch level). What the main theorem needs is the
+interchange
 
 $$
-\mathrm{Tr}\big(A(\varphi)\,\big|\,W_k/W_{k+1}\big) \;=\; \sum_{m\in\mathbb Z} M\varphi\!\Big(\frac{2\pi i m}{\log p}\Big) \;=\; \log p \sum_{n\in\mathbb Z}\varphi(p^n).
+\lim_{\Lambda\to\infty}\ \sum_{p\notin S} \mathrm{Tr}_\Lambda(\text{block}_p) \;\overset{?}{=}\; \sum_{p\notin S}\ \lim_{\Lambda\to\infty} \mathrm{Tr}_\Lambda(\text{block}_p) .
 $$
 
-This is not the mass of the piece of the kernel, which is a regularized trace over the whole `k`-th step.
+The left side is minus the spectral sum and does not depend on `S`. The right side does depend on `S`: it is
+zero once `S` contains the primes up to the support of `φ`, and for smaller `S` it is the corresponding part
+of Weil's prime sum. So the interchange is false as it stands (checked). The reviewer's explanation is that
+at fixed cutoff the mass sits on primes of size about `Λ²`, each of which contributes zero in the limit
+(reported). The correct statement must account
+for the defect, and identifying that defect with Connes' S-local trace plus pole terms is the main theorem
+itself. Removing the factors one at a time does not help: every finite step is exact and leaves a global
+object, and only the limit is S-local.
 
-**The other reading.** With the indentation of Proposition 12.2.2.2 taken to be the indicator of a fundamental
-domain inside the all-units stratum, the "skewed diagonal" sum has only the identity term; every per-prime
-piece is zero identically, the remainder is the whole global kernel, and nothing has been reduced. The
-chapter 12 reviewer found the same for Proposition 12.2.2.4, the only result in range that could justify
-summing the pieces: its integrand is identically zero for every `k`.
-
-**Identification to confirm.** The argument assumes the piece of the kernel is the operator above. The
-statement of Theorem 11.3.2.1 could not be given a definite meaning as printed (section 5.2), so this is an
-argument against the readings that could be constructed, not against a precise statement.
+There is also a mismatch that does not involve GRH. The global scheme uses two-sided cutoffs and removes the
+Paley–Wiener truncation first; done S-locally, that order gives zero. Theorem 12.4.1.1 is Connes' computation
+with a one-sided cutoff and a joint limit, which gives the non-zero local terms. A footnote in the draft
+concedes the cutoffs do not match (reported).
 
 ## 5. Findings by chapter
 
 Full reports: `chapter-reviews/`. "False" means a counterexample is given there.
 
-### 5.1 Chapter 10 and section 9.3 (spectral side)
+### 5.1 Chapters 2–4 (theta-functions, zeta integrals, bases) — reported
 
-- The spectral statement for the critical line (interval `{0}`) is true; the reviewer re-proved it by a
-  different route.
-- **The draft's proof of it (Theorem 10.3.1.1) uses a false uniform bound (checked).** Lines 27124–27135 of
-  the extracted text assert a constant `C` bounding the product of the norms of each evaluation functional and
-  its biorthogonal vector, "ensured by the basis being normalized". Proposition 10.2.1.3 bounds only the
-  functionals. A biorthogonal vector must be 1 at its zero and 0 at every other zero, so if another zero lies
-  at distance `d`, Sobolev embedding (Hölder exponent `γ = min(s/2 − 1/2, 1)`) forces its norm to be at least
-  `c·d^{-γ}`. Gaps between critical-line zeros of zeta tend to zero along a sequence (Selberg: a positive
-  proportion of zeros are on the line, and the mean gap at height `T` is `2π/log T`), so the bound fails.
-  Claim (1) of the theorem would imply a polynomial lower bound on gaps between zeros, which is open
-  (reported). The trace identity itself survives by a different proof (reported).
+- Tate theory and the decay estimates are standard and check out for the rationals. Two formulas in
+  chapter 3 have wrong constants; minor. A key step of "Weil's Identity" carries the author's footnote
+  "Why do such identities hold? Must say more".
+- Chapter 4's single-prime basis is correct: the quotient by the multiples of one Euler factor is smooth
+  functions on a circle, with the exponential system as an absolute basis.
+- There is no basis statement for two different primes in any topology. Theorem 4.6.1.5 assumes commensurable
+  logarithms (several places over one rational prime). In the fine topology the two-prime case would need
+  Baker's theorem, which is not cited. In Hardy-type Hilbert norms raw evaluations cannot be a Schauder basis,
+  because the zero sets of two Euler factors come arbitrarily close.
+- Corollary 4.5.3.1 has a circular proof (the statement is true). Lemma 4.3.3.7 is false and appears unused.
+- Nothing survives completion in a Hilbert norm, and nothing is uniform in the prime.
+
+### 5.2 Chapters 5, 6 and 8 (structure theorems) — reported
+
+- Correct in the fine topology, and re-derived by the reviewer for the rationals: the theta-space is exactly
+  the multiples of the completed zeta function inside entire functions Schwartz on strips, and is closed;
+  every isotypic theta-function comes from a Schwartz function unramified outside `S`; the S-local-to-global
+  map is an isomorphism when the S-class group is trivial.
+- Several written proofs are wrong where the statement is true: Structure Theorem I uses a false step and an
+  inapplicable completeness citation, and promises a later proof that does not appear; Structure Theorem II
+  has a map going the wrong way. Author notes such as "WORK 1: adjust this Theorem" sit on these results.
+- Lemma 5.3.1.1 is false on ramified characters; harmless for what is used later.
+- Chapter 8 is motivational. Theorem 8.1.0.1 is false for the trivial character, section 8.4 is heuristic by
+  its own wording, section 8.5 is an empty heading, and nothing later cites the chapter.
+
+### 5.3 Chapter 7 (S-local per-prime foundation) — reported
+
+- The single-prime statements are true in the model case but nearly tautological: the per-prime quotient does
+  not depend on the zeta function or on the other primes in `S`.
+- Every result is in the fine topology. Chapter 11 asserts that its Sobolev quotient "is the completion of"
+  the chapter 7 quotient; chapter 7 does not support that.
+- Theorem 7.4.2.1's trace sums over all powers of the prime including the zeroth and has no square-root
+  weight; it matches Weil's local term only after the twist and for test functions supported above norm 1.
+  Its proof cites a proposition that does not exist and a formula from chapter 11.
+- Proposition 7.3.3.2's proof stops at "It remains to show that the sub-squares … are cartesian".
+  Definition 7.3.3.3 divides by a subspace not contained in the numerator.
+- The explanation of why the method fails over function fields (commensurable logarithms) is sound.
+
+### 5.4 Sections 9.1–9.2 and Appendix B (analytic foundations) — reported
+
+- The Hardy–Sobolev facts used later are correct for compact intervals: interior evaluations of all orders
+  are continuous, boundary evaluations of order `m` are continuous exactly when `m < (s−1)/2`.
+- Five proofs in section 9.2.2 are placeholders ("Return here"). The spaces are not well defined for
+  unbounded intervals.
+- The multiplicity cap is printed as `min{N, floor((s-1)/2)+1}` throughout chapters 9–11; the correct count
+  is `ceil((s-1)/2)`. They differ at odd integer `s` (checked). The introduction has a third version.
+- The idelic explicit formula (Theorem B.4.4.7) has correct normalisations; the reviewer checked it term by
+  term against the classical formula for the rationals. The draft does not prove it: it cites Weil, and the
+  author's note says the link to the draft's own classical version is still to be explained.
+- That classical version (Theorem B.4.2.2) is wrong as printed at the Archimedean places.
+- The formula appears with three mutually inconsistent normalisations: in B.4.4.7, in the main theorem
+  12.5.1.1 (no volume factor), and in 13.3.1.1 (local constants dropped). Only the first is right.
+- The residue theorem B.3.2.1 is wrong for multiple poles, which matters where it is applied to quotients by
+  an L-function.
+
+### 5.5 Section 9.3 and chapter 10 (spectral side)
+
+- The spectral statement on the critical line is true; the reviewer re-proved it by a different route
+  (reported).
+- **The draft's proof of it (Theorem 10.3.1.1) uses a false uniform bound (checked).** It asserts a constant
+  bounding the product of the norms of each evaluation functional and its biorthogonal vector. A biorthogonal
+  vector must be 1 at its zero and 0 at every other zero, so a neighbouring zero at distance `d` forces its
+  norm to be at least a negative power of `d`. Gaps between critical-line zeros of zeta tend to zero along a
+  sequence, so no such constant exists.
 - The strip case (Theorems 10.2.2.1, 10.3.2.1, 10.4.3.5, 10.4.3.6) has no proof (reported).
-- **Lemma 9.3.2.4 is false as stated (checked).** It claims that for every exponentially decaying Schwartz
-  function the Mellin transform has `O(log T)` zeros in a box of height 1 at height `T`. The function
-  `exp(-z^4) sin(pi z^2)` is entire and Schwartz on every vertical strip, and has about `2T` zeros on the
-  imaginary axis between heights `T` and `T+1`. The proof applies Jensen's formula with an upper bound on the
-  value at the centre where a lower bound is needed. Theorem 9.3.2.6, which the strip case cites, has
-  unquantified data and a monotonicity claim in the wrong direction (reported).
-- Lemma 10.4.2.5 asserts in effect that a normalized Markushevich basis is a Schauder basis (false; the
-  trigonometric system in L¹ of the circle) (reported).
-- Definition 10.4.3.7 (the geometric kernel for a strip) does not define its kernel, and it is ambiguous
-  whether the operator is `A P_spec` or `P_spec A`. Chapters 11–12 compute with it (reported).
-- The multiplicity cap is stated as `min{N, floor((s-1)/2)+1}`; the correct value is `min{N, ceil((s-1)/2)}`.
-  They differ at odd integer `s`, and the introduction has a third version (reported; the correct value was
-  checked).
+- **Lemma 9.3.2.4 is false as stated (checked).** `exp(-z^4) sin(pi z^2)` is entire and Schwartz on every
+  vertical strip and has about `2T` zeros in a box of height 1 at height `T`, against the claimed
+  `O(log T)`. The proof uses an upper bound where Jensen's formula needs a lower bound.
+- Lemma 10.4.2.5 asserts in effect that a normalized Markushevich basis is a Schauder basis (false)
+  (reported).
+- Definition 10.4.3.7 does not define its kernel and is ambiguous between `A P_spec` and `P_spec A`
+  (reported).
 
-### 5.2 Chapter 11 (per-prime machinery)
+### 5.6 Chapter 11 (per-prime machinery)
 
 - **Proposition 11.2.0.1(2) is false (checked).** `φ(u) ↦ φ(u) − φ(u + log p)` is injective but not bounded
-  below on the weighted space, so its range is not closed; only the closure of the range is the intersection
-  of the kernels of the evaluation functionals. Test functions `ψ(u/n)` give
+  below on the weighted line space, so its range is not closed; only the closure of the range is the
+  intersection of the kernels of the evaluation functionals. Three reviewers found this independently.
+- **Theorem 11.1.2.1 is vacuous or false (checked).** With the one-sided cutoff, the closure of the cut-off
+  range of any finite product of per-prime operators is the whole cut-off space, so part (3) is true only
+  because both sides are everything, and the strictness claim in part (2) is false.
+- **Theorem 11.3.2.1 is not well defined and not proved (reported; consistent with section 4).** Its stated
+  right side differs from the formula its proof ends on by the square-root weights; none of its three limits
+  has an estimate.
+- Theorems 11.2.1.2 and 11.2.1.4 identify the wrong limit (reported); repairable, since the discrepancy is an
+  off-diagonal block whose trace tends to zero.
+- Correct: the per-prime trace on the 0-line (Theorem 11.2.2.1) after replacing ranges by closures.
 
-$$
-\frac{\|P_p\varphi_n\|}{\|\varphi_n\|} \;\lesssim\; \frac1n \;\to\; 0 .
-$$
+### 5.7 Chapters 12–14 (assembly and deduction) — reported
 
-- **Theorem 11.1.2.1 is vacuous or false (checked).** With the one-sided cutoff (norm above 1/Λ), the closure
-  of the cut-off range of any finite product of per-prime operators is the whole cut-off space: a functional
-  supported on a half-line and annihilating the range must be periodic with support bounded below, hence
-  zero. So part (3), "global degenerates to S-local", is true only because both sides are everything, and the
-  strictness claim in part (2) is false.
-- **Theorem 11.3.2.1 is not well defined and not proved (reported, consistent with section 4).** The
-  localizing function (11.3.2.2) is identically zero as printed; the stated right side differs from the
-  formula the proof ends on by a factor of the square root of the prime power; the proof multiplies two
-  indicators whose product is zero; none of its three limits has an estimate.
-- Theorems 11.2.1.2 and 11.2.1.4 identify the wrong limit: the strong limit gives the trace of
-  `M_ρ A P_geom`, which differs from the claimed operator by `M_ρ P_geom A P_spec`, a term the draft says is
-  non-zero (reported). This one looks repairable: where `A P_spec` is trace class, that term's trace tends to
-  zero as the cutoff is removed, since the limit operator is an off-diagonal block.
-- Proposition 11.1.1.2(2) is false as stated; a termwise majorant repairs it (reported).
-- Correct: the per-prime trace (Theorem 11.2.2.1) after replacing ranges by closures; density of
-  theta-functions on the 0-line for the rationals; part (1) of 11.1.2.1.
-
-### 5.3 Chapters 12–14 (assembly and deduction) — reported
-
-- Section 12.3 is empty. Theorem 12.4.1.1 (S-local trace) is a sketch by the author's own footnotes; it is
-  Connes' computation for a kernel on the S-adeles that is never identified with the remainder of the global
-  kernel, contains no pole terms, and its local terms depend on the order of two cutoff limits.
-- Proof of Theorem 12.5.1.1, step by step: the decomposition is cited from an overview paragraph and defines
-  neither the remainder nor a mass; the per-prime vanishing is Theorem 11.3.2.1; the S-local evaluation is
-  12.4.1.1, which concerns a different operator. The interchange of the sum over primes with the diagonal
-  integral and with the cutoff limit is not addressed anywhere.
-- The statement of 12.5.1.1 assumes the test function vanishes on norm-one classes and never quantifies the
-  interval or the Sobolev degree (checked against the text).
-- The proof never uses the choices the text calls necessary (`a = 1/2`, Sobolev degree `2[F:Q]`, vanishing of
-  the test function at central points). Run as written on the critical line with the hypotheses its cited
-  results allow, it gives a bound on the multiplicity of every zero that is false: a Dedekind zeta function
-  of an A₄-extension has zeros of multiplicity at least 3, and the Hecke L-function of a CM elliptic curve
-  of rank at least 3 has a central zero of order at least 3 over a field of degree 2.
-- Theorem 13.3.1.1 depends on an arbitrary choice of section of the norm; for a non-canonical choice it is
-  false for the same CM examples.
-- Correct: Theorems 12.1.1.2 and 12.1.1.3 (diagonals of nuclear kernels), Propositions 12.2.2.2 and 12.2.2.4
-  as formal statements (though they carry no information), the algebra of the S-local computation, and the
-  deduction "13.3.1.1 plus Weil implies GRH plus a multiplicity bound".
+- Section 12.3 is empty. Theorem 12.4.1.1 is a sketch by the author's own footnotes; it concerns a kernel on
+  the S-adeles never identified with the remainder of the global kernel, and contains no pole terms.
+- The proof of Theorem 12.5.1.1 cites the decomposition from an overview paragraph, the per-prime vanishing
+  from Theorem 11.3.2.1, and the S-local value from 12.4.1.1. The interchange of the sum over primes with the
+  diagonal integral and the cutoff limit is not addressed anywhere.
+- The proof never uses the conditions the text calls necessary. Run on the critical line with the hypotheses
+  its cited results allow, it bounds the multiplicity of every zero in a way that is false for the Dedekind
+  zeta function of an A₄-extension and for the Hecke L-function of a rank-3 CM elliptic curve.
+- Theorem 13.3.1.1 depends on an arbitrary choice of section of the norm and is false for a non-canonical
+  choice.
+- Correct: Theorems 12.1.1.2 and 12.1.1.3 (diagonals of nuclear kernels), the algebra of the S-local
+  computation, and the deduction "13.3.1.1 plus Weil implies GRH plus a multiplicity bound".
 
 ## 6. What was not examined
 
-- Chapters 2–9 (apart from section 9.3) and the appendices, about 700 pages.
-- Whether a different definition of the pieces, not present in this draft, could avoid section 4. Lemma 1
-  constrains any such definition: it cannot be a filtration of the twisted theta-space in the thin-strip
-  Hilbert space.
-- The automated reviewers' counterexamples in section 5.1 and the items marked "reported".
+- Appendices A, C, D and E, about 350 pages, and the smaller lemmas of chapters 2–3.
+- Number fields other than the rationals, and ramified characters, except where a reviewer says so.
+- Items marked "reported" have not been independently re-derived.
 
-## 7. Files
+## 7. Corrections to the first version of this note
 
-- `chapter-reviews/chapter-10-and-9.3.md`, `chapter-11.md`, `chapters-12-14.md`: unedited reviewer reports.
-- `numerics/explicit.py`: the explicit-formula check of section 4 (needs `mpmath`; `python3 explicit.py 400`).
+An independent reviewer was asked to refute the first version (`chapter-reviews/audit-of-the-note.md`).
+These points were wrong and have been fixed:
+
+- **Direction of the shift.** The piece at `p` corresponds to the test function `φ(px)`, not `φ(x/p)`. The
+  first numerical example was computed for the wrong function. It is kept as
+  `numerics/explicit-wrong-shift.py`; the corrected one is `numerics/corrected.py`.
+- **Where the non-vanishing comes from.** With the correct shift it comes from the pole and Archimedean terms,
+  not from a prime in the shifted support.
+- **Paley–Wiener levels.** The first version called them dense, non-closed subspaces. They are closed
+  subspaces of one-sided-supported functions, and Lemma 2 shows the per-prime quotients on them are
+  non-trivial. The claim that "there is nothing to add up" was wrong.
+- **"Vacuous or contradictory."** There is a third reading (B), under which the per-prime statements are true
+  and the gap is an interchange of limits.
+
+## 8. Files
+
+- `chapter-reviews/`: eight unedited reviewer reports.
+- `numerics/corrected.py`: explicit-formula check for section 4 (needs `mpmath`; `python3 corrected.py 150`).
+- `numerics/explicit-wrong-shift.py`: the superseded check from the first version.
