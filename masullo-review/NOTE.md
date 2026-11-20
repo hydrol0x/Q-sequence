@@ -5,7 +5,7 @@ Source: `https://math216.wordpress.com/wp-content/uploads/2026/11/the-music-of-t
 re-downloaded at 20:18 UTC on 2026-11-20).
 
 **Status of these notes.** Written 2026-11-20 by an AI model (Claude) in one working session. They are a
-reader's report, not a refereed verdict. Line-by-line reviews of chapters 2–14 and Appendix B were done by automated
+reader's report, not a refereed verdict. Line-by-line reviews of chapters 2–14 and Appendices A–E were done by automated
 reviewers (Claude subagents), plus one attempt to prove the missing step; their unedited reports are in
 `chapter-reviews/`. One reviewer was
 briefed to refute an earlier version of this note and found real errors in it; this version incorporates
@@ -32,7 +32,10 @@ is true. A specialist should confirm anything before relying on it.
    of the sum over primes with a cutoff limit, which is equivalent to GRH and is false if done naively.
 4. Many stated intermediate results are false as written, with explicit counterexamples (section 5). Most are
    repairable. The repairs do not supply the step in item 3.
-5. The foundations are in better shape than the later chapters. Tate theory, the identification of the
+5. Chapter 12's notion of diagonal mass rests on a section of Appendix A in which the neighbourhood
+   sequences do not shrink to a point and the pointwise product rule is false (section 5.8). This is separate
+   from item 3 and would need repair before the per-prime computation could be stated precisely.
+6. The foundations are in better shape than the later chapters. Tate theory, the identification of the
    theta-function space with multiples of the completed L-function, the single-prime bases, and the
    normalisation of the explicit formula hold up, in the fine (Fréchet) topology. Every review of the
    foundations independently reports the same absence: nothing in a Hilbert norm, nothing for a growing set
@@ -325,9 +328,46 @@ Full reports: `chapter-reviews/`. "False" means a counterexample is given there.
 - Correct: Theorems 12.1.1.2 and 12.1.1.3 (diagonals of nuclear kernels), the algebra of the S-local
   computation, and the deduction "13.3.1.1 plus Weil implies GRH plus a multiplicity bound".
 
+### 5.8 Appendices A, C, D and E — reported
+
+- **Appendix A (number theory preparations).** The classical material is sound: topology of adeles and
+  ideles, the fundamental domain for norm-one ideles, Haar measure normalisations, the S-unit count. The last
+  section, on which chapter 12's "diagonal mass" is built, is not:
+  - the "standard" neighbourhood sequences (Lemma A.5.2.13) do not shrink to the identity, because they
+    always contain the kernel of the logarithm map; for the rationals, averages of an indicator function over
+    them give 1/2 where the function is 1;
+  - Corollary A.5.4.3 (smoothing commutes with multiplication wherever the limit exists) is false at
+    individual points, and chapter 12 uses it pointwise on the diagonal, a null set;
+  - the written proofs of the differentiation theorem A.5.4.1 are invalid, though the statements are true.
+
+  Also: a connected fundamental domain with non-empty interior, which Remark 12.2.1.4 asks for, cannot exist
+  in the ideles; the S-idelic fundamental domains are defined incorrectly when the S-class group is
+  non-trivial; the S-local measure has two inconsistent normalisations.
+- **Appendix C (locally convex spaces).** The three results the main text relies on are correct as stated:
+  the trace of a nuclear operator factoring through a subspace (C.3.2.2; the printed proof has a gap, a short
+  correct proof exists), traces under strongly convergent nested orthogonal projections (C.3.5.5), and the
+  open mapping theorem (C.1.5.5). Several other statements are false and not load-bearing, for example the
+  singular-value inequality C.3.6.3(1). The exposure is in how the main text applies them: chapter 9 infers
+  nuclearity on a weighted space from nuclearity on plain L², which is not automatic; chapter 11 uses the
+  projection lemma with a limit that is not the identity. The appendix has nothing on trace additivity along
+  an invariant subspace and nothing computing a trace from a non-Schauder basis, where the diagonal sum can
+  diverge.
+- **Appendix D (Schwartz–Bruhat functions).** Definitions and main structural statements are correct.
+  Theorem D.3.4.2 (a decay bound for Mellin transforms on a whole open strip) is false as stated and true on
+  closed sub-strips. Two different topologies are used for the same space of exponentially decaying
+  functions; they differ for the idele class group, so a sentence in chapter 4 is wrong as written, with a
+  known repair. The periodisation theorem D.1.7.1 is proved only for compact subgroups and applied to a
+  non-compact one (the statement is true there). The last section has 21 internal footnotes, one reading
+  "Too many loose ends". Not in the appendix but needed: continuity of the dilation action of ideles on
+  adelic Schwartz functions, and Mellin isomorphisms for closed strips.
+- **Appendix E (topological stacks).** Nothing in chapters 9–13 depends on it; the appendix says so itself,
+  and chapter 8, which it is meant to support, never cites it. It is unfinished by its own first footnote
+  and stops mid-example. Its final example is false and contradicts the (correct) formulas of chapter 8.
+
 ## 6. What was not examined
 
-- Appendices A, C, D and E, about 350 pages, and the smaller lemmas of chapters 2–3.
+- The smaller lemmas of chapters 2–3, parts of chapter 4.3, and proofs that reviewers skimmed (listed in
+  each report). Every chapter and appendix has now had at least one line-by-line read of its statements.
 - Number fields other than the rationals, and ramified characters, except where a reviewer says so.
 - Items marked "reported" have not been independently re-derived.
 
