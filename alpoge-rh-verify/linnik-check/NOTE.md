@@ -126,8 +126,9 @@ theorem linnik_plain : ∃ C L : ℝ, 0 < C ∧ 0 < L ∧ ∀ a q : ℕ, 1 ≤ a
   GlobalTheory.Published.linnik_iff_exists_prime.1 UpperTheory.Lit.linnik
 ```
 
-So five kernels of four independent designs accept a proof of this statement, which mentions nothing but
-Mathlib, and the same tools reject corrupted copies.
+So Lean's kernel, its hardened variant, and three separately written checkers (nanoda, con-leche, con-ron)
+accept a proof of this statement, which mentions nothing but Mathlib, and the same tools reject corrupted
+copies. How independent con-leche and con-ron are of each other was not examined here.
 
 **Cross-check with the published export.** The record counts of this independently built export equal,
 kind by kind, the closure of `UpperTheory.Lit.linnik` in the graph extracted from Sutherland's export:
