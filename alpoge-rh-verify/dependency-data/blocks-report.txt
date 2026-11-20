@@ -1,0 +1,83 @@
+== blocks of the dominator tree (project declarations owned) ==
+  A1 theta/Siegel-Weil core: 537861 (42.7%)
+  A2 volume/height estimates: 79481 (6.3%)
+  A  rest of every_character_of_literature_of_vWin: 219230 (17.4%)
+  B  vwin_of_row (automorphy window): 89838 (7.1%)
+  C  rest of everyCharacter_of_row: 30453 (2.4%)
+  D  Galois representations (galoisLocalGlobalStrong_recParameter): 89788 (7.1%)
+  E  shared: directly under everyCharacter: 212221 (16.9%)
+  top (the five theorems and their glue): 32
+
+== where each source directory's closure declarations sit (percent of the directory's declarations per block) ==
+directory	decls	A1	A2	A	B	C	D	E
+Development/AbelianVarietyTheory	518072	48	4	21	3	1	6	17
+Development/AutomorphicArithmetic	126553	11	1	1	53	0	21	13
+Formalism/LocalToGlobal	84680	85	0	12	0	1	0	1
+Development/AutomorphicSpectrum	81967	4	34	11	1	7	10	33
+Development/WeilBound	79604	4	16	23	0	2	11	43
+Formalism/SharpRestriction	62579	91	0	6	1	1	0	1
+Formalism/HermitianCurvature	46896	99	0	1	0	0	0	0
+Formalism/PeriodIntegrals	38641	89	0	6	0	2	0	2
+ReciprocityTheory/ReductiveGroups	36259	43	3	44	0	1	0	10
+GroundTheory/HeightsAndTheta	33777	0	37	58	0	0	0	5
+Development/EtaleCohomology	13655	0	0	0	1	0	99	0
+GroundTheory/AutomorphicForms	12894	0	0	0	6	0	0	94
+Development/ResolutionOfSingularities	10191	0	0	96	0	0	0	4
+GroundTheory/ProfiniteCohomology	10036	0	0	0	0	69	0	31
+CompanionTheory/SpectralGeometry	8170	11	0	41	0	0	0	47
+GroundTheory/GlobalFields	7043	0	0	1	2	34	0	64
+Formalism/ThetaLogCoordinates	4818	99	0	1	0	0	0	0
+Formalism/LocalRingCardinality	4673	52	0	31	1	7	0	9
+PositivityTheory/AutomorphicForms	4216	0	0	0	89	0	0	11
+Formalism/GL3MeanSquares	4085	99	0	1	0	0	0	0
+CompanionTheory/AutomorphicTheory	3797	70	0	4	0	1	0	25
+GroundTheory/LocalFields	3789	0	0	0	7	1	0	92
+GroundTheory/ArithmeticGeometry	3761	0	3	11	0	25	0	61
+
+== literature statements (constants GlobalTheory.Published.X in the closure) ==
+top-level GlobalTheory.Published.* constants in the closure: 396  by kind: {'d': 273, 't': 122, 'I': 1}
+Published constants that are the entire statement of some theorem in the closure (possibly with the OpenLiteratureStatements argument): 212
+  of these, proved by a theorem that takes OpenLiteratureStatements as hypothesis only: 28
+number of project declarations that a Published statement depends on (its own definitional content): {'0': 21, '1-9': 60, '10-99': 160, '100-999': 130, '1000+': 25}
+Published statements written purely in Mathlib/core terms (no project definition involved): 21
+   GlobalTheory.Published.UnusedSlot72  [d; library decls 1; theorems stating exactly this: 1]
+   GlobalTheory.Published.primesInProgression  [d; library decls 227; theorems stating exactly this: 0]
+   GlobalTheory.Published.consecBlocks  [d; library decls 229; theorems stating exactly this: 0]
+   GlobalTheory.Published.Heisenberg  [I; library decls 622; theorems stating exactly this: 0]
+   GlobalTheory.Published.IsRegularChar  [d; library decls 977; theorems stating exactly this: 0]
+   GlobalTheory.Published.sqrtNegNat  [d; library decls 1159; theorems stating exactly this: 0]
+   GlobalTheory.Published.ChevalleyUnits  [d; library decls 1187; theorems stating exactly this: 2]
+   GlobalTheory.Published.galSMulCommClassIntegers  [t; library decls 1288; theorems stating exactly this: 0]
+   GlobalTheory.Published.indFun  [d; library decls 1495; theorems stating exactly this: 0]
+   GlobalTheory.Published.algebraMap_norm_of_basis_one_sqrt  [t; library decls 1659; theorems stating exactly this: 0]
+   GlobalTheory.Published.norm_of_basis_one_sqrt  [t; library decls 1668; theorems stating exactly this: 0]
+   GlobalTheory.Published.isTotallyComplex_of_sq_eq_neg  [t; library decls 1911; theorems stating exactly this: 0]
+   GlobalTheory.Published.exists_primitiveRoot_pow  [t; library decls 2596; theorems stating exactly this: 0]
+   GlobalTheory.Published.dim_affineOpen  [t; library decls 2973; theorems stating exactly this: 0]
+   GlobalTheory.Published.dim_le_of_isIntegralHom  [t; library decls 3038; theorems stating exactly this: 0]
+   GlobalTheory.Published.residueDegree_of_isClosedImmersion  [t; library decls 3181; theorems stating exactly this: 0]
+   GlobalTheory.Published.generic_of_isIso_restrict  [t; library decls 3328; theorems stating exactly this: 0]
+   GlobalTheory.Published.IsIdealLattice  [d; library decls 3374; theorems stating exactly this: 0]
+   GlobalTheory.Published.HasseNormSt  [d; library decls 3493; theorems stating exactly this: 3]
+   GlobalTheory.Published.algebraMap_norm_tensor  [t; library decls 4186; theorems stating exactly this: 0]
+   GlobalTheory.Published.IdentityComponentOpen  [d; library decls 4216; theorems stating exactly this: 1]
+largest statements by project definitions involved:
+   GlobalTheory.Published.CuspDecayBound: 1739 project decls
+   GlobalTheory.Published.CuspTraceClass: 1758 project decls
+   GlobalTheory.Published.CuspDecaySobolev: 1758 project decls
+   GlobalTheory.Published.cuspTraceClass_of_factorisation: 1762 project decls
+   GlobalTheory.Published.WeilEisensteinSiegelConvergence: 1779 project decls
+   GlobalTheory.Published.cuspDiscreteDecomposition_of_traceClass: 1779 project decls
+   GlobalTheory.Published.WeilSiegelFormulaUnitary: 1811 project decls
+   GlobalTheory.Published.WeilSiegelFormula: 1816 project decls
+   GlobalTheory.Published.cuspTraceClass_of_decay: 1861 project decls
+   GlobalTheory.Published.SiegelWeilUnitarySchrodinger: 1868 project decls
+   GlobalTheory.Published.SiegelEisensteinContinuation: 1869 project decls
+   GlobalTheory.Published.SiegelWeilUnitarySchrodingerLit: 1869 project decls
+   GlobalTheory.Published.SiegelWeilUnitaryConvergent: 1935 project decls
+   GlobalTheory.Published.DoublingMethodLocalZetaIntegrals: 2028 project decls
+   GlobalTheory.Published.RallisInnerProductConvergent: 2088 project decls
+UpperTheory.EveryCharacter: statement involves 2 project declarations, 4800 library declarations
+UpperTheory.LiteratureTheorems.OpenLiteratureStatements: statement involves 1507 project declarations, 11906 library declarations
+UpperTheory.One.M.Row: statement involves 1505 project declarations, 11906 library declarations
+UpperTheory.Zero.LLC.RecTExists: statement involves 323 project declarations, 9262 library declarations

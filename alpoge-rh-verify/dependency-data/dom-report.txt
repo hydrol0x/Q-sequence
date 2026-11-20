@@ -1,0 +1,644 @@
+== dominator tree of the dependency graph (root = the five theorems of Main.lean) ==
+A declaration D "dominates" E when every dependency path from the five theorems to E passes through D.
+"owns" below = number of project declarations dominated (used only through that declaration), itself included.
+reachable nodes 1468414  project 1258904  max dominator depth 49
+project nodes by dominator depth (first 30): [(1, 10), (2, 12), (3, 57588), (4, 45373), (5, 81136), (6, 73483), (7, 102215), (8, 92184), (9, 80551), (10, 77181), (11, 70442), (12, 62880), (13, 58455), (14, 55494), (15, 52893), (16, 45339), (17, 40580), (18, 34604), (19, 31763), (20, 26939), (21, 25728), (22, 21951), (23, 19154), (24, 16164), (25, 16172), (26, 12742), (27, 11409), (28, 9175), (29, 7815), (30, 6376)]
+
+-- heaviest path from the root (each line: the child owning the most) --
+  depth 1: allChi  [t; owns 1258873 project decls, 2502219286 expr nodes; file Supplements/Kernels/MainTheorems.lean]  (100.0% of all project decls; parent has 34106 children)
+  depth 2: UpperTheory.FinalTheorems.everyCharacter  [t; owns 1258872 project decls, 2502219284 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]  (100.0% of all project decls; parent has 1 children)
+  depth 3: UpperTheory.FinalTheorems.everyCharacter_of_row  [t; owns 956863 project decls, 1996349398 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]  (76.0% of all project decls; parent has 110900 children)
+  depth 4: UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin  [t; owns 836572 project decls, 1737829530 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]  (66.5% of all project decls; parent has 11657 children)
+  depth 5: UpperTheory.Lit.every_character_of_theta_integrals_local_matching  [t; owns 537861 project decls, 1118776657 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]  (42.7% of all project decls; parent has 51363 children)
+  depth 6: UpperTheory.Lit.nonempty_hyps_definite_side_of_closed_bound  [t; owns 447188 project decls, 979193513 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]  (35.5% of all project decls; parent has 18828 children)
+  depth 7: GlobalTheory.Fc.S0.StageU.hypotheses_nonempty_of_unramified_exponents_alt  [t; owns 151930 project decls, 382227246 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean]  (12.1% of all project decls; parent has 48093 children)
+  depth 8: GlobalTheory.Fc.AllAtMemberStage0.allRows_of_open0_alt  [t; owns 53860 project decls, 96703117 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkROfIsLinked.lean]  (4.3% of all project decls; parent has 5519 children)
+  depth 9: GlobalTheory.LocalRows.lg1_sLp_sO_hTF  [t; owns 23009 project decls, 40337762 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]  (1.8% of all project decls; parent has 1119 children)
+  depth 10: GlobalTheory.LocalRows.sLp_sO_hTF_of_siegelWeil  [t; owns 23008 project decls, 40337600 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]  (1.8% of all project decls; parent has 1 children)
+  depth 11: GlobalTheory.LocalRows.at_choice_alt  [t; owns 23007 project decls, 40337480 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]  (1.8% of all project decls; parent has 1 children)
+  depth 12: GlobalTheory.CarrierGap.offDiag  [t; owns 22023 project decls, 38519581 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]  (1.7% of all project decls; parent has 32 children)
+  depth 13: GlobalTheory.CarrierGap.theoremS_leaves_of_carrierG  [t; owns 8936 project decls, 17492353 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]  (0.7% of all project decls; parent has 908 children)
+  depth 14: Formalism.L2.SG.Pf.Coef.rowsDatumP_of_deep  [t; owns 3569 project decls, 8208145 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/CoefCutDeep.lean]  (0.3% of all project decls; parent has 747 children)
+  depth 15: Formalism.L2.SG.Pf.Coef.cutAt_of_deep  [t; owns 3495 project decls, 8092992 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/CoefCutDeep.lean]  (0.3% of all project decls; parent has 48 children)
+  depth 16: Formalism.L2.SG.Pf.PCount.partnerCount_holds_all  [t; owns 2083 project decls, 4589744 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/PartnerCountHoldsAll.lean]  (0.2% of all project decls; parent has 194 children)
+  depth 17: Formalism.L2.SG.LsDatumA.integralClosureRank_and_residueTrdegLe  [t; owns 1896 project decls, 4274475 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/IntegralClosureRankAndResidueTrdegLe.lean]  (0.2% of all project decls; parent has 14 children)
+  depth 18: Formalism.L2.SG.LsDatumA.globalCount_of_split_mode  [t; owns 762 project decls, 2128827 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/GlobalCountOfSplitMode.lean]  (0.1% of all project decls; parent has 268 children)
+  depth 19: Formalism.L2.SG.LsDatumA.globalCount_of_module  [t; owns 319 project decls, 1170365 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/GlobalCountOfModule.lean]  (0.0% of all project decls; parent has 125 children)
+  depth 20: Formalism.L2.SG.LsDatumA.localCount_of_module  [t; owns 318 project decls, 1170137 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/GlobalCountOfModule.lean]  (0.0% of all project decls; parent has 1 children)
+
+-- tree, children owning at least 4000 project declarations (depth <= 12) --
+  allChi  [t; owns 1258873 project decls, 2502219286 expr nodes; file Supplements/Kernels/MainTheorems.lean]
+    UpperTheory.FinalTheorems.everyCharacter  [t; owns 1258872 project decls, 2502219284 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+      UpperTheory.FinalTheorems.everyCharacter_of_row  [t; owns 956863 project decls, 1996349398 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+        UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin  [t; owns 836572 project decls, 1737829530 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+          UpperTheory.Lit.every_character_of_theta_integrals_local_matching  [t; owns 537861 project decls, 1118776657 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]
+            UpperTheory.Lit.nonempty_hyps_definite_side_of_closed_bound  [t; owns 447188 project decls, 979193513 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]
+              GlobalTheory.Fc.S0.StageU.hypotheses_nonempty_of_unramified_exponents_alt  [t; owns 151930 project decls, 382227246 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean]
+                GlobalTheory.Fc.AllAtMemberStage0.allRows_of_open0_alt  [t; owns 53860 project decls, 96703117 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkROfIsLinked.lean]
+                  GlobalTheory.LocalRows.lg1_sLp_sO_hTF  [t; owns 23009 project decls, 40337762 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+                    GlobalTheory.LocalRows.sLp_sO_hTF_of_siegelWeil  [t; owns 23008 project decls, 40337600 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+                      GlobalTheory.LocalRows.at_choice_alt  [t; owns 23007 project decls, 40337480 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+                        GlobalTheory.CarrierGap.offDiag  [t; owns 22023 project decls, 38519581 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]
+                        (+ 31 smaller children owning 983 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  GlobalTheory.T.hServ_of_linkR  [t; owns 16253 project decls, 28903538 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowHServOfLinkStatement.lean]
+                    GlobalTheory.row_hServ_of_link_alt  [t; owns 16252 project decls, 28903472 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowHServOfLink.lean]
+                      GlobalTheory.T.reciprocity_kernel_of_artin  [t; owns 16241 project decls, 28898670 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ServHRowLinkRStatement.lean]
+                        GlobalTheory.Svd.servH_row_linkR_alt  [t; owns 16240 project decls, 28898584 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ServHRowLinkR.lean]
+                        (+ 0 smaller children owning 0 project decls in total)
+                      (+ 9 smaller children owning 10 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  GlobalTheory.T.period_entries_tie_and_level_valuations_at_built  [t; owns 4838 project decls, 9716853 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SixRowsAtMemberStatement.lean]
+                    GlobalTheory.Fc.six_rows_at_member_alt  [t; owns 4837 project decls, 9716787 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SixRowsAtMember.lean]
+                      (+ 90 smaller children owning 4836 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  GlobalTheory.CountRowByName.row_counts_of_labels_alt  [t; owns 4205 project decls, 8065838 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowCountsOfLabels.lean]
+                    GlobalTheory.CountRow.row_counts_of_ties_alt  [t; owns 4203 project decls, 8065564 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowCountsOfTies.lean]
+                      (+ 2 smaller children owning 4202 project decls in total)
+                    (+ 1 smaller children owning 1 project decls in total)
+                  (+ 1115 smaller children owning 5554 project decls in total)
+                GlobalTheory.T.large_unramified_exponent_bundles_exist_alt  [t; owns 36795 project decls, 138134814 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MemberBundlesLargeUnramifiedExponents.lean]
+                  GlobalTheory.Fc.StageOneU.member_bundles_large_unramified_exponents_alt  [t; owns 36794 project decls, 138134754 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MemberBundlesLargeUnramifiedExponents.lean]
+                    GlobalTheory.T.member_exists_baseLattice_alt  [t; owns 25812 project decls, 87334656 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+                      GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_prime_alt  [t; owns 25811 project decls, 87334591 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+                        GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_pair_alt  [t; owns 13537 project decls, 28910590 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+                        GlobalTheory.T.all_stages_at_member_of_specializations_alt  [t; owns 5066 project decls, 10035092 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AllStagesAtMemberOfSpecializations.lean]
+                        (+ 736 smaller children owning 7207 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 783 smaller children owning 10981 project decls in total)
+                  (+ 0 smaller children owning 0 project decls in total)
+                UpperTheory.GalC.final_alt_alt  [t; owns 28044 project decls, 78198866 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/CFinal.lean]
+                  UpperTheory.GalC.final_of_alt  [t; owns 26473 project decls, 75865050 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+                    UpperTheory.GalC.linkedAt_linkN_of_boundAtTwoThree  [t; owns 25609 project decls, 73972163 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+                      UpperTheory.GalC.linkN_of_boundAtTwoThree_slot  [t; owns 25608 project decls, 73971565 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+                        UpperTheory.GalC.linkN_of_twGood_galoisPreconditions  [t; owns 25607 project decls, 73970918 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+                        (+ 0 smaller children owning 0 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 15 smaller children owning 863 project decls in total)
+                  (+ 154 smaller children owning 1570 project decls in total)
+                GlobalTheory.T.liftInj_and_nonVan_typeNZ_of_given  [t; owns 6400 project decls, 12122209 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/LiftInjNonVanTypeNZOfPrints.lean]
+                  GlobalTheory.Core.Rk.LiftOnto.liftInj_nonVan_typeNZ_of_hypotheses_alt  [t; owns 6399 project decls, 12122002 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/LiftInjNonVanTypeNZOfPrints.lean]
+                    GlobalTheory.T.downNe_of_eulerRight_doubling  [t; owns 6250 project decls, 11810692 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/EulerFactorFromDoubling.lean]
+                      GlobalTheory.Core.Rk.Exh.Top.downNe_k_of_hypotheses'  [t; owns 6249 project decls, 11810678 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/KplugFill.lean]
+                        PositivityTheory.Rg.Rsw.resCore  [t; owns 5959 project decls, 11126969 expr nodes; file Development/WeilBound/RepresentationTheoryGL/RegularisedSiegelWeil/ThetaIdempotents/ThetaCoefficients/ResCore.lean]
+                        (+ 22 smaller children owning 289 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 36 smaller children owning 148 project decls in total)
+                  (+ 0 smaller children owning 0 project decls in total)
+                (+ 5515 smaller children owning 26830 project decls in total)
+              GlobalTheory.Fc.S0.ontoX_and_lamLow_of_unitaryGroupHypotheses'  [t; owns 34583 project decls, 72926634 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SurjectiveAndLowWeightOfUnramifiedExponents.lean]
+                GlobalTheory.BigOn.ontoX_of_hypotheses_alt_alt  [t; owns 33983 project decls, 71550552 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OntoXOfPrints.lean]
+                  GlobalTheory.FinalJoin.runHolds_of_parOK  [t; owns 10072 project decls, 27245499 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsThresholdRunHolds.lean]
+                    GlobalTheory.T.exists_indexBoundHypothesesWithNet_allValuedPoints  [t; owns 8481 project decls, 24530141 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsIndexBoundHypothesesWithNetAllValuedPointsStatement.lean]
+                      GlobalTheory.InputsAtRecord.inputsNet_recPlus  [t; owns 8480 project decls, 24529795 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsIndexBoundHypothesesWithNetAllValuedPoints.lean]
+                        (+ 238 smaller children owning 8479 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 222 smaller children owning 1590 project decls in total)
+                  GlobalTheory.BigOn.geoSt_of_pageSt_alt  [t; owns 7923 project decls, 11342605 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/GeoStOfPageSt.lean]
+                    GlobalTheory.BigOn.leafDepth_all_record  [t; owns 7503 project decls, 9952698 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/LeafDepthAllRecord.lean]
+                      GlobalTheory.RunDepth.leafDepth_all_run  [t; owns 7502 project decls, 9947808 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/LeafDepthAllRun.lean]
+                        GlobalTheory.T.depthTable_goodPrimes_of_chartForm  [t; owns 7254 project decls, 9454425 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/DepthTableGoodPrimesOfChartFormStatement.lean]
+                        (+ 53 smaller children owning 247 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    (+ 12 smaller children owning 419 project decls in total)
+                  GlobalTheory.T.expSt_of_base_change_and_crystalline_lattices  [t; owns 7093 project decls, 10506227 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExponentBoundOfUnitaryThetaStandardTheorems.lean]
+                    GlobalTheory.BigOn.exponent_bound_of_unitaryThetaStandardTheorems_alt  [t; owns 7092 project decls, 10506209 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExponentBoundOfUnitaryThetaStandardTheorems.lean]
+                      (+ 421 smaller children owning 7091 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  (+ 1968 smaller children owning 8894 project decls in total)
+                (+ 39 smaller children owning 599 project decls in total)
+              GlobalTheory.T.open0_of_unitary_group_hypotheses  [t; owns 22737 project decls, 67325621 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OpenOrbitOfUnramifiedExponents.lean]
+                GlobalTheory.Fc.S0.Open0ProofU.open_orbit_of_unramified_exponents_alt  [t; owns 22736 project decls, 67325606 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OpenOrbitOfUnramifiedExponents.lean]
+                  GlobalTheory.T.main_theorem_published_inputs_third_alt_alt  [t; owns 20124 project decls, 57297522 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsThird.lean]
+                    GlobalTheory.miStarRow_alt_alt  [t; owns 20123 project decls, 57296398 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsThird.lean]
+                      GlobalTheory.T.main_theorem_published_inputs_variant_alt_alt  [t; owns 19740 project decls, 56371057 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsVariant.lean]
+                        GlobalTheory.miStarRowClosing_alt_alt  [t; owns 19739 project decls, 56369849 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsVariant.lean]
+                        (+ 0 smaller children owning 0 project decls in total)
+                      (+ 45 smaller children owning 382 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  (+ 39 smaller children owning 2611 project decls in total)
+                (+ 0 smaller children owning 0 project decls in total)
+              GlobalTheory.RowClaim.Join.thetaLift_row_properties_conj  [t; owns 9354 project decls, 18699565 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/ThetaLiftRowPropertiesConj.lean]
+                GlobalTheory.T.twisted_theta_integral_unfolds  [t; owns 4163 project decls, 8059936 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedThetaIntegralUnfolding.lean]
+                  GlobalTheory.RowUnfLast.twisted_theta_integral_unfolding  [t; owns 4162 project decls, 8059928 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedThetaIntegralUnfolding.lean]
+                    (+ 280 smaller children owning 4161 project decls in total)
+                  (+ 0 smaller children owning 0 project decls in total)
+                (+ 180 smaller children owning 5190 project decls in total)
+              UpperTheory.Lit.functionalsSeparate_of_howeUnram_of_siegelWeil  [t; owns 7127 project decls, 16990355 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/FunctionalsSeparateOfHoweUnramOfSiegelWeil.lean]
+                UpperTheory.Lit.real_functionals_separate_of_hypothesis  [t; owns 5612 project decls, 13766993 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/RealFunctionalsSeparateOfHypothesis.lean]
+                  (+ 95 smaller children owning 5611 project decls in total)
+                (+ 43 smaller children owning 1514 project decls in total)
+              GlobalTheory.BigTop.Fun.Close.fourier_coefficient_fit_of_join_alt  [t; owns 6701 project decls, 15303376 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FourierCoefficientFitOfJoin.lean]
+                GlobalTheory.BigTop.Fun.Close.fittedFunction_at_zero_close_alt  [t; owns 6700 project decls, 15303282 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FittedFunctionAtZeroClose.lean]
+                  (+ 308 smaller children owning 6699 project decls in total)
+                (+ 0 smaller children owning 0 project decls in total)
+              GlobalTheory.T.twisted_multiplicity_one  [t; owns 5736 project decls, 10746385 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedMultiplicityOne.lean]
+                GlobalTheory.MultEqFinal.twisted_multiplicity_eq  [t; owns 5735 project decls, 10745838 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedMultiplicityOne.lean]
+                  UpperTheory.Lit.I5.unitary_theory_of_harishChandra_langlands_alt  [t; owns 5734 project decls, 10745190 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/UnitaryThetaCorrespondenceOfHyp.lean]
+                    (+ 474 smaller children owning 5733 project decls in total)
+                  (+ 0 smaller children owning 0 project decls in total)
+                (+ 0 smaller children owning 0 project decls in total)
+              Formalism.L2.SG.Pf.NcAllC.ncTieC_of_closed  [t; owns 5715 project decls, 8823118 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/DualFamilyCounting/NcAllC.lean]
+                (+ 10 smaller children owning 5714 project decls in total)
+              (+ 48085 smaller children owning 203304 project decls in total)
+            UpperTheory.Top.every_character_of_green_v_win  [t; owns 23314 project decls, 33564486 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean]
+              UpperTheory.Top.zero_free_all_of_green_v_win  [t; owns 23305 project decls, 33560951 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean]
+                UpperTheory.Top.shape_closed_link_n_of_green  [t; owns 19162 project decls, 25885598 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean]
+                  Formalism.L2.G.linkG_concrete5  [t; owns 10716 project decls, 13828791 expr nodes; file Formalism/LocalToGlobal/GroupLattices/LinkGConcreteNoKer.lean]
+                    Formalism.L2.G.linkG_concrete_noKer  [t; owns 4054 project decls, 5670717 expr nodes; file Formalism/LocalToGlobal/GroupLattices/LinkGConcreteNoKer.lean]
+                      (+ 15 smaller children owning 4053 project decls in total)
+                    (+ 619 smaller children owning 6661 project decls in total)
+                  (+ 596 smaller children owning 8445 project decls in total)
+                (+ 432 smaller children owning 4142 project decls in total)
+              (+ 8 smaller children owning 8 project decls in total)
+            GlobalTheory.T.globalLatticeIndexTheorem_of_lengthBoundAtPlaces  [t; owns 4662 project decls, 10903853 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/SelmerLengthBoundAtPointStatement.lean]
+              GlobalTheory.SelmerBoundAtPoint.main  [t; owns 4661 project decls, 10903395 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/SelmerLengthBoundAtPoint.lean]
+                (+ 126 smaller children owning 4660 project decls in total)
+              (+ 0 smaller children owning 0 project decls in total)
+            Formalism.MainNotions.G.GramWindowAlt.theorem_A_closed_form_holds  [t; owns 4638 project decls, 5835479 expr nodes; file Formalism/SharpRestriction/GrowthBounds/FockGramWindow.lean]
+              Formalism.MainNotions.G.SymmetricFormBlocks.closed_of_minimal_vector  [t; owns 4154 project decls, 5297839 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/ClosedOfMinimalVector.lean]
+                Formalism.MainNotions.G.SymmetricFormBlocks.closed_of_splitting_matrix  [t; owns 4142 project decls, 5280280 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/ClosedOfSplittingMatrix.lean]
+                  Formalism.MainNotions.G.SymmetricFormBlocks.closed_of_orthogonal_splitting  [t; owns 4137 project decls, 5273269 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/ClosedOfOrthogonalSplitting.lean]
+                    Formalism.MainNotions.G.SymmetricFormBlocks.integralityFromMetric_of_orthBasisLat  [t; owns 4129 project decls, 5261014 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/IntegralityFromMetricOfOrthBasisLat.lean]
+                      Formalism.MainNotions.G.SymmetricFormBlocks.closed_of_orthogonal_basis  [t; owns 4084 project decls, 5224235 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/ClosedOfOrthogonalBasis.lean]
+                        Formalism.MainNotions.G.SymmetricFormBlocks.closed_of_orthogonal_lattice  [t; owns 4077 project decls, 5216243 expr nodes; file Formalism/SharpRestriction/GrowthBounds/MonomialFactorials/ClosedOfOrthogonalLattice.lean]
+                        (+ 2 smaller children owning 6 project decls in total)
+                      (+ 16 smaller children owning 44 project decls in total)
+                    (+ 4 smaller children owning 7 project decls in total)
+                  (+ 3 smaller children owning 4 project decls in total)
+                (+ 4 smaller children owning 11 project decls in total)
+              (+ 180 smaller children owning 483 project decls in total)
+            (+ 18824 smaller children owning 58058 project decls in total)
+          SelfIntersectionVolumeEstimates.topCovolSlim2_use_alt_alt  [t; owns 79481 project decls, 181355174 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean]
+            PositivityTheory.HtPt.Ah.deep_slim_use  [t; owns 45457 project decls, 95961416 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/AhSlimU.lean]
+              GlobalTheory.CompanionTheory.Ar.Plug.deepStR_of_use  [t; owns 44859 project decls, 95158868 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/DeepStROfUse.lean]
+                GlobalTheory.CompanionTheory.Ar.Link.good_tower_volume_theorem_bis  [t; owns 31482 project decls, 70215234 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/GoodTowerVolumeTheoremBis.lean]
+                  GlobalTheory.T.final_theorem_of_inputs_right  [t; owns 31478 project decls, 70214411 expr nodes; file Development/AutomorphicSpectrum/Proofs/GeometryProofs/FinalTheoremOfInputsRightStatement.lean]
+                    GlobalTheory.CompanionTheory.Ar.Top.goodTower_volume_of_reduced  [t; owns 31477 project decls, 70214310 expr nodes; file Development/AutomorphicSpectrum/Proofs/GeometryProofs/FinalTheoremOfInputsRight.lean]
+                      GlobalTheory.T.good_tower_volume_theorem  [t; owns 26813 project decls, 57524170 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/GoodTowerVolumeTheoremStatement.lean]
+                        GlobalTheory.CompanionTheory.Ar.Top.goodTower_and_volume  [t; owns 26812 project decls, 57524152 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/GoodTowerVolumeTheorem.lean]
+                        (+ 0 smaller children owning 0 project decls in total)
+                      (+ 625 smaller children owning 4663 project decls in total)
+                    (+ 0 smaller children owning 0 project decls in total)
+                  (+ 2 smaller children owning 3 project decls in total)
+                (+ 2604 smaller children owning 13376 project decls in total)
+              (+ 32 smaller children owning 597 project decls in total)
+            SelfIntersectionVolumeEstimates.topCovolG_alt_alt  [t; owns 19901 project decls, 55540097 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolG.lean]
+              (+ 2225 smaller children owning 19900 project decls in total)
+            (+ 3412 smaller children owning 14122 project decls in total)
+          UpperTheory.LiteratureTheorems.theta_integrals_agree_and_local_matching_of_literature  [t; owns 14111 project decls, 34826909 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+            PositivityTheory.ThKR.theoremK_head2  [t; owns 11481 project decls, 27369693 expr nodes; file Development/WeilBound/ThetaLifts/Reductions/FiniteClosure/TheoremKOfMod.lean]
+              PositivityTheory.ThKR.theoremK_head2_of_mod  [t; owns 11221 project decls, 27021984 expr nodes; file Development/WeilBound/ThetaLifts/Reductions/FiniteClosure/TheoremKOfMod.lean]
+                PositivityTheory.Sph.Tr.closeSph  [t; owns 8159 project decls, 21911462 expr nodes; file Development/WeilBound/ThetaLifts/SphericalLattices/SphericalClosure/CloseSph.lean]
+                  (+ 1869 smaller children owning 8158 project decls in total)
+                (+ 755 smaller children owning 3061 project decls in total)
+              (+ 39 smaller children owning 259 project decls in total)
+            (+ 27 smaller children owning 2629 project decls in total)
+          GlobalTheory.TorKSField.toroidalForFanKS  [t; owns 7166 project decls, 27442542 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/ToroidalCompactificationFanLogKodairaSpencerIso.lean]
+            GlobalTheory.T.rigidBoundaryChartsForFan_unitaryDatum  [t; owns 4230 project decls, 18700537 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/RigidBoundaryChartsForFanUnitaryDatumStatement.lean]
+              GlobalTheory.RigChart.rigidForFan_holds  [t; owns 4229 project decls, 18700535 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/RigidBoundaryChartsForFanUnitaryDatum.lean]
+                (+ 73 smaller children owning 4228 project decls in total)
+              (+ 0 smaller children owning 0 project decls in total)
+            (+ 26 smaller children owning 2935 project decls in total)
+          UpperTheory.LiteratureTheorems.published_results_arithmetic  [t; owns 6946 project decls, 11663296 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+            (+ 184 smaller children owning 6945 project decls in total)
+          PositivityTheory.Pf1.HilbertSamuelMoriwaki.hsChain  [t; owns 5445 project decls, 8532956 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/MoriwakiBigTheorem/HSChain.lean]
+            (+ 654 smaller children owning 5444 project decls in total)
+          UpperTheory.LiteratureTheorems.siegel_toroidal_integral_of_literature  [t; owns 5433 project decls, 19361947 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+            GlobalTheory.siegelToroidalIntegral_holds  [t; owns 5432 project decls, 19361942 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalIntegralHolds.lean]
+              GlobalTheory.T.siegelToroidalCompactification_polarisedCharts  [t; owns 5249 project decls, 18857996 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalCompactificationPolarisedChartsStatement.lean]
+                GlobalTheory.SiegJoin.siegelToroidalPolCharts  [t; owns 5248 project decls, 18857994 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalCompactificationPolarisedCharts.lean]
+                  (+ 177 smaller children owning 5247 project decls in total)
+                (+ 0 smaller children owning 0 project decls in total)
+              (+ 31 smaller children owning 182 project decls in total)
+            (+ 0 smaller children owning 0 project decls in total)
+          FunctorialResolution.EmbeddedResolution.canonicalAlgorithmRules_isCorrect  [t; owns 5322 project decls, 4246063 expr nodes; file Development/ResolutionOfSingularities/EmbeddedResolution/StrongResolution/PrincipalizationWithRadicalCenters.lean]
+            FunctorialResolution.EmbeddedResolution.isCorrect_canonicalAlgorithmRules  [t; owns 5321 project decls, 4246056 expr nodes; file Development/ResolutionOfSingularities/EmbeddedResolution/IdealPrincipalization/CanonicalRulesCorrect.lean]
+              (+ 299 smaller children owning 5320 project decls in total)
+            (+ 0 smaller children owning 0 project decls in total)
+          GlobalTheory.T.hasSemiAbelianUniformisation_complete_normal_base  [t; owns 4933 project decls, 14412517 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/HasSemiAbelianUniformisationCompleteNormalBaseStatement.lean]
+            GlobalTheory.Mum.has_of_base  [t; owns 4932 project decls, 14412463 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/HasSemiAbelianUniformisationCompleteNormalBase.lean]
+              (+ 98 smaller children owning 4931 project decls in total)
+            (+ 0 smaller children owning 0 project decls in total)
+          UpperTheory.LiteratureTheorems.published_results_eigen  [t; owns 4257 project decls, 7839082 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+            (+ 68 smaller children owning 4256 project decls in total)
+          UpperTheory.LiteratureTheorems.published_results_first  [t; owns 4009 project decls, 6542035 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+            (+ 174 smaller children owning 4008 project decls in total)
+          (+ 51352 smaller children owning 161607 project decls in total)
+        UpperTheory.One.vwin_of_row  [t; owns 89838 project decls, 208762540 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean]
+          UpperTheory.One.Join.automorphic_window_of_inputs  [t; owns 89835 project decls, 208762190 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean]
+            UpperTheory.One.Join.v_window_of_depth_zero_residual_bc_cm  [t; owns 88857 project decls, 206857181 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean]
+              UpperTheory.V.v_window_of_literal_automorphy_n  [t; owns 88797 project decls, 206856269 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+                UpperTheory.V.HV.DescentVanishingReductions.v_window_of_automorphy_csd_ss_mono_odd  [t; owns 88796 project decls, 206856262 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+                  UpperTheory.V.HV.DescentVanishingReductions.vwin_of_hypotheses_H_E_alt  [t; owns 78404 project decls, 184245399 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+                    UpperTheory.V.Z.Kato.WeilSphericalRecords.katoTwoW_of_printsH  [t; owns 14636 project decls, 27464075 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/KatoTwoWOfPublishedH.lean]
+                      UpperTheory.V.Z.Kato.WeilSphericalRecords.katoTwoW_of_printsH_of_rT_of_quadBC2  [t; owns 14635 project decls, 27464055 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/KatoTwoWOfPublishedH.lean]
+                        UpperTheory.V.Z.Kato.WeilSphericalRecords.twoS  [t; owns 14041 project decls, 26362876 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/KatoQuadraticCharacters/SphericalDecomposition/SphAtTw.lean]
+                        (+ 83 smaller children owning 593 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    UpperTheory.V.HV.DescentVanishingReductions.sp4In0_alt  [t; owns 11101 project decls, 31329915 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/Sp4In0.lean]
+                      UpperTheory.V.Z.Bc.seedIIs_alt  [t; owns 4610 project decls, 9856786 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/BcIndCs.lean]
+                        (+ 56 smaller children owning 4609 project decls in total)
+                      (+ 55 smaller children owning 6490 project decls in total)
+                    UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints  [t; owns 6554 project decls, 15869670 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+                      UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints_and_row  [t; owns 6553 project decls, 15869652 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+                        UpperTheory.V.Z.Sym.W.adjoint_automorphy_w_of_printed_hida_window  [t; owns 5246 project decls, 13539754 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+                        (+ 26 smaller children owning 1306 project decls in total)
+                      (+ 0 smaller children owning 0 project decls in total)
+                    UpperTheory.V.ZK.lemmaK_litN_alt  [t; owns 4748 project decls, 6471257 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/KFinal.lean]
+                      (+ 78 smaller children owning 4747 project decls in total)
+                    (+ 5788 smaller children owning 41364 project decls in total)
+                  UpperTheory.V.HV.DescentVanishingReductions.published_hypotheses_from_patching_alt  [t; owns 5246 project decls, 12149744 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/PublishedHypothesesFromPatching.lean]
+                    (+ 486 smaller children owning 5245 project decls in total)
+                  (+ 1318 smaller children owning 5145 project decls in total)
+                (+ 0 smaller children owning 0 project decls in total)
+              (+ 6 smaller children owning 59 project decls in total)
+            (+ 32 smaller children owning 977 project decls in total)
+          (+ 2 smaller children owning 2 project decls in total)
+        (+ 11655 smaller children owning 30452 project decls in total)
+      UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter  [t; owns 89788 project decls, 152314480 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean]
+        UpperTheory.Gal.Int.galoisRepresentations_of_thetaLift  [t; owns 85662 project decls, 139366617 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GaloisRepresentationsOfThetaLift.lean]
+          UpperTheory.Gal.Int.Geo.geoOne_holds  [t; owns 77399 project decls, 122200986 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/WeightOneGeometricRealization.lean]
+            UpperTheory.Gal.Int.Geo.geometric_realization_of_weight_one  [t; owns 74246 project decls, 116041586 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+              UpperTheory.Gal.Int.Geo.steps_holds  [t; owns 49956 project decls, 69778624 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+                UpperTheory.Gal.Int.Geo.jumpStep_holds  [t; owns 5897 project decls, 10040847 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+                  UpperTheory.Gal.Seam.HT.htSpecGood  [t; owns 5366 project decls, 9108320 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/CrystallineTowers/ClosedHT.lean]
+                    UpperTheory.Gal.Seam.HT.htBij  [t; owns 4097 project decls, 6989916 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/CrystallineTowers/ClosedHT.lean]
+                      (+ 79 smaller children owning 4096 project decls in total)
+                    (+ 140 smaller children owning 1268 project decls in total)
+                  (+ 39 smaller children owning 530 project decls in total)
+                (+ 5294 smaller children owning 44058 project decls in total)
+              UpperTheory.Gal.Int.Geo.kodaira_spencer_of_weight_one  [t; owns 18638 project decls, 38490066 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+                (+ 1377 smaller children owning 18637 project decls in total)
+              (+ 1019 smaller children owning 5651 project decls in total)
+            (+ 145 smaller children owning 3152 project decls in total)
+          UpperTheory.Gal.Int.galoisLocalGlobalStrong_of_geometry_lift  [t; owns 8038 project decls, 16753929 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean]
+            UpperTheory.Gal.Int.galoisLocalGlobal_of_geometry_lift  [t; owns 8015 project decls, 16730698 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean]
+              (+ 197 smaller children owning 8014 project decls in total)
+            (+ 8 smaller children owning 22 project decls in total)
+          (+ 97 smaller children owning 224 project decls in total)
+        UpperTheory.TP.K.tLiftK  [t; owns 4091 project decls, 12929397 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TLiftK.lean]
+          UpperTheory.TP.tLift_holds_k  [t; owns 4090 project decls, 12929395 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TPGHolds.lean]
+            (+ 52 smaller children owning 4089 project decls in total)
+          (+ 0 smaller children owning 0 project decls in total)
+        (+ 22 smaller children owning 34 project decls in total)
+      (+ 110898 smaller children owning 212220 project decls in total)
+    (+ 0 smaller children owning 0 project decls in total)
+  (+ 34105 smaller children owning 31 project decls in total)
+
+-- the 150 declarations owning the most, with dominator depth --
+  d  1  allChi  [t; owns 1258873 project decls, 2502219286 expr nodes; file Supplements/Kernels/MainTheorems.lean]
+  d  2  UpperTheory.FinalTheorems.everyCharacter  [t; owns 1258872 project decls, 2502219284 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+  d  3  UpperTheory.FinalTheorems.everyCharacter_of_row  [t; owns 956863 project decls, 1996349398 expr nodes; file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+  d  4  UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin  [t; owns 836572 project decls, 1737829530 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+  d  5  UpperTheory.Lit.every_character_of_theta_integrals_local_matching  [t; owns 537861 project decls, 1118776657 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]
+  d  6  UpperTheory.Lit.nonempty_hyps_definite_side_of_closed_bound  [t; owns 447188 project decls, 979193513 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SiegelEisensteinSecondTermHypotheses.lean]
+  d  7  GlobalTheory.Fc.S0.StageU.hypotheses_nonempty_of_unramified_exponents_alt  [t; owns 151930 project decls, 382227246 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/HypothesesNonemptyOfUnramifiedExponents.lean]
+  d  4  UpperTheory.One.vwin_of_row  [t; owns 89838 project decls, 208762540 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean]
+  d  5  UpperTheory.One.Join.automorphic_window_of_inputs  [t; owns 89835 project decls, 208762190 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean]
+  d  3  UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter  [t; owns 89788 project decls, 152314480 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean]
+  d  6  UpperTheory.One.Join.v_window_of_depth_zero_residual_bc_cm  [t; owns 88857 project decls, 206857181 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/TopMainZj.lean]
+  d  7  UpperTheory.V.v_window_of_literal_automorphy_n  [t; owns 88797 project decls, 206856269 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+  d  8  UpperTheory.V.HV.DescentVanishingReductions.v_window_of_automorphy_csd_ss_mono_odd  [t; owns 88796 project decls, 206856262 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+  d  4  UpperTheory.Gal.Int.galoisRepresentations_of_thetaLift  [t; owns 85662 project decls, 139366617 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GaloisRepresentationsOfThetaLift.lean]
+  d  5  SelfIntersectionVolumeEstimates.topCovolSlim2_use_alt_alt  [t; owns 79481 project decls, 181355174 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolSlim2Use.lean]
+  d  9  UpperTheory.V.HV.DescentVanishingReductions.vwin_of_hypotheses_H_E_alt  [t; owns 78404 project decls, 184245399 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/WindowBoundOfLiteratureLevel.lean]
+  d  5  UpperTheory.Gal.Int.Geo.geoOne_holds  [t; owns 77399 project decls, 122200986 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/WeightOneGeometricRealization.lean]
+  d  6  UpperTheory.Gal.Int.Geo.geometric_realization_of_weight_one  [t; owns 74246 project decls, 116041586 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+  d  8  GlobalTheory.Fc.AllAtMemberStage0.allRows_of_open0_alt  [t; owns 53860 project decls, 96703117 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkROfIsLinked.lean]
+  d  7  UpperTheory.Gal.Int.Geo.steps_holds  [t; owns 49956 project decls, 69778624 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+  d  6  PositivityTheory.HtPt.Ah.deep_slim_use  [t; owns 45457 project decls, 95961416 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/AhSlimU.lean]
+  d  7  GlobalTheory.CompanionTheory.Ar.Plug.deepStR_of_use  [t; owns 44859 project decls, 95158868 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/DeepStROfUse.lean]
+  d  8  GlobalTheory.T.large_unramified_exponent_bundles_exist_alt  [t; owns 36795 project decls, 138134814 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MemberBundlesLargeUnramifiedExponents.lean]
+  d  9  GlobalTheory.Fc.StageOneU.member_bundles_large_unramified_exponents_alt  [t; owns 36794 project decls, 138134754 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MemberBundlesLargeUnramifiedExponents.lean]
+  d  7  GlobalTheory.Fc.S0.ontoX_and_lamLow_of_unitaryGroupHypotheses'  [t; owns 34583 project decls, 72926634 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/SurjectiveAndLowWeightOfUnramifiedExponents.lean]
+  d  8  GlobalTheory.BigOn.ontoX_of_hypotheses_alt_alt  [t; owns 33983 project decls, 71550552 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OntoXOfPrints.lean]
+  d  8  GlobalTheory.CompanionTheory.Ar.Link.good_tower_volume_theorem_bis  [t; owns 31482 project decls, 70215234 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/HilbertSamuelApplications/GoodTowerVolumeTheoremBis.lean]
+  d  9  GlobalTheory.T.final_theorem_of_inputs_right  [t; owns 31478 project decls, 70214411 expr nodes; file Development/AutomorphicSpectrum/Proofs/GeometryProofs/FinalTheoremOfInputsRightStatement.lean]
+  d 10  GlobalTheory.CompanionTheory.Ar.Top.goodTower_volume_of_reduced  [t; owns 31477 project decls, 70214310 expr nodes; file Development/AutomorphicSpectrum/Proofs/GeometryProofs/FinalTheoremOfInputsRight.lean]
+  d  8  UpperTheory.GalC.final_alt_alt  [t; owns 28044 project decls, 78198866 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/CFinal.lean]
+  d 11  GlobalTheory.T.good_tower_volume_theorem  [t; owns 26813 project decls, 57524170 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/GoodTowerVolumeTheoremStatement.lean]
+  d 12  GlobalTheory.CompanionTheory.Ar.Top.goodTower_and_volume  [t; owns 26812 project decls, 57524152 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/GoodTowerVolumeTheorem.lean]
+  d  9  UpperTheory.GalC.final_of_alt  [t; owns 26473 project decls, 75865050 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+  d 10  GlobalTheory.T.member_exists_baseLattice_alt  [t; owns 25812 project decls, 87334656 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+  d 11  GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_prime_alt  [t; owns 25811 project decls, 87334591 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+  d 10  UpperTheory.GalC.linkedAt_linkN_of_boundAtTwoThree  [t; owns 25609 project decls, 73972163 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+  d 11  UpperTheory.GalC.linkN_of_boundAtTwoThree_slot  [t; owns 25608 project decls, 73971565 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+  d 12  UpperTheory.GalC.linkN_of_twGood_galoisPreconditions  [t; owns 25607 project decls, 73970918 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/LinkNFam.lean]
+  d  6  UpperTheory.Top.every_character_of_green_v_win  [t; owns 23314 project decls, 33564486 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean]
+  d  7  UpperTheory.Top.zero_free_all_of_green_v_win  [t; owns 23305 project decls, 33560951 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopPlug.lean]
+  d  9  GlobalTheory.LocalRows.lg1_sLp_sO_hTF  [t; owns 23009 project decls, 40337762 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+  d 10  GlobalTheory.LocalRows.sLp_sO_hTF_of_siegelWeil  [t; owns 23008 project decls, 40337600 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+  d 11  GlobalTheory.LocalRows.at_choice_alt  [t; owns 23007 project decls, 40337480 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AtChoice.lean]
+  d  7  GlobalTheory.T.open0_of_unitary_group_hypotheses  [t; owns 22737 project decls, 67325621 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OpenOrbitOfUnramifiedExponents.lean]
+  d  8  GlobalTheory.Fc.S0.Open0ProofU.open_orbit_of_unramified_exponents_alt  [t; owns 22736 project decls, 67325606 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/OpenOrbitOfUnramifiedExponents.lean]
+  d 12  GlobalTheory.CarrierGap.offDiag  [t; owns 22023 project decls, 38519581 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]
+  d  9  GlobalTheory.T.main_theorem_published_inputs_third_alt_alt  [t; owns 20124 project decls, 57297522 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsThird.lean]
+  d 10  GlobalTheory.miStarRow_alt_alt  [t; owns 20123 project decls, 57296398 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsThird.lean]
+  d  6  SelfIntersectionVolumeEstimates.topCovolG_alt_alt  [t; owns 19901 project decls, 55540097 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopCovolG.lean]
+  d 11  GlobalTheory.T.main_theorem_published_inputs_variant_alt_alt  [t; owns 19740 project decls, 56371057 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsVariant.lean]
+  d 12  GlobalTheory.miStarRowClosing_alt_alt  [t; owns 19739 project decls, 56369849 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedInputsVariant.lean]
+  d 13  GlobalTheory.T.main_theorem_published_results_final_alt_alt  [t; owns 19243 project decls, 54579683 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedResultsFinal.lean]
+  d 14  GlobalTheory.Fam.miStar_row_alt_alt  [t; owns 19242 project decls, 54578458 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremPublishedResultsFinal.lean]
+  d  8  UpperTheory.Top.shape_closed_link_n_of_green  [t; owns 19162 project decls, 25885598 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/TopShape.lean]
+  d 15  GlobalTheory.T.main_theorem_from_published_results_alt_alt_alt_alt_alt  [t; owns 18783 project decls, 48764892 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremFromPublishedResultsAltAltAltAltAlt.lean]
+  d 16  GlobalTheory.Fam.miAt_of_truePack_alt_alt  [t; owns 18781 project decls, 48764342 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremFromPublishedResultsAltAltAltAltAlt.lean]
+  d 17  GlobalTheory.T.main_theorem_from_published_results_alt_alt_alt_alt  [t; owns 18780 project decls, 48761801 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremFromPublishedResultsAltAltAltAlt.lean]
+  d 18  GlobalTheory.Fam.miStar2_of_allTrue_alt_alt  [t; owns 18779 project decls, 48761249 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MainTheoremFromPublishedResultsAltAltAltAlt.lean]
+  d  7  UpperTheory.Gal.Int.Geo.kodaira_spencer_of_weight_one  [t; owns 18638 project decls, 38490066 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+  d 13  GlobalTheory.T.conclF_of_family_facts_and_bound_at_two_three  [t; owns 18210 project decls, 54914610 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherTailStatement.lean]
+  d 14  GlobalTheory.NLinkClose.main_alt_alt  [t; owns 18209 project decls, 54914558 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherTail.lean]
+  d 19  GlobalTheory.T.true_geometry_family_row_data_alt  [t; owns 17857 project decls, 46035990 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FamAllQOfAllTrueStatement.lean]
+  d 20  GlobalTheory.MiTop.famAllQ_of_allTrue_alt  [t; owns 17856 project decls, 46035802 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FamAllQOfAllTrue.lean]
+  d  9  GlobalTheory.T.hServ_of_linkR  [t; owns 16253 project decls, 28903538 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowHServOfLinkStatement.lean]
+  d 10  GlobalTheory.row_hServ_of_link_alt  [t; owns 16252 project decls, 28903472 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowHServOfLink.lean]
+  d 11  GlobalTheory.T.reciprocity_kernel_of_artin  [t; owns 16241 project decls, 28898670 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ServHRowLinkRStatement.lean]
+  d 12  GlobalTheory.Svd.servH_row_linkR_alt  [t; owns 16240 project decls, 28898584 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ServHRowLinkR.lean]
+  d 13  GlobalTheory.T.bundle_bothParts_of_standardKernel_of_globalArtinReciprocity  [t; owns 16232 project decls, 28894007 expr nodes; file Development/AbelianVarietyTheory/Proofs/SatakeParameters/BundleBothPartsOfStandardKernelOfGlobalArtinReciStatement.lean]
+  d 14  GlobalTheory.Svd.servH_row_of_artin  [t; owns 16231 project decls, 28893875 expr nodes; file Development/AbelianVarietyTheory/Proofs/SatakeParameters/BundleBothPartsOfStandardKernelOfGlobalArtinReci.lean]
+  d 10  UpperTheory.V.Z.Kato.WeilSphericalRecords.katoTwoW_of_printsH  [t; owns 14636 project decls, 27464075 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/KatoTwoWOfPublishedH.lean]
+  d 11  UpperTheory.V.Z.Kato.WeilSphericalRecords.katoTwoW_of_printsH_of_rT_of_quadBC2  [t; owns 14635 project decls, 27464055 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/KatoTwoWOfPublishedH.lean]
+  d  5  UpperTheory.LiteratureTheorems.theta_integrals_agree_and_local_matching_of_literature  [t; owns 14111 project decls, 34826909 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+  d 12  UpperTheory.V.Z.Kato.WeilSphericalRecords.twoS  [t; owns 14041 project decls, 26362876 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/KatoQuadraticCharacters/SphericalDecomposition/SphAtTw.lean]
+  d 12  GlobalTheory.Mem.Top.Bl.exists_baseLattice_of_pair_alt  [t; owns 13537 project decls, 28910590 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExistsBaseLatticeOfPrime.lean]
+  d 13  GlobalTheory.T.volume_theorem_of_inputs  [t; owns 13401 project decls, 27645138 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/VolumeTheoremOfInputsStatement.lean]
+  d 14  GlobalTheory.CompanionTheory.Ar.Cusp.volumeTheoremX_of_inputs  [t; owns 13400 project decls, 27645105 expr nodes; file Development/AutomorphicSpectrum/Proofs/DivisibilityProofs/VolumeTheoremOfInputs.lean]
+  d 13  UpperTheory.V.Z.Kato.Final.zetaUr  [t; owns 12485 project decls, 23510453 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/KatoQuadraticCharacters/UnramifiedZeta/ZetaUr.lean]
+  d  6  PositivityTheory.ThKR.theoremK_head2  [t; owns 11481 project decls, 27369693 expr nodes; file Development/WeilBound/ThetaLifts/Reductions/FiniteClosure/TheoremKOfMod.lean]
+  d  7  PositivityTheory.ThKR.theoremK_head2_of_mod  [t; owns 11221 project decls, 27021984 expr nodes; file Development/WeilBound/ThetaLifts/Reductions/FiniteClosure/TheoremKOfMod.lean]
+  d 10  UpperTheory.V.HV.DescentVanishingReductions.sp4In0_alt  [t; owns 11101 project decls, 31329915 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/Sp4In0.lean]
+  d  9  Formalism.L2.G.linkG_concrete5  [t; owns 10716 project decls, 13828791 expr nodes; file Formalism/LocalToGlobal/GroupLattices/LinkGConcreteNoKer.lean]
+  d  9  GlobalTheory.FinalJoin.runHolds_of_parOK  [t; owns 10072 project decls, 27245499 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsThresholdRunHolds.lean]
+  d 13  GlobalTheory.Mem.Top.Closing.memberE_closing_alt_alt  [t; owns 9790 project decls, 18256606 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/MemberEClosing.lean]
+  d  7  GlobalTheory.RowClaim.Join.thetaLift_row_properties_conj  [t; owns 9354 project decls, 18699565 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/ThetaLiftRowPropertiesConj.lean]
+  d 13  GlobalTheory.CarrierGap.theoremS_leaves_of_carrierG  [t; owns 8936 project decls, 17492353 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]
+  d 15  GlobalTheory.T.bundle_bothParts_of_standardKernel_and_six_hypotheses  [t; owns 8790 project decls, 18393654 expr nodes; file Development/AbelianVarietyTheory/Proofs/SatakeParameters/BundleBothPartsOfStandardKernelAndSixHypothesesStatement.lean]
+  d 16  GlobalTheory.Svd.servH_row  [t; owns 8789 project decls, 18393512 expr nodes; file Development/AbelianVarietyTheory/Proofs/SatakeParameters/BundleBothPartsOfStandardKernelAndSixHypotheses.lean]
+  d 10  GlobalTheory.T.exists_indexBoundHypothesesWithNet_allValuedPoints  [t; owns 8481 project decls, 24530141 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsIndexBoundHypothesesWithNetAllValuedPointsStatement.lean]
+  d 11  GlobalTheory.InputsAtRecord.inputsNet_recPlus  [t; owns 8480 project decls, 24529795 expr nodes; file Development/AbelianVarietyTheory/Proofs/HeightProofs/ExistsIndexBoundHypothesesWithNetAllValuedPoints.lean]
+  d  8  PositivityTheory.Sph.Tr.closeSph  [t; owns 8159 project decls, 21911462 expr nodes; file Development/WeilBound/ThetaLifts/SphericalLattices/SphericalClosure/CloseSph.lean]
+  d  5  UpperTheory.Gal.Int.galoisLocalGlobalStrong_of_geometry_lift  [t; owns 8038 project decls, 16753929 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean]
+  d  6  UpperTheory.Gal.Int.galoisLocalGlobal_of_geometry_lift  [t; owns 8015 project decls, 16730698 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean]
+  d  9  GlobalTheory.BigOn.geoSt_of_pageSt_alt  [t; owns 7923 project decls, 11342605 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/GeoStOfPageSt.lean]
+  d 13  GlobalTheory.CarrierGap.carrierP  [t; owns 7902 project decls, 13084321 expr nodes; file Development/AbelianVarietyTheory/Proofs/FlagMeasures/OffK0Closed.lean]
+  d 10  GlobalTheory.BigOn.leafDepth_all_record  [t; owns 7503 project decls, 9952698 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/LeafDepthAllRecord.lean]
+  d 11  GlobalTheory.RunDepth.leafDepth_all_run  [t; owns 7502 project decls, 9947808 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/LeafDepthAllRun.lean]
+  d 12  GlobalTheory.T.depthTable_goodPrimes_of_chartForm  [t; owns 7254 project decls, 9454425 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/DepthTableGoodPrimesOfChartFormStatement.lean]
+  d 13  GlobalTheory.leafDepthGood_of_chartForm  [t; owns 7253 project decls, 9453799 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/DepthTableGoodPrimesOfChartForm.lean]
+  d  5  GlobalTheory.TorKSField.toroidalForFanKS  [t; owns 7166 project decls, 27442542 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/ToroidalCompactificationFanLogKodairaSpencerIso.lean]
+  d  7  UpperTheory.Lit.functionalsSeparate_of_howeUnram_of_siegelWeil  [t; owns 7127 project decls, 16990355 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/FunctionalsSeparateOfHoweUnramOfSiegelWeil.lean]
+  d  9  GlobalTheory.T.expSt_of_base_change_and_crystalline_lattices  [t; owns 7093 project decls, 10506227 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExponentBoundOfUnitaryThetaStandardTheorems.lean]
+  d 10  GlobalTheory.BigOn.exponent_bound_of_unitaryThetaStandardTheorems_alt  [t; owns 7092 project decls, 10506209 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExponentBoundOfUnitaryThetaStandardTheorems.lean]
+  d  5  UpperTheory.LiteratureTheorems.published_results_arithmetic  [t; owns 6946 project decls, 11663296 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+  d  7  GlobalTheory.BigTop.Fun.Close.fourier_coefficient_fit_of_join_alt  [t; owns 6701 project decls, 15303376 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FourierCoefficientFitOfJoin.lean]
+  d  8  GlobalTheory.BigTop.Fun.Close.fittedFunction_at_zero_close_alt  [t; owns 6700 project decls, 15303282 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/FittedFunctionAtZeroClose.lean]
+  d 10  UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints  [t; owns 6554 project decls, 15869670 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+  d 11  UpperTheory.V.Z.Sym.W.unitary_three_automorphy_dense_of_prints_and_row  [t; owns 6553 project decls, 15869652 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+  d  8  GlobalTheory.T.liftInj_and_nonVan_typeNZ_of_given  [t; owns 6400 project decls, 12122209 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/LiftInjNonVanTypeNZOfPrints.lean]
+  d  9  GlobalTheory.Core.Rk.LiftOnto.liftInj_nonVan_typeNZ_of_hypotheses_alt  [t; owns 6399 project decls, 12122002 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/LiftInjNonVanTypeNZOfPrints.lean]
+  d 15  GlobalTheory.T.star_ad_and_bb_le_of_joint_cond  [t; owns 6317 project decls, 23429375 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowsADInSettingStatement.lean]
+  d 16  GlobalTheory.NLink.rowsAD_in_setting_alt  [t; owns 6316 project decls, 23429248 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/RowsADInSetting.lean]
+  d 21  GlobalTheory.T.true_geometry_family_invariance_alt  [t; owns 6294 project decls, 15912983 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ColSideStatement.lean]
+  d 22  GlobalTheory.Fam.colSide_alt  [t; owns 6293 project decls, 15911100 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ColSide.lean]
+  d 13  GlobalTheory.T.exists_const_tieChi_bound_of_facts  [t; owns 6266 project decls, 17003197 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ExtraBoundOfTwistingEigenFacts.lean]
+  d 17  GlobalTheory.T.adm_at_inert_of_range  [t; owns 6266 project decls, 23105231 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherBisStatement.lean]
+  d 14  GlobalTheory.ExtraFromFacts.main_alt_alt  [t; owns 6265 project decls, 17003121 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsExtraAlt.lean]
+  d 18  GlobalTheory.NLink.InertStep.main_alt_alt  [t; owns 6265 project decls, 23104984 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherBis.lean]
+  d 10  GlobalTheory.T.downNe_of_eulerRight_doubling  [t; owns 6250 project decls, 11810692 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/EulerFactorFromDoubling.lean]
+  d 11  GlobalTheory.Core.Rk.Exh.Top.downNe_k_of_hypotheses'  [t; owns 6249 project decls, 11810678 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/KplugFill.lean]
+  d 12  PositivityTheory.Rg.Rsw.resCore  [t; owns 5959 project decls, 11126969 expr nodes; file Development/WeilBound/RepresentationTheoryGL/RegularisedSiegelWeil/ThetaIdempotents/ThetaCoefficients/ResCore.lean]
+  d  8  UpperTheory.Gal.Int.Geo.jumpStep_holds  [t; owns 5897 project decls, 10040847 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GeometricFlagBases/GeometricRealizationOfWeightOne.lean]
+  d  7  GlobalTheory.T.twisted_multiplicity_one  [t; owns 5736 project decls, 10746385 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedMultiplicityOne.lean]
+  d  8  GlobalTheory.MultEqFinal.twisted_multiplicity_eq  [t; owns 5735 project decls, 10745838 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/TwistedMultiplicityOne.lean]
+  d  9  UpperTheory.Lit.I5.unitary_theory_of_harishChandra_langlands_alt  [t; owns 5734 project decls, 10745190 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/UnitaryThetaCorrespondenceOfHyp.lean]
+  d  7  Formalism.L2.SG.Pf.NcAllC.ncTieC_of_closed  [t; owns 5715 project decls, 8823118 expr nodes; file Formalism/LocalToGlobal/SiegelLatticeTheory/CokernelGLCounts/RankPointCounts/DualFamilyCounting/NcAllC.lean]
+  d  8  UpperTheory.Lit.real_functionals_separate_of_hypothesis  [t; owns 5612 project decls, 13766993 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/LocalTypeDictionary/RealFunctionalsSeparateOfHypothesis.lean]
+  d  5  PositivityTheory.Pf1.HilbertSamuelMoriwaki.hsChain  [t; owns 5445 project decls, 8532956 expr nodes; file Development/WeilBound/CoreStatements/AutomorphicKernels/MoriwakiBigness/MoriwakiBigTheorem/HSChain.lean]
+  d  5  UpperTheory.LiteratureTheorems.siegel_toroidal_integral_of_literature  [t; owns 5433 project decls, 19361947 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+  d  6  GlobalTheory.siegelToroidalIntegral_holds  [t; owns 5432 project decls, 19361942 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalIntegralHolds.lean]
+  d 15  GlobalTheory.T.exists_bound_tieChi_of_prints  [t; owns 5376 project decls, 13883519 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherLastStatement.lean]
+  d 16  GlobalTheory.NormFromFacts.main_alt_alt  [t; owns 5375 project decls, 13883423 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/ImportsFurtherLast.lean]
+  d 17  GlobalTheory.T.conclusion41_of_pAdicHodge_alt  [t; owns 5374 project decls, 13882769 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AdmG14OfAuxStatement.lean]
+  d 18  GlobalTheory.ClosingLocalInputs.main_alt_alt  [t; owns 5373 project decls, 13882598 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AdmG14OfAux.lean]
+  d  9  UpperTheory.Gal.Seam.HT.htSpecGood  [t; owns 5366 project decls, 9108320 expr nodes; file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/CrystallineTowers/ClosedHT.lean]
+  d  5  FunctorialResolution.EmbeddedResolution.canonicalAlgorithmRules_isCorrect  [t; owns 5322 project decls, 4246063 expr nodes; file Development/ResolutionOfSingularities/EmbeddedResolution/StrongResolution/PrincipalizationWithRadicalCenters.lean]
+  d  6  FunctorialResolution.EmbeddedResolution.isCorrect_canonicalAlgorithmRules  [t; owns 5321 project decls, 4246056 expr nodes; file Development/ResolutionOfSingularities/EmbeddedResolution/IdealPrincipalization/CanonicalRulesCorrect.lean]
+  d 14  GlobalTheory.T.allGoodPrimeDepthDataExist_proof  [t; owns 5257 project decls, 6941603 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/AllGoodPrimeDepthDataExistProofStatement.lean]
+  d 15  GlobalTheory.goodPrime_packages  [t; owns 5256 project decls, 6941493 expr nodes; file Development/AbelianVarietyTheory/Proofs/JetHarmonics/AllGoodPrimeDepthDataExistProof.lean]
+  d  7  GlobalTheory.T.siegelToroidalCompactification_polarisedCharts  [t; owns 5249 project decls, 18857996 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalCompactificationPolarisedChartsStatement.lean]
+  d  8  GlobalTheory.SiegJoin.siegelToroidalPolCharts  [t; owns 5248 project decls, 18857994 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/SiegelToroidalCompactificationPolarisedCharts.lean]
+  d 12  UpperTheory.V.Z.Sym.W.adjoint_automorphy_w_of_printed_hida_window  [t; owns 5246 project decls, 13539754 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/UnitaryThreeInputsOfLiterature.lean]
+  d  9  UpperTheory.V.HV.DescentVanishingReductions.published_hypotheses_from_patching_alt  [t; owns 5246 project decls, 12149744 expr nodes; file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/PublishedHypothesesFromPatching.lean]
+  d 19  GlobalTheory.T.crystallinePeriodBound_all_constant_ge_forty  [t; owns 5082 project decls, 13016208 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/CrystallinePeriodBoundAllConstantGeFortyStatement.lean]
+  d 20  GlobalTheory.InertiaEigenvalues.theoremT_all_records  [t; owns 5081 project decls, 13016151 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/CrystallinePeriodBoundAllConstantGeForty.lean]
+  d 12  GlobalTheory.T.all_stages_at_member_of_specializations_alt  [t; owns 5066 project decls, 10035092 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AllStagesAtMemberOfSpecializations.lean]
+  d 13  GlobalTheory.HeightCounting.Up.all_stages_of_specializations_alt  [t; owns 5065 project decls, 10035007 expr nodes; file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/AllStagesAtMemberOfSpecializations.lean]
+  d 21  GlobalTheory.T.liftingStep_theoremT_of_bhattScholze_fontaine  [t; owns 4975 project decls, 12939481 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/LiftingStepTheoremTOfBhattScholzeFontaineStatement.lean]
+  d 22  GlobalTheory.TheoremTClosing.main  [t; owns 4973 project decls, 12939401 expr nodes; file Development/AbelianVarietyTheory/Proofs/InertiaEigenvalues/LiftingStepTheoremTOfBhattScholzeFontaine.lean]
+  d  5  GlobalTheory.T.hasSemiAbelianUniformisation_complete_normal_base  [t; owns 4933 project decls, 14412517 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/HasSemiAbelianUniformisationCompleteNormalBaseStatement.lean]
+  d  6  GlobalTheory.Mum.has_of_base  [t; owns 4932 project decls, 14412463 expr nodes; file Development/AbelianVarietyTheory/Proofs/DivisorProofs/HasSemiAbelianUniformisationCompleteNormalBase.lean]
+
+-- owned size of every *_of_literature theorem and other named items --
+(closure = project declarations reachable from it; owns = those reachable only through it)
+  UpperTheory.FinalTheorems.everyCharacter: closure 1258874 (100.0%), owns 1258872, dominator depth 2, idom allChi
+  UpperTheory.FinalTheorems.everyCharacter_of_row: closure 1169085 (92.9%), owns 956863, dominator depth 3, idom UpperTheory.FinalTheorems.everyCharacter
+  UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin: closure 1053702 (83.7%), owns 836572, dominator depth 4, idom UpperTheory.FinalTheorems.everyCharacter_of_row
+  UpperTheory.Zero.LLC.recTExists: closure 20867 (1.7%), owns 581, dominator depth 3, idom UpperTheory.FinalTheorems.everyCharacter
+  UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter: closure 302008 (24.0%), owns 89788, dominator depth 3, idom UpperTheory.FinalTheorems.everyCharacter
+  UpperTheory.Gal.Int.galoisRepresentations_of_thetaLift: closure 265089 (21.1%), owns 85662, dominator depth 4, idom UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter
+  UpperTheory.One.vwin_of_row: closure 275450 (21.9%), owns 89838, dominator depth 4, idom UpperTheory.FinalTheorems.everyCharacter_of_row
+  Formalism.VW.rh_of_every: closure 6 (0.0%), owns 4, dominator depth 2, idom rhOfAll
+  Formalism.VW.rh_of_right: closure 3 (0.0%), owns 3, dominator depth 3, idom Formalism.VW.rh_of_every
+  UpperTheory.TP.K.tLiftK: closure 42901 (3.4%), owns 4091, dominator depth 4, idom UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter
+  rhOfAll: closure 1258880 (100.0%), owns 5, dominator depth 1, idom ROOT
+  allChi: closure 1258875 (100.0%), owns 1258873, dominator depth 1, idom ROOT
+  claimAll: closure 1258886 (100.0%), owns 7, dominator depth 2, idom LFunction_eq_zero_re
+  critAll: closure 1258878 (100.0%), owns 3, dominator depth 2, idom LFunction_eq_zero_re_of_isPrimitive
+
+-- *_of_literature theorems: closure, owns, idom --
+  UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin: closure 1053702, owns 836572, idom UpperTheory.FinalTheorems.everyCharacter_of_row
+  UpperTheory.LiteratureTheorems.toroidal_compactification_of_literature: closure 79621, owns 3, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.toroidal_for_fan_ks_of_literature: closure 77836, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.siegel_toroidal_integral_of_literature: closure 77583, owns 5433, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.base_change_definite_unitary_group_of_literature: closure 66372, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.theta_integrals_agree_and_local_matching_of_literature: closure 60549, owns 14111, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.rallis_inner_product_convergent_of_literature: closure 41045, owns 127, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.siegel_weil_unitary_convergent_of_literature: closure 37138, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.siegel_weil_unitary_schrodinger_of_literature: closure 37100, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.hecke_l_adic_character_above_of_literature: closure 35317, owns 4, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.hecke_l_adic_character_crystalline_of_literature: closure 35307, owns 3, idom UpperTheory.LiteratureTheorems.hecke_l_adic_character_above_of_literature
+  UpperTheory.LiteratureTheorems.hecke_l_adic_parameter_above_of_literature: closure 34322, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.vol_ge_of_literature: closure 33976, owns 183, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.siegel_weil_std_of_literature: closure 33918, owns 2556, idom UpperTheory.LiteratureTheorems.theta_integrals_agree_and_local_matching_of_literature
+  UpperTheory.LiteratureTheorems.carU_above_l_of_literature: closure 31651, owns 8, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.weil_siegel_formula_unitary_of_literature: closure 29621, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.ar_degree_of_literature: closure 29422, owns 412, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.cycle_heights_of_literature: closure 28273, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.ar_calc_of_literature: closure 28265, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.cusp_u_of_literature: closure 27387, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.algebraic_character_wd_of_literature: closure 24919, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.grothendieck_messing_of_literature: closure 24507, owns 2, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.grothendieck_deformation_of_literature: closure 24503, owns 2, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.carU_local_global_of_literature: closure 24454, owns 7, idom UpperTheory.LiteratureTheorems.carU_above_l_of_literature
+  UpperTheory.LiteratureTheorems.join_out_of_literature: closure 22106, owns 2187, idom UpperTheory.LiteratureTheorems.literature_nonexistence
+  UpperTheory.LiteratureTheorems.greenberg_wiles_of_literature: closure 21230, owns 1, idom UpperTheory.LiteratureTheorems.literature_cohomology
+  UpperTheory.LiteratureTheorems.vol_nef_of_literature: closure 20543, owns 2, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.arith_hilbert_samuel_of_literature: closure 20521, owns 2340, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.abelian_lifting_of_literature: closure 20296, owns 1, idom UpperTheory.LiteratureTheorems.grothendieck_deformation_of_literature
+  UpperTheory.LiteratureTheorems.global_euler_char_of_literature: closure 19467, owns 1, idom UpperTheory.LiteratureTheorems.literature_cohomology
+  UpperTheory.LiteratureTheorems.kawamata_viehweg_of_literature: closure 19403, owns 27, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.point_separation_pair_of_literature: closure 19329, owns 96, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.nadel_vanishing_and_non_klt_divisor_of_literature: closure 19290, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.local_langlands_gl_recT_exists_of_literature: closure 18976, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.abelian_de_rham_of_literature: closure 17639, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.poitou_tate_normalised_of_literature: closure 17341, owns 1, idom UpperTheory.LiteratureTheorems.literature_cohomology
+  UpperTheory.LiteratureTheorems.gelfand_kazhdan_dual_of_literature: closure 17014, owns 2, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.harish_chandra_finite_of_literature: closure 16866, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.discrete_series_cover_of_literature: closure 16707, owns 70, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.discrete_series_classification_of_literature: closure 16026, owns 2, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.de_rham_pot_semistable_of_literature: closure 15308, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.jacquet_shalika_of_literature: closure 14575, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.jacquet_shalika_rigidity_of_literature: closure 14573, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.dual_abelian_scheme_of_literature: closure 14249, owns 1, idom UpperTheory.LiteratureTheorems.zarhin_statement
+  UpperTheory.LiteratureTheorems.hecke_l_adic_character_de_rham_of_literature: closure 13935, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.cm_curve_good_outside_prime_st_of_literature: closure 13502, owns 298, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.bernstein_unitary_product_irreducible_of_literature: closure 13418, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.weber_ray_field_st_of_literature: closure 13203, owns 76, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.pair_u_of_literature: closure 13051, owns 4, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.global_finiteness_of_literature: closure 12921, owns 1, idom UpperTheory.LiteratureTheorems.literature_cohomology
+  UpperTheory.LiteratureTheorems.resolution_char_zero_of_literature: closure 12472, owns 11, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.generic_unitary_dual_gl_of_literature: closure 12439, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.ideal_invariants_one_orbit_st_of_literature: closure 12437, owns 9, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.complex_multiplication_j_st_of_literature: closure 12412, owns 1, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.cuspidal_multiplicity_one_of_literature: closure 11930, owns 1, idom UpperTheory.LiteratureTheorems.carU_local_global_of_literature
+  UpperTheory.LiteratureTheorems.bloch_kato_local_of_literature: closure 11922, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.tempered_product_of_square_integrable_of_literature: closure 11820, owns 3, idom UpperTheory.LiteratureTheorems.literature_local
+  UpperTheory.LiteratureTheorems.unlinked_product_irreducible_of_literature: closure 11491, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.totally_disjoint_product_irreducible_of_literature: closure 11480, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.depth_zero_induction_of_literature: closure 11434, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.formal_degree_compact_dual_of_literature: closure 11419, owns 240, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.square_integrable_segment_of_literature: closure 11419, owns 1, idom UpperTheory.LiteratureTheorems.literature_local
+  UpperTheory.LiteratureTheorems.ess_square_integrable_segments_of_literature: closure 11408, owns 1, idom UpperTheory.LiteratureTheorems.literature_local
+  UpperTheory.LiteratureTheorems.zelevinsky_polynomial_ring_of_literature: closure 11279, owns 3, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.grothendieck_ring_polynomial_of_literature: closure 11248, owns 1, idom UpperTheory.LiteratureTheorems.zelevinsky_polynomial_ring_of_literature
+  UpperTheory.LiteratureTheorems.semistable_reduction_st_of_literature: closure 11145, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.principalisation_of_literature: closure 11052, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.langlands_multisegments_of_literature: closure 10902, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.langlands_exhaustion_gl_of_literature: closure 10658, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.discrete_series_cover_exists_of_literature: closure 10651, owns 3, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.principalisation_char_zero_of_literature: closure 10506, owns 51, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.standard_cosocle_gl_of_literature: closure 10316, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.generic_unlinked_gl_of_literature: closure 10191, owns 1, idom UpperTheory.LiteratureTheorems.literature_local
+  UpperTheory.LiteratureTheorems.good_chern_weil_of_literature: closure 10069, owns 2000, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.siegel_eisenstein_continuation_of_literature: closure 9750, owns 36, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.discrete_series_exists_of_literature: closure 9575, owns 4, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.discrete_series_upq_exists_of_literature: closure 9572, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.weil_representation_exists_of_literature: closure 9343, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.formal_algebraisation_of_literature: closure 9330, owns 1400, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.segment_representation_of_literature: closure 9256, owns 1, idom UpperTheory.LiteratureTheorems.zelevinsky_polynomial_ring_of_literature
+  UpperTheory.LiteratureTheorems.unramified_orthogonality_of_literature: closure 9152, owns 1, idom UpperTheory.LiteratureTheorems.literature_cohomology
+  UpperTheory.LiteratureTheorems.siegel_klingen_deligne_ribet_of_literature: closure 9140, owns 2, idom UpperTheory.LiteratureTheorems.join_out_of_literature
+  UpperTheory.LiteratureTheorems.deligne_ribet_of_literature: closure 9133, owns 1, idom UpperTheory.LiteratureTheorems.siegel_klingen_deligne_ribet_of_literature
+  UpperTheory.LiteratureTheorems.siegelWeilU_unitary_convergent_of_literature: closure 9115, owns 7, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.nef_rr_of_literature: closure 9064, owns 49, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.poincare_lelong_inv_of_literature: closure 8904, owns 3, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.ray_character_artin_of_literature: closure 8427, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.ray_class_field_st_of_literature: closure 8418, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.hecke_l_adic_character_of_literature: closure 8288, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.regular_algebraic_purity_of_literature: closure 8248, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.global_artin_reciprocity_of_literature: closure 8240, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.clozel_cohomological_of_literature: closure 8176, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.cusp_trace_class_of_literature: closure 8003, owns 39, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.local_tate_duality_of_literature: closure 7942, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.local_tate_duality_k_of_literature: closure 7892, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.automorphic_forms_finite_gl_of_literature: closure 7808, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.cusp_forms_bounded_gl_of_literature: closure 7612, owns 1, idom UpperTheory.LiteratureTheorems.gelfand_kazhdan_dual_of_literature
+  UpperTheory.LiteratureTheorems.weil_representation_unitary_pair_of_literature: closure 7576, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.weil_theta_convergence_of_literature: closure 7495, owns 1, idom UpperTheory.LiteratureTheorems.rallis_inner_product_convergent_of_literature
+  UpperTheory.LiteratureTheorems.bhatt_scholze_crystalline_lattices_of_literature: closure 7359, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.bhatt_scholze_integral_of_literature: closure 7290, owns 1115, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.cuspidal_spectrum_gl_of_literature: closure 6974, owns 1, idom UpperTheory.LiteratureTheorems.literature_automorphy
+  UpperTheory.LiteratureTheorems.eis_bl_of_literature: closure 6783, owns 1, idom UpperTheory.LiteratureTheorems.theta_integrals_agree_and_local_matching_of_literature
+  UpperTheory.LiteratureTheorems.semi_abelian_lie_seminegative_of_literature: closure 6666, owns 782, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.cusp_bounded_of_literature: closure 6632, owns 3, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.fargues_exact_of_literature: closure 6466, owns 105, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.prismatic_dieudonne_hodge_of_literature: closure 6339, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.siegel_set_unitary_of_literature: closure 6224, owns 1, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.cusp_decay_sobolev_of_literature: closure 6215, owns 3, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.cusp_rapid_decay_of_literature: closure 6184, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.principal_polarisation_one_section_of_literature: closure 6137, owns 2, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.cusp_decay_bound_of_literature: closure 6124, owns 1, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.clozel_purity_of_literature: closure 6060, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.local_euler_char_k_of_literature: closure 6028, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.nef_numerics_of_literature: closure 5982, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.semi_abelian_hom_extension_of_literature: closure 5935, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.howe_duality_real_of_literature: closure 5457, owns 635, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.flath_factorisation_of_literature: closure 5447, owns 1187, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.flath_tensor_product_of_literature: closure 5430, owns 190, idom UpperTheory.LiteratureTheorems.flath_factorisation_of_literature
+  UpperTheory.LiteratureTheorems.ab_mul_n_st_of_literature: closure 5406, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.geometric_restriction_of_literature: closure 5256, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.kudla_splitting_split_unitary_of_literature: closure 5183, owns 2001, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.theta_rational_invariance_of_literature: closure 5172, owns 7, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.local_finiteness_of_literature: closure 5136, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.local_finiteness_k_of_literature: closure 5093, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.green_series_st_of_literature: closure 5021, owns 26, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.casselman_wallach_of_literature: closure 4872, owns 605, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  Formalism.MainNotions.RamifiedCoefficientChains.S9.LocalLemmasFromLiterature.local_lemmas_of_literature: closure 4809, owns 339, idom Formalism.MainNotions.RamifiedCoefficientChains.Asm.theorem_of_literature_hypotheses
+  UpperTheory.LiteratureTheorems.bernstein_zelevinsky_finiteness_of_literature: closure 4667, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.green_regular_characters_of_literature: closure 4655, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.standard_functors_finite_length_of_literature: closure 4447, owns 1, idom UpperTheory.LiteratureTheorems.tempered_product_of_square_integrable_of_literature
+  UpperTheory.LiteratureTheorems.unitary_irreducible_admissible_of_literature: closure 4321, owns 2, idom UpperTheory.LiteratureTheorems.flath_factorisation_of_literature
+  UpperTheory.LiteratureTheorems.gk_globalisation_of_literature: closure 4134, owns 140, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.partial_zeta_functional_equation_of_literature: closure 4108, owns 1, idom UpperTheory.LiteratureTheorems.join_out_of_literature
+  UpperTheory.LiteratureTheorems.local_converse_gl_of_literature: closure 4105, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.strong_approx_su_of_literature: closure 4088, owns 686, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.harish_chandra_analyticity_of_literature: closure 3970, owns 442, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.harish_chandra_modules_of_literature: closure 3923, owns 2, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.l2_extension_log_canonical_of_literature: closure 3877, owns 564, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.geometric_restriction_filtration_of_literature: closure 3855, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.fontaine_bcris_of_literature: closure 3831, owns 1, idom UpperTheory.LiteratureTheorems.published_results_local
+  Formalism.MainNotions.prop_two_six_congruence_family_of_literature: closure 3708, owns 104, idom Formalism.MainNotions.chosenThin_of_boxesN
+  UpperTheory.LiteratureTheorems.ht_card_of_literature: closure 3697, owns 2, idom UpperTheory.LiteratureTheorems.published_results_analytic
+  UpperTheory.LiteratureTheorems.holomorphic_discrete_series_of_literature: closure 3693, owns 84, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.discrete_series_lowest_k_type_of_literature: closure 3650, owns 19, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.discrete_series_hermitian_unique_of_literature: closure 3606, owns 3, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.weyl_branching_of_literature: closure 3513, owns 4, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.cuspidal_mirabolic_of_literature: closure 3483, owns 235, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.green_cuspidal_of_literature: closure 3411, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.k_finite_vectors_unitary_of_literature: closure 3302, owns 6, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.serre_holomorphic_sections_of_literature: closure 3225, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.gl_howe_duality_of_literature: closure 3159, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.induced_simple_lowest_alcove_of_literature: closure 3082, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.linnik_of_literature: closure 2975, owns 14, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.quadratic_class_field_theory_of_literature: closure 2927, owns 3, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.irreducible_admissible_gl_of_literature: closure 2810, owns 1, idom UpperTheory.LiteratureTheorems.tempered_product_of_square_integrable_of_literature
+  UpperTheory.LiteratureTheorems.metaplectic_representation_of_literature: closure 2809, owns 57, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.hermitian_local_global_of_literature: closure 2745, owns 4, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.real_metaplectic_representation_of_literature: closure 2745, owns 228, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.unramified_doubling_gl_of_literature: closure 2744, owns 114, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.hecke_l_partial_continuation_of_literature: closure 2724, owns 2, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.landherr_st_of_literature: closure 2724, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.hermitian_hasse_principle_of_literature: closure 2707, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.chow_form_exists_of_literature: closure 2702, owns 3, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  GlobalTheory.T.strict_vanishing_dual_of_literature: closure 2681, owns 468, idom GlobalTheory.Ord2.es_vanish
+  UpperTheory.LiteratureTheorems.hecke_l_entire_and_nonzero_at_one_of_literature: closure 2674, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.dixmier_malliavin_factorisation_of_literature: closure 2647, owns 13, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.moy_prasad_jacquet_iso_of_literature: closure 2602, owns 1, idom UpperTheory.LiteratureTheorems.literature_local
+  UpperTheory.LiteratureTheorems.chevalley_units_of_literature: closure 2590, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.cheb_of_literature: closure 2574, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.hasse_norm_st_of_literature: closure 2572, owns 1, idom UpperTheory.LiteratureTheorems.published_results_arithmetic
+  UpperTheory.LiteratureTheorems.chebotarev_degree_one_of_literature: closure 2567, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.depth_zero_jacquet_injective_of_literature: closure 2518, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.borel_casselman_of_literature: closure 2510, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  Formalism.MainNotions.LiftingTheory.wach_statement_of_literature: closure 2485, owns 47, idom Formalism.MainNotions.LiftingTheory.wach_statement_of_admitted
+  UpperTheory.LiteratureTheorems.brauer_degree_zero_of_literature: closure 2476, owns 1, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.radford_shuffle_polynomial_of_literature: closure 2431, owns 2, idom UpperTheory.LiteratureTheorems.published_results_first
+  UpperTheory.LiteratureTheorems.depth_zero_support_of_literature: closure 2387, owns 1, idom UpperTheory.LiteratureTheorems.published_results_eigen
+  UpperTheory.LiteratureTheorems.stone_von_neumann_of_literature: closure 2376, owns 73, idom UpperTheory.LiteratureTheorems.published_results_first
+  Formalism.MainNotions.LiftingTheory.wach_first_clause_of_literature: closure 2357, owns 2, idom Formalism.MainNotions.LiftingTheory.wach_first_clause_of_admitted
+  UpperTheory.LiteratureTheorems.schur_orthogonality_square_integrable_of_literature: closure 2310, owns 2, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+  UpperTheory.LiteratureTheorems.local_langlands_recT_exists_of_literature: closure 2287, owns 2, idom UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin
+
+-- top 400 owners: closure vs owns --
+done

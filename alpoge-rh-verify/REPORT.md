@@ -1,7 +1,9 @@
 # Build/verification log: Lean code published at alpo.ge on 2026-11-20
 
-**Status: IN PROGRESS (interim, updated 2026-11-20 21:00 UTC). Tier B is running; sections 4–6 are not final.
-Section 8 records what other people have reported publicly; none of it is this log's own result.**
+**Status: FINAL for this log (2026-11-20). The full build was stopped on purpose at 26% (section 4), so this
+log does not contain a first-hand full build, axiom check of `Main`, or kernel replay. Section 8 records what
+other people have reported publicly; none of it is this log's own result. `DEPENDENCY-ANALYSIS.md` holds the
+analysis of the published kernel export that replaced the rest of the build.**
 
 This is a factual log of what was downloaded, compiled and checked, and under which axioms.
 It makes no statement about the mathematics. Nothing here says the Riemann Hypothesis is proved.
@@ -84,15 +86,21 @@ def PrimitiveDirichletLZerosOnLine : Prop :=
 - `RiemannHypothesis` and `riemannZeta` are declared in `Mathlib.NumberTheory.LSeries.RiemannZeta`;
   `DirichletCharacter.LFunction` in `Mathlib.NumberTheory.LSeries.DirichletContinuation`.
 - Tier A covers 4 of 175,187 files. These are conditional statements only; they say nothing about `Main`.
-- Repeated first-hand on the Tier B pod at 20:00 UTC, using the `.olean` files produced by the full build:
+- Repeated first-hand on the Tier B pod at 20:00 UTC, using the `.olean` files produced by the (partial) Tier B build:
   `lake env lean TierA.lean` exit 0 (9.69 s, peak RSS 6.8 GB) with output identical to the block above.
   `#check` output there: `Claim.strip : Claim.HalfPlane → Claim.Strip`, `Claim.zeta : Claim.HalfPlane → Claim.Zeta`,
   `Claim.zeta_iff : Claim.Zeta ↔ RiemannHypothesis`.
 
-## 4. Tier B (full build): RUNNING
+## 4. Tier B (full build): STOPPED AT 26%, NO ERRORS UP TO THAT POINT
 
 - Command: `lake build Main 2>&1 | tee build.log`, under `/usr/bin/time -v`, started 2026-11-20T17:08:50Z,
   restarted once at 17:11:47Z (see section 7).
+- **Stopped deliberately at 2026-11-20T20:56:21Z (SIGTERM, exit 143) on the user's decision.** By then other
+  people had published complete builds and kernel checks (section 8), so finishing this one would only have
+  repeated them; the remaining pod time went to the dependency analysis instead.
+- State at the stop: **45,097 of 175,187 project modules compiled (25.7%)**, wall time 3:44:34 for the second
+  run, 3126% CPU, 0 OOM kills (`memory.events`), container memory peak 75 GB (during the first 2.5 minutes of
+  the first run), largest single process 17.1 GB RSS.
 - Progress log (repo modules with an `.olean`, of 175,187):
 
   | UTC | modules | memory in use | disk |
@@ -103,35 +111,44 @@ def PrimitiveDirichletLZerosOnLine : Prop :=
   | 19:58 | 32,880 | 57 GB | 40 GB |
   | 20:47 | 43,168 | 60 GB | 45 GB |
 
-  Rate over the last hour about 3.5 modules/s, projecting completion around 07:20 UTC on 2026-11-21. `build.log` is empty (no warnings or errors printed so far),
-  0 OOM kills (`memory.events`), container memory peak 75 GB (during the first 2.5 minutes).
-- Final result, wall time, peak RSS, job count, first error (if any): **pending**.
-- Reproducibility check against an independent build (see section 8): on this build,
-  `sha256(src/Main.lean) = 017645ca448f2fd1f6fd5c4c2cb2c6e96e472725be13f6e180ca6e1574360939`,
-  `sha256(src/Statements.lean) = 79ef7ca776e42abe1f46caee13ea09bd19f1e2d0b1620d8d5d200258f33b47bf`, and the compiled
-  `sha256(Statements.olean) = f8e0aed3c2d69390b6dd3bb24e13aa25e043a02ca42f021e3f6e4ec8b57fd6b1`. All three equal the
-  values Andrew Sutherland posted for his build. `Main.olean` (his: `9146dfb4…96ad`) does not exist here yet.
+  Rate over the last hour about 3.5 modules/s; at that rate the build would have ended around 07:20 UTC on
+  2026-11-21.
+- **Errors and warnings.** `build.log` stayed at 0 bytes, but that is because Lake's output to the pipe was
+  never flushed before the stop, not because there was nothing to print. (Earlier interim versions of this log
+  read the empty file as "no warnings"; that was wrong.) The per-module `.trace` files are the real record:
+  45,080 traces read, **0 modules with an error, 25,569 modules with at least one warning**.
+- **Comparison with an independent build.** Andrew Sutherland published SHA-256 values for all his compiled
+  `.olean` files (`project-oleans.sha256`, section 8).
+  - Sources and the statements module agree:
+    `sha256(src/Main.lean) = 017645ca448f2fd1f6fd5c4c2cb2c6e96e472725be13f6e180ca6e1574360939`,
+    `sha256(src/Statements.lean) = 79ef7ca776e42abe1f46caee13ea09bd19f1e2d0b1620d8d5d200258f33b47bf`,
+    `sha256(Statements.olean) = f8e0aed3c2d69390b6dd3bb24e13aa25e043a02ca42f021e3f6e4ec8b57fd6b1`.
+  - Of the 45,097 `.olean` files built here, **20,895 are byte-identical to his and 24,202 differ**.
+    6,887 of the differing modules have all their in-repo imports identical, so the difference arises in
+    those modules themselves and then propagates.
+  - Three such modules were recompiled here with 32, 32, 1 and 8 threads; each time the output was
+    byte-identical to this build's first output. So each build is deterministic and the difference is
+    systematic. The cause was not established. One possibility, unconfirmed, is that his build invoked
+    `lean` directly rather than through `lake build`.
+  - Consequence: an export made from a Lake build like this one might not reproduce his export checksum
+    bit for bit even though both come from the same sources.
+- `Main.olean` was never produced here.
 
-## 5. Axioms of the five theorems in `Main.lean`: PENDING (needs Tier B to finish)
+## 5. Axioms of the five theorems in `Main.lean`: NOT RUN HERE
 
-## 6. Tier C (kernel replay): PENDING
+`#print axioms` on `Main` needs the full build. Not run. What this log does have first-hand:
 
-**Plan changed at 21:00 UTC** after reading the Lean Zulip thread and the community mirror's notes (section 8).
-Instead of per-module `leanchecker`, the plan after the build finishes is the protocol the Lean community is
-using, so results are directly comparable:
+- Tier A (section 3): the reduction layer depends on `[propext, Classical.choice, Quot.sound]`.
+- The kernel export published by Sutherland (61.57 GB, both checksums verified here, see
+  `DEPENDENCY-ANALYSIS.md`) declares exactly three axioms: `propext`, `Classical.choice`, `Quot.sound`.
+  That is a statement about that file. That the file corresponds to the published sources is his report,
+  not something verified here.
 
-1. `#print axioms` for the five theorems (section 5).
-2. Export the five theorems with `lean4export` (tag `v4.33.0`, built with Lean `v4.33.1`) and the export
-   targets of `Deicyde/riemann-hypothesis`; record size and SHA-256. An independent build reports
-   61,570,595,788 bytes, SHA-256 `5ea74b912147c5c93cc2b6d70cc727cf908df2f62ac6a20480a3fa02f6be244e`, about
-   1 h 20 min on one thread, peak 163 GB.
-3. Check the export with `nanoda_bin` from Lean `v4.36.0` (a second kernel implementation).
-4. If time remains before the spend cap: `lake comparator` (Lean `v4.36.0`) with a challenge export made by a
-   separate user from a clean clone, which compares statements, checks axioms, and runs Lean's kernel and the
-   hardened `leanchecker-paranoid`.
+## 6. Tier C (kernel replay): NOT RUN HERE
 
-Preparation done at 20:53 UTC, while the build runs, by a separate unprivileged user (`judge`) on the pod that
-has never compiled the submission's code:
+No kernel replay of the full project was run in this log. Others have run several (section 8).
+
+What was prepared on the pod, by a separate unprivileged user (`judge`) that never compiled the submission:
 
 - Toolchains installed with elan: Lean `v4.33.1` and Lean `v4.36.0`
   (commit `611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9`). The 4.36.0 toolchain bundles `nanoda_bin`,
@@ -141,23 +158,20 @@ has never compiled the submission's code:
 - `lean4export` at tag `v4.33.0` (`15f6055e299ad5b89345e533cc2192f4cc00f659`), built with Lean `v4.33.1`.
 - Challenge export: 350,862,311 bytes, 6,495,712 lines, 32 s, peak RSS 6.8 GB,
   **SHA-256 `bd484ac9886a96f26b1d9a7a59ebd45b7a70d102c015d4f31f9302bbdd6ab2b9`, equal to the value published in the
-  community mirror's README.**
+  community mirror's README.** So the five statements being checked by the community are reproduced here
+  from a clean Mathlib-only project.
 - `bubblewrap` does not work in this container ("No permissions to create new namespace"), and
-  `lake comparator` requires it. Step 4 will therefore have to run with `--inadvisably-no-sandbox` (as the
-  `judge` user on this disposable pod), or the checkers will be run directly on the export. Either way this
-  is a deviation from the community protocol and will be reported as such.
+  `lake comparator` requires it, so the comparator could only have run here with `--inadvisably-no-sandbox`.
 
 Earlier observations, kept for the record:
 
 - `github.com/leanprover/lean4checker` is deprecated; its newest tag is `v4.29.0-rc8`, there is none for v4.33.1.
-  The tool now ships in the toolchain as `leanchecker` (same v4.33.1 toolchain as the build); that is what is used.
+  The tool now ships in the toolchain as `leanchecker`.
 - Measured on the build pod: `lake env leanchecker <module>` takes about 15–20 s and about 6.3 GB RSS per module
   (13 early `Formalism` modules and `Statements`: all exit 0). At that cost a replay of all 175,187 modules needs
-  roughly 700+ core-hours, more than the budget for this run.
+  roughly 700+ core-hours.
 - In the Tier A container: `leanchecker` on `Statements`, `HalfPlane`, `ClaimStrip`, `RhOfRight`, one module per
   process: all exit 0. (All four in one process was OOM-killed at 13 GB in that 15 GB container: a resource failure.)
-- `--fresh` (replaying Mathlib and everything else into an empty environment): not run so far.
-- Second kernel (`nanoda_lib`, `lean4lean`): not attempted.
 
 ## 7. Surprising or noteworthy, stated factually
 
@@ -233,11 +247,29 @@ Source: the Lean Zulip thread "Discussion: Alpöge Proves the Riemann Hypothesis
   33 uses of `run_tac`. It reports all notation as `local` or `scoped`, consistent with the one `scoped`
   notation found here.
 - **Dead code.** Junyan Xu reports structures that are never inhabited (`GeneralHyps` and two relatives),
-  suggesting more theory was developed than the proof uses. Andrii Kurdiumov reports that
+  suggesting more theory was developed than the proof uses. Checked here: each is a `Prop` structure whose
+  fields are literature statements (177, 113 and more), none is referenced outside its own definition, and
+  none is in the dependency closure of `Main` (`DEPENDENCY-ANALYSIS.md`, section 4). Andrii Kurdiumov reports that
   `CompanionTheory/EightfoldTheory` contains only `import` statements.
 - **Module count.** 183,890 build jobs: 175,187 project modules plus 8,703 from dependencies.
 
+- **Later status (read at about 21:00 UTC, fetched from the pod).** Sutherland's page
+  `https://math.mit.edu/~drew/grh/` publishes the export, its checksums, his audit log and per-file `.olean`
+  hashes. His `audit.log` shows `#print axioms` for the theorems of `Main` giving
+  `[propext, Classical.choice, Quot.sound]`, and his `nanoda.log` shows exit status 0 after 27:42 with a peak
+  of 88.9 GB. A public live build at `http://106.14.11.164/` (128 vCPU) showed 153,726 jobs done, 0 failed and
+  384,140 warnings at 20:59 UTC, with its audit still pending.
+
+## 9. Cost and clean-up
+
+- Pod `m11vdyb9ph3zlx` was deployed at 2026-11-20T17:04:44Z and terminated at 21:42Z (4.6 hours). Account
+  balance went from $48.98 to $40.74: **$8.24 spent**, against the approved cap of $40. No pods remain.
+- The pod held no credentials of the user's. The untrusted code was compiled only by an unprivileged user
+  with an empty environment, and the pod no longer exists.
+
 ## Files
 
+- `DEPENDENCY-ANALYSIS.md` and `dependency-data/`: structure of the proof, from the published kernel export.
 - `tierA-child-session-report.md`: verbatim Tier A log.
-- `scripts/`: every script run on the build pod, plus `imports.py` (import-graph scan).
+- `scripts/`: every script run on the build pod, plus `imports.py` (import-graph scan) and the
+  dependency-analysis programs.

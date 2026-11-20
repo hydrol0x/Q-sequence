@@ -1,0 +1,476 @@
+== graph ==
+declaration nodes 1468418  constant names 1484733  edges 114115002
+nodes by kind (t=theorem d=def o=opaque A=axiom q=quot I=inductive block): {'I': 7969, 'q': 4, 'd': 214241, 't': 1246110, 'A': 3, 'o': 91}
+axioms in the export: ['Classical.choice', 'Quot.sound', 'propext']
+edges pointing to a later declaration (0 means file order is a topological order): 0
+nodes that are constants of `import Mathlib` (Mathlib, Batteries, Aesop, core, ...): 209514  project nodes: 1258904
+project nodes by kind: {'t': 1075031, 'd': 178305, 'I': 5568}
+sum of expression-DAG sizes: library 82275233  project 2502240476
+
+== closure of the targets ==
+targets found: ['riemannHypothesis', 'riemannZeta_eq_zero_re', 'LFunction_ne_zero_of_half_lt_re', 'LFunction_eq_zero_re', 'LFunction_eq_zero_re_of_isPrimitive']  missing: []
+nodes reachable from the five targets: 1468414 of 1468418  (project: 1258904  library: 209510 )
+nodes not reachable from the targets: 4 ['Nat.lor', 'Nat.xor', 'String.mk._proof_1', 'String.mk']
+  riemannHypothesis: closure 1468390 nodes, project 1258881; direct deps (project): ['rhOfAll']
+  riemannZeta_eq_zero_re: closure 1468392 nodes, project 1258883; direct deps (project): ['rhOfAll', 'RiemannZetaZerosOnLine']
+  LFunction_ne_zero_of_half_lt_re: closure 1468382 nodes, project 1258878; direct deps (project): ['allChi', 'DirichletLNonvanishingRightOfHalf']
+  LFunction_eq_zero_re: closure 1468395 nodes, project 1258889; direct deps (project): ['DirichletLZerosOnLine', 'Claim.Strip', 'Claim.Zeta', 'Claim.HalfPlane', 'claimAll']
+  LFunction_eq_zero_re_of_isPrimitive: closure 1468385 nodes, project 1258881; direct deps (project): ['PrimitiveDirichletLZerosOnLine', 'critAll']
+longest dependency chain: all nodes 449  counting project nodes only 195
+  riemannHypothesis: chain length 449, project-only 195
+  riemannZeta_eq_zero_re: chain length 449, project-only 195
+  LFunction_ne_zero_of_half_lt_re: chain length 448, project-only 194
+  LFunction_eq_zero_re: chain length 449, project-only 195
+  LFunction_eq_zero_re_of_isPrimitive: chain length 449, project-only 195
+shortest-path distance from riemannHypothesis (level, nodes, project nodes): [(1, 2, 1), (2, 34, 2), (3, 90, 3), (4, 579, 5), (5, 1120, 13), (6, 1606, 129), (7, 2909, 523), (8, 6259, 1805), (9, 14598, 6496), (10, 29082, 15934), (11, 44280, 26409), (12, 59498, 38729), (13, 72744, 51399), (14, 82332, 62418), (15, 89889, 71684), (16, 96780, 81371), (17, 100632, 87688), (18, 99525, 88837), (19, 95373, 86726), (20, 91736, 84862), (21, 86896, 81404), (22, 78716, 74451), (23, 70585, 67140), (24, 62258, 59707), (25, 52610, 50552), (26, 43115, 41339), (27, 35201, 33857), (28, 29381, 28372), (29, 23569, 22760), (30, 19858, 19152), (31, 15940, 15305), (32, 13296, 12915), (33, 10060, 9791), (34, 8518, 8309), (35, 6516, 6359), (36, 4972, 4862), (37, 4069, 3985), (38, 3069, 3013), (39, 2278, 2252), (40, 1658, 1640), (41, 1230, 1221), (42, 1163, 1130), (43, 1050, 1039), (44, 1106, 1094), (45, 839, 835), (46, 590, 589), (47, 384, 382), (48, 211, 210), (49, 80, 79), (50, 55, 54), (51, 44, 44), (52, 4, 4), (53, 0, 0)]
+
+== most referenced project declarations (direct references) ==
+    155523  Formalism.BasicNotions.D7
+    149166  Formalism.BasicNotions.D7.R
+    122261  Formalism.BasicNotions.D7.host
+    121592  Formalism.BasicNotions.Ranks.toFrame
+    119641  Formalism.HC.HostAx.toHostRaw
+    119424  Formalism.BasicNotions.Host.toHostAx
+    118002  Formalism.HC.HostRaw.instField
+    117835  Formalism.HC.HostRaw.E
+     71915  Formalism.HC.HostRaw.instNF
+     68989  Formalism.HC.HostRaw.F
+     66324  Formalism.BasicNotions.D7.what₂
+     64379  Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.AF
+     55368  ReciprocityTheory.ChartRestriction.G.Geo.Tor.Sp
+     51035  Formalism.BasicNotions.Host.cmStar
+     42770  Formalism.BasicNotions.HSpace.rank
+     41342  Formalism.BasicNotions.Ranks.m
+     41302  Formalism.BasicNotions.TH.HSp._proof_1
+     36276  Formalism.BasicNotions.Rows.Data.Tau
+     32539  Formalism.BasicNotions.TH.HSp
+     29364  Formalism.L2.Theta.IsDsig._proof_2
+     28520  Formalism.L2.Theta.AE
+     28128  ReciprocityTheory.ChartRestriction.G.Geo.Tor.Host
+     28108  Formalism.BasicNotions.CMData.sig
+     27433  Formalism.L2.Theta.IsVolMeasG._proof_2
+     27433  Formalism.L2.Theta.IsVolMeasG._proof_1
+     27187  Formalism.L2.Theta.IsVolMeasG._proof_3
+     25564  Formalism.L2.Theta.GA
+     24814  Formalism.BasicNotions.Rows.Data.LL
+     24808  Formalism.BasicNotions.Rows.Data.instLL
+     24154  Formalism.BasicNotions.HSpace.gram
+     23564  Formalism.MainNotions.GlobalTheoryTheory.GenusMassVolumes.instGroupHA
+     22119  ReciprocityTheory.ChartRestriction.G.Geo.Tor.spMap
+     21932  Formalism.BasicNotions.D7.nfLL
+     21715  Formalism.BasicNotions.D7.starLL
+     21068  ReciprocityTheory.ChartRestriction.G.Semi.LB.ι
+     20866  ReciprocityTheory.ChartRestriction.G.Geo.Tor.Datum
+     20596  ReciprocityTheory.ChartRestriction.G.Geo.Tor.Coeff.F
+     19839  Formalism.BasicNotions.Rows.Data.Word
+     19622  ReciprocityTheory.ChartRestriction.G.Semi.LB
+     19604  Formalism.L2.Theta.GA._proof_1
+
+== largest project declarations by expression-DAG size ==
+     5538412  t  GlobalTheory.HeightCounting.SideCopy.LamCopy.lam_copy
+     4598434  t  GlobalTheory.HeightCounting.SideCopy.sigSpan_copy
+     2508714  t  GlobalTheory.TwistChoice.goodTw_transfer
+     2328008  t  GlobalTheory.TwistChoice.fullRk_basisOf_transfer
+     2306055  t  GlobalTheory.TwInputs.Move.heckeTie_of_same
+     2167689  t  Formalism.FourierDecayAlt.P.EtaleIntegralityFacts.Lim.ampLimit
+     2134646  t  GlobalTheory.TwistChoice.same_basic
+     2034860  t  GlobalTheory.HeightCounting.Up.SymmetryOfAgreementRelations.move_xd
+     1526443  t  Formalism.FourierDecayAlt.P.EtaleIntegralityFacts.Lim.diff_key
+     1455722  t  GlobalTheory.HeightCounting.Up.ListCarry.listPin_copy
+     1407062  t  Formalism.L2.SG.Pf.CarrierXAll.ac_le
+     1183383  t  GlobalTheory.HeightCounting.Rigid.transfer
+      982901  t  GlobalTheory.Mem.Top.Bl.bwit_cf_eq_alt
+      981513  t  GlobalTheory.AddLaw.diagX_mul_negAddY
+      977736  t  GlobalTheory.Div.PgTie.pgEq_of_linked_alt
+      963898  t  GlobalTheory.TwInputs.Move.SetupRel.good_of
+      962826  t  GlobalTheory.Mem.R3.Rw.EqvMove.equivAll_enl
+      950423  t  GlobalTheory.Mem.R3.SelectionPairing.sp_pin
+      894294  t  GlobalTheory.Mem.R3.SelRowPin.selected_lower_map_third_stage_alt
+      881125  t  GlobalTheory.Mem.R3.twArgs_lev
+      879531  t  GlobalTheory.TopVal.datVal_twArgs
+      867596  t  GlobalTheory.Mem.R3.SelectionPairing.see_pin
+      864051  t  _private.Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.ParameterOfDiscreteSeriesRay.0.logLam_twArgs_pz
+      854758  t  GlobalTheory.Mem.R3.SelRealIn.exists_ratDat_nExpRealS
+      853991  t  GlobalTheory.TopVal.Inj.eq_zero_twArgs
+      853806  t  GlobalTheory.TopVal.TwSet.lev_twArgs
+      849464  t  GlobalTheory.Fam.BaseLevel.pairDataBaseTupleLevel_eq_classLevel_of_stdF
+      830337  t  PositivityTheory.Rg.BcB.F.BC.limAtOf_holds
+      830305  t  GlobalTheory.Mem.R3.SelectionPairing.zsc_pin
+      814282  t  GlobalTheory.TopVal.LevTw.levRead_twArgs
+
+== library constants in the closure, by module area ==
+ depth 1: Mathlib 199979, Init 9284, Batteries 238, Std 9, Aesop 3, Lean 1
+ depth 2: Mathlib.Algebra 39935, Mathlib.RingTheory 23925, Mathlib.Analysis 21383, Mathlib.CategoryTheory 18957, Mathlib.Topology 18427, Mathlib.Data 16045, Mathlib.Order 10137, Mathlib.LinearAlgebra 9872, Mathlib.MeasureTheory 8866, Mathlib.NumberTheory 7444, Mathlib.AlgebraicGeometry 6665, Init.Data 5780, Mathlib.GroupTheory 5063, Mathlib.FieldTheory 3243, Mathlib.Logic 2277, Mathlib.RepresentationTheory 1965, Init.Grind 1552, Mathlib.Geometry 1377, Mathlib.SetTheory 1231, Mathlib.Combinatorics 997, Mathlib.AlgebraicTopology 716, Mathlib.Tactic 675, Mathlib.Probability 609, Init.Prelude 593, Init.Core 415, Init.PropLemmas 247, Init.Omega 246, Batteries.Data 194, Mathlib.Dynamics 152, Init.SimpLemmas 145, Init.GrindInstances 75, Init.WF 56, Init.GetElem 54, Init.Classical 49, Init.Control 34, Batteries.Logic 23, Batteries.Classes 18, Mathlib.Lean 12, Init.SizeOf 11, Init.Ext 9, Init.ByCases 6, Std.Do 5, Std.Tactic 4, Mathlib.Control 4, Init.Coe 4, Aesop.BuiltinRules 3, Init.Util 2, Init.LawfulBEqTactics 2, Batteries.Control 2, Init.WFComputable 2, Init.Tactics 1, Init.BinderNameHint 1, Batteries.Tactic 1, Lean.Meta 1, Mathlib.ModelTheory 1, Mathlib.Condensed 1
+ Mathlib depth 3 (top 80): Mathlib.Algebra.Group 7187, Mathlib.CategoryTheory.Limits 5429, Mathlib.Topology.Algebra 5376, Mathlib.Algebra.Homology 4846, Mathlib.Analysis.Normed 4767, Mathlib.Algebra.Order 4653, Mathlib.Algebra.Category 3411, Mathlib.Analysis.Calculus 3274, Mathlib.Algebra.Module 3029, Mathlib.Analysis.SpecialFunctions 2798, Mathlib.Algebra.Polynomial 2535, Mathlib.MeasureTheory.Measure 2513, Mathlib.Data.Set 2468, Mathlib.Algebra.Ring 2399, Mathlib.LinearAlgebra.Matrix 2261, Mathlib.Order.Filter 2254, Mathlib.RingTheory.Ideal 2187, Mathlib.CategoryTheory.Sites 2020, Mathlib.NumberTheory.NumberField 2008, Mathlib.Algebra.Algebra 1964, Mathlib.Data.Finset 1954, Mathlib.MeasureTheory.Function 1895, Mathlib.MeasureTheory.Integral 1760, Mathlib.Data.Nat 1617, Mathlib.Analysis.InnerProductSpace 1565, Mathlib.CategoryTheory.Monoidal 1537, Mathlib.Algebra.GroupWithZero 1496, Mathlib.Topology.MetricSpace 1456, Mathlib.Topology.ContinuousMap 1437, Mathlib.Analysis.CStarAlgebra 1433, Mathlib.Analysis.Complex 1370, Mathlib.Algebra.BigOperators 1326, Mathlib.NumberTheory.ModularForms 1229, Mathlib.RingTheory.Polynomial 1196, Mathlib.Logic.Equiv 1186, Mathlib.RingTheory.Valuation 1182, Mathlib.AlgebraicGeometry.Morphisms 1145, Mathlib.Topology.UniformSpace 1119, Mathlib.RingTheory.Localization 1066, Mathlib.AlgebraicGeometry.EllipticCurve 1062, Mathlib.LinearAlgebra.TensorProduct 1026, Mathlib.Analysis.Analytic 997, Mathlib.Topology.Order 966, Mathlib.RingTheory.DedekindDomain 965, Mathlib.Data.List 945, Mathlib.NumberTheory.Padics 941, Mathlib.Order.Interval 935, Mathlib.Data.Multiset 927, Mathlib.SetTheory.Cardinal 899, Mathlib.Data.Finsupp 888, Mathlib.Algebra.MvPolynomial 881, Mathlib.RingTheory.MvPowerSeries 841, Mathlib.GroupTheory.Perm 840, Mathlib.Algebra.MonoidAlgebra 837, Mathlib.RingTheory.Extension 834, Mathlib.Geometry.Manifold 797, Mathlib.Analysis.BoxIntegral 752, Mathlib.Data.Matrix 750, Mathlib.CategoryTheory.Triangulated 747, Mathlib.NumberTheory.LSeries 741, Mathlib.Algebra.Star 739, Mathlib.Data.ENNReal 738, Mathlib.GroupTheory.GroupAction 720, Mathlib.RepresentationTheory.Homological 718, Mathlib.CategoryTheory.Abelian 683, Mathlib.CategoryTheory.MorphismProperty 671, Mathlib.CategoryTheory.Localization 667, Mathlib.RingTheory.HahnSeries 653, Mathlib.MeasureTheory.Group 651, Mathlib.RingTheory.Spectrum 651, Mathlib.RingTheory.PowerSeries 637, Mathlib.Data.Fintype 629, Mathlib.MeasureTheory.Constructions 628, Mathlib.RingTheory.WittVector 622, Mathlib.MeasureTheory.MeasurableSpace 619, Mathlib.Data.Fin 617, Mathlib.CategoryTheory.Functor 615, Mathlib.Analysis.Distribution 609, Mathlib.CategoryTheory.Comma 601, Mathlib.RingTheory.TensorProduct 600
+ library modules with at least one constant in the closure: 5254 of 10127  (Mathlib.* only: 5081 of 8173 )
+
+== attribution of project declarations to source files ==
+source files 175187  source lines 17374215  declarations indexed in source 1061531  distinct names 1052886
+attribution method counts: {'prefix': 423218, 'exact': 743971, 'private-module': 82799, 'none': 8725, 'exact-ambiguous': 166, 'prefix-ambiguous': 25}
+unattributed project nodes: 8725  examples: ['PadicComplexInt.eq_1', 'Reformulated.AutPerF.instIsUnitBallPadicComplexPadicComplexInt', 'Reformulated.AutPerF.instFactLtRealNormPadicComplexCastOfNat_development', 'Reformulated.AutPerF.instIsIsometricSMulAlgEquivPadicAlgClOfIsScalarTowerPadic_development', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_1', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_3', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_4', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_6', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_7', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_8', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_10', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_11', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_12', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_14', 'GlobalTheory.Pst.instAddCommGroupDpstUr._aux_16', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_18', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_19', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_20', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_21', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_22', 'GlobalTheory.Pst.instAddCommGroupDpstUr._proof_23', 'GlobalTheory.Pst.instAddCommGroupDpstUr', 'GlobalTheory.Pst.instModuleSubtypeOmMemIntermediateFieldPadicMaximalUnramifiedExtensionDpstUr', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_1', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_3', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_4', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_6', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_7', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_8', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_10', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_11', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_12', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_14', 'GlobalTheory.Pst.instAddCommGroupLetter._aux_16', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_18', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_19', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_20', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_21', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_22', 'GlobalTheory.Pst.instAddCommGroupLetter._proof_23', 'GlobalTheory.Pst.instAddCommGroupLetter', 'GlobalTheory.Pst.instModuleLetter._aux_1', 'GlobalTheory.Pst.instModuleLetter._proof_3', 'GlobalTheory.Pst.instModuleLetter._proof_4', 'GlobalTheory.Pst.instModuleLetter._proof_5', 'GlobalTheory.Pst.instModuleLetter._proof_6', 'GlobalTheory.Pst.instModuleLetter._proof_7', 'GlobalTheory.Pst.instModuleLetter._proof_8', 'GlobalTheory.Pst.instModuleLetter', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_1', 'Formalism.GaloisCohomology.instAddCommGroupQZ._proof_3', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_4', 'Formalism.GaloisCohomology.instAddCommGroupQZ._proof_6', 'Formalism.GaloisCohomology.instAddCommGroupQZ._proof_7', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_8', 'Formalism.GaloisCohomology.instAddCommGroupQZ._proof_10', 'Formalism.GaloisCohomology.instAddCommGroupQZ._proof_11', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_12', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_14', 'Formalism.GaloisCohomology.instAddCommGroupQZ._aux_16']
+unattributed by leading name components: [('GroundTheory.Heights₂', 559), ('GlobalTheory.CompanionTheory', 519), ('UpperTheory.Reformulated', 432), ('Formalism.MainNotions', 324), ('GlobalTheory.IndefiniteRowSideFullHecke', 291), ('UpperTheory.V', 291), ('ReciprocityTheory.ChartRestriction', 283), ('Formalism.L2', 282), ('Formalism.FourierDecayAlt', 160), ('GroundTheory.Automorphic', 148), ('GlobalTheory.BSP', 127), ('GlobalTheory.Mem', 125), ('CrystallineSemistableComparison.Pb', 118), ('GlobalTheory.ConjMult', 111), ('GlobalTheory.SmoothForms', 108), ('Formalism.BasicNotions', 107), ('GroundTheory.Global', 104), ('GlobalTheory.Mum', 103), ('GlobalTheory.KeyOriginBC', 98), ('GlobalTheory.EtC', 96), ('GlobalTheory.CechDR', 90), ('Formalism.IndefR', 88), ('GlobalTheory.Ord2', 86), ('LateralTheory.E', 78), ('GlobalTheory.Col', 77), ('GroundTheory.ProfCoh', 74), ('GroundTheory.Arith', 71), ('GlobalTheory.HolDict', 63), ('GlobalTheory.FieldBaseChange', 63), ('GlobalTheory.GeoTie', 58), ('Formalism.NG', 57), ('GlobalTheory.DI', 56), ('GlobalTheory.K5', 56), ('GlobalTheory.CotUniv', 55), ('GlobalTheory.HeightCounting', 55), ('GlobalTheory.LiftSys', 54), ('GlobalTheory.CatCoh', 52), ('UpperTheory.Gal', 48), ('PositivityTheory.ThKR', 46), ('GlobalTheory.Pst', 45)]
+source-indexed names present in the export (exact name match): 744138 of 1052886 (70.7%)
+source files with at least one declaration in the closure: 146232 of 175187 (83.5%)  lines in those files: 14996447 of 17374215 (86.3%)
+
+-- by directory, depth 1 (dir: files used/total, lines in used files/total, declarations in closure/indexed) --
+  Development: files 118948/141928 (84%), lines 10553156/12232663 (86%), decls 491723/693010 (71%)
+  Formalism: files 14898/18254 (82%), lines 2800542/3200748 (87%), decls 162566/240188 (68%)
+  GroundTheory: files 6552/8507 (77%), lines 880377/1119138 (79%), decls 47890/75102 (64%)
+  ReciprocityTheory: files 3449/3845 (90%), lines 525269/563016 (93%), decls 28562/36446 (78%)
+  CompanionTheory: files 1882/2027 (93%), lines 185609/194218 (96%), decls 10496/11775 (89%)
+  PositivityTheory: files 342/449 (76%), lines 42659/55130 (77%), decls 2908/4746 (61%)
+  Lemmata: files 158/167 (95%), lines 8791/9232 (95%), decls 161/251 (64%)
+  (root): files 2/2 (100%), lines 28/28 (100%), decls 9/9 (100%)
+  Supplements: files 1/3 (33%), lines 16/22 (73%), decls 4/4 (100%)
+  BuildAid: files 0/5 (0%), lines 0/20 (0%), decls 0/0 (0%)
+
+-- by directory, depth 2 (dir: files used/total, lines in used files/total, declarations in closure/indexed) --
+  Development/AbelianVarietyTheory: files 79784/99187 (80%), lines 6789124/8142960 (83%), decls 328873/457043 (72%)
+  Development/AutomorphicArithmetic: files 16919/18431 (92%), lines 1629208/1776375 (92%), decls 41603/91512 (45%)
+  Development/AutomorphicSpectrum: files 13605/15147 (90%), lines 1061637/1195844 (89%), decls 56845/69259 (82%)
+  Formalism/LocalToGlobal: files 4727/5501 (86%), lines 863523/955843 (90%), decls 51170/73288 (70%)
+  Development/WeilBound: files 6716/7051 (95%), lines 819867/848547 (97%), decls 49918/55463 (90%)
+  Formalism/SharpRestriction: files 2694/3093 (87%), lines 649094/709436 (91%), decls 34791/54700 (64%)
+  GroundTheory/HeightsAndTheta: files 4807/6410 (75%), lines 485710/641322 (76%), decls 22356/37829 (59%)
+  Formalism/HermitianCurvature: files 1781/1922 (93%), lines 438858/460802 (95%), decls 28551/35958 (79%)
+  Formalism/PeriodIntegrals: files 3331/4350 (77%), lines 366615/451856 (81%), decls 23710/32699 (73%)
+  ReciprocityTheory/ReductiveGroups: files 2617/2799 (93%), lines 396044/409976 (97%), decls 21819/26331 (83%)
+  GroundTheory/AutomorphicForms: files 466/542 (86%), lines 135323/150005 (90%), decls 8046/10968 (73%)
+  Development/ResolutionOfSingularities: files 499/499 (100%), lines 140709/140709 (100%), decls 4603/8050 (57%)
+  CompanionTheory/SpectralGeometry: files 1217/1254 (97%), lines 104628/105437 (99%), decls 5672/5870 (97%)
+  Development/EtaleCohomology: files 1302/1398 (93%), lines 98930/104525 (95%), decls 9170/10302 (89%)
+  GroundTheory/ProfiniteCohomology: files 443/450 (98%), lines 84242/84902 (99%), decls 5478/6262 (87%)
+  Formalism/GL3MeanSquares: files 353/440 (80%), lines 63405/78320 (81%), decls 2415/4153 (58%)
+  GroundTheory/GlobalFields: files 351/384 (91%), lines 66659/72305 (92%), decls 4787/5830 (82%)
+  GroundTheory/PAdicHodge: files 97/226 (43%), lines 25560/64317 (40%), decls 1708/5360 (32%)
+  PositivityTheory/AutomorphicForms: files 340/445 (76%), lines 42501/54970 (77%), decls 2903/4741 (61%)
+  Formalism/ThetaLogCoordinates: files 203/292 (70%), lines 46214/54555 (85%), decls 2838/4209 (67%)
+  CompanionTheory/AutomorphicTheory: files 400/457 (88%), lines 45670/47957 (95%), decls 2427/2806 (86%)
+  GroundTheory/ArithmeticGeometry: files 163/218 (75%), lines 32366/45046 (72%), decls 2245/3770 (60%)
+  GroundTheory/LocalFields: files 133/159 (84%), lines 35227/40767 (86%), decls 2349/3256 (72%)
+  Formalism/WachLatticeTwists: files 105/262 (40%), lines 15450/38367 (40%), decls 498/1582 (31%)
+  ReciprocityTheory/AnalyticForms: files 144/192 (75%), lines 28546/36680 (78%), decls 1407/2328 (60%)
+  Formalism/LocalRingCardinality: files 98/173 (57%), lines 22409/35348 (63%), decls 1653/3323 (50%)
+  ReciprocityTheory/L2DbarEstimates: files 158/227 (70%), lines 26159/33734 (78%), decls 1055/1877 (56%)
+  Formalism/FlagUnipotentLattices: files 35/77 (45%), lines 24525/31383 (78%), decls 766/2449 (31%)
+  Formalism/PieriBlockIdeals: files 84/98 (86%), lines 28186/29254 (96%), decls 1711/2560 (67%)
+  Formalism/SizeWindowBrackets: files 29/64 (45%), lines 14558/28345 (51%), decls 604/2268 (27%)
+  ReciprocityTheory/DualLattices: files 172/183 (94%), lines 24046/24554 (98%), decls 1108/1489 (74%)
+  Development/DiscreteGroups: files 123/215 (57%), lines 13681/23703 (58%), decls 711/1381 (51%)
+  CompanionTheory/HarishChandraModules: files 113/130 (87%), lines 18738/20874 (90%), decls 1180/1481 (80%)
+  Formalism/AdmissibleDesigns: files 91/93 (98%), lines 20361/20476 (99%), decls 1337/1481 (90%)
+  Formalism/MahlerMeasure: files 46/54 (85%), lines 16687/16821 (99%), decls 1172/1318 (89%)
+  CompanionTheory/RealGroups: files 137/155 (88%), lines 13948/15797 (88%), decls 1003/1217 (82%)
+  Formalism/PadicSubsetSums: files 56/82 (68%), lines 12754/15796 (81%), decls 411/1160 (35%)
+  Formalism/PolynomialDimension: files 32/41 (78%), lines 13483/15760 (86%), decls 724/1048 (69%)
+  Formalism/QuotientMetricDivisors: files 60/63 (95%), lines 15044/15247 (99%), decls 585/845 (69%)
+  Formalism/SatakeDualWeyl: files 79/85 (93%), lines 14164/14777 (96%), decls 840/1079 (78%)
+  ReciprocityTheory/SemistableReduction: files 114/119 (96%), lines 14050/14578 (96%), decls 774/892 (87%)
+  Formalism/DistinguishedUnitIdeals: files 42/44 (95%), lines 14160/14285 (99%), decls 916/1046 (88%)
+  Formalism/GaussJetBounds: files 55/90 (61%), lines 9212/13581 (68%), decls 451/747 (60%)
+  ReciprocityTheory/ClassFieldTheory: files 88/91 (97%), lines 11642/11830 (98%), decls 990/1084 (91%)
+  Formalism/RealPlaceAnalysis: files 49/54 (91%), lines 10204/10653 (96%), decls 866/1058 (82%)
+  Formalism/HarderNarasimhan: files 38/43 (88%), lines 9484/10412 (91%), decls 377/474 (80%)
+  Formalism/EllipticTorsion: files 23/48 (48%), lines 5888/8816 (67%), decls 358/647 (55%)
+  GroundTheory/TateCohomology: files 50/56 (89%), lines 8101/8755 (93%), decls 616/807 (76%)
+  ReciprocityTheory/GroupCohomology: files 44/56 (79%), lines 7339/8227 (89%), decls 469/672 (70%)
+  Formalism/GradedWeylDivisibility: files 102/103 (99%), lines 8079/8125 (99%), decls 541/636 (85%)
+  Formalism/BranchSandwichDivisors: files 14/22 (64%), lines 6188/7889 (78%), decls 404/531 (76%)
+  Formalism/FrobeniusOrbits: files 26/32 (81%), lines 7202/7736 (93%), decls 325/442 (74%)
+  Formalism/CharacterColumnKernels: files 42/54 (78%), lines 6727/7550 (89%), decls 250/428 (58%)
+  Formalism/HermitianLattices: files 36/43 (84%), lines 6662/7418 (90%), decls 272/404 (67%)
+  Formalism/SubspaceCounting: files 12/32 (38%), lines 2766/7069 (39%), decls 96/447 (21%)
+  Formalism/LandauZeroFreeBounds: files 57/58 (98%), lines 6471/6579 (98%), decls 277/300 (92%)
+  Formalism/FormalDegreeBessel: files 27/31 (87%), lines 5315/5655 (94%), decls 391/562 (70%)
+  ReciprocityTheory/GeometryOfNumbers: files 28/39 (72%), lines 3977/5256 (76%), decls 206/330 (62%)
+  GroundTheory/Brauer: files 7/20 (35%), lines 1312/4723 (28%), decls 36/455 (8%)
+  ReciprocityTheory/NeutralLocalFields: files 18/20 (90%), lines 4585/4711 (97%), decls 198/448 (44%)
+  Formalism/MirabolicMackeyTheory: files 22/26 (85%), lines 4335/4636 (94%), decls 180/297 (61%)
+  Formalism/UnipotentAdelicQuotients: files 38/44 (86%), lines 4441/4570 (97%), decls 288/403 (71%)
+  ReciprocityTheory/Chebotarev: files 2/47 (4%), lines 307/4382 (7%), decls 11/273 (4%)
+  CompanionTheory/ThickeningEstimates: files 15/22 (68%), lines 2625/4144 (63%), decls 214/401 (53%)
+  Formalism/FilteredPoleLength: files 27/36 (75%), lines 3432/4117 (83%), decls 77/231 (33%)
+  Formalism/LogVandermondeBounds: files 15/26 (58%), lines 2190/3995 (55%), decls 72/252 (29%)
+  GroundTheory/FunctionField: files 10/12 (83%), lines 2913/3849 (76%), decls 174/317 (55%)
+  Formalism/IncomingBounds: files 15/21 (71%), lines 2521/3742 (67%), decls 100/299 (33%)
+  Formalism/TruncatedSeriesCounting: files 35/39 (90%), lines 3231/3676 (88%), decls 114/182 (63%)
+  Formalism/CyclotomicNorms: files 7/21 (33%), lines 1467/3643 (40%), decls 68/229 (30%)
+
+-- by directory, depth 3 (dir: files used/total, lines in used files/total, declarations in closure/indexed) --
+  Development/AbelianVarietyTheory/Proofs: files 77117/95418 (81%), lines 6244086/7436698 (84%), decls 289784/374269 (77%)
+  Development/AutomorphicSpectrum/Proofs: files 13396/14864 (90%), lines 1037391/1163468 (89%), decls 55270/65586 (84%)
+  Development/AutomorphicArithmetic/AutomorphicVarieties: files 7316/7959 (92%), lines 784117/848614 (92%), decls 18056/44773 (40%)
+  GroundTheory/HeightsAndTheta/Heights: files 4790/6348 (75%), lines 480662/626821 (77%), decls 22177/36383 (61%)
+  Development/AbelianVarietyTheory/Definitions: files 1722/2198 (78%), lines 416346/508569 (82%), decls 31757/61258 (52%)
+  Development/WeilBound/CoreStatements: files 3532/3746 (94%), lines 434938/455457 (95%), decls 24461/27894 (88%)
+  Formalism/HermitianCurvature/HermitianCurvatureProofs: files 1718/1854 (93%), lines 415538/437211 (95%), decls 25794/30889 (84%)
+  Formalism/PeriodIntegrals/UnitaryGroupMassFormula: files 2803/3615 (78%), lines 350090/430489 (81%), decls 21879/29791 (73%)
+  Development/AutomorphicArithmetic/Foundations: files 4299/4413 (97%), lines 408893/419572 (97%), decls 12495/25217 (50%)
+  Formalism/LocalToGlobal/SiegelLatticeTheory: files 1959/2085 (94%), lines 327279/339004 (97%), decls 19822/22786 (87%)
+  Development/WeilBound/RepresentationTheoryGL: files 2405/2486 (97%), lines 268098/274147 (98%), decls 17961/19647 (91%)
+  ReciprocityTheory/ReductiveGroups/ArithmeticGeometry: files 1489/1623 (92%), lines 227762/239112 (95%), decls 11698/14899 (79%)
+  Formalism/SharpRestriction/GrowthBounds: files 1174/1210 (97%), lines 229001/231225 (99%), decls 14543/16141 (90%)
+  Development/AutomorphicArithmetic/ThetaCorrespondence: files 3070/3201 (96%), lines 169581/178983 (95%), decls 5794/6610 (88%)
+  Formalism/SharpRestriction/LevelLetterCocycles: files 727/758 (96%), lines 168381/170849 (99%), decls 8677/10809 (80%)
+  ReciprocityTheory/ReductiveGroups/DiscreteSeries: files 984/1021 (96%), lines 151795/154332 (98%), decls 9077/10329 (88%)
+  Development/ResolutionOfSingularities/EmbeddedResolution: files 477/477 (100%), lines 135525/135525 (100%), decls 4355/7561 (58%)
+  Formalism/SharpRestriction/CuspSpanNormBounds: files 265/399 (66%), lines 112330/132978 (84%), decls 4568/11167 (41%)
+  Development/AutomorphicArithmetic/IntegralCasts: files 749/907 (83%), lines 114564/123617 (93%), decls 1863/4134 (45%)
+  Development/WeilBound/ThetaLifts: files 764/788 (97%), lines 115377/115848 (100%), decls 7415/7677 (97%)
+  CompanionTheory/SpectralGeometry/LocalGlobalProofs: files 1213/1250 (97%), lines 104081/104890 (99%), decls 5598/5787 (97%)
+  Development/AbelianVarietyTheory/BlockTheory: files 426/753 (57%), lines 58934/104027 (57%), decls 3753/14148 (27%)
+  Formalism/LocalToGlobal/Columns: files 241/376 (64%), lines 75883/95905 (79%), decls 3818/7837 (49%)
+  Formalism/LocalToGlobal/IndefiniteReal: files 344/435 (79%), lines 67118/78821 (85%), decls 4018/7020 (57%)
+  Formalism/LocalToGlobal/TorsionIntegrality: files 423/489 (87%), lines 63366/70444 (90%), decls 4747/6058 (78%)
+  Formalism/LocalToGlobal/GlobalTheory: files 286/389 (74%), lines 53222/69295 (77%), decls 2580/4870 (53%)
+  GroundTheory/PAdicHodge: files 97/226 (43%), lines 25560/64317 (40%), decls 1708/5360 (32%)
+  Formalism/SharpRestriction/Divisibility: files 222/274 (81%), lines 51008/63162 (81%), decls 2212/5890 (38%)
+  GroundTheory/AutomorphicForms: files 190/217 (88%), lines 56336/61033 (92%), decls 3522/4552 (77%)
+  Development/AbelianVarietyTheory/PublishedTheorems: files 290/493 (59%), lines 41518/56194 (74%), decls 2280/4394 (52%)
+  PositivityTheory/AutomorphicForms/PublishedInputs: files 340/445 (76%), lines 42501/54970 (77%), decls 2903/4741 (61%)
+  Formalism/GL3MeanSquares/GenusMeanAsymptotics: files 311/343 (91%), lines 49714/52963 (94%), decls 2256/2626 (86%)
+  Development/EtaleCohomology/EtaleSheaves: files 622/688 (90%), lines 47644/51640 (92%), decls 4199/4784 (88%)
+  Development/AutomorphicArithmetic/CommutativeAlgebra: files 407/432 (94%), lines 46343/48495 (96%), decls 1122/3357 (33%)
+  Formalism/LocalToGlobal/KernelLattices: files 139/162 (86%), lines 45808/48309 (95%), decls 2665/4200 (63%)
+  Formalism/SharpRestriction/GlobalSchurBounds: files 122/158 (77%), lines 44002/48032 (92%), decls 2145/4737 (45%)
+  Development/AutomorphicArithmetic/DivisorFrames: files 82/383 (21%), lines 9517/44504 (21%), decls 82/1721 (5%)
+  Formalism/LocalToGlobal/ProjectiveLattices: files 279/325 (86%), lines 39274/43028 (91%), decls 2489/3471 (72%)
+  Formalism/LocalToGlobal/CharacterGerms: files 209/238 (88%), lines 38558/40069 (96%), decls 2021/2835 (71%)
+  Formalism/LocalToGlobal/Divisibility: files 80/96 (83%), lines 30365/31447 (97%), decls 1620/2778 (58%)
+  GroundTheory/LocalFields: files 101/126 (80%), lines 26149/31385 (83%), decls 1761/2539 (69%)
+  Formalism/LocalToGlobal/GroupLattices: files 204/229 (89%), lines 29383/31001 (95%), decls 2068/2552 (81%)
+  Formalism/LocalToGlobal/InertKernelTheory: files 140/149 (94%), lines 28835/29697 (97%), decls 1727/2103 (82%)
+  GroundTheory/AutomorphicForms/GL2: files 82/84 (98%), lines 28545/28688 (100%), decls 1460/1756 (83%)
+  Formalism/SharpRestriction/GenusPolyhedralBounds: files 66/88 (75%), lines 22463/27878 (81%), decls 1214/2325 (52%)
+  Development/AutomorphicSpectrum/Definitions: files 149/197 (76%), lines 20006/26238 (76%), decls 1402/3209 (44%)
+  ReciprocityTheory/DualLattices: files 172/183 (94%), lines 24046/24554 (98%), decls 1108/1489 (74%)
+  GroundTheory/ArithmeticGeometry/SchemeCohomology: files 117/137 (85%), lines 20530/24220 (85%), decls 1625/2089 (78%)
+  Formalism/FlagUnipotentLattices/MinkowskiFactorialBounds: files 19/35 (54%), lines 20098/24074 (83%), decls 495/1116 (44%)
+  Formalism/HermitianCurvature: files 63/68 (93%), lines 23320/23591 (99%), decls 2757/5069 (54%)
+  Formalism/LocalRingCardinality/SpanPowerMembership: files 44/119 (37%), lines 10366/23305 (44%), decls 687/2002 (34%)
+  Formalism/PieriBlockIdeals/PieriColumnMinors: files 54/59 (92%), lines 22122/22358 (99%), decls 1171/1541 (76%)
+  Development/AbelianVarietyTheory/Counterexamples: files 143/192 (74%), lines 15914/20580 (77%), decls 566/1474 (38%)
+  GroundTheory/ProfiniteCohomology/RestrictedRamification: files 91/92 (99%), lines 20453/20499 (100%), decls 1349/1452 (93%)
+  Formalism/AdmissibleDesigns: files 91/93 (98%), lines 20361/20476 (99%), decls 1337/1481 (90%)
+  GroundTheory/GlobalFields/ComplexMultiplication: files 96/98 (98%), lines 20187/20251 (100%), decls 1305/1447 (90%)
+  Formalism/GL3MeanSquares/HookFormulaTorsion: files 28/66 (42%), lines 10197/20059 (51%), decls 89/823 (11%)
+  Formalism/SizeWindowBrackets/ChainSlopeWindows: files 14/32 (44%), lines 10814/19409 (56%), decls 365/1135 (32%)
+  Development/DiscreteGroups/GlobalIrreducibility: files 89/174 (51%), lines 10363/19364 (54%), decls 567/1143 (50%)
+  Development/AutomorphicArithmetic/CyclotomicBounds: files 195/246 (79%), lines 15474/19292 (80%), decls 401/1096 (37%)
+  Formalism/LocalToGlobal/PairingIndexBounds: files 119/127 (94%), lines 14432/17269 (84%), decls 990/1291 (77%)
+  Development/EtaleCohomology/CohomologicalPurity: files 202/202 (100%), lines 17247/17247 (100%), decls 1680/1799 (93%)
+  GroundTheory/GlobalFields/TateThesis: files 77/77 (100%), lines 16795/16795 (100%), decls 1282/1357 (94%)
+  GroundTheory/ArithmeticGeometry/AbelianVarieties: files 39/57 (68%), lines 11018/16358 (67%), decls 586/1277 (46%)
+  Formalism/MahlerMeasure/MahlerMeasureProofs: files 26/28 (93%), lines 15645/15692 (100%), decls 1048/1153 (91%)
+  Formalism/PeriodIntegrals: files 218/328 (66%), lines 10919/14912 (73%), decls 1354/2233 (61%)
+  ReciprocityTheory/SemistableReduction: files 114/119 (96%), lines 14050/14578 (96%), decls 774/892 (87%)
+  GroundTheory/HeightsAndTheta/Theta: files 17/62 (27%), lines 5048/14501 (35%), decls 179/1446 (12%)
+  Development/AutomorphicArithmetic/WhittakerHecke: files 164/164 (100%), lines 14439/14439 (100%), decls 164/701 (23%)
+  Formalism/ThetaLogCoordinates/UniformThetaSubstitution: files 48/62 (77%), lines 13453/14085 (96%), decls 977/1096 (89%)
+
+-- depth-3 directories with the most lines in files that have NO declaration in the closure --
+  Development/AbelianVarietyTheory/Proofs: unused lines 1192612 of 7436698, unused files 18301 of 95418
+  GroundTheory/HeightsAndTheta/Heights: unused lines 146159 of 626821, unused files 1558 of 6348
+  Development/AutomorphicSpectrum/Proofs: unused lines 126077 of 1163468, unused files 1468 of 14864
+  Development/AbelianVarietyTheory/Definitions: unused lines 92223 of 508569, unused files 476 of 2198
+  Formalism/PeriodIntegrals/UnitaryGroupMassFormula: unused lines 80399 of 430489, unused files 812 of 3615
+  Development/AutomorphicArithmetic/AutomorphicVarieties: unused lines 64497 of 848614, unused files 643 of 7959
+  Development/AbelianVarietyTheory/BlockTheory: unused lines 45093 of 104027, unused files 327 of 753
+  GroundTheory/PAdicHodge: unused lines 38757 of 64317, unused files 129 of 226
+  Development/AutomorphicArithmetic/DivisorFrames: unused lines 34987 of 44504, unused files 301 of 383
+  Formalism/HermitianCurvature/HermitianCurvatureProofs: unused lines 21673 of 437211, unused files 136 of 1854
+  Formalism/SharpRestriction/CuspSpanNormBounds: unused lines 20648 of 132978, unused files 134 of 399
+  Development/WeilBound/CoreStatements: unused lines 20519 of 455457, unused files 214 of 3746
+  Formalism/LocalToGlobal/Columns: unused lines 20022 of 95905, unused files 135 of 376
+  Formalism/LocalToGlobal/GlobalTheory: unused lines 16073 of 69295, unused files 103 of 389
+  Development/AbelianVarietyTheory/PublishedTheorems: unused lines 14676 of 56194, unused files 203 of 493
+  Formalism/LocalRingCardinality/SpanPowerMembership: unused lines 12939 of 23305, unused files 75 of 119
+  PositivityTheory/AutomorphicForms/PublishedInputs: unused lines 12469 of 54970, unused files 105 of 445
+  Formalism/SharpRestriction/Divisibility: unused lines 12154 of 63162, unused files 52 of 274
+  Formalism/LocalToGlobal/SiegelLatticeTheory: unused lines 11725 of 339004, unused files 126 of 2085
+  Formalism/LocalToGlobal/IndefiniteReal: unused lines 11703 of 78821, unused files 91 of 435
+  ReciprocityTheory/ReductiveGroups/ArithmeticGeometry: unused lines 11350 of 239112, unused files 134 of 1623
+  Development/AutomorphicArithmetic/Foundations: unused lines 10679 of 419572, unused files 114 of 4413
+  Formalism/GL3MeanSquares/HookFormulaTorsion: unused lines 9862 of 20059, unused files 38 of 66
+  GroundTheory/HeightsAndTheta/Theta: unused lines 9453 of 14501, unused files 45 of 62
+  Development/AutomorphicArithmetic/ThetaCorrespondence: unused lines 9402 of 178983, unused files 131 of 3201
+  Development/AutomorphicArithmetic/IntegralCasts: unused lines 9053 of 123617, unused files 158 of 907
+  Development/DiscreteGroups/GlobalIrreducibility: unused lines 9001 of 19364, unused files 85 of 174
+  Formalism/SizeWindowBrackets/ChainSlopeWindows: unused lines 8595 of 19409, unused files 18 of 32
+  Development/AutomorphicArithmetic/LocalEmbeddings: unused lines 7623 of 13895, unused files 36 of 67
+  Formalism/LocalToGlobal/TorsionIntegrality: unused lines 7078 of 70444, unused files 66 of 489
+  Development/AutomorphicSpectrum/Definitions: unused lines 6232 of 26238, unused files 48 of 197
+  Development/WeilBound/RepresentationTheoryGL: unused lines 6049 of 274147, unused files 81 of 2486
+  Formalism/SharpRestriction/ValuationFrobeniusEpsilon: unused lines 5838 of 9947, unused files 16 of 39
+  Formalism/ThetaLogCoordinates/DualWeylCoordinates: unused lines 5833 of 9041, unused files 54 of 74
+  Formalism/SharpRestriction/GenusPolyhedralBounds: unused lines 5415 of 27878, unused files 22 of 88
+  Formalism/WachLatticeTwists/RealDisplaySplitting: unused lines 5411 of 5752, unused files 18 of 21
+  GroundTheory/ArithmeticGeometry/AbelianVarieties: unused lines 5340 of 16358, unused files 18 of 57
+  GroundTheory/LocalFields: unused lines 5236 of 31385, unused files 25 of 126
+  Formalism/SizeWindowBrackets: unused lines 5192 of 8936, unused files 17 of 32
+  Formalism/SharpRestriction/InertJacobiLevels: unused lines 5110 of 6911, unused files 42 of 48
+  ReciprocityTheory/AnalyticForms/RegularLocalRings: unused lines 4879 of 12341, unused files 32 of 76
+  GroundTheory/AutomorphicForms: unused lines 4697 of 61033, unused files 27 of 217
+  Development/AbelianVarietyTheory/Counterexamples: unused lines 4666 of 20580, unused files 49 of 192
+  GroundTheory/AutomorphicForms/GL2Classical: unused lines 4661 of 7116, unused files 21 of 32
+  Development/AbelianVarietyTheory/Statements: unused lines 4566 of 13189, unused files 47 of 121
+  Formalism/SubspaceCounting/SubspaceCountingProofs: unused lines 4101 of 6515, unused files 15 of 23
+  GroundTheory/GlobalFields/Artin: unused lines 4093 of 4789, unused files 25 of 29
+  ReciprocityTheory/Chebotarev: unused lines 4075 of 4382, unused files 45 of 47
+  Formalism/LocalToGlobal/IndefiniteForms: unused lines 4065 of 10423, unused files 15 of 31
+  Formalism/SharpRestriction/GlobalSchurBounds: unused lines 4030 of 48032, unused files 36 of 158
+
+-- depth-3 directories entirely outside the closure (no file used), by lines --
+  Formalism/WachLatticeTwists/HodgeTateChains: 28 files, 3341 lines
+  Formalism/WachLatticeTwists/WachProductBases: 14 files, 1862 lines
+  CompanionTheory/RealGroups/BaseChange: 18 files, 1849 lines
+  Formalism/WachLatticeTwists/SandwichH1Classes: 13 files, 1797 lines
+  Formalism/WachLatticeTwists/HerrComplexInjectivity: 15 files, 1788 lines
+  Formalism/LogSumExpBounds/CharacterSumPhase: 10 files, 1457 lines
+  Formalism/TranslateCocycles/TranslateCocycleProofs: 3 files, 1369 lines
+  Formalism/WachModuleLifts/WachModuleProofs: 7 files, 928 lines
+  Formalism/WachLatticeTwists/DenseTopActions: 5 files, 870 lines
+  Formalism/WachLatticeTwists/TorsionKernelSplitting: 9 files, 820 lines
+  Formalism/BehrendSets/BehrendVariance: 10 files, 790 lines
+  Development/AutomorphicSpectrum/ParallelStatements: 5 files, 648 lines
+  ReciprocityTheory/L2DbarEstimates/SymmetricSections: 11 files, 626 lines
+  Formalism/TranslateCocycles: 4 files, 583 lines
+  Formalism/ThetaLogCoordinates/PartnerDischarge: 3 files, 409 lines
+  Formalism/SobolevGaussianKernels: 8 files, 346 lines
+  Formalism/WachModuleLifts: 2 files, 311 lines
+  GroundTheory/LocalFields/QuadraticAbelian: 1 files, 304 lines
+  Formalism/LogSumExpBounds: 6 files, 287 lines
+  Formalism/BehrendSets: 4 files, 284 lines
+  CompanionTheory/ThickeningEstimates/SiegelDomainEstimates: 2 files, 266 lines
+  Development/AutomorphicArithmetic/FrobeniusTwistedNorms: 4 files, 266 lines
+  Formalism/LogFactorialBounds: 4 files, 253 lines
+  Formalism/SobolevGaussianKernels/GaussianKernelBounds: 4 files, 232 lines
+  Formalism/LatticeLocalGlobal: 2 files, 216 lines
+  Formalism/JacobiWeightFamilies: 2 files, 209 lines
+  Development/AutomorphicArithmetic/TeichmullerLogarithm: 2 files, 202 lines
+  Formalism/HalfLinks: 1 files, 186 lines
+  Formalism/NormUnitaryBounds: 2 files, 178 lines
+  Development/AutomorphicArithmetic/EvenBoxes: 1 files, 177 lines
+  Formalism/AdicCompletionExports/NonnegativeDivisors: 2 files, 165 lines
+  Formalism/ProductFormula: 1 files, 162 lines
+  GroundTheory/ArithmeticGeometry/SelmerPairing: 1 files, 116 lines
+  Formalism/AlphaUniqueness: 1 files, 97 lines
+  Lemmata/GeneralBFactRightLast: 1 files, 97 lines
+  GroundTheory/ArithmeticGeometry/IwasawaModules: 1 files, 88 lines
+  Formalism/TwistFamilyExistence: 1 files, 87 lines
+  Formalism/WideWeightTheorem: 1 files, 85 lines
+  Lemmata/HermitianVanishing: 1 files, 81 lines
+  ReciprocityTheory/CommutativeAlgebra/PowerSeriesPresentations: 1 files, 77 lines
+  Lemmata/CofiniteContinuousBounds: 1 files, 73 lines
+  Formalism/ArtinHasse: 1 files, 64 lines
+  ReciprocityTheory/CommutativeAlgebra/WeakRegularity: 2 files, 64 lines
+  Lemmata/GeneralBFactSecondVariant: 1 files, 44 lines
+  Lemmata/GeneralBFactExtra: 1 files, 41 lines
+  Lemmata/PowMulVecEigenvalue: 1 files, 32 lines
+  Lemmata/MiscLemmasK: 1 files, 29 lines
+  Development/WeilBound/SupplementaryPages: 1 files, 27 lines
+  ReciprocityTheory/GeometryOfNumbers/MatrixArithmetic: 1 files, 27 lines
+  Lemmata/GeneralBFactThirdLast: 1 files, 23 lines
+
+== named topics: project constants in the closure vs names indexed in source (case-insensitive substring) ==
+  Published: in closure 1784, in source index 1762
+  GeneralHyp: in closure 0, in source index 3
+  OpenLiteratureStatements: in closure 6, in source index 1
+  _of_literature: in closure 186, in source index 187
+  ThetaLift: in closure 330, in source index 289
+  Theta: in closure 23742, in source index 20844
+  ChainInt: in closure 3, in source index 11
+  core_gm: in closure 1, in source index 1
+  Principalization: in closure 2186, in source index 334
+  Nadel: in closure 321, in source index 155
+  Kawamata: in closure 14, in source index 16
+  Toroidal: in closure 192, in source index 219
+  Prismatic: in closure 19, in source index 39
+  Dieudonne: in closure 84, in source index 101
+  Messing: in closure 24, in source index 22
+  recT: in closure 1851, in source index 1561
+  galoisLocalGlobal: in closure 5, in source index 5
+  VWin: in closure 22, in source index 13
+  Stepanov: in closure 0, in source index 0
+  WeilBound: in closure 1375, in source index 0
+  Hironaka: in closure 0, in source index 3
+  Resolution: in closure 10979, in source index 8438
+  Caraiani: in closure 1, in source index 11
+  Langlands: in closure 665, in source index 523
+  Shimura: in closure 1742, in source index 74
+  Deligne: in closure 1005, in source index 847
+  Fontaine: in closure 185, in source index 193
+  Hodge: in closure 8429, in source index 9129
+  Perfectoid: in closure 151, in source index 158
+  Etale: in closure 10845, in source index 6753
+  Crystalline: in closure 13004, in source index 6785
+  Jacquet: in closure 1786, in source index 1496
+  Howe: in closure 1062, in source index 982
+  Rallis: in closure 306, in source index 285
+  SiegelWeil: in closure 9181, in source index 6488
+  Arthur: in closure 1, in source index 8
+  TraceFormula: in closure 1444, in source index 65
+  Unitary: in closure 23008, in source index 16403
+  Eisenstein: in closure 2574, in source index 1897
+  Whittaker: in closure 2392, in source index 1863
+  Mirabolic: in closure 332, in source index 262
+  HarishChandra: in closure 743, in source index 573
+  AbelianVariet: in closure 10673, in source index 108
+  Galois: in closure 12563, in source index 2892
+  Frobenius: in closure 6122, in source index 3231
+  Purity: in closure 2398, in source index 1690
+  Ramanujan: in closure 0, in source index 0
+  Cohomology: in closure 5308, in source index 3483
+  Scheme: in closure 4875, in source index 3796
+  Stack: in closure 372, in source index 300
+  Adic: in closure 11408, in source index 10708
+  Automorphic: in closure 69240, in source index 11631
+  Cusp: in closure 13202, in source index 10080
+  Hecke: in closure 25583, in source index 28534
+  Satake: in closure 1768, in source index 994
+  BaseChange: in closure 6972, in source index 5002
+  Endoscop: in closure 8, in source index 2
+
+GlobalTheory.Published.* names in source: 1577  in closure: 804
+  GlobalTheory.Fc.S0.GeneralHyps: NOT in closure
+  GlobalTheory.Fc.S0.GeneralHypU: NOT in closure
+  GlobalTheory.Fc.S0.GeneralHypV: NOT in closure
+  UpperTheory.LiteratureTheorems.OpenLiteratureStatements: IN closure, kind I, dag 33, referenced directly by 199, direct deps 2, file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean
+  UpperTheory.Zero.LLC.recTExists: IN closure, kind t, dag 6988, referenced directly by 25, direct deps 247, file Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean
+  UpperTheory.Zero.LLC.RecTExists: IN closure, kind d, dag 161, referenced directly by 1748, direct deps 26, file Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean
+  UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter: IN closure, kind t, dag 87, referenced directly by 1, direct deps 18, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean
+  UpperTheory.One.M.Row: IN closure, kind d, dag 160, referenced directly by 11, direct deps 26, file Development/AutomorphicArithmetic/Foundations/UnitarySphericalFixing/SatakeParameters/RecT.lean
+  UpperTheory.EveryCharacter: IN closure, kind d, dag 127, referenced directly by 8, direct deps 34, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean
+
+== top of the dependency graph under riemannHypothesis (project nodes; name, closure size) ==
+  rhOfAll  [t, deps 3, file Supplements/Kernels/MainTheorems.lean]
+    Formalism.VW.rh_of_every  [t, deps 40, file Formalism/GammaFactorNonvanishing/CritLine.lean]
+      UpperTheory.EveryCharacter  [d, deps 34, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean]
+        UpperTheory.EveryCharacter._proof_1  [t, deps 9, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean]
+      Formalism.VW.rh_of_right  [t, deps 333, file Formalism/GammaFactorNonvanishing/RhOfRight.lean]
+        Formalism.VW.rh_of_right._proof_1_1  [t, deps 53, file Formalism/GammaFactorNonvanishing/RhOfRight.lean]
+        Formalism.VW.rh_of_right._proof_1_2  [t, deps 53, file Formalism/GammaFactorNonvanishing/RhOfRight.lean]
+    allChi  [t, deps 2, file Supplements/Kernels/MainTheorems.lean]
+      UpperTheory.EveryCharacter  [d, deps 34, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean] (shown above)
+      UpperTheory.FinalTheorems.everyCharacter  [t, deps 3, file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+        UpperTheory.EveryCharacter  [d, deps 34, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean] (shown above)
+        UpperTheory.FinalTheorems.everyCharacter_of_row  [t, deps 31, file Development/AutomorphicArithmetic/CharacterBoxes/MainConclusion.lean]
+          UpperTheory.EveryCharacter  [d, deps 34, file Development/AutomorphicArithmetic/CharacterBoxes/EveryCharacter.lean] (shown above)
+          UpperTheory.GalStar.RecNotion._proof_1  [t, deps 30, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjAlt.lean]
+          Formalism.ConjugateSelfDual.IsPlaceOver  [d, deps 50, file Formalism/ConjugateSelfDual/Statement.lean]
+          GlobalTheory.LocGL.IrrGL  [d, deps 18, file Development/AbelianVarietyTheory/Definitions/NonGaloisDescent/NonemptyEquivMultiProdOne.lean]
+          GlobalTheory.WeilDeligne.WD  [d, deps 51, file Development/AbelianVarietyTheory/Definitions/AutomorphicMembership/MonodromyZeroOfWeilDeligneRepClassIff.lean]
+          UpperTheory.GalStar.Row0b  [d, deps 72, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean]
+          UpperTheory.Zero.LLC.IsRecT  [d, deps 66, file Development/AutomorphicArithmetic/Foundations/LocalLanglands/IsRecTOfIsRec.lean]
+          UpperTheory.LiteratureTheorems.OpenLiteratureStatements  [I, deps 2, file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+          UpperTheory.LiteratureTheorems.every_character_of_literature_of_vWin  [t, deps 28, file Development/AutomorphicArithmetic/ThetaCorrespondence/ThetaPairLifts/ThirdPlaceSeries/EveryCharacterOfLiteratureOfVWin.lean]
+          UpperTheory.Zero.LLC.recTExists  [t, deps 247, file Development/AutomorphicArithmetic/Foundations/LocalLanglands/LocalCentralUnits/RecTExists.lean]
+          UpperTheory.One.vwin_of_row  [t, deps 30, file Development/AutomorphicArithmetic/AutomorphicVarieties/ModularityArgument/ThresholdArguments/DenseThresholdCases/VwinOfRow.lean]
+        UpperTheory.Gal.Int.galoisLocalGlobalStrong_recParameter  [t, deps 18, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/RowSrc.lean]
+          UpperTheory.GalStar.RecNotion._proof_1  [t, deps 30, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjAlt.lean]
+          UpperTheory.GalStar.Row0b  [d, deps 72, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/TypeConditions/WeightsConjBis.lean]
+          UpperTheory.Gal.Int.recT  [d, deps 26, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/Development.lean]
+          UpperTheory.Gal.Int.galoisRepresentations_of_thetaLift  [t, deps 19, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/IntegralStructures/GaloisRepresentationsOfThetaLift.lean]
+          UpperTheory.TP.K.tLiftK  [t, deps 2, file Development/AutomorphicArithmetic/Foundations/GaloisRepresentations/ThetaParseval/ThetaKernels/TLiftK.lean]
+
+done

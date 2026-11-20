@@ -1,0 +1,16 @@
+source declarations 1061531 in closure by public name 744318 by private (module,name) 57996 total 802314 75.6%
+  theorem 619686 / 784092 79.0%
+  def 136264 / 212819 64.0%
+  structure 5463 / 8286 65.9%
+  instance 3200 / 8199 39.0%
+  lemma 28183 / 34663 81.3%
+  abbrev 9404 / 13202 71.2%
+  inductive 73 / 121 60.3%
+  class 31 / 43 72.1%
+  alias 10 / 106 9.4%
+files 175187 used 146232 unused 28955
+unused files with no indexed declaration at all: 174  lines 1076
+unused files with >=1 indexed declaration: 28781  lines 2376692  declarations 148330
+unused lines total 2377768 of 17374215
+declarations not in closure that sit in used files: 110887
+unused file sizes: median 44 max 2603
