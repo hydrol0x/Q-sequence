@@ -1,0 +1,715 @@
+
+##### Development/AbelianVarietyTheory/Definitions/Foundations/RayPrimes.lean  (49 lines)
+[121] def zerosIn {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) : Set ℂ :=
+[63] def zmult {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (ρ : ℂ) : ℕ :=
+[97] def zsum {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) (f : ℂ → ℂ) : ℂ :=
+[97] def zsumR {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) (f : ℂ → ℝ) : ℝ :=
+
+##### Development/AbelianVarietyTheory/Definitions/GlobalTwisting/ZerosDisc.lean  (48 lines)
+[105] def zerosBox {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (σ T : ℝ) : Set ℂ :=
+[63] def ord {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (ρ : ℂ) : ℕ :=
+[127] def zerosDisc {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (c : ℂ) (R : ℝ) : Set ℂ :=
+[141] def derSeries (c : ℕ → ℂ) (k : ℕ) (s : ℂ) : ℂ :=
+[42] def primesIoc (x y : ℝ) : Finset ℕ := (Ioc ⌊x⌋₊ ⌊y⌋₊).filter Nat.Prime
+[81] def psiAP (M b : ℕ) (u : ℝ) : ℝ := ∑ n ∈ (Icc 1 ⌊u⌋₊).filter (fun n => n ≡ b [MOD M]), Λ n
+[188] def IsExc (c₁ : ℝ) {M : ℕ} [NeZero M] (χ : DirichletCharacter ℂ M) (β : ℝ) : Prop :=
+[130] def ExcData (c₁ : ℝ) (M : ℕ) [NeZero M] (b : ℕ) (θ : ℤ) (β : ℝ) : Prop :=
+[369] def PrimesRel : Prop :=
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/AnalyticAtDslope.lean  (299 lines)
+[169] theorem analyticAt_dslope {f : ℂ → ℂ} {p : ℂ} (hf : AnalyticAt ℂ f p) : AnalyticAt ℂ (dslope f p) p 
+[1164] theorem eq_add_dslope (f : ℂ → ℂ) (p s : ℂ) : f s = f p + (s - p) * dslope f p s 
+[6638] theorem logDeriv_pole {f : ℂ → ℂ} {p : ℂ} (hf : AnalyticAt ℂ f p) (hn : analyticOrderAt f p ≠ ⊤) : ∃ g : ℂ → ℂ, AnalyticAt ℂ g p ∧ ∀ᶠ s in 𝓝[≠] p, deriv f s / f s = ((analyticOrderNatAt f p : ℕ) : ℂ) / (s - p) + g s 
+[131] theorem analyticAt_cpow {u : ℝ} (hu : 0 < u) (p : ℂ) : AnalyticAt ℂ (fun s : ℂ => (u : ℂ) ^ s) p 
+[6951] theorem expand_simple {φ g : ℂ → ℂ} {p k : ℂ} {u : ℝ} (hu : 0 < u) (hp : p ≠ 0) (hg : AnalyticAt ℂ g p) (hφ : ∀ᶠ s in 𝓝[≠] p, φ s = k / (s - p) + g s) : ∃ (a : ℂ) (G : ℂ → ℂ), AnalyticAt ℂ G p ∧ ∀ᶠ s in 𝓝[≠] p, -(φ s) * (u : ℂ) ^ s / s = a / (s - p) ^ 2 + (-(k * ((u : ℂ) ^ p / p))) / (s - p) + G s 
+[6207] theorem expand_zero {φ h : ℂ → ℂ} {m : ℂ} {u : ℝ} (hu : 0 < u) (hh : AnalyticAt ℂ h 0) (hφ : ∀ᶠ s in 𝓝[≠] (0 : ℂ), φ s = m / s + h s) : ∃ (a : ℂ) (G : ℂ → ℂ), AnalyticAt ℂ G 0 ∧ ∀ᶠ s in 𝓝[≠] (0 : ℂ), -(φ s) * (u : ℂ) ^ s / s = a / (s - 0) ^ 2 + (-(m * (Real.log u : ℂ) + h 0)) / (s - 0) + G s 
+[224] theorem analyticOff {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) : AnalyticOnNhd ℂ (LFunction χ) ({1}ᶜ : Set ℂ) 
+[547] theorem exists_entire {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) : ∃ F : ℂ → ℂ, Differentiable ℂ F ∧ F 1 ≠ 0 ∧ ∀ s, s ≠ 1 → LFunction χ s = 0 → F s = 0 
+[2287] theorem finite_zeros {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (T : ℝ) : {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}.Finite 
+[746] theorem order_ne_top {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {ρ : ℂ} (hρ : ρ ≠ 1) : analyticOrderAt (LFunction χ) ρ ≠ ⊤ 
+[3773] theorem logDeriv_one {N : ℕ} [NeZero N] {χ : DirichletCharacter ℂ N} (hχ : χ.IsPrimitive) : ∃ g : ℂ → ℂ, AnalyticAt ℂ g 1 ∧ ∀ᶠ s in 𝓝[≠] (1 : ℂ), deriv (LFunction χ) s / LFunction χ s = (if N = 1 then -1 else 0) / (s - 1) + g s 
+[12627] theorem residue_identity : ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ (u c T : ℝ) (m : ℕ) (h : ℂ → ℂ), 1 < u → 1 < c → 0 < T → AnalyticAt ℂ h 0 → (∀ᶠ s in 𝓝[≠] (0 : ℂ), deriv (LFunction χ) s / LFunction χ s = (m : ℂ) / s + h s) → (∀ s : ℂ, -(1/2 : ℝ) ≤ s.re → s.re ≤ c → |s.im| = T → LFunction χ s ≠ 0) → (∀ s : ℂ, s.re = -(1/2 : ℝ) → LFunction χ s ≠ 0) → (∫ x : ℝ in (-(1/2 : ℝ))..c, (-(deriv (LFunction χ) ((x : ℂ) - T * I) / LFunction χ ((x : ℂ) - T * I)) * (u : ℂ) ^ ((x : ℂ) - T * I) / ((x : ℂ) - T * I))) - (∫ x : ℝ in (-(1/2 : ℝ))..c, (-(deriv (LFunction χ) ((x : ℂ) + T * I) / LFunction χ ((x : ℂ) + T * I)) * (u : ℂ) ^ ((x : ℂ) + T * I) / ((x : ℂ) + T * I))) + I * (∫ t : ℝ in (-T)..T, (-(deriv (LFunction χ) ((c : ℂ) + t * I) / LFunction χ ((c : ℂ) + t * I)) * (u : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I))) - I * (∫ t : ℝ in (-T)..T, (-(deriv (LFunction χ) (((-(1/2) : ℝ) : ℂ) + t * I) / LFunction χ (((-(1/2) : ℝ) : ℂ) + t * I)) * (u : ℂ) ^ (((-(1/2) : ℝ) : ℂ) + t * I) / (((-(1/2) : ℝ) : ℂ) + t * I))) = 2 * Real.pi * I * ((if N = 1 then (u : ℂ) else 0) - (∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)) - (m * (Real.log u : ℂ) + h 0)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ArithmeticLargeSieveOneResidueClassPerPrime.lean  (523 lines)
+[427 priv] private lemma squarefree_prod_of_prime (s : Finset ℕ) (h : ∀ p ∈ s, p.Prime) : Squarefree (∏ p ∈ s, p) 
+[2152 priv] private lemma dvd_pow_of_prime_dvd_imp (n k : ℕ) (h : ∀ p, p.Prime → p ∣ n → p ∣ k) (hn : n ≠ 0) (hk : k ≠ 0) : n ∣ k ^ n 
+[893 priv] private lemma sum_inv_divisors_eq_sigma_div (N : ℕ) (hN : N ≠ 0) : ∑ m ∈ N.divisors, (1 : ℝ) / m = (ArithmeticFunction.sigma 1 N : ℝ) / N 
+[2444 priv] private lemma totient_mul_sigma_pow_le_pow_succ (K : ℕ) : ∀ n : ℕ, 0 < n → n.totient * ArithmeticFunction.sigma 1 (n ^ K) ≤ n ^ (K + 1) 
+[6425 priv] private lemma sum_inv_le_mul_sum_squarefree_inv_totient (Q q : ℕ) (hq : 1 ≤ q) : ∑ n ∈ Finset.Icc 1 Q, (1:ℝ) / n ≤ ((q:ℝ) / q.totient) * ∑ f ∈ (Finset.Icc 1 Q).filter (fun f => Squarefree f ∧ Nat.Coprime f q), (1:ℝ) / f.totient 
+[1825 priv] private lemma coprime_mod_mul_iff (d p m : ℕ) : Nat.Coprime d (m % (d * p)) ↔ Nat.Coprime d m 
+[128 priv] private lemma coprime_mul_add_mul_iff (d p a b : ℕ) (h : Nat.Coprime d p) : Nat.Coprime d (a * p + b * d) ↔ Nat.Coprime d a 
+[1704 priv] private lemma sum_coprime_range_mul_eq_sum_sum (d p : ℕ) (hd : 0 < d) (hp : p.Prime) (hpd : ¬ p ∣ d) (F : ℕ → ℝ) (hF : ∀ m, F m = F (m % (d * p))) : ∑ a ∈ (Finset.range (d * p)).filter (d * p).Coprime, F a = ∑ a₁ ∈ (Finset.range d).filter d.Coprime, ∑ a₂ ∈ (Finset.range p).filter p.Coprime, F (a₁ * p + a₂ * d) 
+[2247 priv] private lemma cexp_mul_div_eq_of_mod_right (D : ℕ) (hD : 0 < D) (n m : ℕ) : cexp (2 * ↑Real.pi * I * n * m / D) = cexp (2 * ↑Real.pi * I * n * ↑(m % D) / D) 
+[1773 priv] private lemma cexp_crt_combination_eq_mul (d p n a₁ a₂ : ℕ) (hd : 0 < d) (hp : 0 < p) : cexp (2 * ↑Real.pi * I * n * ↑(a₁ * p + a₂ * d) / ↑(d * p)) = cexp (2 * ↑Real.pi * I * n * a₁ / d) * cexp (2 * ↑Real.pi * I * n * a₂ / p) 
+[311 priv] private lemma filter_coprime_range_prime_eq_erase_zero (p : ℕ) (hp : p.Prime) : (Finset.range p).filter p.Coprime = (Finset.range p).erase 0 
+[2410 priv] private lemma cexp_mul_div_eq_natMod_left (d : ℕ) (hd : 0 < d) (n a : ℕ) : cexp (2 * ↑Real.pi * I * n * a / d) = cexp (2 * ↑Real.pi * I * ↑(n % d) * a / d) 
+[3561 priv] private lemma sum_range_cexp_eq_ite_dvd (d : ℕ) (hd : 0 < d) (k : ℤ) : ∑ a ∈ Finset.range d, cexp (2 * ↑Real.pi * I * k * a / d) = if (d:ℤ) ∣ k then (d:ℂ) else 0 
+[7907 priv] private lemma sum_norm_sq_exp_sum_eq_mul_sum_residues (d : ℕ) (hd : 0 < d) (S : Finset ℕ) (b : ℕ → ℂ) : ∑ a ∈ Finset.range d, ‖∑ n ∈ S, b n * cexp (2 * ↑Real.pi * I * n * a / d)‖ ^ 2 = d * ∑ r ∈ Finset.range d, ‖∑ n ∈ S.filter (fun n => n % d = r), b n‖ ^ 2 
+[4182 priv] private lemma norm_sum_sq_le_pred_mul_of_avoids_class (p : ℕ) (hp : p.Prime) (c : ℕ) (S : Finset ℕ) (b : ℕ → ℂ) (hS : ∀ n ∈ S, ¬ n ≡ c [MOD p]) : ‖∑ n ∈ S, b n‖ ^ 2 ≤ (p - 1 : ℝ) * ∑ a ∈ (Finset.range p).erase 0, ‖∑ n ∈ S, b n * cexp (2 * ↑Real.pi * I * n * a / p)‖ ^ 2 
+[4190 priv] private lemma norm_sum_sq_le_totient_mul_of_avoids_classes (S : Finset ℕ) : ∀ d : ℕ, 0 < d → Squarefree d → (∀ p : ℕ, p.Prime → p ∣ d → ∃ c : ℕ, ∀ n ∈ S, ¬ n ≡ c [MOD p]) → ∀ b : ℕ → ℂ, ‖∑ n ∈ S, b n‖ ^ 2 ≤ (d.totient : ℝ) * ∑ a ∈ (Finset.range d).filter d.Coprime, ‖∑ n ∈ S, b n * cexp (2 * ↑Real.pi * I * n * a / d)‖ ^ 2 
+[8941] theorem _root_.GlobalTheory.arithmetic_large_sieve_one_class : ∀ (M N Q q : ℕ) (S : Finset ℕ), 1 ≤ Q → 1 ≤ q → S ⊆ Finset.Ioc M (M + N) → (∀ p : ℕ, p.Prime → p ≤ Q → ¬ p ∣ q → ∃ c : ℕ, ∀ n ∈ S, ¬ n ≡ c [MOD p]) → (S.card : ℝ) * ((q.totient : ℝ) / q * Real.log Q) ≤ (Q : ℝ) ^ 2 + 2 * Real.pi * N 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ArithmeticLargeSieveOneResidueClassPerPrimeStatement.lean  (8 lines)
+[206] theorem _root_.GlobalTheory.T.arithmeticLargeSieve_one_residue_class_per_prime : ∀ (M N Q q : ℕ) (S : Finset ℕ), 1 ≤ Q → 1 ≤ q → S ⊆ Finset.Ioc M (M + N) → (∀ p : ℕ, p.Prime → p ≤ Q → ¬ p ∣ q → ∃ c : ℕ, ∀ n ∈ S, ¬ n ≡ c [MOD p]) → (S.card : ℝ) * ((q.totient : ℝ) / q * Real.log Q) ≤ (Q : ℝ) ^ 2 + 2 * Real.pi * N 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/BdIntEqZeroOfPrimitive.lean  (218 lines)
+[119] noncomputable def bdInt (a b c d : ℝ) (f : ℂ → ℂ) : ℂ :=
+[103] def SidesIn (a b c d : ℝ) (B : Set ℂ) : Prop :=
+[231] theorem int_hor {f : ℂ → ℂ} {B : Set ℂ} (hf : ContinuousOn f B) {a b c : ℝ} (h : ∀ x ∈ Set.uIcc a b, (x : ℂ) + c * I ∈ B) : IntervalIntegrable (fun x : ℝ => f (x + c * I)) volume a b 
+[248] theorem int_ver {f : ℂ → ℂ} {B : Set ℂ} (hf : ContinuousOn f B) {a c d : ℝ} (h : ∀ y ∈ Set.uIcc c d, (a : ℂ) + y * I ∈ B) : IntervalIntegrable (fun y : ℝ => f (a + y * I)) volume c d 
+[1984] theorem bdInt_add {a b c d : ℝ} {B : Set ℂ} (h : SidesIn a b c d B) {f g : ℂ → ℂ} (hf : ContinuousOn f B) (hg : ContinuousOn g B) : bdInt a b c d (fun s => f s + g s) = bdInt a b c d f + bdInt a b c d g 
+[1000] theorem bdInt_sum {a b c d : ℝ} {B : Set ℂ} (h : SidesIn a b c d B) {ι : Type*} (S : Finset ι) {f : ι → ℂ → ℂ} (hf : ∀ i ∈ S, ContinuousOn (f i) B) : bdInt a b c d (fun s => ∑ i ∈ S, f i s) = ∑ i ∈ S, bdInt a b c d (f i) 
+[616] theorem bdInt_congr {a b c d : ℝ} {B : Set ℂ} (h : SidesIn a b c d B) {f g : ℂ → ℂ} (hfg : ∀ s ∈ B, f s = g s) : bdInt a b c d f = bdInt a b c d g 
+[379] theorem ftc_hor {F f : ℂ → ℂ} {B : Set ℂ} (hf : ContinuousOn f B) (hF : ∀ s ∈ B, HasDerivAt F (f s) s) {a b c : ℝ} (h : ∀ x ∈ Set.uIcc a b, (x : ℂ) + c * I ∈ B) : ∫ x : ℝ in a..b, f (x + c * I) = F (b + c * I) - F (a + c * I) 
+[780] theorem ftc_ver {F f : ℂ → ℂ} {B : Set ℂ} (hf : ContinuousOn f B) (hF : ∀ s ∈ B, HasDerivAt F (f s) s) {a c d : ℝ} (h : ∀ y ∈ Set.uIcc c d, (a : ℂ) + y * I ∈ B) : I * ∫ y : ℝ in c..d, f (a + y * I) = F (a + d * I) - F (a + c * I) 
+[1420] theorem bdInt_eq_zero_of_primitive {a b c d : ℝ} {B : Set ℂ} (h : SidesIn a b c d B) {F f : ℂ → ℂ} (hf : ContinuousOn f B) (hF : ∀ s ∈ B, HasDerivAt F (f s) s) : bdInt a b c d f = 0 
+[1678] theorem sidesIn_compl {a b c d : ℝ} {p : ℂ} (h1 : a < p.re) (h2 : p.re < b) (h3 : c < p.im) (h4 : p.im < d) : SidesIn a b c d {p}ᶜ 
+[1887] theorem bdInt_sq {a b c d : ℝ} {p : ℂ} (h1 : a < p.re) (h2 : p.re < b) (h3 : c < p.im) (h4 : p.im < d) (k : ℂ) : bdInt a b c d (fun s => k / (s - p) ^ 2) = 0 
+[6218] theorem bdInt_inv {a b c d : ℝ} {p : ℂ} (h1 : a < p.re) (h2 : p.re < b) (h3 : c < p.im) (h4 : p.im < d) (k : ℂ) : bdInt a b c d (fun s => k / (s - p)) = 2 * Real.pi * I * k 
+[6583] theorem residue_rectangle : ∀ (f : ℂ → ℂ) (z w : ℂ) (S : Finset ℂ) (r : ℂ → ℂ), z.re < w.re → z.im < w.im → (∀ p ∈ S, z.re < p.re ∧ p.re < w.re ∧ z.im < p.im ∧ p.im < w.im) → DifferentiableOn ℂ f ((Set.Icc z.re w.re ×ℂ Set.Icc z.im w.im) \ S) → (∀ p ∈ S, ∃ (a : ℂ) (g : ℂ → ℂ), AnalyticAt ℂ g p ∧ ∀ᶠ s in nhdsWithin p {p}ᶜ, f s = a / (s - p) ^ 2 + r p / (s - p) + g s) → (∫ x : ℝ in z.re..w.re, f (x + z.im * I)) - (∫ x : ℝ in z.re..w.re, f (x + w.im * I)) + I * (∫ y : ℝ in z.im..w.im, f (w.re + y * I)) - I * (∫ y : ℝ in z.im..w.im, f (z.re + y * I)) = 2 * Real.pi * I * ∑ p ∈ S, r p 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/BrunTitchmarshExistsConst.lean  (127 lines)
+[1517] theorem exists_dvd_mul_add_of_prime (l q r : ℕ) (hl : l.Prime) (hq : ¬ l ∣ q) : ∃ c : ℕ, l ∣ q * c + r 
+[1441] theorem card_large_primes_class_le (q a Q M N : ℕ) (P : Finset ℕ) (hq : 1 ≤ q) (hQ : 1 ≤ Q) (hP : ∀ p ∈ P, p.Prime ∧ p ≡ a [MOD q] ∧ Q < p ∧ q * M ≤ p ∧ p < q * (M + N)) : (P.card : ℝ) * ((q.totient : ℝ) / q * Real.log Q) ≤ (Q : ℝ) ^ 2 + 2 * Real.pi * N 
+[20807] theorem brun_titchmarsh_const : ∃ C : ℝ, 0 < C ∧ ∀ (q a : ℕ) (x y : ℝ), 1 ≤ q → Nat.Coprime a q → 0 ≤ x → 2 * (q : ℝ) ≤ y → (((primesIoc x (x + y)).filter (fun p => p ≡ a [MOD q])).card : ℝ) ≤ C * y / (q.totient * Real.log (y / q)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/BrunTitchmarshExistsConstStatement.lean  (10 lines)
+[155] theorem _root_.GlobalTheory.T.brunTitchmarsh_exists_const : ∃ C : ℝ, 0 < C ∧ ∀ (q a : ℕ) (x y : ℝ), 1 ≤ q → Nat.Coprime a q → 0 ≤ x → 2 * (q : ℝ) ≤ y → (((primesIoc x (x + y)).filter (fun p => p ≡ a [MOD q])).card : ℝ) ≤ C * y / (q.totient * Real.log (y / q)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ChebyshevPsiProgressionRelativeError.lean  (427 lines)
+[1990] lemma orth (M : ℕ) [NeZero M] (b : ℕ) (hb : Nat.Coprime b M) (u : ℝ) : (((M.totient : ℝ) * psiAP M b u : ℝ) : ℂ) = ∑ χ : DirichletCharacter ℂ M, χ (b : ZMod M)⁻¹ * ∑ n ∈ Finset.Icc 1 ⌊u⌋₊, ((Λ n : ℝ) : ℂ) * χ (n : ZMod M) 
+[3445] lemma zsum (s t : Set ℂ) (ht : t.Finite) (hst : s ⊆ t) (o : ℂ → ℕ) (u : ℝ) (hu : 0 < u) (h : ∀ ρ ∈ s, 1 / 2 ≤ ρ.re) : ‖∑ᶠ ρ ∈ s, (o ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ 2 * u * ∑ᶠ ρ ∈ t, (o ρ : ℝ) * u ^ (ρ.re - 1) 
+[3176] lemma combine (M : ℕ) [NeZero M] (b : ℕ) (hb : Nat.Coprime b M) (u E x : ℝ) (hE : 0 ≤ E) (Z e : DirichletCharacter ℂ M → ℂ) (B : DirichletCharacter ℂ M → ℝ) (h1 : ∀ χ : DirichletCharacter ℂ M, ‖(∑ n ∈ Finset.Icc 1 ⌊u⌋₊, ((Λ n : ℝ) : ℂ) * χ (n : ZMod M)) - (if χ = 1 then (u : ℂ) else 0) + Z χ‖ ≤ E) (h2 : ∀ χ, ‖Z χ - e χ‖ ≤ B χ) (h3 : ∑ χ : DirichletCharacter ℂ M, χ (b : ZMod M)⁻¹ * e χ = (x : ℂ)) : |(M.totient : ℝ) * psiAP M b u - (u - x)| ≤ M * E + ∑ χ, B χ 
+[5703] lemma struct (M : ℕ) [NeZero M] (b : ℕ) (hb : Nat.Coprime b M) (θ : ℤ) (β u T η E : ℝ) (hu : 0 < u) (hE : 0 ≤ E) (h1 : ∀ χ : DirichletCharacter ℂ M, (zerosBox χ (1 / 2) T).Finite ∧ ‖(∑ n ∈ Finset.Icc 1 ⌊u⌋₊, ((Λ n : ℝ) : ℂ) * χ (n : ZMod M)) - (if χ = 1 then (u : ℂ) else 0) + ∑ᶠ ρ ∈ zerosBox χ (1 / 2) T, (ord χ ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ E) (h2 : (θ = 0 ∧ ∀ (χ : DirichletCharacter ℂ M), ∀ ρ ∈ zerosBox χ (1 / 2) T, ρ.re ≤ 1 - η) ∨ ∃ χ₁ : DirichletCharacter ℂ M, χ₁ ^ 2 = 1 ∧ χ₁ (b : ZMod M) = θ ∧ (β : ℂ) ∈ zerosBox χ₁ (1 / 2) T ∧ ord χ₁ β = 1 ∧ ∀ (χ : DirichletCharacter ℂ M), ∀ ρ ∈ zerosBox χ (1 / 2) T, (χ = χ₁ ∧ ρ = β) ∨ ρ.re ≤ 1 - η) : |(M.totient : ℝ) * psiAP M b u - (u - θ * (u ^ β / β))| ≤ M * E + 2 * u * ∑ χ : DirichletCharacter ℂ M, (∑ᶠ ρ ∈ zerosBox χ (1 / 2) T ∩ {ρ | ρ.re ≤ 1 - η}, (ord χ ρ : ℝ) * u ^ (ρ.re - 1)) 
+[15728] lemma mainLower (θ β V : ℝ) (hθ : θ ≤ 1) (h1 : 7 / 8 ≤ β) (h2 : β < 1) (hV : 8 ≤ V) : Real.exp V * min 1 ((1 - β) * V) / 4 ≤ Real.exp V - θ * ((Real.exp V) ^ β / β) 
+[38984] lemma realEnd (Ce Ca η₀ c' K cw R₀ : ℝ) (hCe : 0 < Ce) (hCa : 0 < Ca) (hη : 0 < η₀) (hc : 0 < c') (hK : 0 < K) (hcw : 0 < cw) : ∃ c₂ c₃ C : ℝ, 0 < c₂ ∧ 0 < c₃ ∧ 0 < C ∧ ∀ m V w : ℝ, 1 ≤ m → c₂ * m ≤ V → 0 < V ∧ R₀ * (10 * m + √V) ≤ V ∧ (cw * Real.exp (-(3 * m)) ≤ w → Real.exp m * (Ce * (Real.exp (-(8 * m + √V)) + Real.exp (-(V / 2)) * Real.exp (3 * m)) * (m + V + (8 * m + √V)) ^ 2) + 2 * (Ca * (K * w * Real.exp (-(c' * (V / (10 * m + √V)))) + Real.exp (-(η₀ * V)))) ≤ C * (Real.exp (-c₃ * V / m) + Real.exp (-√(c₃ * V))) * (w / 4)) 
+[7028] lemma etaChoice (c d : ℝ) (hc : 0 < c) (hd : 0 < d) : ∃ c' K R₁ : ℝ, 0 < c' ∧ c' ≤ c / 2 ∧ 1 ≤ K ∧ ∀ δ R : ℝ, 0 < δ → 0 ≤ R → R₁ ≤ R → ∃ a : ℝ, 0 ≤ a ∧ (a = c ∨ a = d * Real.log (d / δ)) ∧ Real.exp (-(a * R / 2)) ≤ K * min 1 δ * Real.exp (-(c' * R)) 
+[40676] theorem psiAP_relative : ∃ c₀ : ℝ, 0 < c₀ ∧ ∀ c₁ : ℝ, 0 < c₁ → c₁ ≤ c₀ → ∃ c₂ c₃ C : ℝ, 0 < c₂ ∧ 0 < c₃ ∧ 0 < C ∧ ∀ (M : ℕ) [NeZero M] (b : ℕ) (θ : ℤ) (β u : ℝ), 3 ≤ M → Nat.Coprime b M → ExcData c₁ M b θ β → (M : ℝ) ^ c₂ ≤ u → |(M.totient : ℝ) * psiAP M b u - (u - θ * (u ^ β / β))| ≤ C * (Real.exp (-c₃ * Real.log u / Real.log M) + Real.exp (-Real.sqrt (c₃ * Real.log u))) * (u - θ * (u ^ β / β)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ChebyshevPsiProgressionRelativeErrorStatement.lean  (10 lines)
+[218] theorem _root_.GlobalTheory.T.chebyshevPsiProgression_relative_error : ∃ c₀ : ℝ, 0 < c₀ ∧ ∀ c₁ : ℝ, 0 < c₁ → c₁ ≤ c₀ → ∃ c₂ c₃ C : ℝ, 0 < c₂ ∧ 0 < c₃ ∧ 0 < C ∧ ∀ (M : ℕ) [NeZero M] (b : ℕ) (θ : ℤ) (β u : ℝ), 3 ≤ M → Nat.Coprime b M → ExcData c₁ M b θ β → (M : ℝ) ^ c₂ ≤ u → |(M.totient : ℝ) * psiAP M b u - (u - θ * (u ^ β / β))| ≤ C * (Real.exp (-c₃ * Real.log u / Real.log M) + Real.exp (-Real.sqrt (c₃ * Real.log u))) * (u - θ * (u ^ β / β)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/CompletedLFunctionNeZeroOfReNonpos.lean  (149 lines)
+[1500] theorem inv_Gammaℝ_eq_mul_inv_add_two (s : ℂ) : (Gammaℝ s)⁻¹ = s / (2 * Real.pi) * (Gammaℝ (s + 2))⁻¹ 
+[523 priv] private lemma deriv_inv_Gammaℝ_eq_shift (x : ℂ) : deriv (fun s : ℂ => (Gammaℝ s)⁻¹) x = 1 / (2 * Real.pi) * (Gammaℝ (x + 2))⁻¹ + x / (2 * Real.pi) * deriv (fun s : ℂ => (Gammaℝ s)⁻¹) (x + 2) 
+[1745] theorem deriv_inv_Gammaℝ_ne_zero (n : ℕ) : deriv (fun s : ℂ => (Gammaℝ s)⁻¹) (-(2 * n)) ≠ 0 
+[1282] theorem rootNumber_ne_zero_of_isPrimitive {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (hχ : χ.IsPrimitive) : rootNumber χ ≠ 0 
+[1784] theorem completedLFunction_ne_zero_of_re_nonpos {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (hχ : χ.IsPrimitive) {s : ℂ} (hs : s.re ≤ 0) (h0 : s ≠ 0 ∨ χ ≠ 1) : completedLFunction χ s ≠ 0 
+[3800] theorem LFunction_zero_of_re_nonpos : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ s : ℂ, s.re ≤ 0 → LFunction χ s = 0 → (∃ n : ℕ, s = -n) ∧ analyticOrderNatAt (LFunction χ) s = 1 ∧ (s = 0 → χ.Even ∧ χ ≠ 1) ∧ (s = -1 → χ.Odd) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DifferentiableAtFractInt.lean  (128 lines)
+[110] noncomputable def fractInt (s : ℂ) : ℂ :=
+[37] noncomputable def cutFract : ℝ → ℂ := (Ioi (1 : ℝ)).indicator fun t => ((Int.fract t : ℝ) : ℂ)
+[117] lemma norm_fract_le (t : ℝ) : ‖((Int.fract t : ℝ) : ℂ)‖ ≤ 1 
+[108] lemma norm_cutFract_le (t : ℝ) : ‖cutFract t‖ ≤ 1 
+[55] lemma measurable_fract_ofReal : Measurable fun t : ℝ => ((Int.fract t : ℝ) : ℂ) 
+[101] lemma measurable_cutFract : Measurable cutFract 
+[1124] lemma fractInt_eq_mellin (s : ℂ) : fractInt s = mellin cutFract (-s) 
+[1089] lemma differentiableAt_fractInt {s : ℂ} (hs : 0 < s.re) : DifferentiableAt ℂ fractInt s 
+[328] lemma norm_integrand_le (s : ℂ) {t : ℝ} (ht : t ∈ Ioi (1 : ℝ)) : ‖((Int.fract t : ℝ) : ℂ) * (t : ℂ) ^ (-(s + 1))‖ ≤ t ^ (-(s.re + 1)) 
+[1183] lemma norm_fractInt_le {s : ℂ} (hs : 0 < s.re) : ‖fractInt s‖ ≤ 1 / s.re 
+[80] lemma zeta_eq_of_one_lt {s : ℂ} (hs : 1 < s.re) : riemannZeta s = s / (s - 1) - s * fractInt s 
+[2850] theorem zeta_eq {s : ℂ} (hs : 0 < s.re) (hs1 : s ≠ 1) : riemannZeta s = s / (s - 1) - s * fractInt s 
+[387] theorem norm_zeta_sub_le : ∀ s : ℂ, 0 < s.re → s ≠ 1 → ‖riemannZeta s - s / (s - 1)‖ ≤ ‖s‖ / s.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DifferentiableAtMellinSummatory.lean  (137 lines)
+[1915] theorem norm_partialSum_le (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (n : ℕ) : ‖∑ k ∈ Finset.Icc 1 n, χ (k : ZMod q)‖ ≤ q 
+[50] noncomputable def summatory (f : ℕ → ℂ) (t : ℝ) : ℂ := ∑ k ∈ Finset.Icc 1 ⌊t⌋₊, f k
+[132] theorem measurable_summatory (f : ℕ → ℂ) : Measurable (summatory f) 
+[296] theorem summatory_eq_zero {t : ℝ} (ht : t < 1) : summatory f t = 0 
+[1205] theorem mellin_summatory (s : ℂ) : mellin (summatory f) (-s) = ∫ t in Set.Ioi (1 : ℝ), (∑ k ∈ Finset.Icc 1 ⌊t⌋₊, f k) * (t : ℂ) ^ (-(s + 1)) 
+[1011] theorem differentiableAt_mellin_summatory (hC : ∀ n, ‖∑ k ∈ Finset.Icc 1 n, f k‖ ≤ C) {s : ℂ} (hs : 0 < s.re) : DifferentiableAt ℂ (fun z => mellin (summatory f) (-z)) s 
+[1955] theorem norm_mellin_summatory_le (hC : ∀ n, ‖∑ k ∈ Finset.Icc 1 n, f k‖ ≤ C) {s : ℂ} (hs : 0 < s.re) : ‖mellin (summatory f) (-s)‖ ≤ C / s.re 
+[1399] theorem LFunction_eq_mul_mellin (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {s : ℂ} (hs : 0 < s.re) : LFunction χ s = s * mellin (summatory fun n => χ (n : ZMod q)) (-s) 
+[964] theorem norm_LFunction_le : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ s : ℂ, 0 < s.re → ‖LFunction χ s‖ ≤ q * ‖s‖ / s.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DirichletLFewZerosSmallDisc.lean  (206 lines)
+[823 priv] private lemma derSeries_one_eq_tsum_vonMangoldt (σ : ℝ) : _root_.GlobalTheory.Lin.derSeries (fun n ↦ (1 : DirichletCharacter ℂ 1) n) 0 ((σ : ℂ) + (0 : ℝ) * I) = ((∑' n : ℕ, vonMangoldt n * (n : ℝ) ^ (-σ) : ℝ) : ℂ) 
+[304 priv] private lemma re_natCast_div_pow_zero_add_one (m : ℕ) (z : ℂ) : ((m : ℂ) / z ^ (0 + 1)).re = m * (z⁻¹).re 
+[332 priv] private lemma re_lt_one_of_mem_zerosDisc {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} {c w : ℂ} {R : ℝ} (hw : w ∈ _root_.GlobalTheory.Lin.zerosDisc χ c R) : w.re < 1 
+[147 priv] private lemma inv_re_nonneg_of_re_nonneg {z : ℂ} (h : 0 ≤ z.re) : 0 ≤ (z⁻¹).re 
+[705 priv] private lemma summable_vonMangoldt_mul_rpow_neg {σ : ℝ} (hσ : 1 < σ) : Summable fun n : ℕ ↦ vonMangoldt n * (n : ℝ) ^ (-σ) 
+[1337 priv] private lemma norm_derSeries_le_tsum_vonMangoldt {q : ℕ} (χ : DirichletCharacter ℂ q) {s : ℂ} (hs : 1 < s.re) : ‖_root_.GlobalTheory.Lin.derSeries (fun n ↦ χ n) 0 s‖ ≤ ∑' n : ℕ, vonMangoldt n * (n : ℝ) ^ (-s.re) 
+[4747 priv] private lemma inv_re_ge_of_norm_sub_le {t r : ℝ} {w : ℂ} (hr : 0 < r) (hw : ‖w - (1 + t * I)‖ ≤ r) (hre : w.re < 1) : 1 / (4 * r) ≤ ((((1 + r : ℝ) : ℂ) + t * I - w)⁻¹).re 
+[22062] theorem _root_.GlobalTheory.SmallDiscZeros.few_zeros : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (t r : ℝ), (χ ≠ 1 ∨ 2 ≤ |t|) → 0 < r → r ≤ 1 / 2 → (_root_.GlobalTheory.Lin.zerosDisc χ (1 + t * I) r).Finite ∧ (∑ᶠ w ∈ _root_.GlobalTheory.Lin.zerosDisc χ (1 + t * I) r, (_root_.GlobalTheory.Lin.ord χ w : ℝ)) ≤ C * (1 + r * Real.log (q * (|t| + 2))) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DirichletLFewZerosSmallDiscStatement.lean  (10 lines)
+[263] theorem _root_.GlobalTheory.T.dirichletL_few_zeros_small_disc : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (t r : ℝ), (χ ≠ 1 ∨ 2 ≤ |t|) → 0 < r → r ≤ 1 / 2 → (zerosDisc χ (1 + t * I) r).Finite ∧ (∑ᶠ w ∈ zerosDisc χ (1 + t * I) r, (ord χ w : ℝ)) ≤ C * (1 + r * Real.log (q * (|t| + 2))) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DirichletLZerosEqPrimitiveCharacterZeros.lean  (79 lines)
+[3502] theorem _root_.GlobalTheory.Lin.zeros_eq_zeros_primitiveCharacter : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ), 0 < s.re → (χ ≠ 1 ∨ s ≠ 1) → haveI : NeZero χ.conductor 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/DirichletLZerosEqPrimitiveCharacterZerosStatement.lean  (10 lines)
+[150] theorem _root_.GlobalTheory.T.dirichletL_zeros_eq_primitiveCharacter_zeros : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ), 0 < s.re → (χ ≠ 1 ∨ s ≠ 1) → haveI : NeZero χ.conductor := ⟨χ.conductor_ne_zero⟩; (LFunction χ s = 0 ↔ LFunction χ.primitiveCharacter s = 0) ∧ ord χ s = ord χ.primitiveCharacter s 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExceptionalDirichletZeroUniqueZeroFreeRegion.lean  (156 lines)
+[2219] theorem one_le_log {M : ℕ} (hM : 3 ≤ M) : 1 ≤ Real.log M 
+[1631] theorem log_mul_le {M : ℕ} (hM : 3 ≤ M) {a : ℝ} (ha : 0 < a) (ha3 : a ≤ 3) : Real.log (a * M) ≤ 2 * Real.log M 
+[920] theorem le_log_mul {M : ℕ} (hM : 3 ≤ M) {a : ℝ} (ha : 1 ≤ a) : Real.log M ≤ Real.log (a * M) 
+[2508] theorem div_log_le {M : ℕ} (hM : 3 ≤ M) {c₁ c : ℝ} (h0 : 0 ≤ c) (h : c₁ ≤ c / 2) : c₁ / Real.log M ≤ c / Real.log (2 * M) 
+[1109 priv] private theorem exists_ne_zero_smul_mem_of_mem_span' {a b x y : ℝ} (ha : 0 ≤ a) (hab : a ≤ b) (hx : 0 < x) (hxy : x ≤ y) : a / y ≤ b / x 
+[15674] theorem main : ∃ c₀ : ℝ, 0 < c₀ ∧ ∀ c₁ : ℝ, 0 < c₁ → c₁ ≤ c₀ → ∃ c : ℝ, 0 < c ∧ ∀ (M : ℕ) [NeZero M], 3 ≤ M → (∀ (χ χ' : DirichletCharacter ℂ M) (β β' : ℝ), IsExc c₁ χ β → IsExc c₁ χ' β' → χ = χ' ∧ β = β') ∧ (∀ (χ : DirichletCharacter ℂ M) (β : ℝ), IsExc c₁ χ β → χ ≠ 1 ∧ 7 / 8 ≤ β ∧ LFunction χ β = 0 ∧ ord χ β = 1 ∧ c / ((M : ℝ) ^ 2 * Real.log M) ≤ 1 - β) ∧ ∀ (χ : DirichletCharacter ℂ M) (ρ : ℂ), ρ.re < 1 → LFunction χ ρ = 0 → (ρ.im = 0 ∧ IsExc c₁ χ ρ.re) ∨ ρ.re ≤ 1 - c / Real.log (M * (|ρ.im| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExceptionalDirichletZeroUniqueZeroFreeRegionStatement.lean  (10 lines)
+[353] theorem _root_.GlobalTheory.T.exceptionalDirichletZero_unique_zeroFreeRegion : ∃ c₀ : ℝ, 0 < c₀ ∧ ∀ c₁ : ℝ, 0 < c₁ → c₁ ≤ c₀ → ∃ c : ℝ, 0 < c ∧ ∀ (M : ℕ) [NeZero M], 3 ≤ M → (∀ (χ χ' : DirichletCharacter ℂ M) (β β' : ℝ), IsExc c₁ χ β → IsExc c₁ χ' β' → χ = χ' ∧ β = β') ∧ (∀ (χ : DirichletCharacter ℂ M) (β : ℝ), IsExc c₁ χ β → χ ≠ 1 ∧ 7 / 8 ≤ β ∧ LFunction χ β = 0 ∧ ord χ β = 1 ∧ c / ((M : ℝ) ^ 2 * Real.log M) ≤ 1 - β) ∧ ∀ (χ : DirichletCharacter ℂ M) (ρ : ℂ), ρ.re < 1 → LFunction χ ρ = 0 → (ρ.im = 0 ∧ IsExc c₁ χ ρ.re) ∨ ρ.re ≤ 1 - c / Real.log (M * (|ρ.im| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsBoundRight.lean  (360 lines)
+[5332] theorem exists_far (S : Finset ℝ) (T : ℝ) : ∃ T' : ℝ, T ≤ T' ∧ T' ≤ T + 1 ∧ ∀ x ∈ S, 1 / (2 * ((S.card : ℝ) + 1)) ≤ |x - T'| 
+[1110] theorem one_le_order {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {w : ℂ} (h1 : w ≠ 1) (hw : LFunction χ w = 0) : 1 ≤ analyticOrderNatAt (LFunction χ) w 
+[1642] theorem exists_bound_right : ∃ B : ℝ, 0 ≤ B ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N) (s : ℂ), 2 ≤ s.re → ‖deriv (LFunction χ) s / LFunction χ s‖ ≤ B 
+[10932] theorem local_formula : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ s : ℂ, -1 ≤ s.re → s.re ≤ 2 → 2 ≤ |s.im| → LFunction χ s ≠ 0 → ∃ Z : Finset ℂ, (∀ w, w ∈ Z ↔ ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ w ≠ 1 ∧ LFunction χ w = 0) ∧ ∑ w ∈ Z, (analyticOrderNatAt (LFunction χ) w : ℝ) ≤ C * Real.log (N * (|s.im| + 2)) ∧ ‖deriv (LFunction χ) s / LFunction χ s - ∑ w ∈ Z, (analyticOrderNatAt (LFunction χ) w : ℂ) / (s - w)‖ ≤ C * Real.log (N * (|s.im| + 2)) 
+[46881] theorem exists_height : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ T : ℝ, 2 ≤ T → ∃ T' : ℝ, T ≤ T' ∧ T' ≤ T + 1 ∧ ∀ s : ℂ, -(1/2 : ℝ) ≤ s.re → s.re ≤ 3 → |s.im| = T' → LFunction χ s ≠ 0 ∧ ‖deriv (LFunction χ) s / LFunction χ s‖ ≤ C * Real.log (N * T) ^ 2 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsDirichletLFunctionZeroGapNearOne.lean  (122 lines)
+[1073] lemma log_pos {x : ℝ} (hx : 1 ≤ x) : 0 < Real.log (3 * x) 
+[1654] lemma weaken {x c d : ℝ} (hx : 1 ≤ x) (hc : 0 < c) (hcd : c ≤ d) : c / (x ^ 2 * Real.log (3 * x)) ≤ d / Real.log (3 * x) 
+[4192] lemma of_region {x c d t r : ℝ} (hx : 1 ≤ x) (hc : 0 < c) (hcd : c ≤ d) (ht : |t| ≤ 1) (h : r < 1 - d / Real.log (x * (|t| + 2))) : c / (x ^ 2 * Real.log (3 * x)) ≤ 1 - r 
+[3034] lemma log_le_sqrt {x : ℝ} (hx : 1 ≤ x) : Real.log (3 * x) ≤ 4 * √x 
+[4961] lemma real_case {x a C c δ : ℝ} (hx : 1 ≤ x) (hC : 0 < C) (hδ : 0 ≤ δ) (hc : 0 < c) (hca : c ≤ a / (4 * C)) (h : a / x ^ ((3 : ℝ) / 2) ≤ C * Real.log (3 * x) ^ 2 * δ) : c / (x ^ 2 * Real.log (3 * x)) ≤ δ 
+[5706] theorem exists_gap : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (ρ : ℂ), (χ ≠ 1 ∨ ρ ≠ 1) → LFunction χ ρ = 0 → |ρ.im| ≤ 1 → c / ((q : ℝ) ^ 2 * Real.log (3 * q)) ≤ 1 - ρ.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsDirichletLFunctionZeroGapNearOneStatement.lean  (10 lines)
+[221] theorem _root_.GlobalTheory.T.exists_dirichletLFunction_zero_gap_near_one : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (ρ : ℂ), (χ ≠ 1 ∨ ρ ≠ 1) → LFunction χ ρ = 0 → |ρ.im| ≤ 1 → c / ((q : ℝ) ^ 2 * Real.log (3 * q)) ≤ 1 - ρ.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsFactorOrder.lean  (42 lines)
+[2527] theorem exists_factor_order {U : Set ℂ} {g : ℂ → ℂ} (hg : AnalyticOnNhd ℂ g U) {w : ℂ} (hw : w ∈ U) (hord : analyticOrderAt g w ≠ ⊤) : ∃ h : ℂ → ℂ, AnalyticOnNhd ℂ h U ∧ (∀ z : ℂ, g z = (z - w) ^ analyticOrderNatAt g w * h z) ∧ h w ≠ (0 : ℂ) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsInterpolationExteriorSmallCoeffs.lean  (336 lines)
+[1868] theorem exists_coeffs (l : ℕ) (z : Fin l → ℂ) (hz : ∀ i, ‖z i‖ ≤ 1) : ∃ a : ℕ → ℂ, (∀ w : ℂ, ∏ i, (w - z i) = ∑ k ∈ Finset.range (l + 1), a k * w ^ k) ∧ ∑ k ∈ Finset.range (l + 1), ‖a k‖ ≤ 2 ^ l 
+[4007] theorem exists_divided (l : ℕ) (z : Fin l → ℂ) (hz : ∀ i, ‖z i‖ ≤ 1) : ∃ b : Fin l → ℂ → ℂ, (∀ j, Continuous (b j)) ∧ (∀ j ζ, ‖ζ‖ ≤ 1 → ‖b j ζ‖ ≤ 2 ^ l) ∧ ∀ ζ w : ℂ, (∑ j, b j ζ * w ^ (j : ℕ)) * (ζ - w) = ∏ i, (ζ - z i) - ∏ i, (w - z i) 
+[10645] theorem cauchy_exterior (g : ℂ → ℂ) (r : ℝ) (hr : 0 < r) (hg : DifferentiableOn ℂ g {w | r ≤ ‖w‖}) (h0 : Tendsto g (Filter.cocompact ℂ) (𝓝 0)) (w : ℂ) (hw : r < ‖w‖) : ∮ ζ in C(0, r), (ζ - w)⁻¹ * g ζ = -(2 * Real.pi * I * g w) 
+[456 priv] private theorem circleIntegral_finset_sum' {ι : Type*} (s : Finset ι) (f : ι → ℂ → ℂ) (c : ℂ) (R : ℝ) (hf : ∀ i ∈ s, CircleIntegrable (f i) c R) : (∮ z in C(c, R), ∑ i ∈ s, f i z) = ∑ i ∈ s, ∮ z in C(c, R), f i z 
+[9289] theorem interpolation : ∀ (l : ℕ) (z : Fin l → ℂ) (g : ℂ → ℂ) (r G : ℝ), 0 < r → r ≤ 1 → (∀ i, r < ‖z i‖ ∧ ‖z i‖ ≤ 1) → DifferentiableOn ℂ g {w | r ≤ ‖w‖} → Tendsto g (Filter.cocompact ℂ) (𝓝 0) → (∀ w : ℂ, ‖w‖ = r → ‖g w‖ ≤ G * ‖∏ i, (w - z i)‖) → ∃ c : Fin l → ℂ, (∀ i, ∑ j, c j * z i ^ (j : ℕ) = g (z i)) ∧ ∑ j, ‖c j‖ ≤ 4 ^ l * r * G 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsInterpolationExteriorSmallCoeffsStatement.lean  (8 lines)
+[320] theorem _root_.GlobalTheory.T.exists_interpolation_exterior_small_coeffs : ∀ (l : ℕ) (z : Fin l → ℂ) (g : ℂ → ℂ) (r G : ℝ), 0 < r → r ≤ 1 → (∀ i, r < ‖z i‖ ∧ ‖z i‖ ≤ 1) → DifferentiableOn ℂ g {w | r ≤ ‖w‖} → Tendsto g (Filter.cocompact ℂ) (𝓝 0) → (∀ w : ℂ, ‖w‖ = r → ‖g w‖ ≤ G * ‖∏ i, (w - z i)‖) → ∃ c : Fin l → ℂ, (∀ i, ∑ j, c j * z i ^ (j : ℕ) = g (z i)) ∧ ∑ j, ‖c j‖ ≤ 4 ^ l * r * G 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsLargeVonMangoldtLogPowerSeriesNearZero.lean  (280 lines)
+[4561] theorem power_sum_mult {C : ℝ} (hC : 1 ≤ C) (hT : ∀ (N M : ℕ) (z : Fin N → ℂ) (i₀ : Fin N), ∃ k : ℕ, M + 1 ≤ k ∧ k ≤ M + N ∧ ((N : ℝ) / (C * (M + N))) ^ N * ‖z i₀‖ ^ k ≤ ‖∑ i, z i ^ k‖) (Z : Finset ℂ) (m : ℂ → ℕ) (f : ℂ → ℂ) (K : ℕ) (hK : ∑ w ∈ Z, m w ≤ K) (ρ : ℂ) (hρ : ρ ∈ Z) (hm : 1 ≤ m ρ) : ∃ j : ℕ, K + 1 ≤ j ∧ j ≤ 2 * K ∧ (‖f ρ‖ / (2 * C)) ^ j ≤ ‖∑ w ∈ Z, (m w : ℂ) * f w ^ j‖ 
+[13961] theorem power_sum_large {C : ℝ} (hC : 1 ≤ C) (hT : ∀ (N M : ℕ) (z : Fin N → ℂ) (i₀ : Fin N), ∃ k : ℕ, M + 1 ≤ k ∧ k ≤ M + N ∧ ((N : ℝ) / (C * (M + N))) ^ N * ‖z i₀‖ ^ k ≤ ‖∑ i, z i ^ k‖) (Z : Finset ℂ) (m : ℂ → ℕ) (s : ℂ) (r B : ℝ) (K : ℕ) (hr : 0 < r) (hs : ∀ w ∈ Z, s - w ≠ 0) (hB : ∑ w ∈ Z, (m w : ℝ) / ‖s - w‖ ^ 2 ≤ B / r ^ 2) (hK : 4 * (8 * C) ^ 2 * B ≤ K) (ρ : ℂ) (hρ : ρ ∈ Z) (hm : 1 ≤ m ρ) (hd : ‖s - ρ‖ ≤ 2 * r) : ∃ j : ℕ, K + 1 ≤ j ∧ j ≤ 2 * K ∧ 3 / 4 * (1 / (4 * C * r)) ^ j ≤ ‖∑ w ∈ Z, (m w : ℂ) / (s - w) ^ j‖ 
+[215] theorem re_lt_one {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} {c w : ℂ} {R : ℝ} (hw : w ∈ zerosDisc χ c R) : w.re < 1 
+[623] theorem inv_sq_le_re {s w : ℂ} {r : ℝ} (m : ℕ) (h : r ≤ (s - w).re) : r * ((m : ℝ) / ‖s - w‖ ^ 2) ≤ ((m : ℂ) / (s - w)).re 
+[2416] theorem norm_derSeries_zero_le (c : ℕ → ℂ) (hc : ∀ n, ‖c n‖ ≤ 1) (σ t : ℝ) (hσ : 1 < σ) : ‖derSeries c 0 (σ + t * I)‖ ≤ (derSeries (fun n : ℕ => (1 : DirichletCharacter ℂ 1) (n : ZMod 1)) 0 (σ + (0 : ℝ) * I)).re 
+[36294] theorem exists_large_derSeries : ∃ A C r₀ : ℝ, 1 ≤ A ∧ 0 < C ∧ 0 < r₀ ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (τ r L : ℝ) (K : ℕ) (ρ : ℂ), (χ ≠ 1 ∨ 2 ≤ |τ|) → Real.log (q * (|τ| + 2)) ≤ L → 1 / L ≤ r → r ≤ r₀ → C * r * L ≤ K → LFunction χ ρ = 0 → ‖ρ - (1 + τ * I)‖ ≤ r → ∃ k : ℕ, K ≤ k ∧ k ≤ 2 * K ∧ 1 / (A * r) ^ (k + 1) ≤ ‖derSeries (fun n : ℕ => χ (n : ZMod q)) k ((1 + r : ℝ) + τ * I)‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsLargeVonMangoldtLogPowerSeriesNearZeroStatement.lean  (10 lines)
+[378] theorem _root_.GlobalTheory.T.exists_large_vonMangoldtLogPowerSeries_near_zero : ∃ A C r₀ : ℝ, 1 ≤ A ∧ 0 < C ∧ 0 < r₀ ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (τ r L : ℝ) (K : ℕ) (ρ : ℂ), (χ ≠ 1 ∨ 2 ≤ |τ|) → Real.log (q * (|τ| + 2)) ≤ L → 1 / L ≤ r → r ≤ r₀ → C * r * L ≤ K → LFunction χ ρ = 0 → ‖ρ - (1 + τ * I)‖ ≤ r → ∃ k : ℕ, K ≤ k ∧ k ≤ 2 * K ∧ 1 / (A * r) ^ (k + 1) ≤ ‖derSeries (fun n : ℕ => χ (n : ZMod q)) k ((1 + r : ℝ) + τ * I)‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsLeNormLFunctionOne.lean  (364 lines)
+[3997] theorem abel_bound (a : ℕ → ℂ) (b : ℕ → ℝ) (M : ℝ) (hA : ∀ N, ‖∑ n ∈ Finset.range N, a n‖ ≤ M) (hb : Antitone b) (hb0 : ∀ n, 0 ≤ b n) (N : ℕ) : ‖∑ n ∈ Finset.range N, a n * (b n : ℂ)‖ ≤ M * b 0 
+[1902] theorem char_sum_bound {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (N : ℕ) : ‖∑ n ∈ Finset.range N, χ ((n + 1 : ℕ) : ZMod q)‖ ≤ q 
+[34] noncomputable def wt (x : ℝ) : ℝ := x⁻¹ - (Real.exp x - 1)⁻¹
+[791] theorem wt_nonneg {x : ℝ} (hx : 0 < x) : 0 ≤ wt x 
+[2632] theorem wt_le_one {x : ℝ} (hx : 0 < x) : wt x ≤ 1 
+[6076] theorem wt_antitoneOn : AntitoneOn wt (Set.Ioi 0) 
+[1792] theorem one_le_zetaMul_sq {q : ℕ} {χ : DirichletCharacter ℂ q} (hχ : χ ^ 2 = 1) {m : ℕ} (hm : m ≠ 0) : 1 ≤ zetaMul χ (m ^ 2) 
+[2291] theorem lambert {q : ℕ} (χ : DirichletCharacter ℂ q) {t : ℂ} (ht : ‖t‖ < 1) : HasSum (fun n : ℕ+ => zetaMul χ n * t ^ (n : ℕ)) (∑' d : ℕ+, χ ((d : ℕ) : ZMod q) * (t ^ (d : ℕ) / (1 - t ^ (d : ℕ)))) 
+[10650] theorem lambert_lower {q : ℕ} {χ : DirichletCharacter ℂ q} (hχ : χ ^ 2 = 1) {M : ℕ} (hM : 0 < M) : (M : ℝ) / 3 ≤ ‖∑' d : ℕ, χ ((d + 1 : ℕ) : ZMod q) * (((Real.exp (((d + 1 : ℕ) : ℝ) * ((M : ℝ) ^ 2)⁻¹) - 1)⁻¹ : ℝ) : ℂ)‖ 
+[3598] theorem summable_inv_exp {α : ℝ} (hα : 0 < α) : Summable fun d : ℕ => (Real.exp (((d + 1 : ℕ) : ℝ) * α) - 1)⁻¹ 
+[4468] theorem compare_right {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {α ε : ℝ} (hα : 0 < α) (hε : 0 < ε) : ‖LFunction χ (1 + ε) * ((α⁻¹ : ℝ) : ℂ) - ∑' d : ℕ, χ ((d + 1 : ℕ) : ZMod q) * (((((d + 1 : ℕ) : ℝ) ^ (-ε) * (Real.exp (((d + 1 : ℕ) : ℝ) * α) - 1)⁻¹ : ℝ)) : ℂ)‖ ≤ q 
+[2620] theorem compare_one {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {α : ℝ} (hα : 0 < α) : ‖LFunction χ 1 * ((α⁻¹ : ℝ) : ℂ) - ∑' d : ℕ, χ ((d + 1 : ℕ) : ZMod q) * (((Real.exp (((d + 1 : ℕ) : ℝ) * α) - 1)⁻¹ : ℝ) : ℂ)‖ ≤ q 
+[3301] theorem inv_le_norm_LFunction_one {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (h2 : χ ^ 2 = 1) : 1 / (36 * (q : ℝ)) ≤ ‖LFunction χ 1‖ 
+[830] theorem exists_le_norm_LFunction_one : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → χ ^ 2 = 1 → c / (q : ℝ) ^ ((3 : ℝ) / 2) ≤ ‖LFunction χ 1‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsNormDerivLFunctionLe.lean  (97 lines)
+[3589] theorem rpow_neg_le {q n : ℕ} (hn : 1 ≤ n) (hnq : n ≤ q) {x : ℝ} (hx : 1 - 2 / Real.log (3 * q) ≤ x) : (n : ℝ) ^ (-x) ≤ Real.exp 2 * (n : ℝ)⁻¹ 
+[9128] theorem norm_LFunction_le {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {s : ℂ} (h1 : 1 - 2 / Real.log (3 * q) ≤ s.re) (h2 : 1 / 20 ≤ s.re) (h3 : ‖s‖ ≤ 2) : ‖LFunction χ s‖ ≤ 84 * Real.exp 2 * Real.log (3 * q) 
+[11947] theorem exists_norm_deriv_LFunction_le : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ σ : ℝ, 1 - 1 / Real.log (3 * q) ≤ σ → σ ≤ 1 → ‖deriv (LFunction χ) σ‖ ≤ C * Real.log (3 * q) ^ 2 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsProdAbsSubGeOnSegment.lean  (52 lines)
+[7289] theorem exists_prod_abs_sub_ge_on_segment : ∀ (N : ℕ) (x : Fin N → ℝ) (a δ : ℝ), 0 < δ → ∃ r : ℝ, a ≤ r ∧ r ≤ a + δ ∧ (δ / (2 * Real.exp 1)) ^ N ≤ ∏ i, |r - x i| 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExistsTsumVonMangoldtDivRpowLeDiv.lean  (60 lines)
+[3848] theorem exists_tsum_vonMangoldt_div_rpow_le_div : ∃ C : ℝ, 1 ≤ C ∧ ∀ s : ℝ, 0 < s → s ≤ 1 → Summable (fun n : ℕ => Λ n / (n : ℝ) ^ (1 + s)) ∧ ∑' n : ℕ, Λ n / (n : ℝ) ^ (1 + s) ≤ C / s 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExplicitFormulaClosed.lean  (93 lines)
+[2531] theorem exists_open_eq_closed (f : ℂ → ℂ) (T : ℝ) (hfin : {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - 0| ≤ T + 1 ∧ f ρ = 0}.Finite) : ∃ T' : ℝ, T ≤ T' ∧ T' ≤ T + 1 ∧ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - 0| ≤ T ∧ f ρ = 0} = {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T' ∧ f ρ = 0} 
+[6114] theorem explicit_formula_closed : ∃ C : ℝ, ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ u T : ℝ, 2 ≤ T → T ≤ u → ‖GlobalTheoryTheory.psi0 χ u + zsum χ 0 T (fun ρ => (u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (q * u * T) ^ 2 / T + Real.log (q * u) + zsumR χ 0 1 (fun ρ => 1 / ‖ρ‖)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExplicitFormulaClosedStatement.lean  (14 lines)
+[232] theorem _root_.GlobalTheory.T.norm_psi0_add_zsum_le : ∃ C : ℝ, ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ u T : ℝ, 2 ≤ T → T ≤ u → ‖GlobalTheoryTheory.psi0 χ u + zsum χ 0 T (fun ρ => (u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (q * u * T) ^ 2 / T + Real.log (q * u) + zsumR χ 0 1 (fun ρ => 1 / ‖ρ‖)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExplicitFormulaDirichletZerosRightHalf.lean  (266 lines)
+[96] theorem zfin {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) : (zerosIn χ t T).Finite 
+[109] theorem zsumR_eq {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) (f : ℂ → ℝ) : zsumR χ t T f = ∑ ρ ∈ (zfin χ t T).toFinset, (zmult χ ρ : ℝ) * f ρ 
+[9642] theorem recip_bound : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ T : ℝ, 2 ≤ T → zsumR χ 0 1 (fun ρ => 1 / ‖ρ‖) ≤ C * ((q : ℝ) ^ 2 * Real.log (3 * q) ^ 2) ∧ zsumR χ 0 T (fun ρ => 1 / ‖ρ‖) ≤ C * ((q : ℝ) ^ 2 * Real.log (3 * q) ^ 2) + C * Real.log (q * T) ^ 2 
+[1556] theorem box_subset {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (T : ℝ) : zerosBox χ (1 / 2) T ⊆ zerosIn χ 0 T 
+[2962] theorem left_zeros {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (u T : ℝ) (hu : 1 ≤ u) : ‖zsum χ 0 T (fun ρ => (u : ℂ) ^ ρ / ρ) - ∑ᶠ ρ ∈ zerosBox χ (1 / 2) T, (ord χ ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ Real.sqrt u * zsumR χ 0 T (fun ρ => 1 / ‖ρ‖) 
+[11214] theorem logs {N q u T : ℝ} (hN : 1 ≤ N) (hq : N ≤ q) (hT : 2 ≤ T) (hu : T ≤ u) {L : ℝ} (hL : L = Real.log (q * u * T)) : 1 ≤ L ∧ Real.log (N * u * T) ^ 2 ≤ L ^ 2 ∧ Real.log (N * u) ≤ L ^ 2 ∧ Real.log (3 * N) ^ 2 ≤ L ^ 2 ∧ Real.log (N * T) ^ 2 ≤ L ^ 2 ∧ (Nat.log 2 ⌊u⌋₊ : ℝ) * Real.log q ≤ 2 * L ^ 2 
+[9005] theorem combine {A B S s x K E P D Z₁ Z t₁ t₂ l₃ l₄ N q : ℝ} (hA : 0 ≤ A) (hB : 0 ≤ B) (hs : 1 ≤ s) (hx : 0 ≤ x) (hK : 0 ≤ K) (hN : 1 ≤ N) (hq : N ≤ q) (hS : S ≤ P + E + D) (hP : P ≤ 2 * K) (hE : E ≤ A * (t₁ + t₂ + Z₁)) (hD : D ≤ s * Z) (h1 : t₁ ≤ x * K) (h2 : t₂ ≤ K) (hl₃ : l₃ ≤ K) (hl₄ : l₄ ≤ K) (hZ₁ : Z₁ ≤ B * (N ^ 2 * l₃)) (hZ : Z ≤ B * (N ^ 2 * l₃) + B * l₄) : S ≤ (2 + A * (2 + B) + 2 * B) * (x + s * q ^ 3) * K 
+[8684] theorem explicit_formula_right : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (u T : ℝ), 2 ≤ T → T ≤ u → (zerosBox χ (1 / 2) T).Finite ∧ ‖(∑ n ∈ Finset.Icc 1 ⌊u⌋₊, ((Λ n : ℝ) : ℂ) * χ (n : ZMod q)) - (if χ = 1 then (u : ℂ) else 0) + ∑ᶠ ρ ∈ zerosBox χ (1 / 2) T, (ord χ ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u / T + Real.sqrt u * (q : ℝ) ^ 3) * Real.log (q * u * T) ^ 2 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ExplicitFormulaDirichletZerosRightHalfStatement.lean  (10 lines)
+[422] theorem _root_.GlobalTheory.T.explicit_formula_dirichlet_zeros_right_half : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (u T : ℝ), 2 ≤ T → T ≤ u → (zerosBox χ (1 / 2) T).Finite ∧ ‖(∑ n ∈ Finset.Icc 1 ⌊u⌋₊, ((Λ n : ℝ) : ℂ) * χ (n : ZMod q)) - (if χ = 1 then (u : ℂ) else 0) + ∑ᶠ ρ ∈ zerosBox χ (1 / 2) T, (ord χ ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u / T + Real.sqrt u * (q : ℝ) ^ 3) * Real.log (q * u * T) ^ 2 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/FiniteBox.lean  (126 lines)
+[1762] theorem finite_box (f : ℂ → ℂ) (hW : ∀ t : ℝ, {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - t| ≤ 1 ∧ f ρ = 0}.Finite) (T : ℝ) : {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ f ρ = 0}.Finite 
+[1772] theorem norm_term_le (m : ℕ) {u T : ℝ} (hT : 2 ≤ T) (hu : T ≤ u) {ρ : ℂ} (h1 : ρ.re < 1) (h2 : T ≤ |ρ.im|) : ‖(m : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ (m : ℝ) * (u / T) 
+[4606] theorem band_le (f : ℂ → ℂ) (m : ℂ → ℕ) (B : ℝ → ℝ) (hW : ∀ t : ℝ, {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - t| ≤ 1 ∧ f ρ = 0}.Finite ∧ ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - t| ≤ 1 ∧ f ρ = 0}, (m ρ : ℝ) ≤ B t) {u T T' : ℝ} (hT : 2 ≤ T) (hu : T ≤ u) (hT1 : T ≤ T') (hT2 : T' ≤ T + 1) : ‖(∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T' ∧ f ρ = 0}, (m ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)) - ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ f ρ = 0}, (m ρ : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ (B T + B (-T)) * (u / T) 
+[8097] theorem zeros_band : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ u T T' : ℝ, 2 ≤ T → T ≤ u → T ≤ T' → T' ≤ T + 1 → {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}.Finite ∧ ‖(∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T' ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)) - ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (N * u * T) ^ 2 / T) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/FinsumMemLeOfSubset.lean  (109 lines)
+[2643 priv] private lemma norm_sub_two_add_le_of_mem_strip {ρ : ℂ} {t : ℝ} (h0 : 0 < ρ.re) (h1 : ρ.re < 1) (ht : |ρ.im - t| ≤ 1) : ‖ρ - (2 + (t : ℂ) * I)‖ ≤ 7 / 2 
+[274 priv] private lemma finsum_mem_le_of_subset_of_nonneg {S D : Set ℂ} (f : ℂ → ℝ) (hf : ∀ x, 0 ≤ f x) (hD : D.Finite) (hSD : S ⊆ D) : ∑ᶠ x ∈ S, f x ≤ ∑ᶠ x ∈ D, f x 
+[5300] theorem _root_.GlobalTheory.ZeroWindow.count_zeros_window : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ t : ℝ, {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - t| ≤ 1 ∧ LFunction χ ρ = 0}.Finite ∧ ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im - t| ≤ 1 ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℝ) ≤ C * Real.log (N * (|t| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ImportsMore.lean  (178 lines)
+[11874] theorem scaled : ∃ C : ℝ, 0 < C ∧ ∀ (F : ℂ → ℂ) (c : ℂ) (M : ℝ), Differentiable ℂ F → F c ≠ 0 → (∀ w, ‖w - c‖ ≤ 15/4 → ‖F w‖ ≤ M) → ({w : ℂ | ‖w - c‖ ≤ 7/2 ∧ F w = 0}.Finite ∧ (∑ᶠ w ∈ {w : ℂ | ‖w - c‖ ≤ 7/2 ∧ F w = 0}, (analyticOrderNatAt F w : ℝ)) ≤ C * (1 + Real.log (M / ‖F c‖))) ∧ ∀ s : ℂ, ‖s - c‖ ≤ 3 → F s ≠ 0 → ‖deriv F s / F s - ∑ᶠ w ∈ {w : ℂ | ‖w - c‖ ≤ 7/2 ∧ F w = 0}, (analyticOrderNatAt F w : ℂ) / (s - w)‖ ≤ C * (1 + Real.log (M / ‖F c‖)) 
+[196] theorem zeta₁_eq {s : ℂ} (hs : s ≠ 1) : riemannZeta₁ s = (s - 1) * riemannZeta s 
+[558] theorem order_zeta₁_eq {s : ℂ} (hs : s ≠ 1) : analyticOrderNatAt riemannZeta₁ s = analyticOrderNatAt riemannZeta s 
+[22327] theorem main : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, -1 ≤ s.re → s.re ≤ 2 → s ≠ 1 → riemannZeta s ≠ 0 → {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ w ≠ 1 ∧ riemannZeta w = 0}.Finite ∧ (∑ᶠ w ∈ {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ w ≠ 1 ∧ riemannZeta w = 0}, (analyticOrderNatAt riemannZeta w : ℝ)) ≤ C * Real.log (|s.im| + 2) ∧ ‖deriv riemannZeta s / riemannZeta s + 1 / (s - 1) - ∑ᶠ w ∈ {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ w ≠ 1 ∧ riemannZeta w = 0}, (analyticOrderNatAt riemannZeta w : ℂ) / (s - w)‖ ≤ C * Real.log (|s.im| + 2) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/IntegralNormSqLp.lean  (198 lines)
+[232] theorem continuous_fourier {f : ℝ → ℂ} (hf : Integrable f) : Continuous (𝓕 f) 
+[1930] theorem fourier_ae_eq {f : ℝ → ℂ} (hf : Integrable f) (h2 : MemLp f 2) : 𝓕 f =ᵐ[volume] (𝓕 (h2.toLp f) : Lp ℂ 2 (volume : Measure ℝ)) 
+[582] theorem integral_norm_sq_Lp (F : Lp ℂ 2 (volume : Measure ℝ)) : ∫ x, ‖F x‖ ^ 2 = ‖F‖ ^ 2 
+[1073] theorem plancherel {f : ℝ → ℂ} (hf : Integrable f) (h2 : MemLp f 2) : Integrable (fun x => ‖𝓕 f x‖ ^ 2) ∧ ∫ x, ‖𝓕 f x‖ ^ 2 = ∫ x, ‖f x‖ ^ 2 
+[3522] theorem fourier_indicator (l δ : ℝ) (hδ : 0 ≤ δ) (c : ℂ) (w : ℝ) : 𝓕 ((Set.Ico (l - δ) l).indicator (fun _ => c)) w = c * cexp (-(2 * π * w * l : ℝ) * I) * ∫ u in (0 : ℝ)..δ, cexp ((2 * π * w * u : ℝ) * I) 
+[3771] theorem kernel_lower (δ s : ℝ) (hδ : 0 ≤ δ) (hs : |s| * δ ≤ 1) : δ / 2 ≤ ‖∫ u in (0 : ℝ)..δ, cexp ((s * u : ℝ) * I)‖ 
+[7953] theorem exp_sum (S : Finset ℕ) (a : ℕ → ℂ) (l : ℕ → ℝ) (T : ℝ) (hT : 0 < T) : (∫ t in (-T)..T, ‖∑ n ∈ S, a n * cexp (-(t * l n : ℝ) * I)‖ ^ 2) ≤ 8 * π * T ^ 2 * ∫ v : ℝ, ‖∑ n ∈ S, (Set.Ico (l n - 1 / T) (l n)).indicator (fun _ => a n) v‖ ^ 2 
+[4645] theorem gallagher : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) (a : ℕ → ℂ) (T : ℝ), 1 ≤ T → (∫ t in (-T)..T, ‖∑ n ∈ Finset.Icc 1 N, a n * (n : ℂ) ^ (-(t * I))‖ ^ 2) ≤ C * T ^ 2 * ∫ x in Set.Ioi (0 : ℝ), ‖∑ n ∈ (Finset.Icc 1 N).filter (fun n : ℕ => x < n ∧ (n : ℝ) ≤ x * Real.exp (1 / T)), a n‖ ^ 2 / x 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/IntervalIntegrableDivOfBounded.lean  (88 lines)
+[178 priv] private lemma measurable_norm_sum_primesIoc (a : ℕ → ℂ) (x : ℝ) : Measurable (fun t : ℝ => ‖∑ p ∈ _root_.GlobalTheory.Lin.primesIoc x t, a p‖) 
+[326 priv] private lemma norm_sum_primesIoc_le_sum_range (a : ℕ → ℂ) (x y t : ℝ) (hty : t ≤ y) : ‖∑ p ∈ _root_.GlobalTheory.Lin.primesIoc x t, a p‖ ≤ ∑ n ∈ Finset.range (⌊y⌋₊ + 1), ‖a n‖ 
+[835 priv] private lemma integrableOn_norm_sum_primesIoc_pow_div (a : ℕ → ℂ) (x y : ℝ) (hx : 0 < x) (k : ℕ) : IntegrableOn (fun t : ℝ => ‖∑ p ∈ _root_.GlobalTheory.Lin.primesIoc x t, a p‖ ^ k / t) (Set.Icc x y) 
+[5937] theorem _root_.GlobalTheory.Lin.sq_integral_primeSum_div_le (a : ℕ → ℂ) (x y : ℝ) (hx : 1 ≤ x) (hxy : x ≤ y) : (∫ t in x..y, ‖∑ p ∈ _root_.GlobalTheory.Lin.primesIoc x t, a p‖ / t) ^ 2 ≤ Real.log (y / x) * ∫ t in x..y, ‖∑ p ∈ _root_.GlobalTheory.Lin.primesIoc x t, a p‖ ^ 2 / t 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/IteratedDerivLogDerivDirichletLViaNearbyZeros.lean  (332 lines)
+[2634] lemma extend (K : ℝ) (U : Set ℂ) (hU : IsOpen U) (Z : Finset ℂ) : ∀ g : ℂ → ℂ, DifferentiableOn ℂ g (U \ Z) → (∀ z ∈ U \ (Z : Set ℂ), ‖g z‖ ≤ K) → ∃ G : ℂ → ℂ, DifferentiableOn ℂ G U ∧ (∀ z, z ∉ Z → G z = g z) ∧ ∀ z ∈ U, ‖G z‖ ≤ K 
+[795] lemma cauchy (K : ℝ) (U : Set ℂ) (hU : IsOpen U) (Z : Finset ℂ) (g : ℂ → ℂ) (h1 : DifferentiableOn ℂ g (U \ Z)) (h2 : ∀ z ∈ U \ (Z : Set ℂ), ‖g z‖ ≤ K) (s : ℂ) (R : ℝ) (hR : 0 < R) (hs : s ∉ Z) (hsub : Metric.closedBall s R ⊆ U) (k : ℕ) : ‖iteratedDeriv k g s‖ ≤ k.factorial * K / R ^ k 
+[4491] lemma hasDerivAt_pole (c w s : ℂ) (k : ℕ) (h : s ≠ w) : HasDerivAt (fun z => c / (z - w) ^ (k + 1)) (-((k + 1 : ℕ) : ℂ) * (c / (s - w) ^ (k + 1 + 1))) s 
+[5614] lemma iter (f : ℕ → ℂ) (hf : LSeries.abscissaOfAbsConv f ≤ 1) (e : ℂ) (Z : Finset ℂ) (m : ℂ → ℂ) (hZ : ∀ w ∈ Z, w.re ≤ 1) (g : ℂ → ℂ) (hg : ∀ s : ℂ, 1 < s.re → g s = -(LSeries f s - e / (s - 1) + ∑ w ∈ Z, m w / (s - w))) (k : ℕ) : ∀ s : ℂ, 1 < s.re → iteratedDeriv k g s = (-1) ^ (k + 1) * (LSeries (LSeries.logMul^[k] f) s + k.factorial * (- (e / (s - 1) ^ (k + 1)) + ∑ w ∈ Z, m w / (s - w) ^ (k + 1))) 
+[2644] lemma derSeries_eq (c : ℕ → ℂ) (k : ℕ) (s : ℂ) : LSeries (LSeries.logMul^[k] (c * fun n : ℕ => ((Λ n : ℝ) : ℂ))) s = k.factorial * derSeries c k s 
+[7706] lemma growth_triv : ∃ B : ℝ, 0 < B ∧ ∀ (q : ℕ) [NeZero q] (z : ℂ), -(7 / 4 : ℝ) ≤ z.re → ‖LFunctionTrivChar₁ q z‖ ≤ B * (q : ℝ) ^ 5 * (‖z‖ + 2) ^ 5 
+[5440] lemma exists_entire : ∃ B : ℝ, 0 < B ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), ∃ F : ℂ → ℂ, Differentiable ℂ F ∧ (∀ z : ℂ, -(7 / 4 : ℝ) ≤ z.re → ‖F z‖ ≤ B * (q : ℝ) ^ 5 * (‖z‖ + 2) ^ 5) ∧ (∀ z : ℂ, z.re = 2 → ‖LFunction χ z‖ ≤ ‖F z‖) ∧ (∀ z : ℂ, F z = 0 ↔ (χ ≠ 1 ∨ z ≠ 1) ∧ LFunction χ z = 0) ∧ (∀ z : ℂ, F z = 0 → analyticOrderNatAt F z = ord χ z) ∧ ∀ s : ℂ, 1 < s.re → deriv F s / F s = deriv (LFunction χ) s / LFunction χ s + (if χ = 1 then 1 else 0) / (s - 1) 
+[32200] theorem main : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (σ t : ℝ) (k : ℕ), 1 < σ → σ ≤ 2 → (zerosDisc χ (2 + t * I) 3).Finite ∧ (∑ᶠ w ∈ zerosDisc χ (2 + t * I) 3, (ord χ w : ℝ)) ≤ C * Real.log (q * (|t| + 2)) ∧ ‖derSeries (fun n : ℕ => χ (n : ZMod q)) k (σ + t * I) - (if χ = 1 then 1 / ((σ : ℂ) + t * I - 1) ^ (k + 1) else 0) + ∑ᶠ w ∈ zerosDisc χ (2 + t * I) 3, (ord χ w : ℂ) / ((σ : ℂ) + t * I - w) ^ (k + 1)‖ ≤ C * Real.log (q * (|t| + 2)) / σ ^ k 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/IteratedDerivLogDerivDirichletLViaNearbyZerosStatement.lean  (10 lines)
+[448] theorem _root_.GlobalTheory.T.iteratedDeriv_logDeriv_dirichletL_via_nearby_zeros : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (σ t : ℝ) (k : ℕ), 1 < σ → σ ≤ 2 → (zerosDisc χ (2 + t * I) 3).Finite ∧ (∑ᶠ w ∈ zerosDisc χ (2 + t * I) 3, (ord χ w : ℝ)) ≤ C * Real.log (q * (|t| + 2)) ∧ ‖derSeries (fun n : ℕ => χ (n : ZMod q)) k (σ + t * I) - (if χ = 1 then 1 / ((σ : ℂ) + t * I - 1) ^ (k + 1) else 0) + ∑ᶠ w ∈ zerosDisc χ (2 + t * I) 3, (ord χ w : ℂ) / ((σ : ℂ) + t * I - w) ^ (k + 1)‖ ≤ C * Real.log (q * (|t| + 2)) / σ ^ k 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LFunctionConjEqZero.lean  (318 lines)
+[974 priv] private theorem conj_apply_lemma {d : ℕ} {χ : DirichletCharacter ℂ d} (h2 : χ ^ 2 = 1) (n : ℕ) : conj (χ n) = χ n 
+[1017 priv] private theorem conj_LFunction_conj_of_sq_eq_one' {d : ℕ} [NeZero d] {χ : DirichletCharacter ℂ d} (h2 : χ ^ 2 = 1) {z : ℂ} (hz : 1 < z.re) : conj (LFunction χ (conj z)) = LFunction χ z 
+[1000] theorem LFunction_conj_eq_zero {d : ℕ} [NeZero d] {χ : DirichletCharacter ℂ d} (h₁ : χ ≠ 1) (h2 : χ ^ 2 = 1) {s : ℂ} (hs : LFunction χ s = 0) : LFunction χ (conj s) = 0 
+[808] theorem one_le_order {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) {ρ : ℂ} (hρ : LFunction χ ρ = 0) : 1 ≤ analyticOrderNatAt (LFunction χ) ρ 
+[176] theorem re_lt_one {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) {ρ : ℂ} (hρ : LFunction χ ρ = 0) : ρ.re < 1 
+[7767] theorem neg_re_logDeriv_le : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ (σ t : ℝ), 1 < σ → σ ≤ 2 → ∀ S : Finset ℂ, (∀ w ∈ S, ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ LFunction χ w = 0) → -(deriv (LFunction χ) (σ + t * I) / LFunction χ (σ + t * I)).re ≤ C * Real.log (q * (|t| + 2)) - ∑ w ∈ S, (1 / ((σ : ℂ) + t * I - w)).re 
+[1274] theorem re_one_div (a b : ℝ) : (1 / ((a : ℂ) + b * I)).re = a / (a ^ 2 + b ^ 2) 
+[3303] theorem half_lt_log (q : ℕ) [NeZero q] (t : ℝ) : 1 / 2 < Real.log (q * (|t| + 2)) 
+[1427] theorem log_zero_le (q : ℕ) [NeZero q] (t : ℝ) : Real.log (q * (|(0 : ℝ)| + 2)) ≤ Real.log (q * (|t| + 2)) 
+[2969] theorem log_two_le (q : ℕ) [NeZero q] (t : ℝ) : Real.log (q * (|2 * t| + 2)) ≤ 2 * Real.log (q * (|t| + 2)) 
+[2362 priv] private theorem norm_ofReal_add_mul_I_le_of_sq_add_sq_le (a b r : ℝ) (hr : 0 ≤ r) (h : a ^ 2 + b ^ 2 ≤ r ^ 2) : ‖(a : ℂ) + b * I‖ ≤ r 
+[39229] theorem inv_le_log : ∃ K : ℝ, 0 < K ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (δ γ : ℝ), χ ≠ 1 → LFunction χ (((1 - δ : ℝ) : ℂ) + γ * I) = 0 → (χ ^ 2 ≠ 1 ∨ γ ≠ 0) → 0 < δ → δ ≤ 1 / 21 → 1 / δ ≤ K * Real.log (q * (|γ| + 2)) 
+[7574] theorem zero_free_region : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ), χ ≠ 1 → LFunction χ s = 0 → (χ ^ 2 ≠ 1 ∨ s.im ≠ 0) → s.re < 1 - c / Real.log (q * (|s.im| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LFunctionEqTsumOfOneLt.lean  (270 lines)
+[2500] theorem norm_sum_range_le {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (m : ℕ) : ‖∑ n ∈ Finset.range m, χ ((n + 1 : ℕ) : ZMod q)‖ ≤ q 
+[2634] theorem norm_cpow_sub_le {a b δ : ℝ} {s : ℂ} (ha : 1 ≤ a) (hab : a ≤ b) (hδ : 0 < δ) (hs : δ ≤ s.re) : ‖(a : ℂ) ^ (-s) - (b : ℂ) ^ (-s)‖ ≤ ‖s‖ / δ * (a ^ (-δ) - b ^ (-δ)) 
+[194] theorem tendsto_rpow_neg {δ : ℝ} (hδ : 0 < δ) (N : ℕ) : Tendsto (fun n : ℕ => ((n + N + 1 : ℕ) : ℝ) ^ (-δ)) atTop (𝓝 0) 
+[1442] theorem hasSum_telescope {δ : ℝ} (hδ : 0 < δ) (N : ℕ) : HasSum (fun n : ℕ => ((n + N + 1 : ℕ) : ℝ) ^ (-δ) - ((n + N + 1 + 1 : ℕ) : ℝ) ^ (-δ)) (((N + 1 : ℕ) : ℝ) ^ (-δ)) 
+[143] noncomputable def term {q : ℕ} (χ : DirichletCharacter ℂ q) (n : ℕ) (s : ℂ) : ℂ :=
+[2190] theorem abel {q : ℕ} (χ : DirichletCharacter ℂ q) (s : ℂ) (N : ℕ) : ∑ n ∈ Finset.range N, χ ((n + 1 : ℕ) : ZMod q) * ((n + 1 : ℕ) : ℂ) ^ (-s) = ∑ n ∈ Finset.range N, term χ n s + (∑ k ∈ Finset.range N, χ ((k + 1 : ℕ) : ZMod q)) * ((N + 1 : ℕ) : ℂ) ^ (-s) 
+[2144] theorem norm_term_le {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (n : ℕ) {δ R : ℝ} {s : ℂ} (hδ : 0 < δ) (hs : δ ≤ s.re) (hR : ‖s‖ ≤ R) : ‖term χ n s‖ ≤ q * (R / δ) * (((n + 1 : ℕ) : ℝ) ^ (-δ) - ((n + 1 + 1 : ℕ) : ℝ) ^ (-δ)) 
+[490] theorem summable_term {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {s : ℂ} (hs : 0 < s.re) : Summable (fun n => term χ n s) 
+[400] theorem norm_boundary_le {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) (s : ℂ) (N : ℕ) : ‖(∑ k ∈ Finset.range N, χ ((k + 1 : ℕ) : ZMod q)) * ((N + 1 : ℕ) : ℂ) ^ (-s)‖ ≤ q * ((N + 1 : ℕ) : ℝ) ^ (-s.re) 
+[1943] theorem LFunction_eq_tsum_of_one_lt {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {s : ℂ} (hs : 1 < s.re) : LFunction χ s = ∑' n, term χ n s 
+[2861] theorem LFunction_eq_tsum {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) {s : ℂ} (hs : 0 < s.re) : LFunction χ s = ∑' n, term χ n s 
+[5111] theorem norm_LFunction_sub_sum_le : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ s : ℂ, 0 < s.re → ∀ N : ℕ, 1 ≤ N → ‖LFunction χ s - ∑ n ∈ Finset.Icc 1 N, χ (n : ZMod q) * (n : ℂ) ^ (-s)‖ ≤ 2 * q * (1 + ‖s‖ / s.re) * (N : ℝ) ^ (-s.re) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LargeMeanOfLargeDerivative.lean  (348 lines)
+[65] def pw (k : ℕ) (u : ℝ) : ℝ := u ^ k / (k.factorial : ℝ) * Real.exp (-u)
+[256] lemma pw_nonneg (k : ℕ) {u : ℝ} (hu : 0 ≤ u) : 0 ≤ pw k u 
+[1249] lemma pw_le (k : ℕ) {u θ : ℝ} (hu : 0 ≤ u) (hθ : 0 < θ) : pw k u ≤ θ ^ k * Real.exp (u / θ - u) 
+[272] lemma pw_le_one (k : ℕ) {u : ℝ} (hu : 0 ≤ u) : pw k u ≤ 1 
+[4362] lemma pw_small (K k : ℕ) {u δ : ℝ} (hδ : 0 < δ) (hu : 0 ≤ u) (h : u ≤ δ / 3 * K) (hK : K ≤ k) : pw k u ≤ δ ^ k * Real.exp (-(u / 2)) 
+[5175] lemma pw_large (K k : ℕ) {u δ : ℝ} (hδ : 0 < δ) (h : 32 / δ * K ≤ u) (hK : k ≤ 2 * K) : pw k u ≤ δ ^ k * Real.exp (-(u / 2)) 
+[2213] lemma pw_pp (k : ℕ) {v r : ℝ} (hr : 0 < r) (hv : 0 ≤ v) : pw k (r * v) ≤ (4 * r) ^ k * Real.exp (v / 4) 
+[3085] lemma hasDerivAt_pw (m : ℕ) (u : ℝ) : HasDerivAt (pw (m + 1)) (pw m u - pw (m + 1) u) u 
+[230] lemma continuous_pw (k : ℕ) : Continuous (pw k) 
+[3555] lemma term_eq (c : ℕ → ℂ) (k n : ℕ) (r : ℝ) : (r : ℂ) ^ k * (((Λ n : ℝ) : ℂ) * c n * ((Real.log n : ℂ) ^ k / (k.factorial : ℂ)) * (n : ℂ) ^ (-((1 + r : ℝ) : ℂ))) = ((Λ n / n * pw k (r * Real.log n) : ℝ) : ℂ) * c n 
+[974] lemma rpow_form (n : ℕ) (hn : 0 < n) (s x : ℝ) : x / (n : ℝ) ^ (1 + s) = x / n * Real.exp (-(s * Real.log n)) 
+[10569] lemma pointwise (c : ℕ → ℂ) (hc : ∀ n, ‖c n‖ ≤ 1) {r δ : ℝ} (hr : 0 < r) (hδ : 0 < δ) (K k : ℕ) (h1 : K ≤ k) (h2 : k ≤ 2 * K) (n : ℕ) : ‖((Λ n / n * pw k (r * Real.log n) : ℝ) : ℂ) * c n - (if n ∈ primesIoc (Real.exp (δ / 3 * K / r)) (Real.exp (32 / δ * K / r)) then (Real.log n : ℂ) * c n / n * ((pw k (r * Real.log n) - pw k (r * Real.log (Real.exp (32 / δ * K / r))) : ℝ) : ℂ) else 0)‖ ≤ δ ^ k * (Λ n / (n : ℝ) ^ (1 + r / 2)) + (4 * r) ^ k * ((if n.Prime then 0 else Λ n) / (n : ℝ) ^ (3 / 4 : ℝ)) 
+[490] lemma norm_tsum_le_of_close {T P : ℕ → ℂ} {G : ℕ → ℝ} (hP : Summable P) (hG : Summable G) (h : ∀ n, ‖T n - P n‖ ≤ G n) : ‖∑' n, T n‖ ≤ ‖∑' n, P n‖ + ∑' n, G n 
+[1539] lemma series_le (c : ℕ → ℂ) (hc : ∀ n, ‖c n‖ ≤ 1) {r δ : ℝ} (hr : 0 < r) (hδ : 0 < δ) (K k : ℕ) (h1 : K ≤ k) (h2 : k ≤ 2 * K) (hs : Summable fun n : ℕ => Λ n / (n : ℝ) ^ (1 + r / 2)) : r ^ k * ‖derSeries c k ((1 + r : ℝ) : ℂ)‖ ≤ ‖∑ n ∈ primesIoc (Real.exp (δ / 3 * K / r)) (Real.exp (32 / δ * K / r)), (Real.log n : ℂ) * c n / n * ((pw k (r * Real.log n) - pw k (r * Real.log (Real.exp (32 / δ * K / r))) : ℝ) : ℂ)‖ + (δ ^ k * ∑' n : ℕ, Λ n / (n : ℝ) ^ (1 + r / 2) + (4 * r) ^ k * ∑' n : ℕ, (if n.Prime then 0 else Λ n) / (n : ℝ) ^ (3 / 4 : ℝ)) 
+[2655] lemma abel_pw (a : ℕ → ℂ) {r x y : ℝ} (hr : 0 < r) (hx : 1 ≤ x) (hxy : x ≤ y) (m : ℕ) : ‖∑ n ∈ primesIoc x y, a n * ((pw (m + 1) (r * Real.log n) - pw (m + 1) (r * Real.log y) : ℝ) : ℂ)‖ ≤ r * ∫ t in x..y, ‖∑ p ∈ primesIoc x t, a p‖ / t 
+[23832] theorem large_mean_of_large_derivative : ∀ A : ℝ, 1 ≤ A → ∃ a b C r₀ K₀ : ℝ, 0 < a ∧ a < b ∧ 0 < C ∧ 0 < r₀ ∧ ∀ (c : ℕ → ℂ) (r : ℝ) (K k : ℕ), (∀ n, ‖c n‖ ≤ 1) → 0 < r → r ≤ r₀ → K₀ ≤ K → K ≤ k → k ≤ 2 * K → 1 / (A * r) ^ (k + 1) ≤ ‖derSeries c k ((1 + r : ℝ) : ℂ)‖ → Real.exp (-(C * K)) / r ^ 3 ≤ ∫ y in (Real.exp (a * K / r))..(Real.exp (b * K / r)), ‖∑ p ∈ primesIoc (Real.exp (a * K / r)) y, (Real.log p : ℂ) * c p / p‖ ^ 2 / y 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LargeMeanOfLargeDerivativeStatement.lean  (10 lines)
+[309] theorem _root_.GlobalTheory.T.integral_prime_sum_sq_ge_of_derSeries_large : ∀ A : ℝ, 1 ≤ A → ∃ a b C r₀ K₀ : ℝ, 0 < a ∧ a < b ∧ 0 < C ∧ 0 < r₀ ∧ ∀ (c : ℕ → ℂ) (r : ℝ) (K k : ℕ), (∀ n, ‖c n‖ ≤ 1) → 0 < r → r ≤ r₀ → K₀ ≤ K → K ≤ k → k ≤ 2 * K → 1 / (A * r) ^ (k + 1) ≤ ‖derSeries c k ((1 + r : ℝ) : ℂ)‖ → Real.exp (-(C * K)) / r ^ 3 ≤ ∫ y in (Real.exp (a * K / r))..(Real.exp (b * K / r)), ‖∑ p ∈ primesIoc (Real.exp (a * K / r)) y, (Real.log p : ℂ) * c p / p‖ ^ 2 / y 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivDirichletLFunctionLocalZeroSum.lean  (91 lines)
+[345] theorem analyticOrderNatAt_comp_const_add (g : ℂ → ℂ) (c w : ℂ) : analyticOrderNatAt (fun z => g (c + z)) w = analyticOrderNatAt g (c + w) 
+[13133] theorem logDeriv_LFunction_local : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ (t : ℝ) (s : ℂ), ‖s - (3/2 + t * I)‖ ≤ 2/3 → LFunction χ s ≠ 0 → {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ LFunction χ w = 0}.Finite ∧ ‖deriv (LFunction χ) s / LFunction χ s - ∑ᶠ w ∈ {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ LFunction χ w = 0}, (analyticOrderNatAt (LFunction χ) w : ℂ) / (s - w)‖ ≤ C * Real.log (q * (|t| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivDirichletLFunctionLocalZeroSumStatement.lean  (8 lines)
+[438] theorem _root_.GlobalTheory.T.logDeriv_dirichletLFunction_local_zero_sum : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ (t : ℝ) (s : ℂ), ‖s - (3/2 + t * I)‖ ≤ 2/3 → LFunction χ s ≠ 0 → {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ LFunction χ w = 0}.Finite ∧ ‖deriv (LFunction χ) s / LFunction χ s - ∑ᶠ w ∈ {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ LFunction χ w = 0}, (analyticOrderNatAt (LFunction χ) w : ℂ) / (s - w)‖ ≤ C * Real.log (q * (|t| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivEqOrderDivAddAnalytic.lean  (42 lines)
+[5673] theorem logDeriv_eq_order_div_add_analytic : ∀ (f : ℂ → ℂ) (p : ℂ), AnalyticAt ℂ f p → (¬ ∀ᶠ s in 𝓝 p, f s = 0) → ∃ g : ℂ → ℂ, AnalyticAt ℂ g p ∧ ∀ᶠ s in 𝓝[≠] p, f s ≠ 0 ∧ deriv f s / f s = ((analyticOrderNatAt f p : ℕ) : ℂ) / (s - p) + g s 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivLFunctionNearZero.lean  (178 lines)
+[2582] theorem norm_limit_le (F h e : ℂ → ℂ) (P : ℂ → Prop) (Z : Finset ℂ) (m : ℂ → ℕ) (B : ℝ) (hh : ContinuousAt h 0) (he : ContinuousAt e 0) (h0 : 0 ∉ Z → m 0 = 0) (hev : ∀ᶠ s in 𝓝[≠] (0 : ℂ), P s ∧ F s = (m 0 : ℂ) / s + h s) (hloc : ∀ s : ℝ, 0 < s → s < 1 → P s → ‖F s + e s - ∑ w ∈ Z, (m w : ℂ) / (s - w)‖ ≤ B) : ‖h 0 + e 0 - ∑ w ∈ Z.erase 0, (m w : ℂ) / (0 - w)‖ ≤ B 
+[4871] theorem exists_regular_part (f e : ℂ → ℂ) (S : Set ℂ) (B : ℝ) (hS : S.Finite) (he : ContinuousAt e 0) (han : AnalyticAt ℂ f 0) (hne : ¬ ∀ᶠ s in 𝓝 (0 : ℂ), f s = 0) (hS0 : f 0 = 0 → 0 ∈ S) (hSz : ∀ w ∈ S, f w = 0) (hT : ∀ w : ℂ, 0 < w.re → w.re < 1 → |w.im| < 1 → f w = 0 → w ∈ S) (hbig : ∀ w ∈ S, w.re ≤ 0 → w ≠ 0 → 1 ≤ ‖w‖) (hcount : ∑ᶠ w ∈ S, (analyticOrderNatAt f w : ℝ) ≤ B) (hloc : ∀ s : ℝ, 0 < s → s < 1 → f s ≠ 0 → ‖deriv f s / f s + e s - ∑ᶠ w ∈ S, (analyticOrderNatAt f w : ℂ) / (s - w)‖ ≤ B) : ∃ h : ℂ → ℂ, AnalyticAt ℂ h 0 ∧ (∀ᶠ s in 𝓝[≠] (0 : ℂ), deriv f s / f s = (analyticOrderNatAt f 0 : ℂ) / s + h s) ∧ ‖h 0‖ ≤ 2 * B + ‖e 0‖ + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < 1 ∧ f ρ = 0}, ((analyticOrderNatAt f ρ : ℕ) : ℝ) / ‖ρ‖ 
+[2391] theorem norm_sub_two_le {w : ℂ} (h1 : 0 ≤ w.re) (h2 : w.re < 1) (h3 : |w.im| < 1) : ‖w - 2‖ ≤ 7 / 2 
+[12371] theorem logDeriv_LFunction_near_zero : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∃ (m : ℕ) (h : ℂ → ℂ), m ≤ 1 ∧ AnalyticAt ℂ h 0 ∧ (∀ᶠ s in 𝓝[≠] (0 : ℂ), deriv (LFunction χ) s / LFunction χ s = (m : ℂ) / s + h s) ∧ ‖h 0‖ ≤ C * (Real.log (2 * N) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < 1 ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℝ) / ‖ρ‖) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivLFunctionStrip.lean  (135 lines)
+[6749] theorem disc (r R : ℝ) (hr : 0 < r) (hrR : r < R) (hR : R < 1) : ∃ C : ℝ, 0 < C ∧ ∀ (F : ℂ → ℂ) (c : ℂ) (a M : ℝ), 0 < a → Differentiable ℂ F → F c ≠ 0 → (∀ z, ‖z - c‖ ≤ a → ‖F z‖ ≤ M) → {w : ℂ | ‖w - c‖ ≤ R * a ∧ F w = 0}.Finite ∧ (∑ᶠ w ∈ {w : ℂ | ‖w - c‖ ≤ R * a ∧ F w = 0}, (analyticOrderNatAt F w : ℝ)) ≤ C * (1 + Real.log (M / ‖F c‖)) ∧ ∀ s : ℂ, ‖s - c‖ ≤ r * a → F s ≠ 0 → a * ‖deriv F s / F s - ∑ᶠ w ∈ {w : ℂ | ‖w - c‖ ≤ R * a ∧ F w = 0}, (analyticOrderNatAt F w : ℂ) / (s - w)‖ ≤ C * (1 + Real.log (M / ‖F c‖)) 
+[19794] theorem logDeriv_LFunction_strip : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ s : ℂ, -1 ≤ s.re → s.re ≤ 2 → LFunction χ s ≠ 0 → {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ LFunction χ w = 0}.Finite ∧ (∑ᶠ w ∈ {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ LFunction χ w = 0}, (analyticOrderNatAt (LFunction χ) w : ℝ)) ≤ C * Real.log (q * (|s.im| + 2)) ∧ ‖deriv (LFunction χ) s / LFunction χ s - ∑ᶠ w ∈ {w : ℂ | ‖w - (2 + s.im * I)‖ ≤ 7/2 ∧ LFunction χ w = 0}, (analyticOrderNatAt (LFunction χ) w : ℂ) / (s - w)‖ ≤ C * Real.log (q * (|s.im| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivRiemannZetaLocalZeroSum.lean  (142 lines)
+[196] lemma zeta₁_eq {s : ℂ} (hs : s ≠ 1) : riemannZeta₁ s = (s - 1) * riemannZeta s 
+[404] lemma zeta₁_eq_zero_iff (w : ℂ) : riemannZeta₁ w = 0 ↔ w ≠ 1 ∧ riemannZeta w = 0 
+[594] lemma order_zeta₁ {w : ℂ} (hw : w ≠ 1) : analyticOrderNatAt riemannZeta₁ w = analyticOrderNatAt riemannZeta w 
+[327] lemma order_shift (c w : ℂ) : analyticOrderNatAt (fun z => riemannZeta₁ (c + z)) w = analyticOrderNatAt riemannZeta₁ (c + w) 
+[1855] lemma logDeriv_zeta₁ {s : ℂ} (hs : s ≠ 1) (h0 : riemannZeta s ≠ 0) : deriv riemannZeta₁ s / riemannZeta₁ s = deriv riemannZeta s / riemannZeta s + 1 / (s - 1) 
+[11665] lemma norm_zeta₁_le (t : ℝ) {z : ℂ} (hz : ‖z‖ ≤ 1) : ‖riemannZeta₁ (3/2 + t * I + z)‖ ≤ 5 * (|t| + 2) ^ 2 
+[3432] lemma le_norm_zeta₁ (t : ℝ) : 1 / 6 ≤ ‖riemannZeta₁ (3/2 + t * I)‖ 
+[16620] theorem logDeriv_riemannZeta_local : ∃ C : ℝ, 0 < C ∧ ∀ (t : ℝ) (s : ℂ), ‖s - (3/2 + t * I)‖ ≤ 2/3 → s ≠ 1 → riemannZeta s ≠ 0 → {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ w ≠ 1 ∧ riemannZeta w = 0}.Finite ∧ ‖deriv riemannZeta s / riemannZeta s + 1 / (s - 1) - ∑ᶠ w ∈ {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ w ≠ 1 ∧ riemannZeta w = 0}, (analyticOrderNatAt riemannZeta w : ℂ) / (s - w)‖ ≤ C * Real.log (|t| + 2) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivRiemannZetaLocalZeroSumStatement.lean  (8 lines)
+[388] theorem _root_.GlobalTheory.T.logDeriv_riemannZeta_local_zero_sum : ∃ C : ℝ, 0 < C ∧ ∀ (t : ℝ) (s : ℂ), ‖s - (3/2 + t * I)‖ ≤ 2/3 → s ≠ 1 → riemannZeta s ≠ 0 → {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ w ≠ 1 ∧ riemannZeta w = 0}.Finite ∧ ‖deriv riemannZeta s / riemannZeta s + 1 / (s - 1) - ∑ᶠ w ∈ {w : ℂ | ‖w - (3/2 + t * I)‖ ≤ 5/6 ∧ w ≠ 1 ∧ riemannZeta w = 0}, (analyticOrderNatAt riemannZeta w : ℂ) / (s - w)‖ ≤ C * Real.log (|t| + 2) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogDerivativeBound.lean  (86 lines)
+[2824] lemma comb_nonneg {z : ℂ} (hz : ‖z‖ = 1) : 0 ≤ 3 + 4 * z.re + (z ^ 2).re 
+[561] lemma neg_logDeriv_eq {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {s : ℂ} (hs : 1 < s.re) : HasSum (fun n : ℕ => (LSeries.term ((fun n : ℕ => χ n) * (fun n : ℕ => (vonMangoldt n : ℂ))) s n).re) (-(deriv (LFunction χ) s / LFunction χ s).re) 
+[7021] lemma term_nonneg {q : ℕ} (χ : DirichletCharacter ℂ q) (σ t : ℝ) (n : ℕ) : 0 ≤ 3 * (LSeries.term ((fun n : ℕ => (1 : DirichletCharacter ℂ q) n) * (fun n : ℕ => (vonMangoldt n : ℂ))) σ n).re + 4 * (LSeries.term ((fun n : ℕ => χ n) * (fun n : ℕ => (vonMangoldt n : ℂ))) (σ + t * I) n).re + (LSeries.term ((fun n : ℕ => (χ ^ 2) n) * (fun n : ℕ => (vonMangoldt n : ℂ))) (σ + 2 * t * I) n).re 
+[3073] theorem three_four_one : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (σ t : ℝ), 1 < σ → 0 ≤ -(3 * (deriv (LFunction (1 : DirichletCharacter ℂ q)) σ / LFunction (1 : DirichletCharacter ℂ q) σ).re + 4 * (deriv (LFunction χ) (σ + t * I) / LFunction χ (σ + t * I)).re + (deriv (LFunction (χ ^ 2)) (σ + 2 * t * I) / LFunction (χ ^ 2) (σ + 2 * t * I)).re) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogFreeZeroDensityDirichletOneModulus.lean  (413 lines)
+[5063] theorem principal_height : ∃ η : ℝ, 0 < η ∧ ∀ (q : ℕ) [NeZero q] (s : ℂ), 1 - η ≤ s.re → s.re < 1 → LFunction (1 : DirichletCharacter ℂ q) s = 0 → 3 ≤ |s.im| 
+[5097] theorem count_le (Z : Finset ℂ) (w : ℂ → ℝ) (F : ℝ → ℝ) (U h δ M : ℝ) (hh : 0 ≤ h) (hU : 0 ≤ U) (hM : 0 ≤ M) (hδ : 0 ≤ δ) (hZ : ∀ ρ ∈ Z, |ρ.im| + h ≤ U) (hF : IntervalIntegrable F volume (-U) U) (hF0 : ∀ τ, 0 ≤ F τ) (h1 : ∀ ρ ∈ Z, ∀ τ, |τ - ρ.im| ≤ h → δ ≤ F τ ∧ ∑ z ∈ Z.filter (fun z => |τ - z.im| ≤ h), w z ≤ M) : δ * (2 * h) * ∑ ρ ∈ Z, w ρ ≤ M * ∫ τ in (-U)..U, F τ 
+[140] noncomputable def primeSum {q : ℕ} (χ : DirichletCharacter ℂ q) (N y τ : ℝ) : ℂ :=
+[615] theorem norm_cpow_le (n : ℕ) (τ : ℝ) : ‖(n : ℂ) ^ (-(τ * I))‖ ≤ 1 
+[3101] theorem integrable_primeSum {q : ℕ} (χ : DirichletCharacter ℂ q) (N M T : ℝ) (hN : 1 ≤ N) : Integrable (Function.uncurry fun τ y : ℝ => ‖primeSum χ N y τ‖ ^ 2 / y) ((volume.restrict (Set.Ioc (-T) T)).prod (volume.restrict (Set.Ioc N M))) 
+[2488] theorem sum_log_div_le : ∃ CM : ℝ, 0 ≤ CM ∧ ∀ N y : ℝ, 1 ≤ y → ∑ p ∈ primesIoc N y, (p : ℝ) * ‖(Real.log p : ℂ) / p‖ ^ 2 / Real.log p ≤ Real.log y + CM 
+[5046] theorem mean_le : ∃ C CM : ℝ, 0 < C ∧ 0 ≤ CM ∧ ∀ (q : ℕ) [NeZero q] (T N M : ℝ), 1 ≤ T → 1 ≤ N → N ≤ M → (2 * q * T) ^ 2 ≤ N → ∑ χ : DirichletCharacter ℂ q, (∫ τ in (-T)..T, ∫ y in N..M, ‖primeSum χ N y τ‖ ^ 2 / y) ≤ C * (Real.log M + CM) * Real.log M 
+[2191] theorem derSeries_twist {q : ℕ} (χ : DirichletCharacter ℂ q) (k : ℕ) (x τ : ℝ) : derSeries (fun n : ℕ => χ (n : ZMod q)) k ((x : ℝ) + τ * I) = derSeries (fun n : ℕ => χ (n : ZMod q) * (n : ℂ) ^ (-(τ * I))) k (x : ℝ) 
+[258] theorem finite_zerosBox {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {σ : ℝ} (T : ℝ) (hσ : 0 < σ) : (zerosBox χ σ T).Finite 
+[4186] theorem detect : ∃ a b C C' r₀ K₀ : ℝ, 0 < a ∧ a < b ∧ 0 < C ∧ 0 < C' ∧ 0 < r₀ ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (τ r L : ℝ) (K : ℕ) (ρ : ℂ), (χ ≠ 1 ∨ 2 ≤ |τ|) → Real.log (q * (|τ| + 2)) ≤ L → 0 < r → 1 / L ≤ r → r ≤ r₀ → C' * r * L ≤ K → K₀ ≤ K → LFunction χ ρ = 0 → ‖ρ - (1 + τ * I)‖ ≤ r → Real.exp (-(C * K)) / r ^ 3 ≤ ∫ y in (Real.exp (a * K / r))..(Real.exp (b * K / r)), ‖primeSum χ (Real.exp (a * K / r)) y τ‖ ^ 2 / y 
+[2445] theorem near {ρ : ℂ} {σ r τ : ℝ} (h1 : σ ≤ ρ.re) (h2 : ρ.re < 1) (h3 : 2 * (1 - σ) ≤ r) (h4 : |τ - ρ.im| ≤ r / 2) : ‖ρ - (1 + τ * I)‖ ≤ r 
+[18449] theorem count_param : ∃ a D C C' r₀ K₀ η : ℝ, 0 < a ∧ 0 < D ∧ 0 < C ∧ 0 < C' ∧ 0 < r₀ ∧ 0 < η ∧ ∀ (q : ℕ) [NeZero q] (T σ r L : ℝ) (K : ℕ), 2 ≤ T → 1 - η ≤ σ → 2 * (1 - σ) ≤ r → 0 < r → r ≤ r₀ → 1 / L ≤ r → Real.log (q * (T + 3)) ≤ L → C' * r * L ≤ K → K₀ ≤ K → 1 ≤ K → (2 * q * (T + 1)) ^ 2 ≤ Real.exp (a * K / r) → ∑ χ : DirichletCharacter ℂ q, (∑ᶠ ρ ∈ zerosBox χ σ T, (ord χ ρ : ℝ)) ≤ D * (1 + r * L) * Real.exp (C * K) * (K : ℝ) ^ 2 
+[25496] theorem zero_density : ∃ A C η : ℝ, 0 < A ∧ 0 < C ∧ 0 < η ∧ ∀ (q : ℕ) [NeZero q] (T σ : ℝ), 2 ≤ T → 1 - η ≤ σ → σ ≤ 1 → ∑ χ : DirichletCharacter ℂ q, (∑ᶠ ρ ∈ zerosBox χ σ T, (ord χ ρ : ℝ)) ≤ C * ((q : ℝ) * T) ^ (A * (1 - σ)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/LogFreeZeroDensityDirichletOneModulusStatement.lean  (10 lines)
+[220] theorem _root_.GlobalTheory.T.logFree_zeroDensity_dirichlet_one_modulus : ∃ A C η : ℝ, 0 < A ∧ 0 < C ∧ 0 < η ∧ ∀ (q : ℕ) [NeZero q] (T σ : ℝ), 2 ≤ T → 1 - η ≤ σ → σ ≤ 1 → ∑ χ : DirichletCharacter ℂ q, (∑ᶠ ρ ∈ zerosBox χ σ T, (ord χ ρ : ℝ)) ≤ C * ((q : ℝ) * T) ^ (A * (1 - σ)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/MultiplicativeLargeSieve.lean  (170 lines)
+[5903] theorem farey_spaced (Q q r b c : ℕ) (hq : q ≤ Q) (hr : r ≤ Q) (hb : b < q) (hc : c < r) (hne : (b : ℝ) / q ≠ (c : ℝ) / r) (k : ℤ) : 1 / (Q : ℝ) ^ 2 ≤ |(b : ℝ) / q - (c : ℝ) / r - k| 
+[511] theorem reduced_inj {q r b c : ℕ} (hq : 0 < q) (hr : 0 < r) (hb : Nat.Coprime b q) (hc : Nat.Coprime c r) (h : (b : ℝ) / q = (c : ℝ) / r) : q = r ∧ b = c 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NegReLogDerivPrincipalLFunctionLe.lean  (154 lines)
+[1063] lemma norm_cpow_neg_le {p : ℕ} (hp : p.Prime) {s : ℂ} (hs : 1 ≤ s.re) : ‖(p : ℂ) ^ (-s)‖ ≤ 1 / 2 
+[1743] lemma half_le_norm_one_sub {p : ℕ} (hp : p.Prime) {s : ℂ} (hs : 1 ≤ s.re) : 1 / 2 ≤ ‖1 - (p : ℂ) ^ (-s)‖ 
+[436] lemma one_sub_ne_zero {p : ℕ} (hp : p.Prime) {s : ℂ} (hs : 1 ≤ s.re) : 1 - (p : ℂ) ^ (-s) ≠ 0 
+[1181] lemma hasDerivAt_factor {p : ℕ} (hp : p.Prime) (s : ℂ) : HasDerivAt (fun z : ℂ => 1 - (p : ℂ) ^ (-z)) ((p : ℂ) ^ (-s) * Complex.log p) s 
+[3121] lemma norm_logDeriv_factor_le {p : ℕ} (hp : p.Prime) {s : ℂ} (hs : 1 ≤ s.re) : ‖logDeriv (fun z : ℂ => 1 - (p : ℂ) ^ (-z)) s‖ ≤ Real.log p 
+[442] lemma sum_log_primeFactors_le (q : ℕ) [NeZero q] : ∑ p ∈ q.primeFactors, Real.log p ≤ Real.log q 
+[1287] lemma norm_logDeriv_sub_le (q : ℕ) [NeZero q] {s : ℂ} (hs : 1 < s.re) : ‖deriv (LFunction (1 : DirichletCharacter ℂ q)) s / LFunction (1 : DirichletCharacter ℂ q) s - deriv riemannZeta s / riemannZeta s‖ ≤ Real.log q 
+[9501] theorem neg_re_logDeriv_le : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (σ t : ℝ), 1 < σ → σ ≤ 2 → -(deriv (LFunction (1 : DirichletCharacter ℂ q)) (σ + t * I) / LFunction (1 : DirichletCharacter ℂ q) (σ + t * I)).re ≤ (1 / ((σ : ℂ) + t * I - 1)).re + C * Real.log (q * (|t| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NegReLogDerivPrincipalLFunctionLeStatement.lean  (8 lines)
+[273] theorem _root_.GlobalTheory.T.neg_re_logDeriv_principalLFunction_le : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (σ t : ℝ), 1 < σ → σ ≤ 2 → -(deriv (LFunction (1 : DirichletCharacter ℂ q)) (σ + t * I) / LFunction (1 : DirichletCharacter ℂ q) (σ + t * I)).re ≤ (1 / ((σ : ℂ) + t * I - 1)).re + C * Real.log (q * (|t| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NegSumLogDerivNonneg.lean  (55 lines)
+[1546] theorem hasSum_re_neg_logDeriv (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (σ : ℝ) (hσ : 1 < σ) : HasSum (fun n : ℕ => (χ n).re * (vonMangoldt n / (n : ℝ) ^ σ)) (-(deriv (LFunction χ) σ / LFunction χ σ).re) 
+[1965] theorem re_sum_nonneg (q : ℕ) (χ ψ : DirichletCharacter ℂ q) (hχ : χ ^ 2 = 1) (hψ : ψ ^ 2 = 1) (a : ZMod q) : 0 ≤ ((1 : DirichletCharacter ℂ q) a).re + (χ a).re + (ψ a).re + ((χ * ψ) a).re 
+[3775] theorem neg_sum_logDeriv_nonneg : ∀ (q : ℕ) [NeZero q] (χ ψ : DirichletCharacter ℂ q) (σ : ℝ), χ ^ 2 = 1 → ψ ^ 2 = 1 → 1 < σ → 0 ≤ -((deriv (LFunction (1 : DirichletCharacter ℂ q)) σ / LFunction (1 : DirichletCharacter ℂ q) σ).re + (deriv (LFunction χ) σ / LFunction χ σ).re + (deriv (LFunction ψ) σ / LFunction ψ σ).re + (deriv (LFunction (χ * ψ)) σ / LFunction (χ * ψ) σ).re) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NormOneSubConjMul.lean  (244 lines)
+[163] theorem exists_factor_one {U : Set ℂ} {g : ℂ → ℂ} (hg : AnalyticOnNhd ℂ g U) {w : ℂ} (hw : w ∈ U) (ho : analyticOrderAt g w ≠ ⊤) : ∃ h : ℂ → ℂ, AnalyticOnNhd ℂ h U ∧ (∀ z, g z = (z - w) ^ (analyticOrderNatAt g w) * h z) ∧ h w ≠ 0 
+[2684] theorem exists_factor {U : Set ℂ} {f : ℂ → ℂ} (hf : AnalyticOnNhd ℂ f U) (S : Finset ℂ) (hS : ∀ w ∈ S, w ∈ U) (ho : ∀ w ∈ S, analyticOrderAt f w ≠ ⊤) : ∃ g : ℂ → ℂ, AnalyticOnNhd ℂ g U ∧ (∀ z, f z = (∏ w ∈ S, (z - w) ^ (analyticOrderNatAt f w)) * g z) ∧ ∀ w ∈ S, g w ≠ 0 
+[7755] theorem norm_logDeriv_le {r R K : ℝ} (hr : 0 < r) (hrR : r < R) (hK : 0 < K) {g : ℂ → ℂ} (hg : DifferentiableOn ℂ g (Metric.ball 0 R)) (h0 : ∀ z ∈ Metric.ball (0 : ℂ) R, g z ≠ 0) (hb : ∀ z ∈ Metric.ball (0 : ℂ) R, ‖g z‖ ≤ ‖g 0‖ * Real.exp K) {z : ℂ} (hz : ‖z‖ ≤ r) : ‖deriv g z / g z‖ ≤ (8 * R / (R - r) ^ 2) * K 
+[475] theorem norm_le_of_sphere {g : ℂ → ℂ} (hg : AnalyticOnNhd ℂ g (Metric.closedBall 0 1)) {B : ℝ} (hb : ∀ z : ℂ, ‖z‖ = 1 → ‖g z‖ ≤ B) {z : ℂ} (hz : ‖z‖ ≤ 1) : ‖g z‖ ≤ B 
+[722] theorem norm_one_sub_conj_mul {w z : ℂ} (hz : ‖z‖ = 1) : ‖1 - (starRingEnd ℂ) w * z‖ = ‖z - w‖ 
+[15509] theorem main : ∀ r R : ℝ, 0 < r → r < R → R < 1 → ∃ C : ℝ, 0 < C ∧ ∀ (f : ℂ → ℂ) (M : ℝ), AnalyticOnNhd ℂ f (Metric.closedBall 0 1) → f 0 ≠ 0 → (∀ z ∈ Metric.closedBall (0 : ℂ) 1, ‖f z‖ ≤ M) → ({w : ℂ | ‖w‖ ≤ R ∧ f w = 0}.Finite ∧ (∑ᶠ w ∈ {w : ℂ | ‖w‖ ≤ R ∧ f w = 0}, (analyticOrderNatAt f w : ℝ)) ≤ C * (1 + Real.log (M / ‖f 0‖))) ∧ ∀ z : ℂ, ‖z‖ ≤ r → f z ≠ 0 → ‖deriv f z / f z - ∑ᶠ w ∈ {w : ℂ | ‖w‖ ≤ R ∧ f w = 0}, (analyticOrderNatAt f w : ℂ) / (z - w)‖ ≤ C * (1 + Real.log (M / ‖f 0‖)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/NormSubOneMulRiemannZetaLe.lean  (218 lines)
+[108] noncomputable def emT (x : ℝ) (s : ℂ) : ℂ :=
+[81] noncomputable def emE (x : ℝ) (s : ℂ) : ℂ :=
+[401] lemma hasDerivAt_shift_cpow {a t : ℝ} (h : 0 < a + t) (c : ℂ) : HasDerivAt (fun z : ℂ => ((a : ℂ) + z) ^ c) (c * ((a : ℂ) + t) ^ (c - 1)) (t : ℂ) 
+[22867] lemma norm_emE_le {a : ℝ} (ha : 1 ≤ a) {s : ℂ} (hs : -(15/8 : ℝ) ≤ s.re) : ‖emE a s‖ ≤ (‖s‖ + 2) ^ 4 * a ^ (-(9/8 : ℝ)) 
+[516] lemma summable_nine_pow_mul_inv_sq_succ : Summable (fun n : ℕ => ((n : ℝ) + 1) ^ (-(9/8 : ℝ))) 
+[553] lemma differentiable_emT {x : ℝ} (hx : 0 < x) : Differentiable ℂ (emT x) 
+[1074] lemma differentiable_emE {x : ℝ} (hx : 0 < x) : Differentiable ℂ (emE x) 
+[1781] lemma differentiableOn_tsum_emE : DifferentiableOn ℂ (fun s => ∑' n : ℕ, emE ((n : ℝ) + 1) s) {s : ℂ | -(15/8 : ℝ) < s.re} 
+[956] lemma tendsto_cpow_zero {c : ℂ} (hc : c.re < 0) : Tendsto (fun n : ℕ => (((n : ℝ) + 1 : ℝ) : ℂ) ^ c) atTop (𝓝 0) 
+[5890] lemma eq_of_one_lt {s : ℂ} (hs : 1 < s.re) : (s - 1) * riemannZeta s = emT 1 s + ∑' n : ℕ, emE ((n : ℝ) + 1) s 
+[1270] lemma eq_of_lt {s : ℂ} (hs : -(15/8 : ℝ) < s.re) (h1 : s ≠ 1) : (s - 1) * riemannZeta s = emT 1 s + ∑' n : ℕ, emE ((n : ℝ) + 1) s 
+[12327] theorem norm_sub_one_mul_riemannZeta_le : ∃ C : ℝ, 0 < C ∧ ∀ s : ℂ, -(7/4 : ℝ) ≤ s.re → s ≠ 1 → ‖(s - 1) * riemannZeta s‖ ≤ C * (‖s‖ + 2) ^ 5 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/OrderNeTop.lean  (202 lines)
+[108] theorem analyticAt_L {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) (z : ℂ) : AnalyticAt ℂ (LFunction χ) z 
+[575] theorem order_ne_top {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) (z : ℂ) : analyticOrderAt (LFunction χ) z ≠ ⊤ 
+[318] theorem le_order {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) (z : ℂ) (n : ℕ) (hn : ∀ i < n, iteratedDeriv i (LFunction χ) z = 0) : n ≤ analyticOrderNatAt (LFunction χ) z 
+[180] theorem re_lt_one {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} (h : χ ≠ 1) {z : ℂ} (hz : LFunction χ z = 0) : z.re < 1 
+[8430] theorem exists_bound : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ σ : ℝ, 1 < σ → σ ≤ 2 → ∀ T : Finset ℝ, (∀ β ∈ T, 2 / 3 ≤ β ∧ LFunction χ β = 0) → -(deriv (LFunction χ) σ / LFunction χ σ).re ≤ C * Real.log (2 * q) - ∑ β ∈ T, (analyticOrderNatAt (LFunction χ) β : ℝ) / (σ - β) 
+[34257] theorem main : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ ψ : DirichletCharacter ℂ q) (β β' : ℝ), χ ≠ 1 → ψ ≠ 1 → χ ^ 2 = 1 → ψ ^ 2 = 1 → 1 - c / Real.log (2 * q) ≤ β → 1 - c / Real.log (2 * q) ≤ β' → LFunction χ β = 0 → LFunction ψ β' = 0 → χ = ψ ∧ β = β' ∧ deriv (LFunction χ) β ≠ 0 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PerronIntegralShiftPrimitiveLFunction.lean  (338 lines)
+[3137 priv] private theorem half_le_norm_sub_of_re_eq_neg_half_of_LFunction_eq_zero {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N) (hχ : χ.IsPrimitive) {s w : ℂ} (hs : s.re = -(1 / 2)) (hw : LFunction χ w = 0) : 1 / 2 ≤ ‖s - w‖ 
+[871 priv] private theorem LFunction_ne_zero_of_re_eq_neg_half {N : ℕ} [NeZero N] (χ : DirichletCharacter ℂ N) (hχ : χ.IsPrimitive) {s : ℂ} (hs : s.re = -(1 / 2)) : LFunction χ s ≠ 0 
+[2510 priv] private theorem norm_finsum_div_sub_le_two_mul_finsum_of_half_le_dist {S : Set ℂ} (hS : S.Finite) (k : ℂ → ℕ) (s : ℂ) (hd : ∀ w ∈ S, 1 / 2 ≤ ‖s - w‖) : ‖∑ᶠ (w : ℂ) (_ : w ∈ S), (k w : ℂ) / (s - w)‖ ≤ 2 * ∑ᶠ (w : ℂ) (_ : w ∈ S), (k w : ℝ) 
+[15878 priv] private theorem exists_norm_logDeriv_LFunction_neg_half_le_log_conductor : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ t : ℝ, ‖deriv (LFunction χ) (((-(1 / 2) : ℝ) : ℂ) + t * I) / LFunction χ (((-(1 / 2) : ℝ) : ℂ) + t * I)‖ ≤ C * Real.log (N * (|t| + 2)) 
+[322 priv] private theorem norm_neg_mul_ofReal_cpow_div_eq (a s : ℂ) {u : ℝ} (hu : 0 < u) : ‖-a * (u : ℂ) ^ s / s‖ = ‖a‖ * u ^ s.re / ‖s‖ 
+[3291 priv] private theorem integral_one_div_abs_add_half_eq_two_mul_log (a : ℝ) (ha : 0 ≤ a) : ∫ t in -a..a, 1 / (|t| + 1 / 2) = 2 * Real.log (2 * a + 1) 
+[7508 priv] private theorem norm_integral_logDeriv_LFunction_mul_cpow_div_neg_half_le : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ u T' : ℝ, 1 ≤ u → 0 ≤ T' → ‖∫ t in -T'..T', -(deriv (LFunction χ) (((-(1 / 2) : ℝ) : ℂ) + t * I) / LFunction χ (((-(1 / 2) : ℝ) : ℂ) + t * I)) * (u : ℂ) ^ (((-(1 / 2) : ℝ) : ℂ) + t * I) / (((-(1 / 2) : ℝ) : ℂ) + t * I)‖ ≤ C * Real.log (N * (T' + 2)) * Real.log (2 * T' + 1) 
+[2935 priv] private theorem rpow_one_add_inv_log_le_three_mul (u : ℝ) (hu : 1 < u) : u ^ (1 + 1 / Real.log u) ≤ 3 * u 
+[5369 priv] private theorem inv_two_pi_mul_sub_add_eq_of_contour_identity (H₁ H₂ V W M S E : ℂ) (hid : H₁ - H₂ + I * V - I * W = 2 * (Real.pi : ℂ) * I * (M - S - E)) : (1 / (2 * (Real.pi : ℂ))) * V - M + S = -E + (1 / (2 * (Real.pi : ℂ))) * (W + I * (H₁ - H₂)) 
+[3299 priv] private theorem norm_neg_add_inv_two_pi_mul_add_I_mul_sub_le (H₁ H₂ W E : ℂ) : ‖-E + (1 / (2 * (Real.pi : ℂ))) * (W + I * (H₁ - H₂))‖ ≤ ‖E‖ + ‖W‖ + ‖H₁‖ + ‖H₂‖ 
+[40617] theorem _root_.GlobalTheory.PerronShift.perron_shift : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ u T : ℝ, 2 ≤ T → T ≤ u → ∃ T' : ℝ, T ≤ T' ∧ T' ≤ T + 1 ∧ ‖(1 / (2 * Real.pi) : ℂ) * (∫ t : ℝ in (-T')..T', (-(deriv (LFunction χ) (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I) / LFunction χ (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I)) * (u : ℂ) ^ (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I) / (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I))) - (if N = 1 then (u : ℂ) else 0) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T' ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (N * u * T) ^ 2 / T + Real.log (N * u) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < 1 ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℝ) / ‖ρ‖) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PerronIntegralShiftPrimitiveLFunctionStatement.lean  (8 lines)
+[501] theorem _root_.GlobalTheory.T.perron_integral_shift_primitive_LFunction : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ u T : ℝ, 2 ≤ T → T ≤ u → ∃ T' : ℝ, T ≤ T' ∧ T' ≤ T + 1 ∧ ‖(1 / (2 * Real.pi) : ℂ) * (∫ t : ℝ in (-T')..T', (-(deriv (LFunction χ) (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I) / LFunction χ (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I)) * (u : ℂ) ^ (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I) / (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I))) - (if N = 1 then (u : ℂ) else 0) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T' ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (N * u * T) ^ 2 / T + Real.log (N * u) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < 1 ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℝ) / ‖ρ‖) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimeCountRelativeErrorOfPsiRelativeError.lean  (391 lines)
+[64] noncomputable def mainPsi (θ : ℤ) (β u : ℝ) : ℝ := u - θ * (u ^ β / β)
+[47] noncomputable def wt (P : ℕ → Prop) (n : ℕ) : ℝ := if n.Prime ∧ P n then Real.log n else 0
+[71] noncomputable def cnt (P : ℕ → Prop) (u : ℝ) : ℝ := (((Finset.Icc 1 ⌊u⌋₊).filter (fun p => p.Prime ∧ P p)).card : ℝ)
+[748] theorem contOn_inv_log : ContinuousOn (fun t : ℝ => 1 / Real.log t) (Set.Ioi 1) 
+[269] theorem intInt_inv_log {x : ℝ} (hx : 1 < x) : IntervalIntegrable (fun t : ℝ => 1 / Real.log t) volume 2 x 
+[319] theorem hasDerivAt_Li {x : ℝ} (hx : 1 < x) : HasDerivAt Li (1 / Real.log x) x 
+[4597] theorem li_bounds {x : ℝ} (hx : 2 ≤ x) : 0 ≤ Li x ∧ Li x ≤ 3 / 2 * x 
+[4434] theorem hasDerivAt_diff (θ : ℤ) {β u : ℝ} (hβ : 0 < β) (hu : 1 < u) : HasDerivAt (fun u => Emain θ β u - mainPsi θ β u / Real.log u) (mainPsi θ β u / (u * Real.log u ^ 2)) u 
+[924] theorem contOn_w {Y X : ℝ} (hY : 1 < Y) : ContinuousOn (fun t : ℝ => 1 / (t * Real.log t ^ 2)) (Set.Icc Y X) 
+[894] theorem contOn_main (θ : ℤ) (β : ℝ) {Y X : ℝ} (hY : 1 < Y) : ContinuousOn (fun t : ℝ => 1 / (t * Real.log t ^ 2) * mainPsi θ β t) (Set.Icc Y X) 
+[1264] theorem integral_main (θ : ℤ) {β Y X : ℝ} (hβ : 0 < β) (hY : 1 < Y) (hYX : Y ≤ X) : ∫ t in Y..X, 1 / (t * Real.log t ^ 2) * mainPsi θ β t = (Emain θ β X - mainPsi θ β X / Real.log X) - (Emain θ β Y - mainPsi θ β Y / Real.log Y) 
+[1082] theorem cnt_eq (P : ℕ → Prop) (u : ℝ) : cnt P u = ∑ k ∈ Finset.Ioc 0 ⌊u⌋₊, 1 / Real.log k * wt P k 
+[4495] theorem abel (P : ℕ → Prop) {Y X : ℝ} (hY : 1 < Y) (hYX : Y ≤ X) : cnt P X - cnt P Y = (∑ k ∈ Finset.Icc 0 ⌊X⌋₊, wt P k) / Real.log X - (∑ k ∈ Finset.Icc 0 ⌊Y⌋₊, wt P k) / Real.log Y + ∫ t in Y..X, 1 / (t * Real.log t ^ 2) * ∑ k ∈ Finset.Icc 0 ⌊t⌋₊, wt P k 
+[10286] theorem core (P : ℕ → Prop) (θ : ℤ) {β φ ρ Y X : ℝ} (hβ : 0 < β) (hY : 1 < Y) (hYX : Y ≤ X) (h : ∀ u ∈ Set.Icc Y X, |φ * (∑ k ∈ Finset.Icc 0 ⌊u⌋₊, wt P k) - mainPsi θ β u| ≤ ρ * mainPsi θ β u) : |φ * (cnt P X - cnt P Y) - (Emain θ β X - Emain θ β Y)| ≤ ρ * (Emain θ β X - Emain θ β Y + 2 * (mainPsi θ β Y / Real.log Y)) 
+[1284] theorem psi_sub_wt (P : ℕ → Prop) {u : ℝ} (hu : 1 ≤ u) : |(∑ n ∈ (Finset.Icc 1 ⌊u⌋₊).filter P, Λ n) - ∑ k ∈ Finset.Icc 0 ⌊u⌋₊, wt P k| ≤ 2 * √u * Real.log u 
+[19671] theorem main_bounds {θ : ℤ} {β δ u : ℝ} (hθ : θ = 0 ∨ θ = 1 ∨ θ = -1) (hβ : 7 / 8 ≤ β) (hδ : 0 < δ) (hδβ : δ ≤ 1 - β) (hu : 1 ≤ u) (hl : 4 ≤ Real.log u) : δ * u ≤ mainPsi θ β u ∧ mainPsi θ β u ≤ 3 * u 
+[7014] theorem abs_emain_le {θ : ℤ} {β u : ℝ} (hθ : θ = 0 ∨ θ = 1 ∨ θ = -1) (hβ : 7 / 8 ≤ β) (hβ1 : β ≤ 1) (hu : 4 ≤ u) : |Emain θ β u| ≤ 3 * u 
+[315] theorem cnt_bounds (P : ℕ → Prop) {u : ℝ} (hu : 0 ≤ u) : 0 ≤ cnt P u ∧ cnt P u ≤ u 
+[53484] theorem step (P : ℕ → Prop) {θ : ℤ} {β δ φ B ρ s : ℝ} (hθ : θ = 0 ∨ θ = 1 ∨ θ = -1) (hβ : 7 / 8 ≤ β) (hδ : 0 < δ) (hδβ : δ ≤ 1 - β) (hB : 3 ≤ B) (hφ : 0 ≤ φ) (hφB : φ ≤ B) (hρ : 0 ≤ ρ) (hs : 64 * B ≤ δ * s) (h : ∀ u ∈ Set.Icc (s ^ 8) (s ^ 16), |φ * (∑ n ∈ (Finset.Icc 1 ⌊u⌋₊).filter P, Λ n) - mainPsi θ β u| ≤ ρ * mainPsi θ β u) : 0 ≤ Emain θ β (s ^ 16) ∧ |φ * cnt P (s ^ 16) - Emain θ β (s ^ 16)| ≤ (3 * ρ + 4 / s) * Emain θ β (s ^ 16) 
+[19257] theorem pi_rel_of_psi_rel : ∀ c₂ c₃ C cS : ℝ, 0 < c₂ → 0 < c₃ → 0 < C → 0 < cS → ∃ c₂' c₃' C' : ℝ, 0 < c₂' ∧ 0 < c₃' ∧ 0 < C' ∧ ∀ (B φ β : ℝ) (θ : ℤ) (P : ℕ → Prop), 3 ≤ B → 1 ≤ φ → φ ≤ B → (θ = 0 ∨ ((θ = 1 ∨ θ = -1) ∧ 7 / 8 ≤ β ∧ cS / B ^ 3 ≤ 1 - β)) → (∀ u : ℝ, B ^ c₂ ≤ u → |φ * (∑ n ∈ (Finset.Icc 1 ⌊u⌋₊).filter P, Λ n) - (u - θ * (u ^ β / β))| ≤ C * (Real.exp (-c₃ * Real.log u / Real.log B) + Real.exp (-Real.sqrt (c₃ * Real.log u))) * (u - θ * (u ^ β / β))) → ∀ X : ℝ, B ^ c₂' ≤ X → |φ * (((Finset.Icc 1 ⌊X⌋₊).filter (fun p => p.Prime ∧ P p)).card : ℝ) - Formalism.HermitianLattices.GL2PrimeSums.Emain θ β X| ≤ C' * (Real.exp (-c₃' * Real.log X / Real.log B) + Real.exp (-Real.sqrt (c₃' * Real.log X))) * Formalism.HermitianLattices.GL2PrimeSums.Emain θ β X 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimeCountRelativeErrorOfPsiRelativeErrorStatement.lean  (10 lines)
+[420] theorem _root_.GlobalTheory.T.primeCount_relative_error_of_psi_relative_error : ∀ c₂ c₃ C cS : ℝ, 0 < c₂ → 0 < c₃ → 0 < C → 0 < cS → ∃ c₂' c₃' C' : ℝ, 0 < c₂' ∧ 0 < c₃' ∧ 0 < C' ∧ ∀ (B φ β : ℝ) (θ : ℤ) (P : ℕ → Prop), 3 ≤ B → 1 ≤ φ → φ ≤ B → (θ = 0 ∨ ((θ = 1 ∨ θ = -1) ∧ 7 / 8 ≤ β ∧ cS / B ^ 3 ≤ 1 - β)) → (∀ u : ℝ, B ^ c₂ ≤ u → |φ * (∑ n ∈ (Finset.Icc 1 ⌊u⌋₊).filter P, Λ n) - (u - θ * (u ^ β / β))| ≤ C * (Real.exp (-c₃ * Real.log u / Real.log B) + Real.exp (-Real.sqrt (c₃ * Real.log u))) * (u - θ * (u ^ β / β))) → ∀ X : ℝ, B ^ c₂' ≤ X → |φ * (((Finset.Icc 1 ⌊X⌋₊).filter (fun p => p.Prime ∧ P p)).card : ℝ) - Formalism.HermitianLattices.GL2PrimeSums.Emain θ β X| ≤ C' * (Real.exp (-c₃' * Real.log X / Real.log B) + Real.exp (-Real.sqrt (c₃' * Real.log X))) * Formalism.HermitianLattices.GL2PrimeSums.Emain θ β X 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimeMeanValueCharactersTwistIntegralLe.lean  (261 lines)
+[687] theorem sum_integral_le {ι : Type*} (s : Finset ι) (μ : Measure ℝ) (f : ι → ℝ → ℝ) (G : ℝ → ℝ) (hm : ∀ i, AEStronglyMeasurable (f i) μ) (h0 : ∀ᵐ x ∂μ, ∀ i, 0 ≤ f i x) (hG : Integrable G μ) (h : ∀ᵐ x ∂μ, ∑ i ∈ s, f i x ≤ G x) : ∑ i ∈ s, ∫ x, f i x ∂μ ≤ ∫ x, G x ∂μ 
+[383] theorem kernel_eq (n δ x : ℝ) : (if x < n ∧ n ≤ x * Real.exp δ then 1 / x else 0) = (Set.Ico (n / Real.exp δ) n).indicator (fun x => 1 / x) x 
+[1028] theorem kernel_integral (n δ : ℝ) (hn : 0 < n) (hδ : 0 ≤ δ) : IntegrableOn (fun x : ℝ => if x < n ∧ n ≤ x * Real.exp δ then 1 / x else 0) (Set.Ioi 0) ∧ ∫ x in Set.Ioi (0 : ℝ), (if x < n ∧ n ≤ x * Real.exp δ then 1 / x else 0) = δ 
+[734] theorem conj_char {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {u : ZMod q} (hu : IsUnit u) : (starRingEnd ℂ) (χ u) = χ u⁻¹ 
+[6873] theorem orth (q : ℕ) [NeZero q] (S : Finset ℕ) (a : ℕ → ℂ) (hS : ∀ n ∈ S, Nat.Coprime n q) : ∑ χ : DirichletCharacter ℂ q, ‖∑ n ∈ S, a n * χ (n : ZMod q)‖ ^ 2 ≤ ∑ n ∈ S, (q.totient : ℝ) * ((S.filter (fun m => m ≡ n [MOD q])).card : ℝ) * ‖a n‖ ^ 2 
+[475] theorem mem_primesIoc {x y : ℝ} (hx : 0 ≤ x) {p : ℕ} : p ∈ primesIoc x y ↔ x < p ∧ (p : ℝ) ≤ y ∧ p.Prime 
+[16857] theorem window (C : ℝ) (hC : 0 < C) (hB : ∀ (q a : ℕ) (x y : ℝ), 1 ≤ q → Nat.Coprime a q → 0 ≤ x → 2 * (q : ℝ) ≤ y → (((primesIoc x (x + y)).filter (fun p => p ≡ a [MOD q])).card : ℝ) ≤ C * y / (q.totient * Real.log (y / q))) (q : ℕ) [NeZero q] (T N x : ℝ) (a : ℕ → ℂ) (S : Finset ℕ) (hT : 1 ≤ T) (hN : (2 * q * T) ^ 2 ≤ N) (hx : 0 < x) (hS : ∀ n ∈ S, n.Prime ∧ N < n ∧ x < n ∧ (n : ℝ) ≤ x * Real.exp (1 / T)) : ∑ χ : DirichletCharacter ℂ q, ‖∑ n ∈ S, a n * χ (n : ZMod q)‖ ^ 2 ≤ ∑ n ∈ S, 4 * C * n / (T * Real.log n) * ‖a n‖ ^ 2 
+[6333] theorem prime_mean_value : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (T N y : ℝ) (a : ℕ → ℂ), 1 ≤ T → (2 * q * T) ^ 2 ≤ N → ∑ χ : DirichletCharacter ℂ q, (∫ t in (-T)..T, ‖∑ p ∈ primesIoc N y, a p * χ (p : ZMod q) * (p : ℂ) ^ (-(t * I))‖ ^ 2) ≤ C * ∑ p ∈ primesIoc N y, (p : ℝ) * ‖a p‖ ^ 2 / Real.log p 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimeMeanValueCharactersTwistIntegralLeStatement.lean  (10 lines)
+[323] theorem _root_.GlobalTheory.T.primeMeanValue_characters_twist_integral_le : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (T N y : ℝ) (a : ℕ → ℂ), 1 ≤ T → (2 * q * T) ^ 2 ≤ N → ∑ χ : DirichletCharacter ℂ q, (∫ t in (-T)..T, ‖∑ p ∈ primesIoc N y, a p * χ (p : ZMod q) * (p : ℂ) ^ (-(t * I))‖ ^ 2) ≤ C * ∑ p ∈ primesIoc N y, (p : ℝ) * ‖a p‖ ^ 2 / Real.log p 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimesInProgressionsRelativeError.lean  (54 lines)
+[1683] theorem sign_of_sq_eq_one {M : ℕ} [NeZero M] (χ : DirichletCharacter ℂ M) (h : χ ^ 2 = 1) (b : ℕ) (hb : Nat.Coprime b M) (θ : ℤ) (hθ : χ (b : ZMod M) = (θ : ℂ)) : θ = 1 ∨ θ = -1 
+[6749] theorem primesRel_holds : GlobalTheory.Lin.PrimesRel 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/PrimesInProgressionsRelativeErrorStatement.lean  (10 lines)
+[2] theorem _root_.GlobalTheory.T.primesInProgressions_relativeError : GlobalTheory.Lin.PrimesRel 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/Repulsion.lean  (359 lines)
+[1026] theorem one_le_ord {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {w : ℂ} (hw : w ≠ 1) (h0 : LFunction χ w = 0) : 1 ≤ ord χ w 
+[2922] theorem norm_pow_sub_le {a b : ℂ} (ha : ‖a‖ ≤ 1) (hb : ‖b‖ ≤ 1) (j : ℕ) : ‖a ^ j - b ^ j‖ ≤ j * ‖a - b‖ 
+[3975] theorem pole_pair {β t : ℝ} (hβ : β < 1) (j : ℕ) : ‖1 / ((2 : ℂ) + t * I - 1) ^ j - (1 / ((2 : ℂ) + t * I - β)) ^ j‖ ≤ j * (1 - β) 
+[3041] theorem pole_far {β t : ℝ} (hβ : β < 1) (hβ' : 1 / 2 ≤ β) (h : ¬ ‖(β : ℂ) - (2 + t * I)‖ ≤ 3) (j : ℕ) : ‖1 / ((2 : ℂ) + t * I - 1) ^ j‖ ≤ 1 / 2 ^ j 
+[2925] theorem summable_der (c : ℕ → ℂ) (hc : ∀ n, ‖c n‖ ≤ 1) (k : ℕ) (t : ℝ) : Summable fun n : ℕ => ((Λ n : ℝ) : ℂ) * c n * ((Real.log n : ℂ) ^ k / (k.factorial : ℂ)) * (n : ℂ) ^ (-((2 : ℂ) + t * I)) 
+[7537] theorem der_pos {q : ℕ} [NeZero q] (χ₁ χ : DirichletCharacter ℂ q) (h : χ₁ ^ 2 = 1) (k : ℕ) (t : ℝ) : 0 ≤ (derSeries (fun n : ℕ => (1 : DirichletCharacter ℂ q) (n : ZMod q)) k (2 + (0 : ℝ) * I) + derSeries (fun n : ℕ => χ₁ (n : ZMod q)) k (2 + (0 : ℝ) * I) + derSeries (fun n : ℕ => χ (n : ZMod q)) k (2 + t * I) + derSeries (fun n : ℕ => (χ * χ₁) (n : ZMod q)) k (2 + t * I)).re 
+[115] noncomputable def powSum (W : Multiset ℂ) (t : ℝ) (j : ℕ) : ℂ :=
+[7718] theorem exists_list : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (t L : ℝ), Real.log (q * (|t| + 2)) ≤ L → ∃ W : Multiset ℂ, (∀ w : ℂ, ‖w - (2 + t * I)‖ ≤ 3 → w ≠ 1 → LFunction χ w = 0 → W.count w = ord χ w) ∧ (W.card : ℝ) ≤ C * L ∧ ∀ k : ℕ, (derSeries (fun n : ℕ => χ (n : ZMod q)) k (2 + t * I)).re + (powSum W t (k + 1)).re ≤ (if χ = 1 then 1 / ((2 : ℂ) + t * I - 1) ^ (k + 1) else 0).re + 2 * C * L / 2 ^ (k + 1) 
+[4482] theorem exists_erase {β : ℝ} (hβ : β < 1) (hβ' : 1 / 2 ≤ β) (W : Multiset ℂ) (t : ℝ) (h : ‖(β : ℂ) - (2 + t * I)‖ ≤ 3 → (β : ℂ) ∈ W) : ∃ W' : Multiset ℂ, W'.card ≤ W.card ∧ (∀ w ∈ W, w ≠ β ∨ 2 ≤ W.count w → w ∈ W') ∧ ∀ j : ℕ, (powSum W' t j).re + (1 / ((2 : ℂ) + t * I - 1) ^ j).re ≤ (powSum W t j).re + j * (1 - β) + 1 / 2 ^ j 
+[993] theorem power_step : ∃ C : ℝ, 0 < C ∧ ∀ (M : Multiset ℂ) (z : ℂ) (L δ x : ℝ), z ∈ M → 1 ≤ L → 0 < δ → 0 ≤ x → x ≤ 1 / 2 → 1 / (1 + x) ≤ ‖z‖ → (M.card : ℝ) ≤ L → (∀ j : ℕ, 1 ≤ j → (M.map fun y => y ^ j).sum.re ≤ 2 * j * δ + L / 2 ^ j) → Real.log (1 / (C * L * δ)) / (C * L) ≤ x 
+[32938] theorem repulsion : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ₁ χ : DirichletCharacter ℂ q) (β L : ℝ) (ρ : ℂ), χ₁ ≠ 1 → χ₁ ^ 2 = 1 → β < 1 → 1 / 2 ≤ β → LFunction χ₁ β = 0 → LFunction χ ρ = 0 → 1 / 2 ≤ ρ.re → ρ.re < 1 → (χ ≠ χ₁ ∨ ρ ≠ β ∨ 2 ≤ ord χ₁ β) → Real.log (q * (|ρ.im| + 2)) ≤ L → c * Real.log (c / ((1 - β) * L)) / L ≤ 1 - ρ.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/RepulsionStatement.lean  (10 lines)
+[321] theorem _root_.GlobalTheory.T.one_sub_re_ge_of_exceptional_zero_repulsion : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (χ₁ χ : DirichletCharacter ℂ q) (β L : ℝ) (ρ : ℂ), χ₁ ≠ 1 → χ₁ ^ 2 = 1 → β < 1 → 1 / 2 ≤ β → LFunction χ₁ β = 0 → LFunction χ ρ = 0 → 1 / 2 ≤ ρ.re → ρ.re < 1 → (χ ≠ χ₁ ∨ ρ ≠ β ∨ 2 ≤ ord χ₁ β) → Real.log (q * (|ρ.im| + 2)) ≤ L → c * Real.log (c / ((1 - β) * L)) / L ≤ 1 - ρ.re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SumIccThreeQuartersPowLe.lean  (159 lines)
+[2820] theorem sum_Icc_three_quarters_pow_le (J : ℕ) : ∑ j ∈ Finset.Icc 1 J, (3 / 4 : ℝ) ^ j ≤ 3 - 3 * (3 / 4 : ℝ) ^ J 
+[20283] theorem powerSum_weighted_ineq {ι : Type} (S : Finset ι) (z : ι → ℂ) (b : ι → ℕ) (i₀ : ι) (L δ x : ℝ) (hi : i₀ ∈ S) (hb : 1 ≤ b i₀) (hL : 1 ≤ L) (hδ : 0 < δ) (hx0 : 0 ≤ x) (hx : x ≤ 1 / 2) (hz : 1 / (1 + x) ≤ ‖z i₀‖) (hS : (∑ i ∈ S, (b i : ℝ)) ≤ L) (hp : ∀ j : ℕ, 1 ≤ j → (∑ i ∈ S, (b i : ℂ) * z i ^ j).re ≤ 2 * j * δ + L / 2 ^ j) (J : ℕ) : (J : ℝ) / 4 - 7 * L ≤ 4 * (J : ℝ) ^ 2 * δ * (1 + x) ^ J 
+[8021] theorem powerSum_repulsion : ∃ C : ℝ, 0 < C ∧ ∀ (ι : Type) (S : Finset ι) (z : ι → ℂ) (b : ι → ℕ) (i₀ : ι) (L δ x : ℝ), i₀ ∈ S → 1 ≤ b i₀ → 1 ≤ L → 0 < δ → 0 ≤ x → x ≤ 1 / 2 → 1 / (1 + x) ≤ ‖z i₀‖ → (∑ i ∈ S, (b i : ℝ)) ≤ L → (∀ j : ℕ, 1 ≤ j → (∑ i ∈ S, (b i : ℂ) * z i ^ j).re ≤ 2 * j * δ + L / 2 ^ j) → Real.log (1 / (C * L * δ)) / (C * L) ≤ x 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SumIntervalIntegralLeOfSpaced.lean  (220 lines)
+[6226] theorem gallagher_interval (f f' h : ℝ → ℝ) (hf : ∀ t, HasDerivAt f (f' t) t) (hf' : Continuous f') (hh : Continuous h) (hb : ∀ t, |f' t| ≤ h t) (x δ : ℝ) (hδ : 0 < δ) : f x ≤ ∫ t in x..(x + δ), (f t / δ + h t) 
+[2378] theorem integral_exp_two_pi_sub (n m : ℕ) (y : ℝ) : ∫ t in y..(y + 1), Complex.exp (2 * Real.pi * I * ((n : ℂ) - m) * t) = if n = m then 1 else 0 
+[1725] theorem norm_expSum_shift (s : Finset ℕ) (b : ℕ → ℂ) (c t : ℝ) : ‖∑ n ∈ s, b n * Complex.exp (2 * Real.pi * I * ((n : ℂ) - c) * t)‖ = ‖∑ n ∈ s, b n * Complex.exp (2 * Real.pi * I * n * t)‖ 
+[2785] theorem integral_norm_sq_expSum (s : Finset ℕ) (b : ℕ → ℂ) (y : ℝ) : ∫ t in y..(y + 1), ‖∑ n ∈ s, b n * Complex.exp (2 * Real.pi * I * n * t)‖ ^ 2 = ∑ n ∈ s, ‖b n‖ ^ 2 
+[2750] theorem sum_intervalIntegral_le_of_spaced (g : ℝ → ℝ) (hg : Continuous g) (h0 : ∀ t, 0 ≤ g t) (S : Finset ℝ) (p : ℝ → ℝ) (δ y : ℝ) (hδ : 0 < δ) (h1 : ∀ x ∈ S, y ≤ p x) (h2 : ∀ x ∈ S, p x + δ ≤ y + 1) (h3 : ∀ x ∈ S, ∀ z ∈ S, x ≠ z → δ ≤ |p x - p z|) : ∑ x ∈ S, ∫ t in (p x)..(p x + δ), g t ≤ ∫ t in y..(y + 1), g t 
+[1392] theorem expSum_sub_int (s : Finset ℕ) (b : ℕ → ℂ) (x : ℝ) (k : ℤ) : ∑ n ∈ s, b n * Complex.exp (2 * Real.pi * I * n * ((x - k : ℝ) : ℂ)) = ∑ n ∈ s, b n * Complex.exp (2 * Real.pi * I * n * x) 
+[17316] theorem additive_large_sieve : ∀ (M N : ℕ) (a : ℕ → ℂ) (S : Finset ℝ) (δ : ℝ), 0 < δ → δ ≤ 1 → (∀ x ∈ S, ∀ y ∈ S, x ≠ y → ∀ k : ℤ, δ ≤ |x - y - k|) → ∑ x ∈ S, ‖∑ n ∈ Finset.Ioc M (M + N), a n * Complex.exp (2 * Real.pi * I * n * x)‖ ^ 2 ≤ (1 / δ + 2 * Real.pi * N) * ∑ n ∈ Finset.Ioc M (M + N), ‖a n‖ ^ 2 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SumPrimesIocEqSumIndicator.lean  (125 lines)
+[273] theorem mem_primesIoc_bounds {x y : ℝ} (hx : 0 ≤ x) (hxy : x ≤ y) {p : ℕ} (hp : p ∈ primesIoc x y) : x < p ∧ (p : ℝ) ≤ y 
+[832] theorem sum_primesIoc_eq_sum_indicator (a : ℕ → ℂ) {x y t : ℝ} (ht : 0 ≤ t) (hty : t ≤ y) : ∑ p ∈ primesIoc x t, a p = ∑ p ∈ primesIoc x y, (Set.Ici (p : ℝ)).indicator (fun _ => a p) t 
+[256 priv] private lemma intervalIntegrable_indicator_Ici_of_intervalIntegrable {E : Type*} [NormedAddCommGroup E] {f : ℝ → E} {x y p : ℝ} (hf : IntervalIntegrable f MeasureTheory.volume x y) : IntervalIntegrable ((Set.Ici p).indicator f) MeasureTheory.volume x y 
+[940 priv] private lemma integral_indicator_Ici_deriv_eq_sub_of_hasDerivAt {J J' : ℝ → ℝ} {x y p : ℝ} (hxp : x < p) (hpy : p ≤ y) (hJ : ∀ t ∈ Set.Icc x y, HasDerivAt J (J' t) t) (hc : ContinuousOn J' (Set.Icc x y)) : ∫ t in x..y, (Set.Ici p).indicator (fun t => (J' t : ℂ)) t = (J y : ℂ) - J p 
+[3925] theorem abel_primesIoc_weight (a : ℕ → ℂ) (J J' : ℝ → ℝ) (x y r : ℝ) (hx : 1 ≤ x) (hxy : x ≤ y) (hJ : ∀ t ∈ Set.Icc x y, HasDerivAt J (J' t) t) (hc : ContinuousOn J' (Set.Icc x y)) (hb : ∀ t ∈ Set.Icc x y, |J' t| ≤ r / t) : ‖∑ p ∈ primesIoc x y, a p * ((J p - J y : ℝ) : ℂ)‖ ≤ r * ∫ t in x..y, ‖∑ p ∈ primesIoc x t, a p‖ / t 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SumRpowZerosLe.lean  (235 lines)
+[4847] theorem mem_disc {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {T : ℝ} {ρ : ℂ} (h : ρ ∈ zerosBox χ (1 / 2) T) : ⌊ρ.im⌋ ∈ Finset.Icc (-⌈T⌉) ⌈T⌉ ∧ ρ ∈ zerosDisc χ (2 + ((⌊ρ.im⌋ : ℝ) : ℂ) * I) 3 
+[5923] theorem total_count : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (T : ℝ), 2 ≤ T → ∃ h : (zerosBox χ (1 / 2) T).Finite, ∑ ρ ∈ h.toFinset, (ord χ ρ : ℝ) ≤ C * (q * T ^ 2) 
+[7962] theorem layers {ι : Type*} (s : Finset ι) (w δ : ι → ℝ) (hw : ∀ i, 0 ≤ w i) {L η e : ℝ} (hL : 0 < L) (J : ℕ) (hJ : L * e < J) (hη : 0 ≤ η) : ∑ i ∈ s with η ≤ δ i, w i * Real.exp (-(L * δ i)) ≤ ∑ j ∈ Finset.range J, Real.exp (-(L * η) - j) * (∑ i ∈ s with δ i ≤ min (η + (j + 1) / L) e, w i) + Real.exp (-(L * e)) * ∑ i ∈ s, w i 
+[19511] theorem sum_rpow_zeros_le : ∃ A C η₀ : ℝ, 0 < A ∧ 0 < C ∧ 0 < η₀ ∧ ∀ (q : ℕ) [NeZero q] (T u η : ℝ), 2 ≤ T → ((q : ℝ) * T) ^ A ≤ u → 0 ≤ η → ∑ χ : DirichletCharacter ℂ q, (∑ᶠ ρ ∈ zerosBox χ (1 / 2) T ∩ {ρ | ρ.re ≤ 1 - η}, (ord χ ρ : ℝ) * u ^ (ρ.re - 1)) ≤ C * (u ^ (-η / 2) + u ^ (-η₀)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SumRpowZerosLeStatement.lean  (10 lines)
+[277] theorem _root_.GlobalTheory.T.exists_sum_characters_finsum_zeros_rpow_re_sub_one_le : ∃ A C η₀ : ℝ, 0 < A ∧ 0 < C ∧ 0 < η₀ ∧ ∀ (q : ℕ) [NeZero q] (T u η : ℝ), 2 ≤ T → ((q : ℝ) * T) ^ A ≤ u → 0 ≤ η → ∑ χ : DirichletCharacter ℂ q, (∑ᶠ ρ ∈ zerosBox χ (1 / 2) T ∩ {ρ | ρ.re ≤ 1 - η}, (ord χ ρ : ℝ) * u ^ (ρ.re - 1)) ≤ C * (u ^ (-η / 2) + u ^ (-η₀)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SummableNinePowMulInvSqSucc.lean  (323 lines)
+[20] noncomputable def diffPow : ℕ → ℂ → ℝ → ℂ | 0, s, x => (x : ℂ) ^ (-s) | k + 1, s, x => diffPow k s x - diffPow k s (x + 1) theorem hasDerivAt_diffPow (k : ℕ) (s : ℂ) : ∀ x : ℝ, 0 < x → HasDerivAt (diffPow k s) (-s * diffPow k (s + 1) x) x 
+[2124] theorem hasDerivAt_diffPow (k : ℕ) (s : ℂ) : ∀ x : ℝ, 0 < x → HasDerivAt (diffPow k s) (-s * diffPow k (s + 1) x) x 
+[3239] theorem norm_diffPow_le (k : ℕ) : ∀ (s : ℂ) (x : ℝ), 0 < x → 0 ≤ s.re + k → ‖diffPow k s x‖ ≤ (‖s‖ + k) ^ k * x ^ (-(s.re + k)) 
+[1021] theorem differentiable_diffPow (k : ℕ) : ∀ x : ℝ, 0 < x → Differentiable ℂ (fun s => diffPow k s x) 
+[6449] theorem abel_step (q : ℕ) (hq : 0 < q) (a : ℕ → ℂ) (M : ℝ) (hp : Function.Periodic a q) (h0 : ∑ n ∈ Finset.range q, a n = 0) (hM : ∀ n, ‖a n‖ ≤ M) : ∃ (b : ℕ → ℂ) (μ : ℂ), Function.Periodic b q ∧ ∑ n ∈ Finset.range q, b n = 0 ∧ (∀ n, ‖b n‖ ≤ 2 * q * M) ∧ ‖μ‖ ≤ q * M ∧ ∀ f : ℕ → ℂ, Summable (fun n => ‖f n‖) → ∑' n, a n * f n = μ * f 0 + ∑' n, b n * (f n - f (n + 1)) 
+[1437] theorem summable_diffPow (k : ℕ) (s : ℂ) (hs : 1 < s.re + k) : Summable (fun n : ℕ => ‖diffPow k s ((n : ℝ) + 1)‖) 
+[5303] theorem abel_three (q : ℕ) (hq : 0 < q) (a : ℕ → ℂ) (hp : Function.Periodic a q) (h0 : ∑ n ∈ Finset.range q, a n = 0) (hM : ∀ n, ‖a n‖ ≤ 1) : ∃ (b : ℕ → ℂ) (μ₁ μ₂ μ₃ : ℂ), (∀ n, ‖b n‖ ≤ 8 * (q : ℝ) ^ 3) ∧ ‖μ₁‖ ≤ q ∧ ‖μ₂‖ ≤ 2 * (q : ℝ) ^ 2 ∧ ‖μ₃‖ ≤ 4 * (q : ℝ) ^ 3 ∧ ∀ s : ℂ, 1 < s.re → ∑' n : ℕ, a n * diffPow 0 s ((n : ℝ) + 1) = μ₁ * diffPow 0 s 1 + μ₂ * diffPow 1 s 1 + μ₃ * diffPow 2 s 1 + ∑' n : ℕ, b n * diffPow 3 s ((n : ℝ) + 1) 
+[805] theorem summable_nine_pow_mul_inv_sq_succ (t : ℝ) (ht : 1 < t) : Summable (fun n : ℕ => ((n : ℝ) + 1) ^ (-t)) 
+[3047] theorem norm_term_le (b : ℕ → ℂ) (K R : ℝ) (hb : ∀ n, ‖b n‖ ≤ K) (s : ℂ) (hs : -(15 / 8 : ℝ) ≤ s.re) (hR : ‖s‖ ≤ R) (n : ℕ) : ‖b n * diffPow 3 s ((n : ℝ) + 1)‖ ≤ K * (R + 3) ^ 3 * ((n : ℝ) + 1) ^ (-(9 / 8 : ℝ)) 
+[5420] theorem LFunction_eq (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (hχ : χ ≠ 1) : ∃ (b : ℕ → ℂ) (μ₁ μ₂ μ₃ : ℂ), (∀ n, ‖b n‖ ≤ 8 * (q : ℝ) ^ 3) ∧ ‖μ₁‖ ≤ q ∧ ‖μ₂‖ ≤ 2 * (q : ℝ) ^ 2 ∧ ‖μ₃‖ ≤ 4 * (q : ℝ) ^ 3 ∧ ∀ s : ℂ, -(15 / 8 : ℝ) < s.re → LFunction χ s = μ₁ * diffPow 0 s 1 + μ₂ * diffPow 1 s 1 + μ₃ * diffPow 2 s 1 + ∑' n : ℕ, b n * diffPow 3 s ((n : ℝ) + 1) 
+[18134] theorem norm_LFunction_le_poly_left : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ ≠ 1 → ∀ s : ℂ, -(7/4 : ℝ) ≤ s.re → ‖LFunction χ s‖ ≤ C * (q : ℝ) ^ 4 * (‖s‖ + 2) ^ 4 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/SummableNonPrimeVonMangoldtDivRpow.lean  (153 lines)
+[3665 priv] private lemma log_div_pow_add_two_rpow_three_quarters_le (P : ℝ) (hP : 2 ≤ P) (k : ℕ) : Real.log P / (P ^ (k + 2)) ^ (3 / 4 : ℝ) ≤ 4 * P ^ (-(5 / 4 : ℝ)) * ((2 : ℝ) ^ (-(3 / 4 : ℝ))) ^ k 
+[2273] theorem _root_.GlobalTheory.Lin.NonPrimeVonMangoldt.summable_nonPrime_vonMangoldt_div_rpow : Summable (fun n : ℕ => (if n.Prime then 0 else Λ n) / (n : ℝ) ^ (3 / 4 : ℝ)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TruncatedExplicitFormula.lean  (74 lines)
+[12372] theorem truncated_explicit_formula : ∃ C : ℝ, 0 < C ∧ ∀ (N : ℕ) [NeZero N] (χ : DirichletCharacter ℂ N), χ.IsPrimitive → ∀ u T : ℝ, 2 ≤ T → T ≤ u → {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}.Finite ∧ ‖psi0 χ u + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < T ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℂ) * ((u : ℂ) ^ ρ / ρ)‖ ≤ C * (u * Real.log (N * u * T) ^ 2 / T + Real.log (N * u) + ∑ᶠ ρ ∈ {ρ : ℂ | 0 < ρ.re ∧ ρ.re < 1 ∧ |ρ.im| < 1 ∧ LFunction χ ρ = 0}, ((analyticOrderNatAt (LFunction χ) ρ : ℕ) : ℝ) / ‖ρ‖) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TruncatedPerronKernel.lean  (405 lines)
+[237] lemma ne_zero_of_re {σ t : ℝ} (h : σ ≠ 0) : (σ : ℂ) + t * I ≠ 0 
+[212] lemma ne_zero_of_im {σ t : ℝ} (h : t ≠ 0) : (σ : ℂ) + t * I ≠ 0 
+[192] lemma cont_vinv {σ : ℝ} (h : σ ≠ 0) : Continuous fun t : ℝ => ((σ : ℂ) + t * I)⁻¹ 
+[167] lemma cont_hinv {t : ℝ} (h : t ≠ 0) : Continuous fun σ : ℝ => ((σ : ℂ) + t * I)⁻¹ 
+[6053 priv] private lemma hasDerivAt_half_log_sub_I_mul_arctan_eq_inv {s : ℝ} (hs : s ≠ 0) (x : ℝ) : HasDerivAt (fun x : ℝ => ((Real.log (x ^ 2 + s ^ 2) / 2 : ℝ) : ℂ) - I * (Real.arctan (x / s) : ℂ)) ((x : ℂ) + s * I)⁻¹ x 
+[4085] lemma vinv {σ : ℝ} (h : σ ≠ 0) (T : ℝ) : ∫ t in (-T)..T, ((σ : ℂ) + t * I)⁻¹ = ((2 * Real.arctan (T / σ) : ℝ) : ℂ) 
+[2602] lemma hinv {T : ℝ} (h : T ≠ 0) (a b : ℝ) : (∫ x in a..b, ((x : ℂ) + ((-T : ℝ) : ℂ) * I)⁻¹) - ∫ x in a..b, ((x : ℂ) + T * I)⁻¹ = 2 * I * ((Real.arctan (b / T) - Real.arctan (a / T) : ℝ) : ℂ) 
+[377] lemma norm_exp (L σ t : ℝ) : ‖cexp (L * ((σ : ℂ) + t * I))‖ = Real.exp (L * σ) 
+[1482] lemma vbound (L : ℝ) {σ T : ℝ} (h : σ ≠ 0) (hT : 0 ≤ T) : ‖∫ t in (-T)..T, cexp (L * ((σ : ℂ) + t * I)) / ((σ : ℂ) + t * I)‖ ≤ Real.exp (L * σ) / |σ| * (2 * T) 
+[2505] lemma hbound {L : ℝ} (hL : L ≠ 0) {t a b : ℝ} (h : t ≠ 0) (hab : a ≤ b) : ‖∫ x in a..b, cexp (L * ((x : ℂ) + t * I)) / ((x : ℂ) + t * I)‖ ≤ (Real.exp (L * b) - Real.exp (L * a)) / (L * |t|) 
+[2634] lemma rect_right (L : ℝ) {a b : ℝ} (T : ℝ) (ha : 0 < a) (hab : a ≤ b) : (∫ x in a..b, cexp (L * ((x : ℂ) + ((-T : ℝ) : ℂ) * I)) / ((x : ℂ) + ((-T : ℝ) : ℂ) * I)) - (∫ x in a..b, cexp (L * ((x : ℂ) + T * I)) / ((x : ℂ) + T * I)) + I * (∫ t in (-T)..T, cexp (L * ((b : ℂ) + t * I)) / ((b : ℂ) + t * I)) - I * (∫ t in (-T)..T, cexp (L * ((a : ℂ) + t * I)) / ((a : ℂ) + t * I)) = 0 
+[7939] lemma rect_left (L : ℝ) {a b T : ℝ} (ha : a < 0) (hb : 0 < b) (hT : 0 < T) : (∫ x in a..b, cexp (L * ((x : ℂ) + ((-T : ℝ) : ℂ) * I)) / ((x : ℂ) + ((-T : ℝ) : ℂ) * I)) - (∫ x in a..b, cexp (L * ((x : ℂ) + T * I)) / ((x : ℂ) + T * I)) + I * (∫ t in (-T)..T, cexp (L * ((b : ℂ) + t * I)) / ((b : ℂ) + t * I)) - I * (∫ t in (-T)..T, cexp (L * ((a : ℂ) + t * I)) / ((a : ℂ) + t * I)) = 2 * Real.pi * I 
+[318] lemma le_of_forall_large {x B K c : ℝ} (hc : 0 < c) (hK : 0 ≤ K) (h : ∀ U : ℝ, c ≤ U → x ≤ B + K / U) : x ≤ B 
+[1443] lemma norm_le_three {x p q r : ℂ} (h : I * x = p - q + I * r ∨ I * x = q - p + I * r) : ‖x‖ ≤ ‖p‖ + ‖q‖ + ‖r‖ 
+[6543] lemma far_neg {L c T : ℝ} (hL : L < 0) (hc : 0 < c) (hT : 0 < T) : ‖∫ t in (-T)..T, cexp (L * ((c : ℂ) + t * I)) / ((c : ℂ) + t * I)‖ ≤ 2 * Real.exp (L * c) / (T * |L|) 
+[7251] lemma far_pos {L c T : ℝ} (hL : 0 < L) (hc : 0 < c) (hT : 0 < T) : ‖(∫ t in (-T)..T, cexp (L * ((c : ℂ) + t * I)) / ((c : ℂ) + t * I)) - 2 * Real.pi‖ ≤ 2 * Real.exp (L * c) / (T * |L|) 
+[6826] lemma near (L : ℝ) {c T : ℝ} (hc : 0 < c) (hT : 0 < T) : ‖∫ t in (-T)..T, cexp (L * ((c : ℂ) + t * I)) / ((c : ℂ) + t * I)‖ ≤ Real.exp (L * c) * (Real.pi + 2 * (T * |L|)) 
+[9185] theorem truncated_perron_kernel : ∃ C : ℝ, 0 < C ∧ ∀ y c T : ℝ, 0 < y → y ≠ 1 → 0 < c → 1 ≤ T → ‖(1 / (2 * Real.pi) : ℂ) * (∫ t in (-T)..T, (y : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I)) - (if 1 < y then 1 else 0)‖ ≤ C * y ^ c * min 1 (1 / (T * |Real.log y|)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TruncatedPerronPsi.lean  (609 lines)
+[5234] lemma kernel_bound : ∃ C : ℝ, 0 < C ∧ ∀ y c T : ℝ, 0 < y → 0 < c → 1 ≤ T → ‖(1 / (2 * Real.pi) : ℂ) * (∫ t in (-T)..T, (y : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I)) - (if 1 ≤ y then 1 else 0)‖ ≤ C * y ^ c ∧ ‖(1 / (2 * Real.pi) : ℂ) * (∫ t in (-T)..T, (y : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I)) - (if 1 ≤ y then 1 else 0)‖ * (T * |Real.log y|) ≤ C * y ^ c 
+[4073] lemma interchange (a : ℕ → ℂ) (ha0 : a 0 = 0) {c u : ℝ} (T : ℝ) (hc : 0 < c) (hu : 0 < u) (hs : LSeriesSummable a c) : HasSum (fun n : ℕ => a n * ∫ t in (-T)..T, ((u / n : ℝ) : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I)) (∫ t in (-T)..T, LSeries a ((c : ℂ) + t * I) * (u : ℂ) ^ ((c : ℂ) + t * I) / ((c : ℂ) + t * I)) 
+[5922] lemma zeta_bound {s : ℝ} (hs : 1 < s) : ∑' n : ℕ, 1 / (n : ℝ) ^ s ≤ 1 + 1 / (s - 1) 
+[120] noncomputable def w (N : ℕ) (B : ℝ) (n : ℕ) : ℝ :=
+[641] lemma w_nonneg (N : ℕ) {B : ℝ} (hB : 0 ≤ B) (n : ℕ) : 0 ≤ w N B n 
+[647] lemma harm (N : ℕ) : ∑ k ∈ Finset.range (N + 1), 1 / (k : ℝ) ≤ 1 + Real.log N 
+[3517] lemma sum_w (N : ℕ) {B : ℝ} (hB : 0 ≤ B) : ∑ n ∈ Finset.range (N + 1 + (N + 1)), w N B n ≤ 2 + B * (2 * (1 + Real.log N)) 
+[2346] lemma half_le_log {u : ℝ} (hu : 2 ≤ u) : 1 / 2 ≤ Real.log u 
+[10394] lemma far_term {u T C E : ℝ} {n : ℕ} (hu : 2 ≤ u) (hT : 0 < T) (hn : 0 < n) (hC : 0 ≤ C) (hE : 0 ≤ E) (h : E * (T * |Real.log (u / n)|) ≤ C * (u / n) ^ (1 + 1 / Real.log u)) (hf : (n : ℝ) ≤ u / 2 ∨ 2 * u ≤ n) : Real.log n * E ≤ C * (12 * u * Real.log u / T * (1 / (n : ℝ) ^ (1 + 1 / (2 * Real.log u)))) 
+[20132] lemma near_term {u T C E : ℝ} {n : ℕ} (hu : 2 ≤ u) (hT : 0 < T) (hC : 0 ≤ C) (hE : 0 ≤ E) (h0 : E ≤ C * (u / n) ^ (1 + 1 / Real.log u)) (h : E * (T * |Real.log (u / n)|) ≤ C * (u / n) ^ (1 + 1 / Real.log u)) (hf1 : u / 2 < n) (hf2 : n < 2 * u) : Real.log n * E ≤ C * (16 * Real.log u * w ⌊u⌋₊ (2 * u / T) n) 
+[25296] theorem truncated_perron_psi : ∃ C : ℝ, 0 < C ∧ ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (u T : ℝ), 2 ≤ T → T ≤ 2 * u → 2 ≤ u → ‖(∑ n ∈ Finset.Icc 1 ⌊u⌋₊, (Λ n : ℂ) * χ (n : ZMod q)) - (1 / (2 * Real.pi) : ℂ) * ∫ t in (-T)..T, -(deriv (LFunction χ) ((1 + 1 / Real.log u : ℝ) + t * I) / LFunction χ ((1 + 1 / Real.log u : ℝ) + t * I)) * (u : ℂ) ^ (((1 + 1 / Real.log u : ℝ) : ℂ) + t * I) / ((1 + 1 / Real.log u : ℝ) + t * I)‖ ≤ C * (u * Real.log u ^ 2 / T + Real.log u) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TsumOneDivRpowLe.lean  (93 lines)
+[5349] theorem tsum_one_div_rpow_le {σ : ℝ} (hσ : 1 < σ) : ∑' n : ℕ, 1 / ((n : ℝ) + 1) ^ σ ≤ σ / (σ - 1) 
+[1641] theorem norm_LSeries_le {f : ℕ → ℂ} (hf : ∀ n, ‖f n‖ ≤ 1) {s : ℂ} (hs : 1 < s.re) : ‖LSeries f s‖ ≤ s.re / (s.re - 1) 
+[2645] theorem norm_LFunction_ge (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (s : ℂ) (hs : 1 < s.re) : (s.re - 1) / s.re ≤ ‖LFunction χ s‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TuranSecondMainTheoremPowerSumsUnitCoefficients.lean  (234 lines)
+[3259] lemma norm_sum_pow_mul_prod_le {ι κ : Type*} [Fintype ι] (z : ι → ℂ) (a : κ → ℂ) (B : ℝ) (T : Finset κ) (ha : ∀ t ∈ T, ‖a t‖ ≤ 1) : ∀ m : ℕ, (∀ k, m ≤ k → k ≤ m + T.card → ‖∑ i, z i ^ k‖ ≤ B) → ‖∑ i, z i ^ m * ∏ t ∈ T, (z i - a t)‖ ≤ 2 ^ T.card * B 
+[3825] lemma tendsto_inv_prod {κ : Type*} (a : κ → ℂ) (T : Finset κ) (ha : ∀ t ∈ T, ‖a t‖ ≤ 1) (M : ℕ) : Tendsto (fun w : ℂ => (w ^ (M + 1) * ∏ t ∈ T, (w - a t))⁻¹) (Filter.cocompact ℂ) (𝓝 0) 
+[5060] lemma inv_pow_le_exp (N M : ℕ) (hN : 0 < N) (r : ℝ) (hr : 1 - (N : ℝ) / (2 * (M + N)) ≤ r) : 1 ≤ r ^ M * Real.exp 1 ^ N 
+[17665] lemma core (N M : ℕ) (z : Fin N → ℂ) (i₁ : Fin N) (h1 : ‖z i₁‖ = 1) (hz : ∀ i, ‖z i‖ ≤ 1) (B : ℝ) (hB : ∀ k, M + 1 ≤ k → k ≤ M + N → ‖∑ i, z i ^ k‖ ≤ B) : ((N : ℝ) / (16 * Real.exp 1 ^ 2 * (M + N))) ^ N ≤ B 
+[3285] theorem powerSum_second_main : ∃ C : ℝ, 1 ≤ C ∧ ∀ (N M : ℕ) (z : Fin N → ℂ) (i₀ : Fin N), ∃ k : ℕ, M + 1 ≤ k ∧ k ≤ M + N ∧ ((N : ℝ) / (C * (M + N))) ^ N * ‖z i₀‖ ^ k ≤ ‖∑ i, z i ^ k‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/TuranSecondMainTheoremPowerSumsUnitCoefficientsStatement.lean  (8 lines)
+[174] theorem _root_.GlobalTheory.T.turan_second_main_theorem_power_sums_unit_coefficients : ∃ C : ℝ, 1 ≤ C ∧ ∀ (N M : ℕ) (z : Fin N → ℂ) (i₀ : Fin N), ∃ k : ℕ, M + 1 ≤ k ∧ k ≤ M + N ∧ ((N : ℝ) / (C * (M + N))) ^ N * ‖z i₀‖ ^ k ≤ ‖∑ i, z i ^ k‖ 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/WeightedFejerPositivity.lean  (121 lines)
+[5820] theorem normSq_geomSum_le_fejer (w : ℂ) (hw : ‖w‖ ≤ 1) (J : ℕ) : Complex.normSq (∑ j ∈ Finset.range (J + 1), w ^ j) ≤ (J + 1 : ℝ) + 2 * ∑ j ∈ Finset.Icc 1 J, ((J : ℝ) + 1 - j) * (w ^ j).re 
+[3069] theorem fejer_re_ge (w : ℂ) (hw : ‖w‖ ≤ 1) (J : ℕ) : -(1 / 2) ≤ ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (w ^ j).re 
+[2969] theorem sum_fejer_weights (J : ℕ) : ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) = (J : ℝ) / 2 
+[4244] theorem weighted_fejer_split (J : ℕ) (θ : ℝ) (w : ℂ) : ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (1 + Real.cos (j * θ)) * (w ^ j).re = ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (w ^ j).re + (∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * ((w * Complex.exp (θ * I)) ^ j).re) / 2 + (∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * ((w * Complex.exp (-(θ * I))) ^ j).re) / 2 
+[4538] theorem weighted_fejer_positivity : ∀ (J : ℕ) (θ : ℝ), (∀ w : ℂ, ‖w‖ ≤ 1 → -1 ≤ ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (1 + Real.cos (j * θ)) * (w ^ j).re) ∧ (J : ℝ) / 4 - 3 / 4 ≤ ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (1 + Real.cos (j * θ)) * (Complex.exp (θ * I) ^ j).re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/WeightedFejerPositivityStatement.lean  (8 lines)
+[219] theorem _root_.GlobalTheory.T.neg_one_le_sum_fejer_cos_re_pow_and_lower_bound : ∀ (J : ℕ) (θ : ℝ), (∀ w : ℂ, ‖w‖ ≤ 1 → -1 ≤ ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (1 + Real.cos (j * θ)) * (w ^ j).re) ∧ (J : ℝ) / 4 - 3 / 4 ≤ ∑ j ∈ Finset.Icc 1 J, (1 - (j : ℝ) / (J + 1)) * (1 + Real.cos (j * θ)) * (Complex.exp (θ * I) ^ j).re 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ZeroCountHolds.lean  (14 lines)
+[494] theorem zeroCount_holds : GlobalTheory.Mem.An.ZeroCount 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ZeroFreePrincipal.lean  (334 lines)
+[1017 priv] private lemma one_le_analyticOrderNatAt_riemannZeta_of_eq_zero {ρ : ℂ} (hρ : ρ ≠ 1) (hz : riemannZeta ρ = 0) : 1 ≤ analyticOrderNatAt riemannZeta ρ 
+[10157 priv] private lemma neg_re_logDeriv_riemannZeta_le_sub_inv_dist_zero_add_log {C : ℝ} (hC : ∀ (t : ℝ) (s : ℂ), ‖s - (3 / 2 + ↑t * I)‖ ≤ 2 / 3 → s ≠ 1 → riemannZeta s ≠ 0 → {w | ‖w - (3 / 2 + ↑t * I)‖ ≤ 5 / 6 ∧ w ≠ 1 ∧ riemannZeta w = 0}.Finite ∧ ‖deriv riemannZeta s / riemannZeta s + 1 / (s - 1) - ∑ᶠ (w : ℂ) (_ : w ∈ {w | ‖w - (3 / 2 + ↑t * I)‖ ≤ 5 / 6 ∧ w ≠ 1 ∧ riemannZeta w = 0}), ↑(analyticOrderNatAt riemannZeta w) / (s - w)‖ ≤ C * Real.log (|t| + 2)) (t σ : ℝ) (hσ1 : 1 < σ) (hσ2 : σ ≤ 2) (r : ℝ) (hr : r = 0 ∨ ∃ β : ℝ, riemannZeta (β + t * I) = 0 ∧ 2 / 3 ≤ β ∧ r = 1 / (σ - β)) : -(deriv riemannZeta (σ + t * I) / riemannZeta (σ + t * I)).re ≤ (1 / ((σ : ℂ) + t * I - 1)).re - r + C * Real.log (|t| + 2) 
+[752 priv] private lemma three_four_one_neg_re_logDeriv_riemannZeta_nonneg (σ t : ℝ) (hσ : 1 < σ) : 0 ≤ -(3 * (deriv riemannZeta σ / riemannZeta σ).re + 4 * (deriv riemannZeta (σ + t * I) / riemannZeta (σ + t * I)).re + (deriv riemannZeta (σ + 2 * t * I) / riemannZeta (σ + 2 * t * I)).re) 
+[2757 priv] private lemma re_one_div_le_re_of_re_pos_of_one_le_abs_im {z : ℂ} (hre : 0 < z.re) (him : 1 ≤ |z.im|) : (1 / z).re ≤ z.re 
+[43017 priv] private lemma exists_re_lt_one_sub_div_log_of_riemannZeta_eq_zero : ∃ c : ℝ, 0 < c ∧ ∀ s : ℂ, riemannZeta s = 0 → 1 ≤ |s.im| → s.re < 1 - c / Real.log (|s.im| + 2) 
+[3124 priv] private lemma exists_riemannZeta_ne_zero_near_one_of_abs_im_le_one : ∃ η : ℝ, 0 < η ∧ ∀ s : ℂ, s ≠ 1 → |s.im| ≤ 1 → 1 - η < s.re → riemannZeta s ≠ 0 
+[12481] theorem _root_.GlobalTheory.ZeroFreePrincipal.zero_free : ∃ c : ℝ, 0 < c ∧ ∀ (q : ℕ) [NeZero q] (s : ℂ), s ≠ 1 → LFunction (1 : DirichletCharacter ℂ q) s = 0 → s.re < 1 - c / Real.log (q * (|s.im| + 2)) 
+
+##### Development/AbelianVarietyTheory/Proofs/GlobalInterpolation/ZetaEqSubIntegralFract.lean  (68 lines)
+[1130] lemma zeta_eq_mul_integral_floor {s : ℂ} (hs : 1 < s.re) : riemannZeta s = s * ∫ t in Set.Ioi (1 : ℝ), ((⌊t⌋₊ : ℕ) : ℂ) * (t : ℂ) ^ (-(s + 1)) 
+[732] lemma integrableOn_cpow_neg {s : ℂ} (hs : 1 < s.re) : IntegrableOn (fun t : ℝ => (t : ℂ) ^ (-s)) (Set.Ioi 1) 
+[1297] lemma integrableOn_fract_mul {s : ℂ} (hs : 1 < s.re) : IntegrableOn (fun t : ℝ => ((Int.fract t : ℝ) : ℂ) * (t : ℂ) ^ (-(s + 1))) (Set.Ioi 1) 
+[3052] theorem zeta_eq_sub_integral_fract : (let d1 : ℂ → ℂ := @(fun (s : ℂ) ↦ ∫ (t : ℝ) in Set.Ioi (1 : ℝ), (↑(Int.fract t) : ℂ) * (↑t : ℂ) ^ (-(s + (1 : ℂ)))); ∀ {s : ℂ}, (1 : ℝ) < Complex.re s → riemannZeta s = s / (s - (1 : ℂ)) - s * d1 s) 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/DirichletLZeroSymmetry.lean  (103 lines)
+[800] theorem zsym_gammaFactor_ne_zero (χ : DirichletCharacter ℂ q) {s : ℂ} (hs : 0 < s.re) : χ.gammaFactor s ≠ 0 
+[299] theorem zsym_differentiable_gammaFactor_inv (χ : DirichletCharacter ℂ q) : Differentiable ℂ (fun s => (χ.gammaFactor s)⁻¹) 
+[699] theorem zsym_rootNumber_ne_zero {χ : DirichletCharacter ℂ q} (hχ : χ.IsPrimitive) : χ.rootNumber ≠ 0 
+[145] noncomputable def zsymFactor (χ : DirichletCharacter ℂ q) (s : ℂ) : ℂ :=
+[2651] theorem zsym_eq {χ : DirichletCharacter ℂ q} (hχ : χ.IsPrimitive) {s : ℂ} (h0 : 0 < s.re) (h1 : s.re < 1) : χ.LFunction s = zsymFactor χ s * χ⁻¹.LFunction (1 - s) 
+[1124] theorem zsymFactor_ne_zero {χ : DirichletCharacter ℂ q} (hχ : χ.IsPrimitive) {s : ℂ} (h0 : 0 < s.re) (h1 : s.re < 1) : zsymFactor χ s ≠ 0 
+[1327] theorem zsymFactor_analyticAt (χ : DirichletCharacter ℂ q) {s : ℂ} (h1 : s.re < 1) : AnalyticAt ℂ (zsymFactor χ) s 
+[240] theorem zsym_analyticAt_LFunction (χ : DirichletCharacter ℂ q) {s : ℂ} (hs : s ≠ 1) : AnalyticAt ℂ χ.LFunction s 
+[1447] theorem zeros_symm_one_sub : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ ρ : ℂ, 0 < ρ.re → ρ.re < 1 → ((DirichletCharacter.LFunction χ ρ = 0 ↔ DirichletCharacter.LFunction χ⁻¹ (1 - ρ) = 0) ∧ zmult χ ρ = zmult χ⁻¹ (1 - ρ)) 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/DirichletLZerosInWindowFiniteAndPosOrder.lean  (83 lines)
+[224] theorem analyticOff {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) : AnalyticOnNhd ℂ (LFunction χ) ({1}ᶜ : Set ℂ) 
+[564] theorem exists_entire {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) : ∃ F : ℂ → ℂ, Differentiable ℂ F ∧ F 1 ≠ 0 ∧ ∀ s, s ≠ 1 → LFunction χ s = 0 → F s = 0 
+[201] theorem ne_one_of_mem {q : ℕ} [NeZero q] {χ : DirichletCharacter ℂ q} {t T : ℝ} {ρ : ℂ} (h : ρ ∈ zerosIn χ t T) : ρ ≠ 1 
+[3050] theorem finite_zeros {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) : (zerosIn χ t T).Finite 
+[657] theorem order_ne_top {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {ρ : ℂ} (hρ : ρ ≠ 1) : analyticOrderAt (LFunction χ) ρ ≠ ⊤ 
+[442] theorem one_le_zmult {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) {t T : ℝ} {ρ : ℂ} (hρ : ρ ∈ zerosIn χ t T) : 1 ≤ zmult χ ρ 
+[110] theorem finite_and_one_le_zmult : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ), (zerosIn χ t T).Finite ∧ ∀ ρ ∈ zerosIn χ t T, 1 ≤ zmult χ ρ 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/DirichletLZerosInWindowFiniteAndPosOrderStatement.lean  (12 lines)
+[85] theorem _root_.GlobalTheory.T.dirichletLZerosInWindow_finite_and_pos_order : ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ), (zerosIn χ t T).Finite ∧ ∀ ρ ∈ zerosIn χ t T, 1 ≤ zmult χ ρ 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/LogDerivSeriesOfExplicit.lean  (465 lines)
+[2209] theorem sum_not_coprime_le (q N : ℕ) (hq : q ≠ 0) : ∑ n ∈ (Icc 1 N).filter (fun n => ¬ n.Coprime q), Λ n ≤ Nat.log 2 N * Real.log q 
+[1412] theorem norm_sub_primitive_le {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (N : ℕ) : ‖∑ n ∈ Icc 1 N, ((Λ n : ℝ) : ℂ) * χ (n : ZMod q) - ∑ n ∈ Icc 1 N, ((Λ n : ℝ) : ℂ) * χ.primitiveCharacter (n : ZMod χ.conductor)‖ ≤ Nat.log 2 N * Real.log q 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/LogFactorialEqSumVonMangoldtMulDiv.lean  (82 lines)
+[789] theorem log_factorial_eq_sum_vonMangoldt_mul_div (N : ℕ) : Real.log (N.factorial : ℝ) = ∑ n ∈ Ioc 0 N, Λ n * ((N / n : ℕ) : ℝ) 
+[5359] theorem sum_vonMangoldt_div_nat_bounds (N : ℕ) (hN : 1 ≤ N) : Real.log N - 1 ≤ ∑ n ∈ Ioc 0 N, Λ n / (n : ℝ) ∧ ∑ n ∈ Ioc 0 N, Λ n / (n : ℝ) ≤ Real.log N + (Real.log 4 + 4) 
+[3873] theorem mertens_first_vonMangoldt : ∃ CM : ℝ, 0 ≤ CM ∧ ∀ y : ℝ, 1 ≤ y → |∑ n ∈ Icc 1 ⌊y⌋₊, Λ n / (n : ℝ) - Real.log y| ≤ CM 
+
+##### Development/AbelianVarietyTheory/Proofs/IwasawaDecomposition/SumIndicatorLeZsumR.lean  (181 lines)
+[117] theorem zsumR_eq_sum_toFinset {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) (f : ℂ → ℝ) (h : (zerosIn χ t T).Finite) : zsumR χ t T f = ∑ ρ ∈ h.toFinset, (zmult χ ρ : ℝ) * f ρ 
+[516] theorem sum_indicator_le_zsumR {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (t T : ℝ) (S : Finset ℂ) (h : (zerosIn χ t T).Finite) : ∑ ρ ∈ S, (zmult χ ρ : ℝ) * (if ρ ∈ zerosIn χ t T then 1 else 0) ≤ zsumR χ t T (fun _ => 1) 
+[3325] theorem recip_le_sum_windows {q : ℕ} [NeZero q] (χ : DirichletCharacter ℂ q) (T : ℝ) (ρ : ℂ) (hρ : ρ ∈ zerosIn χ 0 T) : (if 1 < |ρ.im| then 1 / ‖ρ‖ else 0 : ℝ) ≤ ∑ k ∈ Icc 1 ⌊T⌋₊, (k : ℝ)⁻¹ * ((if ρ ∈ zerosIn χ (k : ℝ) 1 then 1 else 0) + (if ρ ∈ zerosIn χ (-(k : ℝ)) 1 then 1 else 0)) 
+[15435] theorem zsumR_recip_le : GlobalTheory.Mem.An.ZeroCount → ∃ C : ℝ, ∀ (q : ℕ) [NeZero q] (χ : DirichletCharacter ℂ q), χ.IsPrimitive → ∀ T : ℝ, 2 ≤ T → zsumR χ 0 T (fun ρ => if 1 < |ρ.im| then 1 / ‖ρ‖ else 0) ≤ C * Real.log (q * T) ^ 2 ∧ zsumR χ 0 1 (fun _ => 1) ≤ C * Real.log (3 * q) 
+
+##### Development/AbelianVarietyTheory/PublishedTheorems/AutomorphicForms₂/ZeroCount.lean  (17 lines)
+[116] def ZeroCount : Prop :=
+
+##### Development/AbelianVarietyTheory/PublishedTheorems/PublishedFoundations/PrimesInProgressionNonempty.lean  (37 lines)
+[23] def primesInProgression (a q : ℕ) : Set ℕ := {p | p.Prime ∧ p ≡ a [MOD q]}
+[15] noncomputable def leastPrimeMod (a q : ℕ) : ℕ := sInf (primesInProgression a q)
+[94] def Linnik : Prop :=
+[337 priv] private theorem exists_prime_modEq_of_coprime (a q : ℕ) (hq : 1 ≤ q) (h : a.Coprime q) : ∃ p : ℕ, p.Prime ∧ p ≡ a [MOD q] 
+[693] theorem _root_.GlobalTheory.Published.linnik_iff_exists_prime : _root_.GlobalTheory.Published.Linnik ↔ ∃ C L : ℝ, 0 < C ∧ 0 < L ∧ ∀ a q : ℕ, 1 ≤ a → 1 ≤ q → a.Coprime q → ∃ p : ℕ, p.Prime ∧ p ≡ a [MOD q] ∧ (p : ℝ) ≤ C * (q : ℝ) ^ L 
+
+##### Development/AutomorphicArithmetic/ThetaCorrespondence/Linnik.lean  (157 lines)
+[1190 priv] private theorem intervalIntegrable_inv_log_theta_correspondence (a b : ℝ) (ha : 2 ≤ a) (hb : 2 ≤ b) : IntervalIntegrable (fun t : ℝ => 1 / Real.log t) MeasureTheory.volume a b 
+[1386 priv] private theorem li_sub_li_pos_of_lt (Y X : ℝ) (hY : 2 ≤ Y) (h : Y < X) : 0 < Formalism.HermitianLattices.GL2PrimeSums.Li X - Formalism.HermitianLattices.GL2PrimeSums.Li Y 
+[866 priv] private theorem li_nonneg_of_two_le (X : ℝ) (hX : 2 ≤ X) : 0 ≤ Formalism.HermitianLattices.GL2PrimeSums.Li X 
+[831 priv] private theorem li_pos_of_two_lt (X : ℝ) (hX : 2 < X) : 0 < Formalism.HermitianLattices.GL2PrimeSums.Li X 
+[22316] theorem exists_prime_modEq_le_rpow_of_primesRel : GlobalTheory.Lin.PrimesRel → ∃ A : ℝ, 1 ≤ A ∧ ∀ a M : ℕ, 2 < M → a.Coprime M → ∃ p : ℕ, p.Prime ∧ p ≡ a [MOD M] ∧ (p : ℝ) ≤ (M : ℝ) ^ A 
+[2430] theorem linnik : GlobalTheory.Published.Linnik 
+
+##### Formalism/GL3MeanSquares/SmoothedRemainderRealIntegralFormula.lean  (165 lines)
+[66] def Li (X : ℝ) : ℝ := ∫ t in (2 : ℝ)..X, 1 / Real.log t
+[53] def Emain (θ : ℤ) (β X : ℝ) : ℝ := Li X - θ * Li (X ^ β)
+
+##### Formalism/SharpRestriction/GlobalSchurBounds/GeneralLinearActions/FiltrationCocycleLiftCriterion.lean  (107 lines)
+[21] abbrev abelian₂ (n : ℕ) : ℝ := (ArithmeticFunction.vonMangoldt n : ℝ)
+[166] def psi0 {N : ℕ} (χ : DirichletCharacter ℂ N) (u : ℝ) : ℂ :=
