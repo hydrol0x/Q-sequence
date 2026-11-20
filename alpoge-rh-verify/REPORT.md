@@ -1,6 +1,6 @@
 # Build/verification log: Lean code published at alpo.ge on 2026-11-20
 
-**Status: IN PROGRESS (interim, written 2026-11-20 ~17:30 UTC). Tier B is running; sections 4–6 are not final.**
+**Status: IN PROGRESS (interim, updated 2026-11-20 20:00 UTC). Tier B is running; sections 4–6 are not final.**
 
 This is a factual log of what was downloaded, compiled and checked, and under which axioms.
 It makes no statement about the mathematics. Nothing here says the Riemann Hypothesis is proved.
@@ -83,13 +83,26 @@ def PrimitiveDirichletLZerosOnLine : Prop :=
 - `RiemannHypothesis` and `riemannZeta` are declared in `Mathlib.NumberTheory.LSeries.RiemannZeta`;
   `DirichletCharacter.LFunction` in `Mathlib.NumberTheory.LSeries.DirichletContinuation`.
 - Tier A covers 4 of 175,187 files. These are conditional statements only; they say nothing about `Main`.
+- Repeated first-hand on the Tier B pod at 20:00 UTC, using the `.olean` files produced by the full build:
+  `lake env lean TierA.lean` exit 0 (9.69 s, peak RSS 6.8 GB) with output identical to the block above.
+  `#check` output there: `Claim.strip : Claim.HalfPlane → Claim.Strip`, `Claim.zeta : Claim.HalfPlane → Claim.Zeta`,
+  `Claim.zeta_iff : Claim.Zeta ↔ RiemannHypothesis`.
 
 ## 4. Tier B (full build): RUNNING
 
 - Command: `lake build Main 2>&1 | tee build.log`, under `/usr/bin/time -v`, started 2026-11-20T17:08:50Z,
   restarted once at 17:11:47Z (see section 7).
-- At 17:27:32Z: 3,014 of 175,187 repo modules built, 31 `lean` processes, 38 GB in use, `build.log` empty
-  (no warnings or errors printed so far). Observed rate about 2.9 modules/s.
+- Progress log (repo modules with an `.olean`, of 175,187):
+
+  | UTC | modules | memory in use | disk |
+  |---|---|---|---|
+  | 17:27 | 3,014 | 38 GB | 19 GB |
+  | 17:56 | 8,498 | 41 GB | 25 GB |
+  | 19:05 | 22,548 | 53 GB | 34 GB |
+  | 19:58 | 32,880 | 57 GB | 40 GB |
+
+  Rate over the last hour about 3.4 modules/s. `build.log` is empty (no warnings or errors printed so far),
+  0 OOM kills (`memory.events`), container memory peak 75 GB (during the first 2.5 minutes).
 - Final result, wall time, peak RSS, job count, first error (if any): **pending**.
 
 ## 5. Axioms of the five theorems in `Main.lean`: PENDING (needs Tier B to finish)
