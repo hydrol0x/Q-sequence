@@ -130,6 +130,23 @@ using, so results are directly comparable:
    separate user from a clean clone, which compares statements, checks axioms, and runs Lean's kernel and the
    hardened `leanchecker-paranoid`.
 
+Preparation done at 20:53 UTC, while the build runs, by a separate unprivileged user (`judge`) on the pod that
+has never compiled the submission's code:
+
+- Toolchains installed with elan: Lean `v4.33.1` and Lean `v4.36.0`
+  (commit `611c117bfaf7b7ae1cfcf246ce6fba31e8f509e9`). The 4.36.0 toolchain bundles `nanoda_bin`,
+  `leanchecker-paranoid`, `con-leche`, `con-ron`, `lean4lean` and `lake comparator`.
+- Clean clone of `Deicyde/riemann-hypothesis` at `e50d09817ad81469f737e8f637561e6ccf86c670`; `lake exe cache get`;
+  `lake build Challenge` (the challenge file imports only Mathlib).
+- `lean4export` at tag `v4.33.0` (`15f6055e299ad5b89345e533cc2192f4cc00f659`), built with Lean `v4.33.1`.
+- Challenge export: 350,862,311 bytes, 6,495,712 lines, 32 s, peak RSS 6.8 GB,
+  **SHA-256 `bd484ac9886a96f26b1d9a7a59ebd45b7a70d102c015d4f31f9302bbdd6ab2b9`, equal to the value published in the
+  community mirror's README.**
+- `bubblewrap` does not work in this container ("No permissions to create new namespace"), and
+  `lake comparator` requires it. Step 4 will therefore have to run with `--inadvisably-no-sandbox` (as the
+  `judge` user on this disposable pod), or the checkers will be run directly on the export. Either way this
+  is a deviation from the community protocol and will be reported as such.
+
 Earlier observations, kept for the record:
 
 - `github.com/leanprover/lean4checker` is deprecated; its newest tag is `v4.29.0-rc8`, there is none for v4.33.1.
