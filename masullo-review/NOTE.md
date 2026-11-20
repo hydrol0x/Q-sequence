@@ -5,8 +5,9 @@ Source: `https://math216.wordpress.com/wp-content/uploads/2026/11/the-music-of-t
 re-downloaded at 20:18 UTC on 2026-11-20).
 
 **Status of these notes.** Written 2026-11-20 by an AI model (Claude) in one working session. They are a
-reader's report, not a refereed verdict. Eight line-by-line reviews of parts of the draft were done by
-automated reviewers (Claude subagents); their unedited reports are in `chapter-reviews/`. One of them was
+reader's report, not a refereed verdict. Line-by-line reviews of chapters 2–14 and Appendix B were done by automated
+reviewers (Claude subagents), plus one attempt to prove the missing step; their unedited reports are in
+`chapter-reviews/`. One reviewer was
 briefed to refute an earlier version of this note and found real errors in it; this version incorporates
 those corrections (section 7 lists what changed). Claims re-derived by the author of the note are marked
 **checked**; claims taken from a reviewer's report are marked **reported**. Nothing here bears on whether GRH
@@ -171,6 +172,50 @@ Paley–Wiener truncation first; done S-locally, that order gives zero. Theorem 
 with a one-sided cutoff and a joint limit, which gives the non-zero local terms. A footnote in the draft
 concedes the cutoffs do not match (reported).
 
+### An attempt to supply the step (reported)
+
+A separate reviewer was asked to prove as much of the strategy as possible in the model case and to settle
+what remains (`chapter-reviews/prover-report.md`; scripts and output in `numerics/prover/`). Its results,
+which have not been independently re-derived:
+
+- **The main theorem for half-width `a` is equivalent to a zero-free half-plane.** For test functions
+  supported above norm 1, the formula with spectral side restricted to the strip holds if and only if zeta has
+  no zeros with real part at least `1/2 + a`. It is Weil's formula for `a ≥ 1/2` and is RH for all `a > 0`
+  together. (Proof: subtract Weil's formula and apply a uniqueness lemma for exponential sums over zeros.)
+- **Filtration of the full twisted theta-space.** For `a < 1/2` every quotient is zero (Lemma 1 above). For
+  `a > 1/2` the quotients are non-trivial with trace equal to Weil's local term, and summing them recovers
+  Weil's formula, which says nothing about RH. The condition that keeps the twisted Euler zeros outside a
+  thin strip is the same condition that makes each step invertible there.
+- **Pieces of the kernel at operator level.** Vanishing of the piece at every large prime is false
+  unconditionally, by the same uniqueness lemma. The remainder after removing the Euler factors up to `K` is
+
+$$
+Z_K(\varphi) \;=\; \sum_{\rho\in\text{strip}} M\varphi(\rho-\tfrac12)\,\prod_{p\le K}\big(1-p^{-\rho}\big),
+$$
+
+  and each coefficient has no limit as `K` grows: the partial Euler product at any non-real point of the
+  critical strip has limit superior infinity and limit inferior zero. Numerically, for one fixed test
+  function, `Z_K` starts at 0.0503 and by `K` between a million and ten million ranges between about
+  −920,000 and +860,000. The strategy would need it to stay constant.
+- **One-sided cut-off spaces.** On square-integrable functions on `[1, ∞)` with weight exponent `α`, each
+  finite product of Euler steps (with truncation back to the half-line) is invertible, so again nothing is
+  lost at any finite stage. The formal limit, which sends global theta-functions to local ones, is
+
+$$
+E_\infty g \;=\; \sum_{n\ge1} \mu(n)\,n^{-1/2}\,g(n\,\cdot\,),
+$$
+
+  and it is a closable operator if and only if zeta has no zeros with real part above `1/2 + α`. On the
+  critical-line space that is RH. This is a statement of Nyman–Beurling type: the degeneration from global to
+  local is multiplication by the reciprocal of zeta.
+- **Connes' form.** For a fixed finite set of places the cut-off trace formula is a theorem of Connes, and
+  primes beyond the support of the test function contribute nothing to it. That is the correct version of
+  "large primes do not matter". Uniformity in the set of places is the global formula.
+
+This agrees with reading B: the difference between that reading and the one-sided spaces here is only
+whether one truncates back to a fixed half-line after each step. In both, every finite stage is exact and
+the passage to the limit is equivalent to the hypothesis being proved.
+
 ## 5. Findings by chapter
 
 Full reports: `chapter-reviews/`. "False" means a counterexample is given there.
@@ -304,6 +349,7 @@ These points were wrong and have been fixed:
 
 ## 8. Files
 
-- `chapter-reviews/`: eight unedited reviewer reports.
+- `chapter-reviews/`: unedited reviewer reports, the audit of this note, and the prover's report.
+- `numerics/prover/`: scripts and output for the partial-Euler-product experiment.
 - `numerics/corrected.py`: explicit-formula check for section 4 (needs `mpmath`; `python3 corrected.py 150`).
 - `numerics/explicit-wrong-shift.py`: the superseded check from the first version.
