@@ -1,6 +1,7 @@
 # Build/verification log: Lean code published at alpo.ge on 2026-11-20
 
-**Status: IN PROGRESS (interim, updated 2026-11-20 20:00 UTC). Tier B is running; sections 4–6 are not final.**
+**Status: IN PROGRESS (interim, updated 2026-11-20 21:00 UTC). Tier B is running; sections 4–6 are not final.
+Section 8 records what other people have reported publicly; none of it is this log's own result.**
 
 This is a factual log of what was downloaded, compiled and checked, and under which axioms.
 It makes no statement about the mathematics. Nothing here says the Riemann Hypothesis is proved.
@@ -100,14 +101,36 @@ def PrimitiveDirichletLZerosOnLine : Prop :=
   | 17:56 | 8,498 | 41 GB | 25 GB |
   | 19:05 | 22,548 | 53 GB | 34 GB |
   | 19:58 | 32,880 | 57 GB | 40 GB |
+  | 20:47 | 43,168 | 60 GB | 45 GB |
 
-  Rate over the last hour about 3.4 modules/s. `build.log` is empty (no warnings or errors printed so far),
+  Rate over the last hour about 3.5 modules/s, projecting completion around 07:20 UTC on 2026-11-21. `build.log` is empty (no warnings or errors printed so far),
   0 OOM kills (`memory.events`), container memory peak 75 GB (during the first 2.5 minutes).
 - Final result, wall time, peak RSS, job count, first error (if any): **pending**.
+- Reproducibility check against an independent build (see section 8): on this build,
+  `sha256(src/Main.lean) = 017645ca448f2fd1f6fd5c4c2cb2c6e96e472725be13f6e180ca6e1574360939`,
+  `sha256(src/Statements.lean) = 79ef7ca776e42abe1f46caee13ea09bd19f1e2d0b1620d8d5d200258f33b47bf`, and the compiled
+  `sha256(Statements.olean) = f8e0aed3c2d69390b6dd3bb24e13aa25e043a02ca42f021e3f6e4ec8b57fd6b1`. All three equal the
+  values Andrew Sutherland posted for his build. `Main.olean` (his: `9146dfb4…96ad`) does not exist here yet.
 
 ## 5. Axioms of the five theorems in `Main.lean`: PENDING (needs Tier B to finish)
 
-## 6. Tier C (kernel replay): PENDING / will be partial
+## 6. Tier C (kernel replay): PENDING
+
+**Plan changed at 21:00 UTC** after reading the Lean Zulip thread and the community mirror's notes (section 8).
+Instead of per-module `leanchecker`, the plan after the build finishes is the protocol the Lean community is
+using, so results are directly comparable:
+
+1. `#print axioms` for the five theorems (section 5).
+2. Export the five theorems with `lean4export` (tag `v4.33.0`, built with Lean `v4.33.1`) and the export
+   targets of `Deicyde/riemann-hypothesis`; record size and SHA-256. An independent build reports
+   61,570,595,788 bytes, SHA-256 `5ea74b912147c5c93cc2b6d70cc727cf908df2f62ac6a20480a3fa02f6be244e`, about
+   1 h 20 min on one thread, peak 163 GB.
+3. Check the export with `nanoda_bin` from Lean `v4.36.0` (a second kernel implementation).
+4. If time remains before the spend cap: `lake comparator` (Lean `v4.36.0`) with a challenge export made by a
+   separate user from a clean clone, which compares statements, checks axioms, and runs Lean's kernel and the
+   hardened `leanchecker-paranoid`.
+
+Earlier observations, kept for the record:
 
 - `github.com/leanprover/lean4checker` is deprecated; its newest tag is `v4.29.0-rc8`, there is none for v4.33.1.
   The tool now ships in the toolchain as `leanchecker` (same v4.33.1 toolchain as the build); that is what is used.
@@ -162,6 +185,40 @@ def PrimitiveDirichletLZerosOnLine : Prop :=
   `Statements` 1, `ClaimStrip` 2, `RhOfRight` 1, `CritLine` 14,301 (2,553,287 lines), `MainConclusion` 175,174.
   Imports from outside the repo are `Mathlib…`, `Lean…` and `Batteries.Tactic.OpenPrivate` only.
 - Not checked: network or filesystem access during builds (no syscall tracing), build determinism.
+
+## 8. What others have reported (not this log's results)
+
+Source: the Lean Zulip thread "Discussion: Alpöge Proves the Riemann Hypothesis" as of 15:40 EST (20:40 UTC) on
+2026-11-20, supplied by the user as a PDF, and the repository `Deicyde/riemann-hypothesis` at commit
+`e50d0981` (read directly). These are other people's statements, recorded here because they bear on this log.
+
+- **Builds.** Andrew Sutherland reports a successful build on 8 machines of 192 cores in just over an hour,
+  with the same archive SHA-256 as section 1. Simon DeDeo reports that the code compiles on his machine with
+  one recoverable segfault during the run. Several others report builds in progress.
+- **Second kernel.** Sutherland reports that `nanoda_bin` (Lean 4.36.0) checked the full 61.57 GB export and
+  exited 0: 27 min 42 s on 80 threads, peak memory 89 GB.
+- **Comparator.** Sutherland reports that statement comparison and the axiom check passed in a
+  `lake comparator --paranoid` run that used an earlier challenge export differing only in `sorry`
+  placeholders; the run with the canonical challenge was still in progress.
+- **con-leche / con-ron.** The mirror's notes say the versions bundled with Lean 4.36.0 decline the export
+  because of a mutual reflexive inductive type (`…EmbeddedResolution.PrincipalizationCertificate`), which is a
+  limitation of those checkers. Szymon Teżewski reports that a newer con-leche accepts, in 3 min 24 s on 64
+  cores with 45 GB.
+- **lean4lean.** Reported failing for a version reason (`unknown constant 'Decidable.intro'` when the 4.36
+  build reads a 4.33 export); not a verdict on the proof.
+- **Lean version.** The mirror's notes list which kernel soundness fixes Lean 4.33.1 includes and which later
+  runtime fixes (4.34.1) it lacks, and conclude that a pass by the 4.33.1 kernel alone is limited evidence.
+  That is why checks by Lean 4.36.0 and independent kernels matter.
+- **Setup files.** The mirror's notes independently describe the per-module `.setup.json` problem (about 6 MB
+  each, around a terabyte in total) and recommend deleting each file once its module is built, as done here.
+- **Static scan.** The mirror's scan agrees with section 7: no `axiom`, `sorry`, `native_decide`,
+  `implemented_by`, `unsafe`, `opaque`, `debug.*`. It counts `kexactB` used through macros in 67 files and
+  33 uses of `run_tac`. It reports all notation as `local` or `scoped`, consistent with the one `scoped`
+  notation found here.
+- **Dead code.** Junyan Xu reports structures that are never inhabited (`GeneralHyps` and two relatives),
+  suggesting more theory was developed than the proof uses. Andrii Kurdiumov reports that
+  `CompanionTheory/EightfoldTheory` contains only `import` statements.
+- **Module count.** 183,890 build jobs: 175,187 project modules plus 8,703 from dependencies.
 
 ## Files
 
