@@ -154,21 +154,33 @@ argument against the readings that could be constructed, not against a precise s
 
 Full reports: `chapter-reviews/`. "False" means a counterexample is given there.
 
-### 5.1 Chapter 10 and section 9.3 (spectral side) — reported
+### 5.1 Chapter 10 and section 9.3 (spectral side)
 
 - The spectral statement for the critical line (interval `{0}`) is true; the reviewer re-proved it by a
   different route.
-- The draft's proof of it (Theorem 10.3.1.1) uses a uniform bound on the biorthogonal system that is false:
-  the dual vectors blow up where zeros cluster, and Selberg's theorem gives clustering. Claim (1) of that
-  theorem would imply an open lower bound on gaps between zeros.
-- The strip case (Theorems 10.2.2.1, 10.3.2.1, 10.4.3.5, 10.4.3.6) has no proof. Its foundations are false as
-  stated: Lemma 9.3.2.4 (zero-counting; counterexample `exp(-z^4) sin(pi z^2)`) and Theorem 9.3.2.6.
+- **The draft's proof of it (Theorem 10.3.1.1) uses a false uniform bound (checked).** Lines 27124–27135 of
+  the extracted text assert a constant `C` bounding the product of the norms of each evaluation functional and
+  its biorthogonal vector, "ensured by the basis being normalized". Proposition 10.2.1.3 bounds only the
+  functionals. A biorthogonal vector must be 1 at its zero and 0 at every other zero, so if another zero lies
+  at distance `d`, Sobolev embedding (Hölder exponent `γ = min(s/2 − 1/2, 1)`) forces its norm to be at least
+  `c·d^{-γ}`. Gaps between critical-line zeros of zeta tend to zero along a sequence (Selberg: a positive
+  proportion of zeros are on the line, and the mean gap at height `T` is `2π/log T`), so the bound fails.
+  Claim (1) of the theorem would imply a polynomial lower bound on gaps between zeros, which is open
+  (reported). The trace identity itself survives by a different proof (reported).
+- The strip case (Theorems 10.2.2.1, 10.3.2.1, 10.4.3.5, 10.4.3.6) has no proof (reported).
+- **Lemma 9.3.2.4 is false as stated (checked).** It claims that for every exponentially decaying Schwartz
+  function the Mellin transform has `O(log T)` zeros in a box of height 1 at height `T`. The function
+  `exp(-z^4) sin(pi z^2)` is entire and Schwartz on every vertical strip, and has about `2T` zeros on the
+  imaginary axis between heights `T` and `T+1`. The proof applies Jensen's formula with an upper bound on the
+  value at the centre where a lower bound is needed. Theorem 9.3.2.6, which the strip case cites, has
+  unquantified data and a monotonicity claim in the wrong direction (reported).
 - Lemma 10.4.2.5 asserts in effect that a normalized Markushevich basis is a Schauder basis (false; the
-  trigonometric system in L¹ of the circle).
+  trigonometric system in L¹ of the circle) (reported).
 - Definition 10.4.3.7 (the geometric kernel for a strip) does not define its kernel, and it is ambiguous
-  whether the operator is `A P_spec` or `P_spec A`. Chapters 11–12 compute with it.
+  whether the operator is `A P_spec` or `P_spec A`. Chapters 11–12 compute with it (reported).
 - The multiplicity cap is stated as `min{N, floor((s-1)/2)+1}`; the correct value is `min{N, ceil((s-1)/2)}`.
-  They differ at odd integer `s`, and the introduction has a third version.
+  They differ at odd integer `s`, and the introduction has a third version (reported; the correct value was
+  checked).
 
 ### 5.2 Chapter 11 (per-prime machinery)
 
@@ -190,7 +202,9 @@ $$
   formula the proof ends on by a factor of the square root of the prime power; the proof multiplies two
   indicators whose product is zero; none of its three limits has an estimate.
 - Theorems 11.2.1.2 and 11.2.1.4 identify the wrong limit: the strong limit gives the trace of
-  `M_ρ A P_geom`, which differs from the claimed operator by a term the draft says is non-zero (reported).
+  `M_ρ A P_geom`, which differs from the claimed operator by `M_ρ P_geom A P_spec`, a term the draft says is
+  non-zero (reported). This one looks repairable: where `A P_spec` is trace class, that term's trace tends to
+  zero as the cutoff is removed, since the limit operator is an off-diagonal block.
 - Proposition 11.1.1.2(2) is false as stated; a termwise majorant repairs it (reported).
 - Correct: the per-prime trace (Theorem 11.2.2.1) after replacing ranges by closures; density of
   theta-functions on the 0-line for the rationals; part (1) of 11.1.2.1.
@@ -204,6 +218,8 @@ $$
   neither the remainder nor a mass; the per-prime vanishing is Theorem 11.3.2.1; the S-local evaluation is
   12.4.1.1, which concerns a different operator. The interchange of the sum over primes with the diagonal
   integral and with the cutoff limit is not addressed anywhere.
+- The statement of 12.5.1.1 assumes the test function vanishes on norm-one classes and never quantifies the
+  interval or the Sobolev degree (checked against the text).
 - The proof never uses the choices the text calls necessary (`a = 1/2`, Sobolev degree `2[F:Q]`, vanishing of
   the test function at central points). Run as written on the critical line with the hypotheses its cited
   results allow, it gives a bound on the multiplicity of every zero that is false: a Dedekind zeta function
