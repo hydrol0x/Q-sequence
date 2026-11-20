@@ -7,8 +7,7 @@ in Mathlib terms, it is a famous theorem whose truth is not in doubt, and its pr
 declarations), so it can be read. It is a spot check of whether the code does recognisable mathematics.
 It says nothing direct about the main theorem.
 
-**Status.** The reading is done (sections 1–4). The machine re-check (section 5) is running in a separate
-session and is not yet reported.
+**Status.** Done: reading (sections 1–4) and machine re-check (section 5). Both came out clean.
 
 ## 1. What was checked
 
@@ -102,10 +101,59 @@ not by a human specialist, and not a replay. Mathlib lemmas were taken to mean w
 reader can miss an error; what the reading does show is that every statement in the chain is one a number
 theorist would recognise as true, and that the chain is the known proof.
 
-## 5. Machine re-check
+## 5. Machine re-check: PASS
 
-Requested from a separate session in an environment that can install Lean: build the 517 modules with Lean
-4.33.1, print the axioms, prove a Mathlib-only restatement, export it, check the export with the independent
-kernel `nanoda_bin` from Lean 4.36.0, and confirm that the kernel rejects deliberately corrupted copies.
+Run 2026-11-20 22:31–23:25 UTC by a separate session in a 4-core, 15 GB container, from a fresh download of
+the author's archive (SHA-256 `9631b4f0…c7fc`, matches). Its log is condensed in `machine-check-report.md`.
 
-**Not yet reported.** This section will be filled in when it is.
+| Check | Result |
+|---|---|
+| `lake build …ThetaCorrespondence.Linnik` (Lean 4.33.1, Mathlib `0df444a3` from cache) | exit 0, 18:43, peak 8.2 GB; 517 project modules, 0 with errors, 196 with warnings |
+| `#print axioms UpperTheory.Lit.linnik` | `[propext, Classical.choice, Quot.sound]` |
+| Mathlib-only restatement `linnik_plain` (below), proved from the repo's theorem | elaborates unchanged; same three axioms |
+| Export of `linnik_plain` (`lean4export` v4.33.0 built with 4.33.1) | 718,761,442 bytes, SHA-256 `80999437bcdcbdf144ad6ee77fc920d3bf91a3d5d7300c008a71559350226289`; declares exactly the three axioms |
+| `nanoda_bin` 0.4.17 (independent Rust kernel, from Lean 4.36.0) | **accepts**, 81,832 declarations, 2:03, 761 MB |
+| `lake comparator` (Lean 4.36.0, sandboxed) against a Mathlib-only challenge file stating `linnik_plain := sorry` | **exit 0**: statement matches, axioms permitted, Lean 4.36.0 kernel accepts |
+| `lake comparator --paranoid` | `leanchecker-paranoid`, nanoda, con-leche (`--verified`), con-ron (`--verified`) and Lean's kernel all **accept**; lean4lean aborts on `unknown constant 'Decidable.intro'`, the known version mismatch (it fails the same way on a Mathlib-only export), so the overall exit code is 1 |
+| `leanchecker` 4.33.1 on the Linnik module | exit 0 |
+| Negative control A: statement of `linnik_plain` swapped for another proposition, proof kept | nanoda **rejects**; comparator **rejects** ("statement does not match") |
+| Negative control B: proof of one lemma deep in the closure replaced by another theorem's proof | nanoda **rejects**; Lean 4.36.0 `leanchecker --from-export` **rejects** |
+| Challenge export given as its own solution | comparator **rejects** ("Illegal axiom detected: 'sorryAx'") |
+
+```lean
+theorem linnik_plain : ∃ C L : ℝ, 0 < C ∧ 0 < L ∧ ∀ a q : ℕ, 1 ≤ a → 1 ≤ q → a.Coprime q →
+    ∃ p : ℕ, p.Prime ∧ p ≡ a [MOD q] ∧ (p : ℝ) ≤ C * (q : ℝ) ^ L :=
+  GlobalTheory.Published.linnik_iff_exists_prime.1 UpperTheory.Lit.linnik
+```
+
+So five kernels of four independent designs accept a proof of this statement, which mentions nothing but
+Mathlib, and the same tools reject corrupted copies.
+
+**Cross-check with the published export.** The record counts of this independently built export equal,
+kind by kind, the closure of `UpperTheory.Lit.linnik` in the graph extracted from Sutherland's export:
+1,289 inductive blocks, 50 opaque, 4 quotient primitives, 3 axioms, 556 theorems under `GlobalTheory`, and
+theorems and definitions equal once `linnik_plain` and the four built-ins the exporter is asked to add
+(`Nat.lor`, `Nat.xor`, `String.mk`, `String.mk._proof_1`) are accounted for (62,987 vs 62,985 + 2 theorems;
+14,805 vs 14,802 + 3 definitions). For this part of the proof, his export and a build from the published
+sources agree.
+
+Deviations in the run: elan could not be installed there, so both official toolchain archives were unpacked
+and used directly (versions and commits confirmed; SHA-256 of the 4.33.1 archive matches the earlier Tier A
+run). The other 516 modules were not replayed one by one with `leanchecker`; the export-based checks cover
+the whole closure.
+
+Text scan of the full 517-file import closure (most of it not used by the Linnik proof): no `sorry`,
+`admit`, `axiom`, `native_decide`, `macro`, `elab`, `syntax`, `unsafe`, `implemented_by`, `extern`,
+`opaque`, `initialize` or `#eval`; `decide` 58 times; 2 `open private` (in an unrelated file).
+
+## 6. Result
+
+- The statement is Linnik's theorem in Mathlib terms.
+- The proof is the classical one, every lemma statement in it was read and none found false, and its
+  constants are no better than the literature's.
+- It compiles from the published sources, depends on the three standard axioms, and its export is accepted
+  by Lean's kernel (4.33.1 and 4.36.0), the hardened Lean checker, nanoda, con-leche and con-ron, which
+  reject tampered copies.
+
+What this does not show: anything about the other 1.26 million project declarations, beyond the fact that
+in the one place where the output could be compared with known mathematics, it held up.
